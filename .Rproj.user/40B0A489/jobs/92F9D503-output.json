@@ -7,3 +7,4 @@
 [1,"\u001B[32mGET: /\u001B[39m\n"]
 [1,"\u001B[32mGET: /labs/lab6.html\u001B[39m\n"]
 [1,"\u001B[32mGET: /\u001B[39m\n"]
+[1,"\u001B[33mWARN: Unable to resolve link target: preparation.qmd\u001B[39m\n\u001B[32mGET: /\u001B[39m\n"]

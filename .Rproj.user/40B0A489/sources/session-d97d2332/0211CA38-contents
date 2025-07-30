@@ -1,0 +1,11 @@
+---
+params:
+  answer: true
+format:
+  html:
+    output-file: lab2_answers.html
+execute:
+  enabled: true
+---
+
+```{r child='lab2.qmd'}

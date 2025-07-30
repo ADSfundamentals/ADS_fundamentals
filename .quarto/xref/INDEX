@@ -1,0 +1,57 @@
+{
+  "index.qmd": {
+    "index.html": "875910db"
+  },
+  "about.qmd": {
+    "about.html": "40d7ca69"
+  },
+  "manual.qmd": {
+    "manual.html": "3b48df16"
+  },
+  "preperation.qmd": {
+    "preperation.html": "ba4bdb5b"
+  },
+  "exam.qmd": {
+    "exam.html": "f6d809e5"
+  },
+  "assignments.qmd": {
+    "assignments.html": "57c5a0cf"
+  },
+  "labs/lab1.qmd": {
+    "lab1.html": "69d0082e"
+  },
+  "labs/lab2.qmd": {
+    "lab2.html": "88e7eda9",
+    "{{ 'lab2_answers' if params.answer else 'lab2' }}.html": "ef3ec340",
+    "lab2_answers.html": "036bea72"
+  },
+  "labs/lab2_answers.qmd": {
+    "lab2_answers.html": "73304575"
+  },
+  "labs/lab3.qmd": {
+    "lab3.html": "61ef260c",
+    "lab3_answers.html": "746bfac9"
+  },
+  "labs/lab3_answers.qmd": {
+    "lab3_answers.html": "b35dd831"
+  },
+  "labs/lab4.qmd": {
+    "lab3.html": "5077b8d6",
+    "lab4.html": "d776308d"
+  },
+  "labs/lab4_answers.qmd": {
+    "lab4_answers.html": "22b210bf"
+  },
+  "labs/lab5.qmd": {
+    "lab5.html": "bd12bcc6"
+  },
+  "labs/lab5_answers.qmd": {
+    "lab5_answers.html": "ac599dda"
+  },
+  "labs/lab6.qmd": {
+    "lab6.html": "4af9dfae"
+  },
+  "labs/lab6_answers.qmd": {
+    "lab6_answers.html": "b7efbdd9"
+  }
+}

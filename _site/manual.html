@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Course manual – ADS_fundamentals</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d904793c2fe8b9f05fdc73cba6253167.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ADS_fundamentals</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./manual.html" aria-current="page"> 
+<span class="menu-text">Course manual</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./preperation.html"> 
+<span class="menu-text">Preparation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./exam.html"> 
+<span class="menu-text">Exam</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#course-content" id="toc-course-content" class="nav-link active" data-scroll-target="#course-content">Course content</a></li>
+  <li><a href="#course-structure" id="toc-course-structure" class="nav-link" data-scroll-target="#course-structure">Course structure</a></li>
+  <li><a href="#how-to-pass-the-course" id="toc-how-to-pass-the-course" class="nav-link" data-scroll-target="#how-to-pass-the-course">How to pass the course</a>
+  <ul class="collapse">
+  <li><a href="#attendance" id="toc-attendance" class="nav-link" data-scroll-target="#attendance">Attendance</a></li>
+  <li><a href="#testing-procedure" id="toc-testing-procedure" class="nav-link" data-scroll-target="#testing-procedure">Testing procedure</a></li>
+  </ul></li>
+  <li><a href="#course-objectives-and-learning-outcomes" id="toc-course-objectives-and-learning-outcomes" class="nav-link" data-scroll-target="#course-objectives-and-learning-outcomes">Course objectives and learning outcomes</a>
+  <ul class="collapse">
+  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives">Course objectives</a></li>
+  <li><a href="#rationale-for-assessment-strategy" id="toc-rationale-for-assessment-strategy" class="nav-link" data-scroll-target="#rationale-for-assessment-strategy">Rationale for assessment strategy</a></li>
+  </ul></li>
+  <li><a href="#important-notice-about-the-use-of-course-material" id="toc-important-notice-about-the-use-of-course-material" class="nav-link" data-scroll-target="#important-notice-about-the-use-of-course-material">Important notice about the use of course material</a></li>
+  <li><a href="#fraud-plagiarism-and-use-of-generative-ai" id="toc-fraud-plagiarism-and-use-of-generative-ai" class="nav-link" data-scroll-target="#fraud-plagiarism-and-use-of-generative-ai">Fraud, plagiarism and use of generative AI</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Course manual</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="course-content" class="level2">
+<h2 class="anchored" data-anchor-id="course-content">Course content</h2>
+<p>Regression techniques are widely used to quantify the relationship between two or more variables. In data science, linear and logistic regression are common and powerful techniques for evaluating such relations. These techniques are only useful, however, once you understand when and how to apply them. In this course, students will learn how to apply linear and logistic regression with the R statistical software package.</p>
+<p>This course will introduce students to the principles of analytical data science, linear and logistic regression, and the basics of statistical learning. Students will develop fundamental R programming skills and will gain experience with tidyverse: visualize data with ggplot2 and performing basic data wrangling with dplyr. This course helps prepare students for an entry-level research career (e.g.&nbsp;junior researcher or research assistant) or further education in research (e.g., a [research] Master program or a PhD).</p>
+</section>
+<section id="course-structure" class="level2">
+<h2 class="anchored" data-anchor-id="course-structure">Course structure</h2>
+<p>In seven weeks, you will learn the basics of data handling and statistical programming with R and details about regression techniques in the context of statistical inference, prediction, and classification. Each week will comprise four activities:</p>
+<ul>
+<li><p>During the weekly <strong>in-person lectures</strong>, we will cover the theoretical content.</p></li>
+<li><p>During the weekly <strong>in-person workgroup</strong> meetings, you will work on real-world data analysis with a group of your peers.</p></li>
+<li><p>Weekly <strong>self-study practical exercises</strong> connect the statistical theory to practice by applying the lecture content in the R statistical programming language.</p></li>
+<li><p>There is an <strong>online weekly Q&amp;A</strong> session in case you get stuck or have questions.</p></li>
+</ul>
+</section>
+<section id="how-to-pass-the-course" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-pass-the-course">How to pass the course</h2>
+<p>Your final grade consists of three elements:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Grade component</th>
+<th>Weight</th>
+<th>Required minimum grade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Group assignment 1</td>
+<td>25%</td>
+<td>5.5</td>
+</tr>
+<tr class="even">
+<td>Group assignment 2</td>
+<td>25%</td>
+<td>5.5</td>
+</tr>
+<tr class="odd">
+<td>Written exam in Remindo</td>
+<td>50%</td>
+<td>5.5</td>
+</tr>
+</tbody>
+</table>
+<section id="attendance" class="level3">
+<h3 class="anchored" data-anchor-id="attendance">Attendance</h3>
+<p>During this course, you will attend 7 lectures, 7 workgroup sessions and hand in 6 practical assignments.</p>
+<p><strong>Attendance</strong> for the lectures and the workgroup sessions <strong>is mandatory</strong>. You work on your group assignments during the workgroup meetings. For a collaborative spirit, attendance is crucial.</p>
+</section>
+<section id="testing-procedure" class="level3">
+<h3 class="anchored" data-anchor-id="testing-procedure">Testing procedure</h3>
+<p>There are two opportunities per year to take a test.</p>
+<ul>
+<li><p>Should circumstances prevent you from taking the first opportunity, you will be invited to the second. It is not necessary to deregister.</p></li>
+<li><p>If you do not obtain a satisfactory final grade on the second opportunity, you will have to retake the course in the 2026-2027 academic year. See detailed information on testing on&nbsp;<a href="https://students.uu.nl/en/fss/clinical-child-and-adolescent-psychology/practical-information/academic-policies-and-procedures/testing">the student website</a>.</p></li>
+<li><p>but you have obtained a pass for one part (e.g.&nbsp;an assignment or the exam), then you do not have to redo this part next year.</p></li>
+</ul>
+</section>
+</section>
+<section id="course-objectives-and-learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="course-objectives-and-learning-outcomes">Course objectives and learning outcomes</h2>
+<section id="course-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="course-objectives">Course objectives</h3>
+<p>At the end of this course, students are able to:</p>
+<ol type="1">
+<li>Identify key statistical concepts such as:</li>
+</ol>
+<ul>
+<li><p>(Conditional) probability</p></li>
+<li><p>Inference</p></li>
+<li><p>Estimation</p></li>
+<li><p>Prediction</p></li>
+<li><p>Classification</p></li>
+<li><p>Sampling variability</p></li>
+<li><p>Statistical modeling</p></li>
+<li><p>Residuals Fitted values</p></li>
+</ul>
+<ol start="2" type="1">
+<li><p>Choose an appropriate regression model for a given research scenario.</p></li>
+<li><p>Explain the differences/similarities between statistical inference and model-based prediction/classification; give examples of each type of problem.</p></li>
+<li><p>Identify the assumptions of linear and logistic regression; describe the consequences of violating these assumptions.</p></li>
+<li><p>Describe the three components of a generalized linear model and how these components are specified in logistic regression.</p></li>
+<li><p>Interpret the estimates from linear and logistic regression models, and use these estimates to answer research questions.</p></li>
+<li><p>Use the R statistical software platform to perform basic statistical programming, data manipulation, data visualization, and basic data wrangling.</p></li>
+<li><p>Use the R statistical software platform to perform, interpret, and evaluate linear and logistic regression analyses on real-world data.</p></li>
+<li><p>Interpret R output and use the results to answer research questions.</p></li>
+<li><p>Use Quarto to document the results of a statistical analysis.</p></li>
+</ol>
+</section>
+<section id="rationale-for-assessment-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="rationale-for-assessment-strategy">Rationale for assessment strategy</h3>
+<p>In this course, skills and knowledge are evaluated with two types of assignment.</p>
+<ol type="1">
+<li><p>The exam evaluates knowledge and understanding of statistical concepts (Learning goal 1), the ability to critically evaluate research problems and statistical methods (Learning goals 2–5), and the ability to interpret statistical results and software output and apply these interpretations (Learning goals 6 &amp; 9).</p></li>
+<li><p>The group assignments evaluate the student’s ability to work with data, solve basic data analytic problems, execute quantitative data analyses on real-world data sets, and document the results (learning goals 6–10).</p></li>
+</ol>
+</section>
+</section>
+<section id="important-notice-about-the-use-of-course-material" class="level2">
+<h2 class="anchored" data-anchor-id="important-notice-about-the-use-of-course-material">Important notice about the use of course material</h2>
+<p>The course material you receive in this course is intended for your personal learning process. All course content, including course manuals, presentations, recordings, (elaborations of) assignments and additional documents, is the intellectual property of Utrecht University. This material may not be shared, distributed or sold, both online and offline, without the express written permission of the university. NB: This also concerns entering course material in GenAI.</p>
+<p>We would like to emphasize that taking this course is an investment in your own development. The material has been carefully put together to deepen your understanding of the field and strengthen your skills. By distributing or even selling this material, you violate the intellectual property of the UU. We therefore ask you to respect these guidelines and contribute to a fair and honest learning environment.</p>
+</section>
+<section id="fraud-plagiarism-and-use-of-generative-ai" class="level2">
+<h2 class="anchored" data-anchor-id="fraud-plagiarism-and-use-of-generative-ai">Fraud, plagiarism and use of generative AI</h2>
+<p>Plagiarism and fraud are serious academic offenses. Plagiarism is defined as the use of another person’s work without proper acknowledgment. This includes copying and pasting text from the internet, from books, or from other students. If you use text from another source, you must put it in quotation marks and provide a citation. If you do not, you are committing plagiarism. Fraud is defined as the use of dishonest methods to gain an unfair advantage. This includes copying another student’s work, submitting work that is not your own, or submitting the same work for two different courses. If you commit fraud or plagiarism, you will fail the course. If you are not sure what constitutes plagiarism or fraud, please see the (UU Fraud and plagiarism policy)[https://students.uu.nl/en/practical-information/policies-and-procedures/fraud-and-plagiarism].</p>
+<p>The use of generative AI (e.g., chatGPT) in the group assignments is allowed only for the following cases:</p>
+<ul>
+<li><p>Gain inspiration</p></li>
+<li><p>Ask for help on how to tackle an assignment</p></li>
+</ul>
+<p>The use of generative AI must be clearly indicated in the assignment, clearly identifying the specific model used and for what purpose. The use of generative AI for other purposes is not allowed.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

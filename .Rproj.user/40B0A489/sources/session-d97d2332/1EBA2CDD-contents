@@ -1,0 +1,107 @@
+---
+title: "Exam"
+---
+
+## What will be tested? 
+
+Anything mentioned in the lectures may appear on the exam.
+
+This includes both information printed in the lecture slides and information delivered verbally during a lecture itself.Anything covered in the required readings may appear on the exam.
+
+Obviously, this is a lot of material. To prioritize, keep in mind that topics mentioned in the lectures and topics directly related to ideas covered in the lectures are most likely to appear on the exam.
+
+The materials presented on the "preparation" page can also be part of the exam since this is required knowledge. 
+
+Summary of the required readings: 
+
+-   [R4DS](https://r4ds.hadley.nz/): Ch. 1, 3, 4, 7, 9, 10, 13, 16.
+
+-   [SDAM](https://mspeekenbrink.github.io/sdam-book/index.html): Ch. 1, 2, 3, 4, 5, 6.1, 12.1-12.5, 12.8. 
+
+-   [Book420:](https://book.stat420.org/) Ch.17.4.
+
+-   [https://stats.oarc.ucla.edu/r/dae/robust-regression/](https://stats.oarc.ucla.edu/r/dae/robust-regression/)
+
+-   [https://stats.oarc.ucla.edu/r/dae/robust-regression/](https://stats.oarc.ucla.edu/r/dae/robust-regression/)
+
+-   [https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/](https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/)
+
+-   [https://stats.oarc.ucla.edu/r/dae/logit-regression/](https://stats.oarc.ucla.edu/r/dae/logit-regression/)
+
+
+## What about equations?
+
+
+This is not a math class; we are not trying to test your ability to do 
+calculations or manipulate equations. That being said, a certain degree of 
+mathematical literacy is crucial to statistics and data science, so you will 
+have to do some simple calculations on the exam. For example, you should be 
+comfortable with the following.
+
+- Working with the linear regression equation, $Y_i = \beta_0 + \beta_1 X_i +\varepsilon_i$, to:
+   - Calculate predicted values give certain inputs
+   - Interpret parameter estimates
+   - Evaluate hypotheses/research questions
+
+- The differences between:
+   - The full regression model: $Y_i = \hat{\beta}_0 + \hat{\beta}_1 X_i +\hat{\varepsilon}_i$
+   - The equation for the best-fit line: $\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i$
+
+- The definition of a residual: 
+   - $\hat{\varepsilon}_i = Y_i - \hat{Y}_i$
+
+- The relationship between probabilities ($p$) and odds (for binary outcomes):
+   - $\text{odds} = \frac{p}{1-p}$
+
+- The definition of the logit function:
+   - $\ln(\text{odds}) = \ln\left(\frac{p}{1-p}\right) = \text{logit}(p)$
+
+- The definition of the logistic function, its relation to the logit function, 
+and its role in logistic regression:
+   - $\text{logistic}(\eta_i) = \text{logit}^{-1}(p_i) = \frac{\exp(\eta_i)}{1+\exp(\eta_i)} = \frac{\exp(\hat{\beta}_0 + \hat{\beta}_1 X_i)}{1 + \exp(\hat{\beta}_0 + \hat{\beta}_1 X_i)} = \hat{p}_i$
+
+Of course, you should also be able to do basic arithmetic operations that are 
+too trivial to detail here (e.g., calculating the difference between the $R^2$ 
+statistics from two models that you are trying to compare).
+
+**Note**: Although all examples above are shown in terms of simple linear 
+regression models, you should also be able to do these calculations/interpretations 
+using multiple linear regression models and models that include dummy codes and
+interactions.
+
+## Q&A and practice exam
+
+-   The lecture on Monday January 12 will be completely devoted to a recap of the material and there will be plenty of time to answer all your questions. Send your questions in advance to Dr. Lang if you want to make sure you get an extensive answer! 
+
+-   A link to a practice exam will be provided later.
+
+
+## What can I expect regarding the exam? 
+
+The exam takes place on January 22. Keep an eye out on [MyTimetable](https://mytimetable.uu.nl/) for the timing, location. These can change very last-minute! 
+
+The exam takes place on laptops that are provided in the room, and we use the software program Remindo. Please read the [instructions](https://remindo-support.sites.uu.nl/wp-content/uploads/sites/79/2017/01/Student-instruction-reviewed-29112019-EN.pdf) on how to use Remindo carefully. You can also [practice](https://uu.remindotoetsdemo.nl/) making an exam in Remindo. Remindo has a small built-in calculator, so you don’t need to bring one. 
+
+Regulations during the exam:
+
+-   Turn of your phone and smartwatch and stow them away. You cannot use them in any way during the exam.
+
+-   You are not allowed to use any teaching materials or dictionaries during the exam. 
+
+-   Close your bag and do not store it in the walkway. 
+
+-   You cannot leave in the first 30 minutes. 
+
+-   You are not allowed to visit the bathroom during the exam. 
+
+-   Make sure your ID is visible on your table during the exam.
+
+-   If you are more than 30 minutes late to the exam, you are not allowed to participate. 
+
+
+What to bring:
+
+-   Identification card.
+
+-   Solid ID and password for logging in to Remindo. 
+

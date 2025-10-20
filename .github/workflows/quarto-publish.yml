@@ -38,6 +38,10 @@ jobs:
 #        with:
 #          cache-version: 1
 
+       - name: Install R packages
+         run: |
+            install.packages(c("rmarkdown", "knitr"))
+
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
 

@@ -10,7 +10,7 @@ website:
         text: Overview
       - href: manual.qmd
         text: Course manual
-      - href: preperation.qmd
+      - href: preparation.qmd
         text: Preparation
       - href: assignments.qmd
         text: Assignments

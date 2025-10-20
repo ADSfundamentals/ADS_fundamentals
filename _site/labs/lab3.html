@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -133,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Course manual</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../preperation.html"> 
+    <a class="nav-link" href="../preparation.html"> 
 <span class="menu-text">Preparation</span></a>
   </li>  
   <li class="nav-item">
@@ -160,22 +189,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#data-set-loading-inspection" id="toc-data-set-loading-inspection" class="nav-link" data-scroll-target="#data-set-loading-inspection">Data set: Loading &amp; Inspection</a></li>
-  <li><a href="#model-assumptions" id="toc-model-assumptions" class="nav-link" data-scroll-target="#model-assumptions">Model assumptions</a>
+  <li><a href="#part-1-repeat-from-last-week" id="toc-part-1-repeat-from-last-week" class="nav-link active" data-scroll-target="#part-1-repeat-from-last-week">Part 1: Repeat from last week</a></li>
+  <li><a href="#part-2-multiple-linear-regression" id="toc-part-2-multiple-linear-regression" class="nav-link" data-scroll-target="#part-2-multiple-linear-regression">Part 2: Multiple linear regression</a>
   <ul class="collapse">
-  <li><a href="#linearity" id="toc-linearity" class="nav-link" data-scroll-target="#linearity">Linearity</a></li>
-  <li><a href="#predictor-matrix-full-rank" id="toc-predictor-matrix-full-rank" class="nav-link" data-scroll-target="#predictor-matrix-full-rank">Predictor matrix full rank</a></li>
-  <li><a href="#exogenous-predictors" id="toc-exogenous-predictors" class="nav-link" data-scroll-target="#exogenous-predictors">Exogenous predictors</a></li>
-  <li><a href="#constant-finite-error-variance" id="toc-constant-finite-error-variance" class="nav-link" data-scroll-target="#constant-finite-error-variance">Constant, finite error variance</a></li>
-  <li><a href="#independent-errors" id="toc-independent-errors" class="nav-link" data-scroll-target="#independent-errors">Independent errors</a></li>
-  <li><a href="#normally-distributed-errors" id="toc-normally-distributed-errors" class="nav-link" data-scroll-target="#normally-distributed-errors">Normally distributed errors</a></li>
+  <li><a href="#categorical-predictors" id="toc-categorical-predictors" class="nav-link" data-scroll-target="#categorical-predictors">Categorical predictors</a></li>
   </ul></li>
-  <li><a href="#influential-observations" id="toc-influential-observations" class="nav-link" data-scroll-target="#influential-observations">Influential observations</a>
+  <li><a href="#part-3-model-comparison" id="toc-part-3-model-comparison" class="nav-link" data-scroll-target="#part-3-model-comparison">Part 3: Model comparison</a></li>
+  <li><a href="#part-4-residuals-observed-vs.-predicted" id="toc-part-4-residuals-observed-vs.-predicted" class="nav-link" data-scroll-target="#part-4-residuals-observed-vs.-predicted">Part 4: Residuals: observed vs.&nbsp;predicted</a>
   <ul class="collapse">
-  <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers">Outliers</a></li>
-  <li><a href="#high-leverage-observations" id="toc-high-leverage-observations" class="nav-link" data-scroll-target="#high-leverage-observations">High-leverage observations</a></li>
-  <li><a href="#influence-on-the-model" id="toc-influence-on-the-model" class="nav-link" data-scroll-target="#influence-on-the-model">Influence on the model</a></li>
+  <li><a href="#calculating-new-predicted-values" id="toc-calculating-new-predicted-values" class="nav-link" data-scroll-target="#calculating-new-predicted-values">Calculating new predicted values</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -202,177 +224,104 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<hr>
-<p>In this practical, the assumptions of the linear regression model will be discussed. You will practice with checking the different assumptions, and practice with accounting for some of the assumptions with additional steps. Please note that these assumptions can only be checked once you have selected a (final) model, as these assumptions ‘need’ a model that they apply to.</p>
+<section id="part-1-repeat-from-last-week" class="level1">
+<h1>Part 1: Repeat from last week</h1>
 <p>We will use the following packages in this practical:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(regclass)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
-</section>
-<section id="data-set-loading-inspection" class="level1">
-<h1>Data set: Loading &amp; Inspection</h1>
-<p>For the first part of this practical, a data set from a fish market is used. You can find the dataset in the surfdrive folder. The variables in this fish data set are:</p>
-<ul>
-<li>Species of the fish</li>
-<li>Weight of the fish in grams</li>
-<li>Vertical, length of the fish in cm</li>
-<li>Diagonal length of the fish in cm</li>
-<li>Cross length of the fish in cm</li>
-<li>Height of the fish in cm</li>
-<li>Diagonal width of the fish in cm
-</li>
-</ul>
-<p>Download the dataset from the Surfdrive folder, store it in the folder of your <code>Rproject</code> for this practical and open it in <code>R</code>. Also, adjust the column names according to the code below to make them a bit more intuitive.</p>
+<p>We will use the same data that we used last week to perform a simple linear regression, the Iris dataset. But now, we will extend on this simple model with multiple variables.</p>
+<p>In order to do this, we first need to load the data again and run the simple model where Sepal length is predicted by Petal width.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data set</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Fish.csv"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_fish) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"weigth"</span>, <span class="st">"vertical_length"</span>, <span class="st">"diagonal_length"</span>, <span class="st">"cross_length"</span>, <span class="st">"height"</span>, <span class="st">"diagonal_width"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the data set with the 'head' function to have a general impression.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data_fish <span class="sc">%&gt;%</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> iris <span class="co"># load the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)   <span class="co"># inspect the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  species weigth vertical_length diagonal_length cross_length  height
-1   Bream    242            23.2            25.4         30.0 11.5200
-2   Bream    290            24.0            26.3         31.2 12.4800
-3   Bream    340            23.9            26.5         31.1 12.3778
-4   Bream    363            26.3            29.0         33.5 12.7300
-5   Bream    430            26.5            29.0         34.0 12.4440
-6   Bream    450            26.8            29.7         34.7 13.6024
-  diagonal_width
-1         4.0200
-2         4.3056
-3         4.6961
-4         4.4555
-5         5.1340
-6         4.9274</code></pre>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
 </div>
 </div>
-<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specify model</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Petal.Width, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> data)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ask for summary</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Sepal.Length ~ Petal.Width, data = data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.38822 -0.29358 -0.04393  0.26429  1.34521 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  4.77763    0.07293   65.51   &lt;2e-16 ***
+Petal.Width  0.88858    0.05137   17.30   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.478 on 148 degrees of freedom
+Multiple R-squared:  0.669, Adjusted R-squared:  0.6668 
+F-statistic: 299.2 on 1 and 148 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
 </section>
-<section id="model-assumptions" class="level1">
-<h1>Model assumptions</h1>
-<p>We will now discuss and check the various model assumptions of linear regression. If steps can be taken to account for a violated assumption, this will also be touched upon.</p>
-<hr>
-<section id="linearity" class="level2">
-<h2 class="anchored" data-anchor-id="linearity">Linearity</h2>
-<p>With the assumption of linearity, it is assumed that the relation between the dependent and independent variables is (more or less) linear. You can check this by generating a scatterplot using a predictor variable and outcome variable of the regression model.</p>
+<section id="part-2-multiple-linear-regression" class="level1">
+<h1>Part 2: Multiple linear regression</h1>
+<p>You can add additional predictors to a model. This can improve the fit and the predictions. When multiple predictors are used in a regression model, it’s called a Multiple linear regression. You specify this model as <code>outcome_variable ~ predictor_1 + predictor_2 + ... + predictor_n</code>.</p>
 <ol type="1">
-<li><p><strong>Check whether there is a linear relation between the variables vertical length and the cross length.</strong></p></li>
-<li><p><strong>Next check the relation between weight and height.</strong></p></li>
-<li><p><strong>Describe both plots. What differences do you see?</strong></p></li>
+<li><strong>Add Petal length as a second predictor to the model specified as <code>model1</code> and store this under the name <code>model2</code>, and supply summary statistics. Again, give a substantive interpretation of the coefficients and the model.</strong></li>
 </ol>
-<p>When a non-linear relation is present, you can either choose another model to use, or transform the predictor before adding it to the model, for example using a log-transformation. Applying a transformation, however, will not always solve the problem, and makes interpretation of the model less intuitive.</p>
+<section id="categorical-predictors" class="level2">
+<h2 class="anchored" data-anchor-id="categorical-predictors">Categorical predictors</h2>
+<p>Up to here, we only included continuous predictors in our models. We will now include a categorical predictor in the model as well.</p>
+<p>When a categorical predictor is added, this predictor is split in several contrasts (or dummies), where each group is compared to a reference group. In our example Iris data, the variable ‘Species’ is a categorical variable that indicate the species of flower. This variable can be added as example for a categorical predictor. Contrasts, and thus the dummy coding, can be inspected through <code>contrasts()</code>.</p>
+<ol start="2" type="1">
+<li><strong>Add species as a predictor to the model specified as <code>model2</code>, store it under the name <code>model3</code> and interpret the categorical coefficients of this new model.</strong></li>
+</ol>
+</section>
+</section>
+<section id="part-3-model-comparison" class="level1">
+<h1>Part 3: Model comparison</h1>
+<p>Now you have created multiple models, you can compare how well these models function (compare the model fit). There are multiple ways of testing the model fit and to compare models, as explained in the lecture and the reading material. In this practical, we use the following:</p>
+<ul>
+<li>AIC (use the function <code>AIC()</code> on the model object)</li>
+<li>BIC (use the function <code>BIC()</code> on the model object)</li>
+<li>MSE (use <code>MSE()</code> of the <code>MLmetrics</code> package, or calculate by transforming the <code>model$residuals</code>)</li>
+<li>Deviance test (use <code>anova()</code> to compare 2 models)</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Compare the fit of the model specified under question 5 and the model specified under question 8. Use all four fit comparison methods listed above. Interpret the fit statistics you obtain/tests you use to compare the fit.</strong></li>
+</ol>
+</section>
+<section id="part-4-residuals-observed-vs.-predicted" class="level1">
+<h1>Part 4: Residuals: observed vs.&nbsp;predicted</h1>
+<p>When fitting a regression line, the predicted values have some error in comparison to the observed values. The sum of the squared values of these errors is the sum of squares. A regression analysis finds the line such that the lowest sum of squares possible is obtained.</p>
+<p>The image below shows how the predicted (on the blue regression line) and observed values (black dots) differ and how the predicted values have some error (red vertical lines).</p>
+<p><img src="errorterms.PNG" class="img-fluid"></p>
+<p>When having multiple predictors, it becomes harder or impossible to make such a plot as above (you need a plot with more dimensions). You can, however, still plot the observed values against the predicted values and infer the error terms from there.</p>
 <ol start="4" type="1">
-<li><p><strong>Apply a log-transformation to the weight variable.</strong></p></li>
-<li><p><strong>Plot the relation between length and weight again, but now including the transformed variable.</strong></p></li>
-<li><p><strong>Describe if the transformation improved the linear relation.</strong></p></li>
+<li><p><strong>Create a dataset of predicted values for model 1 by taking the outcome variable <code>Sepal.Length</code> and the <code>fitted.values</code> from the model.</strong></p></li>
+<li><p><strong>Create an observed vs.&nbsp;predicted plot for model 1 (the red vertial lines are no must).</strong></p></li>
+<li><p><strong>Create a dataset of predicted values and create a plot for model 2.</strong></p></li>
+<li><p><strong>Compare the two plots and discuss the fit of the models based on what you see in the plots. You can combine them in one figure using the <code>grid.arrange()</code> function.</strong></p></li>
 </ol>
-<hr>
-</section>
-<section id="predictor-matrix-full-rank" class="level2">
-<h2 class="anchored" data-anchor-id="predictor-matrix-full-rank">Predictor matrix full rank</h2>
-This assumption states that:
-<li>
-there need to be more observations than predictors (n &gt; P).
-</li><li>
-no predictor can be a linear combination of other predictors; predictors cannot have a very high correlation (multicollinearity).
-</li>
+<section id="calculating-new-predicted-values" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-new-predicted-values">Calculating new predicted values</h2>
+<p>A regression model can be used to predict values for new cases that were not used to built the model. The regression equation always consists of coefficients (<span class="math inline">\(\beta\)</span>s) and observed variables (<span class="math inline">\(X\)</span>):</p>
 <p><br></p>
-<p>The first part of this assumption is easy to check: see if the number of observations minus the number of predictors is a positive number. The second part can be checked by either obtaining correlations between the predictors, or by determining the VIF (variance inflation factor). When the VIF is above 10, this indicate high multicollinearity. To account for this, predictors can be excluded from the model, or a new variable can be constructed based on predictors with a high correlation.</p>
-<p>To examine VIF scores, the function <code>VIF()</code> from the <code>regclass</code> can be used on a prespecified model. If this model includes a categorical variable with multiple categories, such as ‘species’ in the example data, the generalized VIF is used, and we have to look at the third column (GVIF^*(1/(2*Df))), these values can be compared to normal VIF values.</p>
-<ol start="7" type="1">
-<li><p><strong>Specify a linear model with <code>weight</code> as outcome variable using all other variables in the dataset as predictors. Save this model as <code>model_fish1</code>. Calculate VIF values for this model.</strong></p></li>
-<li><p><strong>Check the VIF scores. If VIF scores exceed a score of 10, give substantial explanation why the VIF scores are this high.</strong></p></li>
-<li><p><strong>What adjustments can be made to the model to account for multicollinearity in this case?</strong></p></li>
-<li><p><strong>Run a new model which only includes one of the three length variables and call it <code>model_fish2</code>. Describe if there is an improvement.</strong></p></li>
-<li><p><strong>What happens with the regression model when there are more predictors than observations?</strong></p></li>
-</ol>
-<hr>
-</section>
-<section id="exogenous-predictors" class="level2">
-<h2 class="anchored" data-anchor-id="exogenous-predictors">Exogenous predictors</h2>
-<p>For this assumption, the expected value of the errors (mean of the errors) must be 0. Furthermore, The errors must be independent of the predictors.</p>
-<ol start="12" type="1">
-<li><strong>What is the possible consequence of not meeting this assumption?</strong></li>
-</ol>
-<hr>
-</section>
-<section id="constant-finite-error-variance" class="level2">
-<h2 class="anchored" data-anchor-id="constant-finite-error-variance">Constant, finite error variance</h2>
-<p>This assumptions is also called ‘the assumption of homoscedasticity’. It states that the variance of the error terms should be constant over all levels of the predictors. This can be checked by plotting the residuals against the fitted values. These plots can be obtained by simply taking the first plot of a specified model, <code>plot(model_x)</code>.</p>
-<ol start="13" type="1">
-<li><p><strong>Create a residual vs fitted values plot for <code>model_fish1</code>, which is the first plot generated by the <code>plot()</code> function.</strong></p></li>
-<li><p><strong>Load in the <code>iris</code> data, and specify a model where sepal length is predicted by all other variables and save this as <code>model_iris1</code>.</strong></p></li>
-<li><p><strong>Create a residual vs fitted plot for this model as well.</strong></p></li>
-<li><p><strong>Discuss both plots and indicate whether the assumption is met.</strong></p></li>
-<li><p><strong>Discuss what the consequence would be if this assumption is violated.</strong></p></li>
-</ol>
-<hr>
-</section>
-<section id="independent-errors" class="level2">
-<h2 class="anchored" data-anchor-id="independent-errors">Independent errors</h2>
-<p>This assumption states that error terms should have no correlation. Dependence of the errors can result from multiple things. First, there is a possible dependence in the error terms when there is serial dependence, for example because the data contains variables that are measured over time. Another reason can be when there is a cluster structure in the data, for example students in classes in schools.</p>
-<ol start="18" type="1">
-<li><strong>How can both causes of correlated error terms be detected, and what can be done to solve the problem?</strong></li>
-</ol>
-<hr>
-</section>
-<section id="normally-distributed-errors" class="level2">
-<h2 class="anchored" data-anchor-id="normally-distributed-errors">Normally distributed errors</h2>
-<p>This assumption states that errors should be roughly normally distributed. Like the assumption of homoscedasticity, this can be checked by model plots, provided by R.</p>
-<ol start="19" type="1">
-<li><p><strong>Create a QQ plot for <code>model_iris1</code>, which is the second plot generated by the <code>plot()</code> function. Indicate whether the assumption is met.</strong></p></li>
-<li><p><strong>Create a new model using the fish data, where <code>diagonal_width</code> is predicted by <code>cross_length</code>, and store the model as <code>model_fish3</code>.</strong></p></li>
-<li><p><strong>Create a QQ plot for <code>model_fish3</code>.</strong></p></li>
-<li><p><strong>Interpret the two plots. Is the assumption met in both cases?</strong></p></li>
-<li><p><strong>In what cases is it problematic that the assumption is not met? And in what cases is it no problem?</strong></p></li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="influential-observations" class="level1">
-<h1>Influential observations</h1>
-<hr>
-<section id="outliers" class="level2">
-<h2 class="anchored" data-anchor-id="outliers">Outliers</h2>
-<p>Outliers are observations that show extreme outcomes compared to the other data, or observations with outcome values that fit the model very badly. Outliers can be detected by inspecting the <em>externally studentized residuals</em>.</p>
-<ol start="24" type="1">
-<li><p><strong>Make a plot of studentized residuals by using the functions <code>rstudent</code> and <code>plot</code> for `model_fish1. What do you conclude?</strong></p></li>
-<li><p><strong>Make a plot of studentized residuals for <code>model_iris1</code>.</strong></p></li>
-<li><p><strong>Store the dataset <code>Animals</code> from the <code>MASS</code> package. Define a regression model where animals’ body weight is predicted by brain weight and store it as <code>model_animals1</code>.</strong></p></li>
-<li><p><strong>Make a plot of the studentized residuals for <code>model_animals1</code>.</strong></p></li>
-</ol>
-<hr>
-</section>
-<section id="high-leverage-observations" class="level2">
-<h2 class="anchored" data-anchor-id="high-leverage-observations">High-leverage observations</h2>
-<p>High-leverage observations are observations with extreme predictor values. To detect these observations, we look at their <em>leverage values</em>. These values can be summarized in a leverage plot.</p>
-<ol start="28" type="1">
-<li><strong>For the model specified under model_animals1, create a leverage plot by plotting the <code>hatvalues()</code> of the model.</strong></li>
-</ol>
-<hr>
-</section>
-<section id="influence-on-the-model" class="level2">
-<h2 class="anchored" data-anchor-id="influence-on-the-model">Influence on the model</h2>
-<p>Both outliers and observations with high leverage are not necessarily a problem. Cases that are both, however, seem to form more of a problem. These cases can influence the model heavily and can therefore be problematic.</p>
-<p>Influence measures come in two sorts: Cook’s distance checks for influential observations, while DFBETAS check for influential, and possible problematic, observations per regression coefficients.</p>
-<ol start="29" type="1">
-<li><p><strong>For <code>model_animals1</code>, check Cooks distance by plotting the <code>cooks.distance</code> of the model.</strong></p></li>
-<li><p><strong>For <code>model_animals1</code>, check the DFBETAS by using the function <code>dfbetas</code>.</strong></p></li>
-<li><p><strong>Describe what you see in the plots for Cook’s distance and DFBETAS. What do you conclude?</strong></p></li>
-<li><p><strong>Delete the problematic observation that you found in Question 12 and store the dataset under a new name.</strong></p></li>
-<li><p><strong>Fit the regression model where animals’ body weight is predicted by brain weight using the adjusted dataset and store it as <code>model_animals2</code>.</strong></p></li>
-<li><p><strong>Compare the output to <code>model_animals1</code> and describe the changes.</strong></p></li>
-<li><p><strong>Run the plots for influential observations again on this new model and see if anything changes.</strong></p></li>
-</ol>
+<p><span class="math display">\[\hat{y} = \beta_0 + \beta_1 * X_{a}* + \beta_2 * X_b +  \ldots  + \beta_n * X_n\]</span></p>
 
 
 </section>

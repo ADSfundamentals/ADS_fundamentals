@@ -2,13 +2,13 @@
 title: "Assignments"
 ---
 
-Both assignments are group assignments. We will form groups of 4 at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course. 
+Both assignments are group assignments. We will form groups of 4 at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.
 
-In order to be assigned to a group, presence at the first meeting is crucial! 
+In order to be assigned to a group, presence at the first meeting is crucial!
 
 ## Assignment 1: Linear regression
 
--   **Type of assignment:** Written report. 
+-   **Type of assignment:** Written report.
 
 -   **Grading:** 25% of your final grade
 
@@ -16,17 +16,17 @@ In order to be assigned to a group, presence at the first meeting is crucial!
 
 -   **What to submit:** A ZIP archive containing the complete R project (dataset, .qmd, HTML)
 
--   **Where to submit:** This Surfdrive folder
+-   **Where to submit:** [Here](https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN)
 
--   **What is graded:** Only your .html file is graded, so make sure all code, comments and output are visible! 
+-   **What is graded:** Only your .html file is graded, so make sure all code, comments and output are visible!
 
 -   **Description:** For this assignment, you perform and report a multiple linear regression analysis in an R markdown document. The assignment will be graded on the following five dimensions:
 
-1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data. 
+1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
 
-2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure. 
+2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure.
 
-3.  **Assumptions:** Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed. 
+3.  **Assumptions:** Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed.
 
 4.  **Interpretation:** Substantive interpretation of the final model. Answering your research question.
 
@@ -42,16 +42,16 @@ Group assignment 2: Logistic regression
 
 -   **Presentation:** WG meeting Thursday January 15
 
--   **Deadline:** Wednesday January 14, 15:00. Hand in your ZIP archive including your slides. Your WG instructor will set the slides up for the presentations on Thursday. 
+-   **Deadline:** Wednesday January 14, 15:00. Hand in your ZIP archive including your slides. Your WG instructor will set the slides up for the presentations on Thursday.
 
 -   **What to submit:** A ZIP archive containing the complete R project (dataset, .qmd, slides)
 
--   **Where to submit:** This Surfdrive folder
+-   **Where to submit:** [Here](https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN)
 
 -   **Description:** For this assignment, you perform and report a multiple logistic regression analysis in an R markdown document. The assignment will be graded on the following five dimensions:
 
-1.    **Preliminaries:** Introduction of your research questions, description and potential processing of your data. 
-2.    **Model estimation:** Description of the model estimates, model fit, and model comparison procedure. 
-3.    **Assumptions:** Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed. 
-4.    **Interpretation:** Substantive interpretation of the final model (including the confusion matrix). Answering your research question. 
-5.    **Layout:** Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations.
+1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
+2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure.
+3.  **Assumptions:** Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed.
+4.  **Interpretation:** Substantive interpretation of the final model (including the confusion matrix). Answering your research question.
+5.  **Layout:** Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations.

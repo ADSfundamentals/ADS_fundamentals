@@ -14,8 +14,6 @@ If you have never worked with R before, use the tutorials from [Open Statistical
 
 -   Data types
 
--   Workflow
-
 -   Basic visualizations
 
 are required knowledge before you start the course!

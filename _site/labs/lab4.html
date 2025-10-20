@@ -133,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Course manual</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../preperation.html"> 
+    <a class="nav-link" href="../preparation.html"> 
 <span class="menu-text">Preparation</span></a>
   </li>  
   <li class="nav-item">
@@ -217,18 +217,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-set-loading-inspection" class="level1">
 <h1>Data set: Loading &amp; Inspection</h1>
-<p>For the first part of this practical, a data set from a fish market is used. You can find the dataset in the surfdrive folder. The variables in this fish data set are:</p>
+<p>For the first part of this practical, a <a href="Fish.csv">dataset</a> from a fish market is used. The variables in this fish data set are:</p>
 <ul>
-<li>Species of the fish</li>
-<li>Weight of the fish in grams</li>
-<li>Vertical, length of the fish in cm</li>
-<li>Diagonal length of the fish in cm</li>
-<li>Cross length of the fish in cm</li>
-<li>Height of the fish in cm</li>
-<li>Diagonal width of the fish in cm
+<li><p>Species of the fish</p></li>
+<li><p>Weight of the fish in grams</p></li>
+<li><p>Vertical, length of the fish in cm</p></li>
+<li><p>Diagonal length of the fish in cm</p></li>
+<li><p>Cross length of the fish in cm</p></li>
+<li><p>Height of the fish in cm</p></li>
+<li><p>Diagonal width of the fish in cm</p>
 </li>
 </ul>
-<p>Download the dataset from the Surfdrive folder, store it in the folder of your <code>Rproject</code> for this practical and open it in <code>R</code>. Also, adjust the column names according to the code below to make them a bit more intuitive.</p>
+<p>Download the dataset from the GitHub link, store it in the folder of your <code>Rproject</code> for this practical and open it in <code>R</code>. Also, adjust the column names according to the code below to make them a bit more intuitive.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data set</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Fish.csv"</span>)</span>
@@ -279,9 +279,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="predictor-matrix-full-rank" class="level2">
 <h2 class="anchored" data-anchor-id="predictor-matrix-full-rank">Predictor matrix full rank</h2>
-This assumption states that:
+<p>This assumption states that:</p>
 <li>
-there need to be more observations than predictors (n &gt; P).
+<p>there need to be more observations than predictors (n &gt; P).</p>
 </li><li>
 no predictor can be a linear combination of other predictors; predictors cannot have a very high correlation (multicollinearity).
 </li>

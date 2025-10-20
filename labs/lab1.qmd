@@ -2,7 +2,7 @@
 title: "Lab 1"
 ---
 
-From the [Open Statistical Programming](https://www.openstatprog.com/) modules, complete the following: 
+From the [Open Statistical Programming](https://www.openstatprog.com/) modules, complete the following:
 
 -   Reproducible reporting
 
@@ -10,6 +10,5 @@ From the [Open Statistical Programming](https://www.openstatprog.com/) modules, 
 
 -   Data manipulation
 
--   Functions advanced
-
 -   Iteration
+

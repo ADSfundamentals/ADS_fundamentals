@@ -1,0 +1,158 @@
+---
+title: "Work Group Meeting 1"
+author: "Fundamental Techniques in Data Science with R"
+format: 
+  revealjs:
+    theme: dark
+---
+
+## Today
+
+- Introduction
+- Course structure
+- Work group structure
+- Assignments
+
+*break*
+
+- Start first assignment
+
+## Introduction
+
+- Introduce yourself
+- What is your background (study)? 
+- Why did you choose this minor/course? 
+
+## Course structure 
+
+- Monday 15:15: Lecture by Dr. K. Lang **on location**
+- Tuesday 13:15: Q&A by Dr. K. Lang **online**
+- Thursday 09:00 & 11:00: Workgroup meetings **on location**
+
+By yourself: 
+
+- Do the required reading
+- Work on practicals (deadline is next Monday 15:00, before the next lecture)
+- Continue work on group assignment 
+
+## Workgroup meetings
+
+- Apply the lecture topics to your own (real!) datasets 
+- Meet your group to work together 
+
+## Assignments 
+:::: {.columns}
+
+::: {.column width="50%"}
+Assignment 1 
+
+- Group assignment
+- Groups with max. 4 members
+- Linear regression
+- Hand in written report on Monday Dec. 8, 15:00 
+:::
+
+::: {.column width="50%"}
+Assignment 2 
+
+- Group assignment
+- Same group as assignment 1
+- Logistic regression
+- Presentation on Thursday Jan. 15 at workgroup meeting
+:::
+
+::::
+
+## Assignments
+
+Grading:
+
+- Both group assignments contribute 25% to your final grade
+- All group members receive the same grade 
+- If names are omitted from groups/assignments, we assume everyone is aware of this. 
+
+Hand in: 
+
+- Through SurfFileDrop (link is on website)
+- Hand in a .zip file with R project and all files (html, qmd, dataset)
+- Make sure all code and text are visible in the html files
+- Only content in html files is graded!!!! 
+- Check the course website for more information
+
+## This week:
+
+- Make groups of max. 4 students 
+- Look for a dataset 
+- Inspect variables
+- Come up with research questions for linear and logistic regression
+- Pre-processing of the dataset where needed 
+
+## Dataset requirements 
+
+The dataset should at least contain:
+
+- A continuous outcome variable 
+- At least two continuous predictor variables
+- A categorical predictor variable 
+- A dichotomous outcome variable 
+
+## Tips for datasets 
+
+Look for datasets online: 
+
+- Kaggle
+- GitHub
+- CBS/Eurostat
+- RIVM
+- Through scientific papers
+- Large panel studies (PISA, LISS, EVS, ESS, TIMSS)
+- DANS KNAW or ODISSEI portal
+
+Datasets from courses can be difficult for this purpose, don't use them!  
+
+## Example research questions 
+
+Linear regression: 
+
+- Can body weight predict the level of cholesterol in Dutch adults? 
+- What variables are related to income in the Netherlands? 
+
+Logistic regression: 
+
+- Do body weight, calorie intake, fate intake and age have an influence on the occurence of a heart attack? 
+- What variables can be used to predict whether students pass a driving test? 
+
+## Data processing 
+
+Examples:
+
+- Are the character classes set correctly? Adjust with functions such as `as_factor()` or `as_numeric()`
+- Are missing values correctly recognized? 
+- Do you need to calculate any sumscores or meanscores? 
+- Do you need to link multiple separate datasets? 
+
+## Use of Generative AI
+
+You are allowed to:
+
+- Gain inspiration
+- Ask for help how to tackle an assignment
+
+You are not allowed to: 
+
+- Submit generated text or code as if it was written by you
+- Have text or code revised 
+
+## Before the end of the meeting
+
+As a group, send an email to your WG instructor with: 
+
+- Names of group members
+- How you agree to collaborate
+- Selected data set (topic and link)
+- Research questions you want to answer in your assignments 
+
+Send this email before the end of the meeting! 
+
+
+

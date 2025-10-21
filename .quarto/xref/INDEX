@@ -46,5 +46,8 @@
   },
   "manual.qmd": {
     "manual.html": "32d2ed19"
+  },
+  "workgroups/WG1.qmd": {
+    "WG1.html": "90a566be"
   }
 }

@@ -1,0 +1,30 @@
+\frametitle{Performing a T-Test in a Pipeline}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{cats} \hlopt{%$%} \hlkwd{t.test}\hldef{(Hwt} \hlopt{~} \hldef{Sex)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+  $$\vx{-40}$$
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error in wrap(., w = 80): could not find function "{}wrap"{}}}\end{kframe}
+\end{knitrout}
+
+  The above is equivalent to either of the following.
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{cats} \hlopt{%>%} \hlkwd{t.test}\hldef{(Hwt} \hlopt{~} \hldef{Sex,} \hlkwc{data} \hldef{= .)}
+\hlkwd{t.test}\hldef{(Hwt} \hlopt{~} \hldef{Sex,} \hlkwc{data} \hldef{= cats)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+

@@ -1,5 +1,8 @@
 ---
 title: "Lab 1"
+output-file: "lab2.html"
+params:
+  answers: false
 ---
 
 From the [Open Statistical Programming](https://www.openstatprog.com/) modules, complete the following:
@@ -8,7 +11,179 @@ From the [Open Statistical Programming](https://www.openstatprog.com/) modules, 
 
 -   External data
 
--   Data manipulation
+------------------------------------------------------------------------
 
--   Iteration
+
+# Introduction
+
+Welcome to the first practical of Fundamental Techniques in Data Science with R! In this part of the practical, you will learn about 
+
+* Pipes
+* Data transformation 
+
+---
+
+We will work with the following packages today: 
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(kableExtra)
+```
+
+
+We are going to use the General Social Survey, which is a long-running [US survey](https://gss.norc.org/) conducted by the NORC at the University of Chicago. The survey monitors changes in social characteristics and attitudes. The survey is quite large, so we can access a smaller version in the `forcats` package. It has the following variables:
+
+* **year**: year of the survey from 2000-2014
+* **marital**: marital status
+* **age**: max age is truncated to 89
+* **race**
+* **rincome**: reported income
+* **partyid**: political affiliation
+* **relig**: religion
+* **denom**: denomination 
+* **tvhours**: hours per day watching tv
+
+If you want more information on the survey you can type `?gss_cat` into the console. 
+Let's load the data. 
+
+```{r}
+gss_cat <- forcats::gss_cat
+```
+
+We can take a look at the data using `head()`, which shows us the first 6 rows of the data frame. 
+
+```{r}
+head(gss_cat)
+```
+
+The `str()` function tells us what the class of each variable is. You will notice that most variables in the gss_cat data are factors with different levels. In this tutorial we will work mainly with these variables to learn techniques for working with factors. 
+
+```{r}
+str(gss_cat)
+```
+
+# Part 2: Pipes
+
+Pipes are a useful tool that make it easier to express a sequence of multiple operations in R. Pipes ` %>% ` come from the `magrittr` package, so they are automatically loaded when you use the `tidyverse`. Pipes make code more intuitive and easier to understand - which is good for practicing open science! 
+
+Let's compare code written with - and without - pipes. 
+
+Below you see how the ` %>% ` is used to pass information from one line to the next. It's easy to follow along and see exactly what is being done to the data, line by line. 
+
+```{r, message=FALSE}
+gss_cat %>%
+  filter(relig == "Protestant") %>%
+  group_by(year, relig) %>%
+  summarise(tvhours = mean(tvhours, na.rm = TRUE))
+```
+
+In contrast, the following code performs the same operations but without piping. To understand what is happening you need to read the code from the inside out - which is much more difficult. 
+
+```{r, warning = FALSE, message=FALSE}
+# Using base R
+summarise(group_by(filter(gss_cat, 
+                          relig == "Protestant"), 
+                   year, 
+                   relig), 
+          tvhours = mean(tvhours, 
+                         na.rm = TRUE)
+          )
+```
+
+Pipes don't (automatically) assign a new object as a result of the operations you make. You need to specify `<-`  at the beginning if you wish to save the results. There is a special variation of the pipe that allows assignments, ` %<>%`  but it is less obvious than `<-`. 
+
+Pipes are not appropriate for every situation. You should consider not using pipes when:
+
+* The sequence of operations is longer than 10 steps. In this situation, it is useful to break up the code into intermediate steps and assign them to objects. This will be helpful if you need to identify any problems. 
+* You have multiple inputs and outputs. If you are transforming more than one object it is better not to use pipes. 
+
+*Note: `Cmd + Shift + M` (Mac) and `Ctrl + Shift + M` is a useful shorthand for the ` %>% `.*
+
+------------------------------------------------------------------------
+
+# Part 3: Data transformation
+
+In this section we will practice data transformation using functions from the `dplyr` package in the core tidyverse. You should be familiar with some of these functions already, but today we will go a little further.
+
+Remember to use the ` %>% ` operator!
+
+
+## Filtering data
+
+The `filter()` function allows you to subset observations based on their values. The first argument is the name of the data frame. The second and subsequent arguments are the expressions that filter the data frame.
+
+R provides the following options for filtering: `>`, `>=`, `<`, `<=`, `!=` (not equal), and `==` (equal). You can also combine these with the following logical operators: `&` meaning "and", `|` meaning "or", and `!` meaning "not". 
+
+1. **Use the `filter()` function to display only married people in the gss_cat data set.**
+
+```{r, include = params$answers}
+gss_cat %>% 
+  filter(marital == "Married")
+
+# Since we only want to find married people we will use the equal operator, ==, and encase the observations we want in quotes.*
+```
+
+2. **Use the `filter()` function to display divorced AND widowed people in the gss_cat data set.**
+```{r, include = params$answers}
+gss_cat %>% 
+  filter(marital == "Divorced" | marital == "Widowed")
+
+# In this case we need to combine logical operators. The or operator is appropriate here since we are looking for two kinds of matches in the same variable (& would not work since people cannot be both divorced and widowed). We combine this with the equal operator.
+```
+
+## Arranging data
+
+3. **Use the `arrange()` function to reorder the information in the data frame by the number of tv hours.**
+
+```{r, include = params$answers}
+gss_cat %>% 
+  arrange(tvhours)
+
+# Arrange only needs one argument, the variable you wish to reorder. Arrange orders the rows of a gss_cat by the tvhours column. The default here is to arrange in ascending order.
+```
+
+4. **You can combine arrange() with functions like `desc()` to re-order a column in descending order. Try doing this.**
+
+```{r, include = params$answers}
+gss_cat %>%
+  arrange(desc(tvhours))
+
+# When combining these functions you need to wrap arrange around the operation you want to do.
+```
+
+5. **How would you filter only married people and arrange them by how much tv they watch?**
+
+**Hint: You need to combine filter and arrange using the %>%**
+
+```{r, include = params$answers}
+gss_cat %>% 
+  filter(marital == "Married") %>% 
+  arrange(tvhours)
+
+# Using the pipe we can perform multiple operations at once without needing to save each interim step as an object.
+```
+
+6. **How would you use `arrange()` and `count()` to find what the most common religion is?**
+
+```{r, include = params$answers}
+gss_cat %>%
+  count(relig) %>%
+  arrange(desc(n))
+
+# In this case, we are not passing a variable to arrange but a logical, n. This tells R to count all the categories in relig and subsequently order these categories in descending order.*
+```
+
+## Summarizing data
+
+7. **How many hours of tv on average are watched by people of different religions?**
+
+**Hint: `select()`, `group_by()`, and `summarize()` are useful functions for this**
+
+```{r, include = params$answers}
+gss_cat %>%
+  select(relig, tvhours) %>% # also works without using select
+  group_by(relig) %>% 
+  summarise(tvhours = mean(tvhours, na.rm = TRUE))
+
+# Combining several operations can seem complex, but once you understand what is happening you can apply to most other cases. In this example we tell R to take the `gss_data`, select only `relig` and `tvhours`, group the different categories of `relig` and perform a summarising function on these groups in respect to tvhours. Inside the `summarise()` function we tell it to take an average and to remove missing values.* 
+```
 

@@ -6,7 +6,8 @@
     "lab4_answers.html": "ca7abaa7"
   },
   "labs/lab1.qmd": {
-    "lab1.html": "6156379b"
+    "lab1.html": "6156379b",
+    "lab2.html": "c83d729b"
   },
   "labs/lab3.qmd": {
     "lab3.html": "8c8ebb65"
@@ -49,5 +50,8 @@
   },
   "workgroups/WG1.qmd": {
     "WG1.html": "90a566be"
+  },
+  "labs/lab1_answers.qmd": {
+    "lab1_answers.html": "8cfec8ab"
   }
 }

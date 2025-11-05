@@ -102,6 +102,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -160,7 +162,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-open-statistical-programming-modules" id="toc-part-1-open-statistical-programming-modules" class="nav-link active" data-scroll-target="#part-1-open-statistical-programming-modules">Part 1: Open Statistical Programming modules</a></li>
+  <li><a href="#part-1-exploratory-data-analysis" id="toc-part-1-exploratory-data-analysis" class="nav-link active" data-scroll-target="#part-1-exploratory-data-analysis">Part 1: Exploratory data analysis</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a>
+  <ul class="collapse">
+  <li><a href="#variation" id="toc-variation" class="nav-link" data-scroll-target="#variation">Variation</a></li>
+  <li><a href="#covariation" id="toc-covariation" class="nav-link" data-scroll-target="#covariation">Covariation</a></li>
+  <li><a href="#non-graphical-eda" id="toc-non-graphical-eda" class="nav-link" data-scroll-target="#non-graphical-eda">Non-Graphical EDA</a></li>
+  <li><a href="#summary-tables" id="toc-summary-tables" class="nav-link" data-scroll-target="#summary-tables">Summary tables</a></li>
+  <li><a href="#graphical-eda-base-r-vs-ggplot" id="toc-graphical-eda-base-r-vs-ggplot" class="nav-link" data-scroll-target="#graphical-eda-base-r-vs-ggplot">Graphical EDA: <strong>base R</strong> vs <strong>ggplot</strong></a></li>
+  <li><a href="#visualising-distributions-of-single-variables" id="toc-visualising-distributions-of-single-variables" class="nav-link" data-scroll-target="#visualising-distributions-of-single-variables">Visualising distributions of single variables</a></li>
+  <li><a href="#visualing-the-distributions-of-multiple-variables" id="toc-visualing-the-distributions-of-multiple-variables" class="nav-link" data-scroll-target="#visualing-the-distributions-of-multiple-variables">Visualing the distributions of multiple variables</a>
+  <ul class="collapse">
+  <li><a href="#continuous---continuous" id="toc-continuous---continuous" class="nav-link" data-scroll-target="#continuous---continuous">Continuous - Continuous</a></li>
+  <li><a href="#continuous---categorical" id="toc-continuous---categorical" class="nav-link" data-scroll-target="#continuous---categorical">Continuous - Categorical</a></li>
+  </ul></li>
+  <li><a href="#facets" id="toc-facets" class="nav-link" data-scroll-target="#facets">Facets</a></li>
+  <li><a href="#arranging-multiple-plots" id="toc-arranging-multiple-plots" class="nav-link" data-scroll-target="#arranging-multiple-plots">Arranging multiple plots</a></li>
+  </ul></li>
   <li><a href="#part-2-linear-regression" id="toc-part-2-linear-regression" class="nav-link" data-scroll-target="#part-2-linear-regression">Part 2: Linear regression</a>
   <ul class="collapse">
   <li><a href="#loading-the-dataset" id="toc-loading-the-dataset" class="nav-link" data-scroll-target="#loading-the-dataset">Loading the dataset</a></li>
@@ -192,44 +211,479 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="part-1-open-statistical-programming-modules" class="level1">
-<h1>Part 1: Open Statistical Programming modules</h1>
-<p>From the <a href="https://www.openstatprog.com/">Open Statistical Programming</a> modules, complete the following:</p>
+<section id="part-1-exploratory-data-analysis" class="level1">
+<h1>Part 1: Exploratory data analysis</h1>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In this practical you will learn about exploratory data analysis (EDA). EDA involves inspecting, transforming and visualising data with the goal of finding interesting features to substantiate one or more research questions. This practical will draw on skills you learned in the preparation materials and week 1, while introducing you to some new material like visualisation with <code>ggplot()</code>.</p>
+<p>You will need the following packages for this tutorial.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(weathermetrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You will work with the <code>mpg</code> dataset from the <code>ggplot2</code> package. <code>mpg</code> contains a subset of the fuel economy data that EPA makes available <a href="https://fueleconomy.gov/">here</a>. The data frame has 234 rows and 11 variables:</p>
 <ul>
-<li><p>Descriptive statistics</p></li>
-<li><p>GGplot</p></li>
+<li><strong>manufacturer:</strong> manufacturer name</li>
+<li><strong>model:</strong> model name</li>
+<li><strong>displ:</strong> engine displacement in litres</li>
+<li><strong>year:</strong> year of manufacture</li>
+<li><strong>cyl:</strong> number of cylinders</li>
+<li><strong>trans:</strong> type of transmission</li>
+<li><strong>drv:</strong> type of drive train (f = front-wheel drive; r = rear-wheel drive; 4 = four-wheel drive)</li>
+<li><strong>cty:</strong> city miles per gallon</li>
+<li><strong>hw:</strong> highway miles per gallon</li>
+<li><strong>fl:</strong> fuel type</li>
+<li><strong>class”</strong> type of car</li>
 </ul>
+<p>You can also type <code>?mpg</code> into the console to learn more.</p>
+<p>Let’s get an overview of the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+  manufacturer model displ  year   cyl trans      drv     cty   hwy fl    class 
+  &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; 
+1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p     compa…
+2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p     compa…
+3 audi         a4      2    2008     4 manual(m6) f        20    31 p     compa…
+4 audi         a4      2    2008     4 auto(av)   f        21    30 p     compa…
+5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p     compa…
+6 audi         a4      2.8  1999     6 manual(m5) f        18    26 p     compa…</code></pre>
+</div>
+</div>
+<p>In previous week we learned that <code>str()</code> can be used to get an overview of the data and the structure of a dataframe. You can also use <code>glimpse()</code> from the <code>tidyverse</code> which returns similar results in a more readable format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 234
+Columns: 11
+$ manufacturer &lt;chr&gt; "audi", "audi", "audi", "audi", "audi", "audi", "audi", "…
+$ model        &lt;chr&gt; "a4", "a4", "a4", "a4", "a4", "a4", "a4", "a4 quattro", "…
+$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…
+$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…
+$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …
+$ trans        &lt;chr&gt; "auto(l5)", "manual(m5)", "manual(m6)", "auto(av)", "auto…
+$ drv          &lt;chr&gt; "f", "f", "f", "f", "f", "f", "f", "4", "4", "4", "4", "4…
+$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…
+$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…
+$ fl           &lt;chr&gt; "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p…
+$ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact", "c…</code></pre>
+</div>
+</div>
+<p>Before you begin exploring your data, you need to check that the class or mode of your variables is as expected. You have character/factor and numerical/integer types.</p>
+<ol type="1">
+<li><p><strong>Are there any variables that do not have the class you expect it to?</strong></p></li>
+<li><p><strong>Make any changes you feel are necessary.</strong></p></li>
+</ol>
+</section>
+<section id="exploratory-data-analysis" class="level1">
+<h1>Exploratory data analysis</h1>
+<p><strong>Exploratory Data Analysis</strong> is a process whereby you examine and transform your data to extract interesting insights and understand what relationships (if any!) exist among the variables. In this way, EDA is closely related to principles of data cleaning because <em>tidy</em> data is easier to explore. Initial steps of EDA involve examining distributions, handling missings and outliers, removing redundant data and coding categorical variables properly.</p>
+<p>EDA is very flexible and iterative process and gives the researcher a lot of freedom, but it is typically split into <em>graphical</em> and <em>non-graphical</em> analysis. Further within this framework we can also start to think about what kind of <strong>variation</strong> occurs <em>within</em> variables and what kind of <strong>covariation</strong> occurs <em>between</em> my variables.</p>
+<section id="variation" class="level2">
+<h2 class="anchored" data-anchor-id="variation">Variation</h2>
+<p><strong>Variation</strong> describes how the values of a variable change each time you measure it. A continuous variable that is measured on one occasion will have different values to that same variable measured on another occasion. This variation between measurement occasions are what we call “error”. Categorical variables also vary across measurement occasions or across individuals. Visualising variation is a very intuitive way to understand trends or patterns within a variable.</p>
+</section>
+<section id="covariation" class="level2">
+<h2 class="anchored" data-anchor-id="covariation">Covariation</h2>
+<p><strong>Covariation</strong> describes how the values of at least two variables vary together or are related. Again, visualising covariation is also the most intuitive way to understand patterns between variables.</p>
+</section>
+<section id="non-graphical-eda" class="level2">
+<h2 class="anchored" data-anchor-id="non-graphical-eda">Non-Graphical EDA</h2>
+<p>If you are interested in a particular aspect of a variable you can summarise this information in a table. We have covered how to create nicely formatted tables in the previous practical, so the example below is just to refresh your memory.</p>
+</section>
+<section id="summary-tables" class="level2">
+<h2 class="anchored" data-anchor-id="summary-tables">Summary tables</h2>
+<p>Below we summarise <code>hwy</code> by vehicle <code>class</code>, by asking for commonly used summary statistics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span>         <span class="co"># by class</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(hwy),   <span class="co"># minimum of hwy</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(hwy), <span class="co"># mean</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(hwy),     <span class="co"># standard deviation</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(hwy),   <span class="co"># maximum</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())  <span class="sc">%&gt;%</span>     <span class="co"># nr of observations</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span>  </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>), <span class="at">full_width =</span> F)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">class</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">min</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mean</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">sd</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">max</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2seater</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">24.80000</td>
+<td style="text-align: right;">1.303840</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">compact</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">28.29787</td>
+<td style="text-align: right;">3.781620</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">midsize</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">27.29268</td>
+<td style="text-align: right;">2.135930</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">minivan</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">22.36364</td>
+<td style="text-align: right;">2.062655</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pickup</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">16.87879</td>
+<td style="text-align: right;">2.274280</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">subcompact</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">28.14286</td>
+<td style="text-align: right;">5.375012</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">suv</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">18.12903</td>
+<td style="text-align: right;">2.977973</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">62</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ol start="3" type="1">
+<li><strong>Create a summary of engine displacement by year, including the minimum, maximum, median, and inter quantile range.</strong></li>
+</ol>
+</section>
+<section id="graphical-eda-base-r-vs-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="graphical-eda-base-r-vs-ggplot">Graphical EDA: <strong>base R</strong> vs <strong>ggplot</strong></h2>
+<p>Plots can be made using base R functions like <code>plot()</code>, <code>hist()</code>, or <code>barplot()</code>. Here are some examples of how this works on the <code>mpg</code> data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mpg<span class="sc">$</span>displ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(mpg<span class="sc">$</span>cyl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> mpg<span class="sc">$</span>displ, <span class="at">y =</span> mpg<span class="sc">$</span>hwy,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Highway mpg"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Engine displacement (L)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These plots are quick to produce and are useful for an initial understanding of the data, but the syntax used to create them is specific to the type of plot. In contrast, <code>ggplot</code> has a streamlined approach to plotting involving largely the same steps regardless of plot type. Specifically, in <code>ggplot</code> we build up visualisations layer by layer using the <code>+</code> operator (which is similar to the <code>%&gt;%</code> operator we are already familiar with).</p>
+<p>The main, important, layers in <code>ggplot</code> are:</p>
+<ul>
+<li>Pass the data to <code>ggplot()</code></li>
+<li>Choose aesthetic mappings with <code>aes()</code></li>
+<li>Choose geometric components with <code>geom()</code></li>
+<li>Choose additional labels, themes, and visuals</li>
+<li>Choose faceting if it is applicable with <code>facet()</code></li>
+</ul>
+<p>What does this layering system look like? In <a href="https://r4ds.had.co.nz/data-visualisation.html"><em>Chapter 3: Data Visualisation</em></a> of Hadley Wickham’s R4DS book, there is a general ggplot template to give you an idea of how plots are layered.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">ggplot(data = &lt;DATA&gt;) + </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">  &lt;GEOM_FUNCTION&gt;(</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">     mapping = aes(&lt;MAPPINGS&gt;)) +</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">  &lt;COORDINATE_FUNCTION&gt; +</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">  &lt;FACET_FUNCTION&gt; +</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">  &lt;THEME&gt; </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Below is a real example of how this looks. Remember that you do not have to / need to use all of the <code>ggplot</code> options (and there are many many more than presented here). However, this gives you an idea of how the layers of these plots are built up.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris) <span class="sc">+</span> <span class="co"># Data</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="co"># Variable on the x-axis</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> Sepal.Width, <span class="co"># Variable on the y-axis</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">colour =</span> Species)) <span class="sc">+</span> <span class="co"># Legend </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sepal Length"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sepal Width"</span>, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Relationship between Sepal Length and Width by Species"</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>() <span class="sc">+</span> <span class="co"># Default standard for mapping x and y</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Species) <span class="sc">+</span> <span class="co"># Splits plot by the species variable</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="co"># Sets the background theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can read about different <code>ggplot2</code> options <a href="https://ggplot2.tidyverse.org/reference/">here</a>. The reference guides by <a href="https://rpubs.com/arvindpdmn/ggplot2-basics">RPubs</a>, <a href="http://www.sthda.com/english/wiki/ggplot2-essentials">STHDA</a> and <a href="https://www.datanovia.com/en/blog/ggplot-examples-best-reference/#scatter-plot">Data Novia</a> will be useful once you grasp the basics and want to make more complicated visualisations.</p>
+</section>
+<section id="visualising-distributions-of-single-variables" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-distributions-of-single-variables">Visualising distributions of single variables</h2>
+<section id="categorical-variables" class="level4">
+<h4 class="anchored" data-anchor-id="categorical-variables">Categorical variables</h4>
+<p><strong>Bar charts</strong> are often used to visualise categorical variables with a finite set of values. Below is an example how to visuailse the distribution of <code>drv</code> - the type of drive train in the <code>mpg</code> dataset.</p>
+<p><code>geom_bar</code> transforms each value of <code>drv</code> into a count to be plotted on the y-axis. The x-axis presents the category associated with each count.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> drv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li><p><strong>Create a bar chart that shows a count for the different vehicle classes in <code>mpg</code>.</strong></p></li>
+<li><p><strong>Look up different <code>ggplot</code> themes, and apply one to the bar chart you just created.</strong></p></li>
+</ol>
+</section>
+<section id="continuous-variables" class="level4">
+<h4 class="anchored" data-anchor-id="continuous-variables">Continuous variables</h4>
+<p><strong>Histograms</strong> are often used to visualise the distribution of a continuous variable. Below is an example of how to visualise the distribution of <code>cty</code> - the number of city miles per gallon in the <code>mpg</code> dataset.</p>
+<p><code>geom_hist</code> transforms the x-axis into equally spaced “bins” and the height of each bar on the y-axis is the number of observations falling in each bin.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> cty), </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">binwidth =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can change the value of <code>binwidth</code> to adjust the width of the intervals. Different binwidths can reveal different patterns in the data.</p>
+<ol start="6" type="1">
+<li><strong>What happens when you change the value of <code>binwidth</code> to <code>1</code>? Does the distribution change?</strong></li>
+</ol>
+<p><strong>Density plots</strong> are an alternative to histograms for continuous data. Below is an example of the density of <code>cty</code> from the <code>mpg</code> data. The argument <code>fill = "darkseagreen"</code> just adds colour. You can also specify <code>colour = "&lt;COLOUR NAME&gt;"</code> to change the density line.</p>
+<p><code>geom_density</code> transforms the data into smoothed kernel density estimates (basically a smooth histogram). It is useful for continuous data that come from an underlying smooth distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> cty)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"darkseagreen"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can also include raw data in a histogram in the form of “rug” marks.</p>
+<ol start="7" type="1">
+<li><strong>Add rug marks to plot above by adding the argument <code>+ geom_rug(size = 1, colour = "darkorange")</code>.</strong></li>
+</ol>
+</section>
+</section>
+<section id="visualing-the-distributions-of-multiple-variables" class="level2">
+<h2 class="anchored" data-anchor-id="visualing-the-distributions-of-multiple-variables">Visualing the distributions of multiple variables</h2>
+<section id="continuous---continuous" class="level3">
+<h3 class="anchored" data-anchor-id="continuous---continuous">Continuous - Continuous</h3>
+<p><strong>Scatterplots</strong> are often used to explore how two continuous variables covary together. Below is an example of how to visualise covariation between <code>displ</code> (engine displacement) and <code>hwy</code> (highway miles per gallon) in the <code>mpg</code> data. If there is a clear pattern in how the points fall on the x- and y-axes then we can say these variables covary.</p>
+<p><code>geom_point</code> plots values of <code>displ</code> on the y-axis and values of <code>hwy</code> on the x-axis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> hwy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Some of these values might be clustered together based on another characteristic. You can explore this by adding colour to the aesthetic mappings, for example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> hwy, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colour =</span> class))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="8" type="1">
+<li><strong>Repeat the plot above, but mapping the type of transmission to the <code>colour</code> aesthetic. Add a theme and change the titles of the x- and y-axes.</strong></li>
+</ol>
+<p>Different aesthetic mappings can be combined in one plot. For example, you may want to add a line of best fit to a scatterplot plot, which you can do using <code>geom_smooth()</code>.</p>
+<ol start="9" type="1">
+<li><strong>Create a scatter plot showing the relationship between engine displacement and city miles, including a line of best fit.</strong></li>
+</ol>
+<p>You can fit more than one line in the same plot. This is often useful in multilevel modelling, where different hierarchies (e.g., groups, locations, individuals) have different slopes.</p>
+<ol start="10" type="1">
+<li><strong>Recreate the previous plot, but adding <code>colour = class</code> to the aesthetic mappings. Use <code>method = "lm"</code> and set <code>se = FALSE</code> in <code>geom_smooth()</code>. What difference does this make?</strong></li>
+</ol>
+</section>
+<section id="continuous---categorical" class="level3">
+<h3 class="anchored" data-anchor-id="continuous---categorical">Continuous - Categorical</h3>
+<p><strong>Boxplots</strong> are often used to explore the distribution of a continuous variable broken down by a categorical variable. Below is an example of <code>hwy</code> broken down by <code>drv</code>.</p>
+<p><code>geom_boxplot</code> transforms the data to show summary statistics that are represented by the different visual features of the boxplot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> drv, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> hwy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These features of the boxplot are:</p>
+<ul>
+<li>Lower horizontal line</li>
+<li>Thicker horizontal middle line</li>
+<li>Upper horizontal line</li>
+<li>Vertical whiskers</li>
+<li>Points beyond the whiskers</li>
+</ul>
+<ol start="11" type="1">
+<li><p><strong>What do each of these features tell us?</strong></p></li>
+<li><p><strong>Add <code>+ coord_flip()</code> to the plot above. What does this do?</strong></p></li>
+<li><p><strong>What can you conclude about the highway miles per gallon of each type of drive train from the boxplot above?</strong></p></li>
+</ol>
+<p>The variable <code>trans</code> contains 10 different transmissions types. These 10 categories can be assumed under 2 broader categories: <strong>manual</strong> and <strong>auto</strong>.</p>
+<ol start="14" type="1">
+<li><p><strong>Use <code>mutate()</code> and <code>fct_collapse()</code> to collapse the 10 categories of <code>trans</code> to just these 2 categories.</strong></p></li>
+<li><p><strong>Use the previous example to create a boxplot mapping <code>cty</code> on the y-axis and <code>drv</code> on the x-axis, this time adding the argument <code>colour = trans</code> to <code>aes()</code>. What has changed?</strong></p></li>
+</ol>
+</section>
+</section>
+<section id="facets" class="level2">
+<h2 class="anchored" data-anchor-id="facets">Facets</h2>
+<p><strong>Facets</strong> are a way to split your plot into many subplots according to some categorical variable.</p>
+<p>To do this, you use the command <code>facet_wrap()</code> to facet by a single variable. The first argument to <code>facet_wrap()</code> is a formula initiated by <code>~</code> and a variable name. Below is an example of how this can work on the <code>mpg</code> data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> hwy)) <span class="sc">+</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> class, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It is possible to facet on a combination of two variables using <code>facet_grid()</code>. Like before, the first argument is a formula, but containing two variable names separated by <code>~</code>. Below is an example of how this can work.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> hwy)) <span class="sc">+</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(drv <span class="sc">~</span> cyl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="16" type="1">
+<li><p><strong>Notice that there are empty cells in the bottom left facets above. What do you think this means?</strong></p></li>
+<li><p><strong>Create a scatter plot of <code>displ</code> and <code>hwy</code>, faceting by the of <code>manufacturer</code> name.</strong></p></li>
+<li><p><strong>Change the names on the axes to be more informative.</strong></p></li>
+</ol>
+</section>
+<section id="arranging-multiple-plots" class="level2">
+<h2 class="anchored" data-anchor-id="arranging-multiple-plots">Arranging multiple plots</h2>
+<p>If you have multiple plots that you want to arrange on the same page, you can use <code>ggarrange()</code> from the <code>ggpubr</code> package.</p>
+<p>The first step is creating some plots. For this exercise we will only use the variables <code>hwy</code>, <code>cty</code>, and <code>class</code>.</p>
+<ol start="19" type="1">
+<li><strong>Create the following three plots:</strong></li>
+</ol>
+<p><strong>A. A bar plot showing counts of <code>class</code>, assigning <code>class</code> to the <code>fill</code> aesthetic.</strong></p>
+<p><strong>B. A box plot of <code>class</code> by <code>hwy</code> per gallon, assigning <code>class</code> to the <code>colour</code> aesthetic.</strong></p>
+<p><strong>C. A jittered scatterplot of <code>hwy</code> and <code>cty</code> miles per gallon, assigning <code>class</code> to the <code>colour</code> aesthetic.</strong></p>
+<p><strong>Remember to save each plot as an object to be called upon later.</strong></p>
+<p><strong>D. Use <code>ggarrange()</code> to arrange the three plots in one space. <code>ggarrange()</code> takes the plots as arguments as well as <code>ncol</code> or <code>nrow</code> to customise the arrangement</strong></p>
+<p><strong>E. Repeat the code from the previous question, adding <code>common.legend = TRUE</code> and <code>legend = "bottom"</code> to <code>ggarrange()</code>.</strong></p>
 <hr>
+</section>
 </section>
 <section id="part-2-linear-regression" class="level1">
 <h1>Part 2: Linear regression</h1>
-<p>We will use the following packages in this practical:</p>
+<p>We will use the following packages in this part of the practical:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this practical, you will learn how to perform regression analyses in <code>R</code> using <code>lm()</code> and inspect variables by plotting these variables, using <code>ggplot()</code>, repeating some topics of the last 3 weeks.</p>
 <section id="loading-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="loading-the-dataset">Loading the dataset</h2>
 <p>In the this practical, we will use the built-in data set <code>iris</code>. This data set contains the measurement of different iris species (flowers), you can find more information <a href="https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/iris">here</a>.</p>
-<ol type="1">
+<ol start="20" type="1">
 <li><strong>Load the dataset and explain what variables are measured in the first three columns of your data set.</strong></li>
 </ol>
 </section>
 <section id="inspecting-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="inspecting-the-dataset">Inspecting the dataset</h2>
 <p>A good way of eyeballing on a relation between two continuous variables is by creating a scatterplot.</p>
-<ol start="2" type="1">
+<ol start="21" type="1">
 <li><strong>Plot the sepal length and the petal width variables in a <code>ggplot</code> scatter plot (<code>geom_points</code>)</strong></li>
 </ol>
 <p>A loess curve can be added to the plot to get a general idea of the relation between the two variables. You can add a loess curve to a ggplot with <code>stat_smooth(method = "loess")</code>.</p>
-<ol start="3" type="1">
+<ol start="22" type="1">
 <li><strong>Add a loess curve to the plot under question 2, for further inspection.</strong></li>
 </ol>
 <p>To get a clearer idea of the general trend in the data (or of the relation), a regression line can be added to the plot. A regression line can be added in the same way as a loess curve, the method argument in the function needs to be altered to <code>lm</code> to do so.</p>
-<ol start="4" type="1">
+<ol start="23" type="1">
 <li><strong>Change the loess curve of the previous plot to a regression line. Describe the relation that the line indicates.</strong></li>
 </ol>
 </section>
@@ -238,11 +692,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>With the <code>lm()</code> function, you can specify a linear regression model. You can save a model in an object and request summary statistics with the <code>summary()</code> command. The model is always specified with the code <code>outcome_variable ~ predictor</code>.</p>
 <p>When a model is stored in an object, you can ask for the coefficients with <code>coefficients()</code>. The next code block shows how you would specify a model where petal width is predicted by sepal width, and how summary statistics for this model would look like</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify model: outcome = petal width, predictor = sepal width</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>iris_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Width <span class="sc">~</span> Sepal.Width,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> iris)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris_model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify model: outcome = petal width, predictor = sepal width</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>iris_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Width <span class="sc">~</span> Sepal.Width,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> iris)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris_model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -273,7 +727,7 @@ F-statistic: 22.91 on 1 and 148 DF,  p-value: 4.073e-06</code></pre>
 <li><p>The (adjusted) R squared as a metric for model performance.</p></li>
 </ul>
 <p>Individual elements can be extracted by calling specific model elements (e.g.&nbsp;<code>iris_model1$coefficients</code>).</p>
-<ol start="5" type="1">
+<ol start="24" type="1">
 <li><p><strong>Specify a regression model where Sepal length is predicted by Petal width. Store this model as `model1. Supply summary statistics for this model.</strong></p></li>
 <li><p><strong>Based on the summary of the model, give a substantive interpretation of the regression coefficient.</strong></p></li>
 <li><p><strong>Relate the summary statistics and coefficients to the plots you made in questions 2 - 4.</strong></p></li>

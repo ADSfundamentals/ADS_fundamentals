@@ -1,0 +1,10 @@
+---
+title: "Lab 1"
+output-file: "lab1_answers.html"
+params:
+  answers: true
+---
+
+```{r}
+#| child: "lab1.qmd"
+```

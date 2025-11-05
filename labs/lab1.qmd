@@ -1,6 +1,6 @@
 ---
 title: "Lab 1"
-output-file: "lab2.html"
+output-file: "lab1.html"
 params:
   answers: false
 ---

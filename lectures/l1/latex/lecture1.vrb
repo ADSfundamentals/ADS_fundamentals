@@ -12,9 +12,21 @@
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
 
+	Welch Two Sample t-test
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error in wrap(., w = 80): could not find function "{}wrap"{}}}\end{kframe}
+data:  Hwt by Sex
+t = -6.5179, df = 140.61, p-value = 1.186e-09
+alternative hypothesis: true difference in means between group F and group M
+is not equal to 0
+95 percent confidence interval:
+ -2.763753 -1.477352
+sample estimates:
+mean in group F mean in group M
+       9.202128       11.322680
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 
   The above is equivalent to either of the following.
@@ -22,7 +34,7 @@
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hldef{cats} \hlopt{%>%} \hlkwd{t.test}\hldef{(Hwt} \hlopt{~} \hldef{Sex,} \hlkwc{data} \hldef{= .)}
+\hldef{cats |>} \hlkwd{t.test}\hldef{(Hwt} \hlopt{~} \hldef{Sex,} \hlkwc{data} \hldef{= _)}
 \hlkwd{t.test}\hldef{(Hwt} \hlopt{~} \hldef{Sex,} \hlkwc{data} \hldef{= cats)}
 \end{alltt}
 \end{kframe}

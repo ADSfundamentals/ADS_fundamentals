@@ -45,10 +45,10 @@
       keywordstyle = \color{codekeyword},
       commentstyle = \color{codecomment}\itshape,
       stringstyle = \color{codestring},
-      deletekeywords = {_}
-      %frame = single,
-      %frameround = tttt,
-      %fillcolor = \color{blue}%
+      deletekeywords = {_}%
+      % frame = single,
+      % frameround = tttt,
+      % fillcolor = \color{blue}%
     ]{#1}%
   }
 }
@@ -81,10 +81,10 @@
 \newcommand{\pkg}[1]{\textbf{#1}}
 %\newcommand{\src}[1]{\texttt{#1}}
 
-\newcommand{\pipe}{\texttt{\%>\%}}
+\newcommand{\tightpipe}{\texttt{|>}}
+\newcommand{\pipe}{\tightpipe~}
 \newcommand{\expipe}{\texttt{\%\$\%}}
 \newcommand{\apipe}{\texttt{\%<>\%}}
-\newcommand{\rpipe}{\texttt{|>}}
 
 \title{R Basics}
 \subtitle{Fundamental Techniques in Data Science}
@@ -97,7 +97,7 @@ set.seed(235711)
 
 library(knitr)
 
-#source("../../../code/supportFunctions.R")
+source(here::here("code", "supportFunctions.R"))
 
 options(width = 60)
 opts_chunk$set(size = "footnotesize",
@@ -105,7 +105,9 @@ opts_chunk$set(size = "footnotesize",
                fig.path = "figure/r_basics-",
                message = FALSE,
                warning = FALSE,
-               comment = "")
+               comment = "",
+               root.dir = here::here("./")
+               )
 knit_theme$set('edit-kwrite')
 @
 
@@ -126,17 +128,18 @@ knit_theme$set('edit-kwrite')
 %----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Attribution}
-  
-This course was originally developed by Gerko Vink. You can access the original
-version of these materials on Dr. Vink's GitHub page:
-\url{https://github.com/gerkovink/fundamentals}.
-\va
-The course materials have been (extensively) modified. Any errors or 
-inaccuracies introduced via these modifications are fully my own responsibility
-and shall not be taken as representing the views and/or beliefs of Dr. Vink.
-\va
-You can see Gerko's version of the course on his personal website:
-\url{https://www.gerkovink.com/fundamentals}.
+
+  This course was originally developed by Gerko Vink. You can access the original version of these materials on Dr.
+  Vink's GitHub page: \url{https://github.com/gerkovink/fundamentals}.
+
+  \va
+
+  The course materials have been (extensively) modified. Any errors or inaccuracies introduced via these modifications
+  are fully my own responsibility and shall not be taken as representing the views and/or beliefs of Dr. Vink.
+
+  \va
+
+  You can see Gerko's version of the course on his personal website: \url{https://www.gerkovink.com/fundamentals}.
 
 \end{frame}
 
@@ -144,7 +147,7 @@ You can see Gerko's version of the course on his personal website:
 
 \begin{frame}{Prerequisite Knowledge}
   
-  After completeing the preperatory exercieses, you should already be familiar with the following ideas.
+  After completeing the preperatory exercises, you should already be familiar with the following ideas.
 
   \begin{itemize}
     \item What is R?
@@ -159,6 +162,14 @@ You can see Gerko's version of the course on his personal website:
       \end{itemize}
     \item Visualization with Base R graphics
   \end{itemize}
+
+  We will not cover these topics in the lectures.
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Related Topics}
 
   As part of this week's lab exercises, you will complete detailed tutorials covering:
 
@@ -591,11 +602,46 @@ sapply(dat1, mean, trim = 0.1)
 
 \watermarkoff %--------------------------------------------------------------------------------------------------------%
 
+\begin{frame}[fragile, allowframebreaks]{Some Data}
+
+  Let's create a few data frames to work with in the next few slides.
+
+  <<>>=
+  (d1 <- data.frame(1:6, c(-1, 1), seq(0.1, 0.6, 0.1)))
+  @
+  
+  \pagebreak
+
+  <<>>=
+  (d2 <- data.frame(x = 1:6, y = c(-1, 1), z = seq(0.1, 0.6, 0.1)))
+  @
+  
+  \pagebreak
+
+  <<>>=
+  (d3 <- data.frame(a = sample(c(TRUE, FALSE), 8, replace = TRUE),
+                    b = sample(c("foo", "bar"), 8, replace = TRUE),
+                    c = runif(8)
+                    )
+  )
+  @
+  
+  \pagebreak
+
+  <<>>=
+  (d4 <- data.frame(matrix(NA, 10, 3)))
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
 \begin{frame}[fragile]{Tidyverse Subsetting}
 
-  The \pkg{dplyr} package provides many ways to subset data, but two functions
-  are most frequently useful.
+  The \pkg{dplyr} package provides many ways to subset data, but two functions are most frequently useful.
+
   \vc
+
   \begin{itemize}
   \item \src{select()}: subset columns
     \vc
@@ -614,8 +660,7 @@ sapply(dat1, mean, trim = 0.1)
 
 \begin{frame}[fragile]{Subsetting Columns: \src{select()}}
 
-  The \src{dplyr::select()} function provides a very intuitive syntax for
-  variable selection and column-wise subsetting.
+  The \src{dplyr::select()} function provides a very intuitive syntax for variable selection and column-wise subsetting.
   
   \begin{columns}
     \begin{column}{0.5\textwidth}
@@ -692,8 +737,7 @@ sapply(dat1, mean, trim = 0.1)
 
 \begin{frame}[fragile]{Base R Variable Transformations}
 
-  There is nothing very special about the process of transforming variables in
-  Base R.
+  There is nothing very special about the process of transforming variables in Base R.
   
   \begin{columns}
     \begin{column}{0.5\textwidth}
@@ -724,8 +768,7 @@ sapply(dat1, mean, trim = 0.1)
 
 \begin{frame}[fragile]{Tidyverse Variable Transformations}
 
-  The \src{mutate()} function from \pkg{dplyr} is the workhorse of Tidyverse
-  transformation functions.
+  The \src{mutate()} function from \pkg{dplyr} is the workhorse of Tidyverse transformation functions.
 
   \begin{columns}
     \begin{column}{0.5\textwidth}
@@ -759,13 +802,15 @@ sapply(dat1, mean, trim = 0.1)
   sort(d3$c)
   sort(d3$c, decreasing = TRUE)
   @
+
   \vb
-  To sort the rows of a data frame according to the order of one of its columns,
-  the \src{dplyr::arrange()} works best.
+
+  To sort the rows of a data frame according to the order of one of its columns, the \src{dplyr::arrange()} works best.
+
   \vc
+
   \begin{itemize}
-  \item You can use the Base R \src{order()} function to achieve similar
-    results.
+  \item You can use the Base R \src{order()} function to achieve similar results.
     \vc
   \item The behavior of \src{order()} is (extremely) unintuitive.
   \end{itemize}
@@ -810,13 +855,13 @@ sapply(dat1, mean, trim = 0.1)
 
 \watermarkoff %--------------------------------------------------------------------------------------------------------%
 
-\subsection{The Basic Tidyverse Pipe: \pipe}
+\subsection{The Basic Pipe: \tightpipe}
 
 %----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile]{What are pipes?}
 
-  The \pipe$~$symbol represents the \emph{pipe} operator.
+  The \pipe symbol represents the \emph{pipe} operator.
   \vc
   \begin{itemize}
   \item We use the pipe operator to compose functions into a \emph{pipeline}.
@@ -828,14 +873,15 @@ sapply(dat1, mean, trim = 0.1)
 
   <<eval = FALSE>>=
   firstBoys <-
-      readRDS("boys.rds") %>%
+      here::here("data", "boys.rds") |>
+      readRDS() |>
       head()
   @
   
   This pipeline replaces the following code.
 
   <<eval = FALSE>>=
-  firstBoys <- head(readRDS("boys.rds"))
+  firstBoys <- head(readRDS(here::here("data", "boys.rds"))
   @
   
 \end{frame}
@@ -863,7 +909,7 @@ sapply(dat1, mean, trim = 0.1)
   <<>>=
   library(dplyr)
 
-  boys <- readRDS("../../../data/boys.rds")
+  boys <- readRDS(here::here("data", "boys.rds"))
   boys <- transform(boys, hgt = hgt / 100)
   boys <- filter(boys, age > 15)
   boys <- subset(boys, select = c(hgt, wgt, bmi))
@@ -879,16 +925,15 @@ sapply(dat1, mean, trim = 0.1)
 
   <<>>=
   boys <-
-      readRDS("../../../data/boys.rds") %>%
-      transform(hgt = hgt / 100) %>%
-      filter(age > 15) %>%
+      readRDS(here::here("data", "boys.rds") |>
+      transform(hgt = hgt / 100) |>
+      filter(age > 15) |>
       subset(select = c(hgt, wgt, bmi))
   @
   
   \vb
 
-  With a pipeline, our code more clearly represents the sequence of steps in our
-  analysis.
+  With a pipeline, our code more clearly represents the sequence of steps in our analysis.
 
 \end{frame}
 
@@ -910,7 +955,7 @@ sapply(dat1, mean, trim = 0.1)
 
   \va
 
-  In RStudio, you can use a keyboard shortcut to insert the \pipe$~$symbol.
+  In RStudio, you can use a keyboard shortcut to insert the \pipe symbol.
   \vc
   \begin{itemize}
   \item  Windows/Linux: \emph{ctrl} + \emph{shift} + \emph{m}
@@ -927,12 +972,12 @@ sapply(dat1, mean, trim = 0.1)
   Pipes compose R functions without nesting.
   \vc
   \begin{itemize}
-  \item \src{f(x)} becomes \src{x} \pipe$~~$\src{f()}
+  \item \src{f(x)} becomes \src{x} \pipe \src{f()}
   \end{itemize}
 
   <<>>=
   mean(rnorm(10))
-  rnorm(10) %>% mean()
+  rnorm(10) |> mean()
   @
   
 \end{frame}
@@ -944,12 +989,12 @@ sapply(dat1, mean, trim = 0.1)
   Multiple function arguments are fine.
   \vc
   \begin{itemize}
-  \item \src{f(x, y)} becomes \src{x} \pipe$~~$\src{f(y)}
+  \item \src{f(x, y)} becomes \src{x} \pipe \src{f(y)}
   \end{itemize}
 
   <<>>=
   cor(boys, use = "pairwise.complete.obs")
-  boys %>% cor(use = "pairwise.complete.obs")
+  boys |> cor(use = "pairwise.complete.obs")
   @
   
 \end{frame}
@@ -961,15 +1006,14 @@ sapply(dat1, mean, trim = 0.1)
   Composing more than two functions is easy, too.
   \vc
   \begin{itemize}
-  \item \src{h(g(f(x)))} becomes \src{x} \pipe$~~$\src{f} \pipe$~~$\src{g}
-    \pipe$~~$\src{h}
+  \item \src{h(g(f(x)))} becomes \src{x} \pipe \src{f()} \pipe \src{g()} \pipe \src{h()}
   \end{itemize}
 
   <<>>=
   max(na.omit(subset(boys, select = wgt)))
-  boys %>%
-      subset(select = wgt) %>%
-      na.omit() %>%
+  boys |> 
+      subset(select = wgt) |>
+      na.omit() |>
       max()
   @
   
@@ -981,32 +1025,31 @@ sapply(dat1, mean, trim = 0.1)
 
 \watermarkon %---------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{The Role of \src{.} in a Pipeline}
+\begin{frame}[fragile]{The Role of \src{_} in a Pipeline}
 
-  In the expression \src{a} \pipe$~~$\src{f(arg1, arg2, arg3)}, \src{a} will be
-  "piped into" \src{f()} as \src{arg1}.
+  In the expression \src{a} \pipe \src{f(arg1, arg2, arg3)}, \src{a} will be "piped into" \src{f()} as \src{arg1}.
 
   <<error = TRUE, fig.show = "hide">>=
   data(cats, package = "MASS")
-  cats %>% plot(Hwt ~ Bwt)
+  cats |> plot(Hwt ~ Bwt)
   @
   
   Clearly, we have a problem if we pipe our data into the wrong argument.
   \vc
   \begin{itemize}
-  \item We can change this behavior with the \src{.} symbol.
+  \item We can change this behavior with the \src{_} symbol.
     \vc
-  \item The \src{.} symbol acts as a placeholder for the data in a pipeline.
+  \item The \src{_} symbol acts as a placeholder for the data in a pipeline.
   \end{itemize}
 
 \end{frame}
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{The Role of \src{.} in a Pipeline}
+\begin{frame}[fragile]{The Role of \src{_} in a Pipeline}
 
   <<out.width = "50%">>=
-  cats %>% plot(Hwt ~ Bwt, data = .)
+  cats |> plot(Hwt ~ Bwt, data = _)
   @
   
 \end{frame}
@@ -1015,17 +1058,19 @@ sapply(dat1, mean, trim = 0.1)
 
 \begin{frame}[fragile]{Exposition Pipe: \expipe}
 
-  There are several different flavors of pipe. The \emph{exposition pipe},
-  \expipe, is a particularly useful variant.
+  The \pkg{magrittr} package provides several different flavors of pipe. The \emph{exposition pipe}, \expipe, is a
+  particularly useful variant.
+
   \vc
+
   \begin{itemize}
-  \item The exposition pipe \emph{exposes} the contents of an object to
-    the next function in the pipeline.
+  \item The exposition pipe \emph{exposes} the contents of an object to the next function in the pipeline.
   \end{itemize}
 
   \vc
 
   <<out.width = "40%">>=
+  library(magrittr)
   cats %$% plot(Hwt ~ Bwt)
   @
   
@@ -1042,13 +1087,13 @@ sapply(dat1, mean, trim = 0.1)
   $$\vx{-40}$$
 
   <<echo = FALSE>>=
-  cats %$% t.test(Hwt ~ Sex) %>% wrap(w = 80)
+  cats %$% t.test(Hwt ~ Sex) |> wrap(w = 80)
   @
   
   The above is equivalent to either of the following.
 
   <<eval = FALSE>>=
-  cats %>% t.test(Hwt ~ Sex, data = .)
+  cats |> t.test(Hwt ~ Sex, data = _)
   t.test(Hwt ~ Sex, data = cats)
   @
   
@@ -1062,15 +1107,15 @@ sapply(dat1, mean, trim = 0.1)
 
 \begin{frame}{Some Programming Tips}
 
-  You can save yourself a great deal of heartache by following a few simple 
-  guidelines.
+  You can save yourself a great deal of heartache by following a few simple guidelines.
+
   \begin{itemize}
   \item Keep your code tidy.
     \vc
   \item Use comments to clarify what you are doing.
     \vc
-  \item When working with functions in RStudio, use the TAB key to quickly
-    access the documentation of the function's arguments.
+  \item When working with functions in RStudio, use the TAB key to quickly access the documentation of the function's
+    arguments.
     \vc
   \item Give your R scripts and objects meaningful names.
     \vc
@@ -1089,12 +1134,11 @@ Use common sense and BE CONSISTENT.
 \item Browse the \href{https://style.tidyverse.org}{tidyverse style guide}.
 \begin{itemize}
   \item The point of style guidelines is to enforce a common vocabulary.
-  \item You want people to concentrate on \emph{what} you're saying, not
-    \emph{how} you're saying it.
+  \item You want people to concentrate on \emph{what} you're saying, not \emph{how} you're saying it.
   \end{itemize}
 \vc
-\item If the code you add to a project/codebase looks drastically different from
-  the extant code, the incongruity will confuse readers and collaborators.
+\item If the code you add to a project/codebase looks drastically different from the extant code, the incongruity will
+  confuse readers and collaborators.
 \end{itemize}
 \vb
 Spacing and whitespace are your friends.
@@ -1111,10 +1155,10 @@ Spacing and whitespace are your friends.
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[allowframebreaks]{References}
-  \bibliographystyle{apacite}
-  \bibliography{../../../bibtex/ftds_refs.bib}
-\end{frame}
+% \begin{frame}[allowframebreaks]{References}
+%   \bibliographystyle{apacite}
+%   \bibliography{bibtex/ftds_refs.bib}
+% \end{frame}
 
 %----------------------------------------------------------------------------------------------------------------------%
 

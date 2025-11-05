@@ -1,2 +1,82 @@
+# Quarto
 /.quarto/
+/_site/
+/_book/
+/_manuscript/
+*.html
+*.pdf
+*.docx
+*.epub
+
+# R
 .Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+ENV/
+.venv/
+*.ipynb_checkpoints/
+.ipynb_checkpoints
+
+# Jupyter
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+
+# Cache
+.cache/
+*.cache
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Reveal.js (if using for presentations)
+*_files/
+*_cache/
+
+# knitr/rmarkdown cache
+/*_cache/
+/cache/
+
+# Output directories (if customized)
+output/

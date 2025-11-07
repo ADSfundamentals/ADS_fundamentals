@@ -1,9 +1,0 @@
-\beamer@sectionintoc {1}{Functions}{6}{0}{1}
-\beamer@sectionintoc {2}{Iteration}{15}{0}{2}
-\beamer@sectionintoc {3}{Data Manipulation}{29}{0}{3}
-\beamer@subsectionintoc {3}{1}{Subsetting}{30}{0}{3}
-\beamer@subsectionintoc {3}{2}{Transforming \& Rearranging}{38}{0}{3}
-\beamer@sectionintoc {4}{Pipes}{42}{0}{4}
-\beamer@subsectionintoc {4}{1}{The Basic Pipe: \texttt {|>}}{43}{0}{4}
-\beamer@subsectionintoc {4}{2}{Other Flavors of Pipe}{50}{0}{4}
-\beamer@sectionintoc {5}{Workflow \& Project Management}{54}{0}{5}

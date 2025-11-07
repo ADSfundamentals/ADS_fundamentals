@@ -1,7 +1,7 @@
-%%% Title:    FTDS Lecture 1: R Basics
+%%% Title:    FTDS Lecture 1: R Programming Basics
 %%% Author:   Kyle M. Lang
 %%% Created:  2016-01-28
-%%% Modified: 2025-11-05
+%%% Modified: 2025-11-07
 
 \documentclass[10pt]{beamer}
 \usetheme{Utrecht}
@@ -9,13 +9,12 @@
 \usepackage{graphicx}
 \usepackage[natbibapa]{apacite}
 \usepackage[libertine]{newtxmath}
-\usepackage{booktabs}
-\usepackage{caption}
+% \usepackage{booktabs}
+% \usepackage{caption}
+% \usepackage{xspace}
+\usepackage[most]{tcolorbox}
 \usepackage{listings}
-\usepackage{xspace}
-\usepackage{tcolorbox}
-\tcbuselibrary{listings}
-\usepackage{fancyvrb}
+% \usepackage{fancyvrb}
 \usepackage{hyperref}
 
 \hypersetup{
@@ -29,64 +28,37 @@
 \definecolor{codekeyword}{RGB}{1,1,129}
 \definecolor{codecomment}{RGB}{131,129,131}
 
-\newcommand{\src}[1]{%
-  \tcbox[%
-    on line, 
+\newtcbox{\src}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
     colback = codebackground, 
-    colframe = codebackground, 
+    colframe = codebackground,
     left = 0pt, 
     right = 0pt, 
-    top = 0pt, 
-    bottom = 0pt%
-  ]{%
-    \lstinline[%
-      language = R, 
-      basicstyle = \ttfamily,
-      keywordstyle = \color{codekeyword},
-      commentstyle = \color{codecomment}\itshape,
-      stringstyle = \color{codestring},
-      deletekeywords = {_}%
-      % frame = single,
-      % frameround = tttt,
-      % fillcolor = \color{blue}%
-    ]{#1}%
   }
-}
 
-%\DeclareTotalTCBox{\src}
-%                  { s v }
-%                  {verbatim, colupper = white, colback = black!75!white, colframe = black} 
-%                  {%
-%                    \IfBooleanT{#1}{\textcolor{red}{\ttfamily\bfseries >}}% 
-%                    \lstinline[language = command.com, keywordstyle = \color{blue!35!white}\bfseries]^#2^%
-%                  }
+\newtcbox{\srcT}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+    height = 14pt,
+    valign = bottom,
+  }
 
-%\newtcbinputlisting[]{\src}[1][]{
-%  listing only,
-%  nobeforeafter,
-%  after={\xspace},
-%  hbox,
-%  tcbox raise base,
-%  fontupper=\ttfamily,
-%  colback=lightgray,
-%  colframe=lightgray,
-%  size=fbox
-%  }{#1}
-
-%\newcommand{\src}[1]{%
-%  \begin{tcbwritetemp} \tcboxverb[beamer]{#1} \end{tcbwritetemp}%
-%  \tcbusetemp%
-%}
 \newcommand{\rmsc}[1]{\textrm{\textsc{#1}}}
 \newcommand{\pkg}[1]{\textbf{#1}}
-%\newcommand{\src}[1]{\texttt{#1}}
 
 \newcommand{\tightpipe}{\texttt{|>}}
 \newcommand{\pipe}{\tightpipe~}
 \newcommand{\expipe}{\texttt{\%\$\%}}
 \newcommand{\apipe}{\texttt{\%<>\%}}
 
-\title{R Basics}
+\title{R Programming Fundamentals}
 \subtitle{Fundamental Techniques in Data Science}
 \author{Kyle M. Lang}
 \institute{Department of Methodology \& Statistics\\Utrecht University}
@@ -147,11 +119,15 @@ knit_theme$set('edit-kwrite')
 
 \begin{frame}{Prerequisite Knowledge}
   
-  After completeing the preperatory exercises, you should already be familiar with the following ideas.
+  After completing the preparatory exercises, you should already be familiar with the following ideas.
+
+  \vb
 
   \begin{itemize}
     \item What is R?
+      \vc
     \item What is RStudio?
+      \vc
     \item Basic R data objects
       \begin{itemize}
         \item Atomic Vectors
@@ -160,8 +136,11 @@ knit_theme$set('edit-kwrite')
         \item Data Frames
         \item Factors
       \end{itemize}
+      \vc
     \item Visualization with Base R graphics
   \end{itemize}
+
+  \vb
 
   We will not cover these topics in the lectures.
 
@@ -171,12 +150,17 @@ knit_theme$set('edit-kwrite')
 
 \begin{frame}{Related Topics}
 
-  As part of this week's lab exercises, you will complete detailed tutorials covering:
+  As part of this week's lab exercises, you will complete detailed tutorials covering the following topics.
+
+  \vc
 
   \begin{itemize}
     \item How to create reproducible reports with Quarto
+      \vc
     \item How to load data from external files
   \end{itemize}
+
+  \vb
 
   We will not cover these topics in the lectures.
 
@@ -224,8 +208,8 @@ knit_theme$set('edit-kwrite')
 
   <<>>=
   square <- function(x) {
-      out <- x^2
-      out
+    out <- x^2
+    out
   }
   @
 
@@ -279,10 +263,10 @@ knit_theme$set('edit-kwrite')
 
   <<>>=
   getLsBeta <- function(datList) {
-      X <- datList$X
-      y <- datList$y
-      
-      solve(crossprod(X)) %*% t(X) %*% y
+    X <- datList$X
+    y <- datList$y
+ 
+    solve(crossprod(X)) %*% t(X) %*% y
   }
   @
 
@@ -301,14 +285,7 @@ knit_theme$set('edit-kwrite')
 
 \begin{frame}[fragile]{User-Defined Functions}
 
-  Functions are first-class objects in R.
-  \begin{itemize}
-  \item We can treat functions like any other R object.
-  \end{itemize}
-
-  \vb
-  
-  R views an unevaluated function as an object with type "closure".
+  R views unevaluated functions as special objects with type "closure".
 
   <<>>=
   class(getLsBeta)
@@ -360,14 +337,18 @@ c(1, 3, 6:9, 12)
 
 %----------------------------------------------------------------------------------------------------------------------%
 
+\subsection{Loops}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
 \begin{frame}{Loops}
 
   There are three types of loops in R: \emph{for}, \emph{while}, and \emph{until}.
   \vc
   \begin{itemize}
-    \item You'll rarely use anything but the for loop.
+    \item You'll rarely use anything but the \emph{for} loop.
     \vc
-    \item So, we won't discuss while or until loops.
+    \item So, we won't discuss \emph{while} or \emph{until} loops.
   \end{itemize}
 
   \va
@@ -376,7 +357,7 @@ c(1, 3, 6:9, 12)
 
 <<eval = FALSE>>=
 for(INDEX in RANGE) {
-     Stuff To Do with the Current INDEX Value
+  Stuff To Do with the Current INDEX Value
 }
 @
 
@@ -391,7 +372,7 @@ for(INDEX in RANGE) {
 <<>>=
 val <- 0
 for(i in 1:100) {
-    val <- val + i
+  val <- val + i
 }
 
 val
@@ -404,7 +385,7 @@ val
 <<>>=
 means <- rep(0, ncol(mtcars))
 for(j in 1:ncol(mtcars)) {
-    means[j] <- mean(mtcars[ , j])
+  means[j] <- mean(mtcars[ , j])
 }
 
 means
@@ -422,12 +403,12 @@ Loops are often one of the least efficient solutions in R.
 n <- 1e8
 
 t0 <- system.time({
-    val0 <- 0
-    for(i in 1:n) val0 <- val0 + i
+  val0 <- 0
+  for(i in 1:n) val0 <- val0 + i
 })
 
 t1 <- system.time(
-    val1 <- sum(1:n)
+  val1 <- sum(1:n)
 )
 @
 
@@ -459,6 +440,10 @@ colMeans(mtcars)
 \end{frame}
 
 \watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\subsection{Apply Statements}
+
+%----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile, allowframebreaks]{Apply Statements}
 
@@ -602,36 +587,19 @@ sapply(dat1, mean, trim = 0.1)
 
 \watermarkoff %--------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile, allowframebreaks]{Some Data}
+\begin{frame}[fragile, allowframebreaks]{Example Data}
 
-  Let's create a few data frames to work with in the next few slides.
-
-  <<>>=
-  (d1 <- data.frame(1:6, c(-1, 1), seq(0.1, 0.6, 0.1)))
-  @
-  
-  \pagebreak
+  First, we'll create a data frame to work with in the next few slides.
 
   <<>>=
-  (d2 <- data.frame(x = 1:6, y = c(-1, 1), z = seq(0.1, 0.6, 0.1)))
-  @
-  
-  \pagebreak
-
-  <<>>=
-  (d3 <- data.frame(a = sample(c(TRUE, FALSE), 8, replace = TRUE),
-                    b = sample(c("foo", "bar"), 8, replace = TRUE),
-                    c = runif(8)
-                    )
+  d1 <- data.frame(
+    a = sample(c(TRUE, FALSE), 8, replace = TRUE),
+    b = sample(c("foo", "bar"), 8, replace = TRUE),
+    c = runif(8)
   )
+  d1
   @
-  
-  \pagebreak
 
-  <<>>=
-  (d4 <- data.frame(matrix(NA, 10, 3)))
-  @
-  
 \end{frame}
 
 %----------------------------------------------------------------------------------------------------------------------%
@@ -666,14 +634,14 @@ sapply(dat1, mean, trim = 0.1)
     \begin{column}{0.5\textwidth}
       
       <<>>=
-      select(d3, a, b)
+      select(d1, a, b)
       @
       
     \end{column}
     \begin{column}{0.5\textwidth}
       
       <<>>=
-      select(d3, -a)
+      select(d1, -a)
       @
       
     \end{column}
@@ -691,14 +659,14 @@ sapply(dat1, mean, trim = 0.1)
     \begin{column}{0.5\textwidth}
       
       <<>>=
-      filter(d3, c > 0.5)
+      filter(d1, c > 0.5)
       @
       
     \end{column}
     \begin{column}{0.5\textwidth}
       
       <<>>=
-      filter(d3, c > 0.15, b == "foo")
+      filter(d1, c > 0.15, b == "foo")
       @
       
     \end{column}
@@ -712,14 +680,14 @@ sapply(dat1, mean, trim = 0.1)
     \begin{column}{0.5\textwidth}
 
       <<>>=
-      d3[d3$c > 0.5, ]
+      d1[d1$c > 0.5, ]
       @
       
     \end{column}
     \begin{column}{0.5\textwidth}
       
       <<>>=
-      d3[d3$c > 0.15 & d3$b == "foo", ]
+      d1[d1$c > 0.15 & d1$b == "foo", ]
       @
       
     \end{column}
@@ -743,20 +711,20 @@ sapply(dat1, mean, trim = 0.1)
     \begin{column}{0.5\textwidth}
 
       <<>>=
-      d4   <- d3
-      d4$d <- scale(d4$c)
-      d4$e <- !d4$a
-      d4
+      d2   <- d1
+      d2$d <- scale(d2$c)
+      d2$e <- !d2$a
+      d2
       @
       
     \end{column}
     \begin{column}{0.5\textwidth}
       
       <<>>=
-      d4   <- d3
-      d4$c <- scale(d4$c, scale = FALSE)
-      d4$a <- as.numeric(d4$a)
-      d4
+      d2   <- d1
+      d2$c <- scale(d2$c, scale = FALSE)
+      d2$a <- as.numeric(d2$a)
+      d2
       @
       
     \end{column}
@@ -774,17 +742,16 @@ sapply(dat1, mean, trim = 0.1)
     \begin{column}{0.5\textwidth}
 
       <<>>=
-      mutate(d3, d = rbinom(nrow(d3), 1, c))
+      mutate(d1, d = rbinom(nrow(d1), 1, c))
       @
       
     \end{column}
     \begin{column}{0.5\textwidth}
       
       <<>>=
-      mutate(d3,
-             d = rbinom(nrow(d3), 1, c),
-             e = d * c
-             )
+      mutate(d1,
+             d = rbinom(nrow(d1), 1, c),
+             e = d * c)
       @
       
     \end{column}
@@ -799,13 +766,14 @@ sapply(dat1, mean, trim = 0.1)
   To sort a single vector, the best option is the Base R \src{sort()} function.
 
   <<>>=
-  sort(d3$c)
-  sort(d3$c, decreasing = TRUE)
+  sort(d1$c)
+  sort(d1$c, decreasing = TRUE)
   @
 
   \vb
 
-  To sort the rows of a data frame according to the order of one of its columns, the \src{dplyr::arrange()} works best.
+  To sort the rows of a data frame according to the order of one of its columns, the \src{dplyr::arrange()} function
+  works best.
 
   \vc
 
@@ -827,21 +795,21 @@ sapply(dat1, mean, trim = 0.1)
     \begin{column}{0.3\textwidth}
 
       <<>>=
-      arrange(d3, a)
+      arrange(d1, a)
       @
       
     \end{column}
     \begin{column}{0.3\textwidth}
       
       <<>>=
-      arrange(d3, -c)
+      arrange(d1, -c)
       @
       
     \end{column}
     \begin{column}{0.3\textwidth}
       
       <<>>=
-      arrange(d3, -a, c)
+      arrange(d1, -a, c)
       @
       
     \end{column}
@@ -859,9 +827,9 @@ sapply(dat1, mean, trim = 0.1)
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{What are pipes?}
+\begin{frame}[fragile]{The Basic Pipe: \src{|>}}
 
-  The \pipe symbol represents the \emph{pipe} operator.
+  The \src{\pipe} symbol represents the \emph{pipe} operator.
   \vc
   \begin{itemize}
   \item We use the pipe operator to compose functions into a \emph{pipeline}.
@@ -873,9 +841,9 @@ sapply(dat1, mean, trim = 0.1)
 
   <<eval = FALSE>>=
   firstBoys <-
-      here::here("data", "boys.rds") |>
-      readRDS() |>
-      head()
+    here::here("data", "boys.rds") |>
+    readRDS() |>
+    head()
   @
   
   This pipeline replaces the following code.
@@ -925,10 +893,11 @@ sapply(dat1, mean, trim = 0.1)
 
   <<>>=
   boys <-
-      readRDS(here::here("data", "boys.rds") |>
-      transform(hgt = hgt / 100) |>
-      filter(age > 15) |>
-      subset(select = c(hgt, wgt, bmi))
+    here::here("data", "boys.rds") |>
+    readRDS() |>
+    transform(hgt = hgt / 100) |>
+    filter(age > 15) |>
+    subset(select = c(hgt, wgt, bmi))
   @
   
   \vb
@@ -944,7 +913,7 @@ sapply(dat1, mean, trim = 0.1)
   When you use pipes, your code becomes more readable.
   \vc
   \begin{itemize}
-  \item Operations are structured from left to right instead of in to out.
+  \item Operations are structured from left-to-right instead of in-to-out.
     \vc
   \item You can avoid many nested function calls.
     \vc
@@ -955,7 +924,7 @@ sapply(dat1, mean, trim = 0.1)
 
   \va
 
-  In RStudio, you can use a keyboard shortcut to insert the \pipe symbol.
+  In RStudio, you can use a keyboard shortcut to insert the \src{\pipe} symbol.
   \vc
   \begin{itemize}
   \item  Windows/Linux: \emph{ctrl} + \emph{shift} + \emph{m}
@@ -972,7 +941,7 @@ sapply(dat1, mean, trim = 0.1)
   Pipes compose R functions without nesting.
   \vc
   \begin{itemize}
-  \item \src{f(x)} becomes \src{x} \pipe \src{f()}
+  \item \src{f(x)} becomes \src{x \pipe f()}
   \end{itemize}
 
   <<>>=
@@ -989,7 +958,7 @@ sapply(dat1, mean, trim = 0.1)
   Multiple function arguments are fine.
   \vc
   \begin{itemize}
-  \item \src{f(x, y)} becomes \src{x} \pipe \src{f(y)}
+  \item \src{f(x, y)} becomes \src{x \pipe f(y)}
   \end{itemize}
 
   <<>>=
@@ -1006,15 +975,15 @@ sapply(dat1, mean, trim = 0.1)
   Composing more than two functions is easy, too.
   \vc
   \begin{itemize}
-  \item \src{h(g(f(x)))} becomes \src{x} \pipe \src{f()} \pipe \src{g()} \pipe \src{h()}
+  \item \src{h(g(f(x)))} becomes \src{x \pipe f() \pipe g() \pipe h()}
   \end{itemize}
 
   <<>>=
   max(na.omit(subset(boys, select = wgt)))
   boys |> 
-      subset(select = wgt) |>
-      na.omit() |>
-      max()
+    subset(select = wgt) |>
+    na.omit() |>
+    max()
   @
   
 \end{frame}
@@ -1025,9 +994,9 @@ sapply(dat1, mean, trim = 0.1)
 
 \watermarkon %---------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{The Role of \src{_} in a Pipeline}
+\begin{frame}[fragile]{Using Uncooperative Functions in a Pipeline}
 
-  In the expression \src{a} \pipe \src{f(arg1, arg2, arg3)}, \src{a} will be "piped into" \src{f()} as \src{arg1}.
+  In the expression \src{a \pipe f(arg1, arg2, arg3)}, \src{a} will be "piped into" \src{f()} as \src{arg1}.
 
   <<error = TRUE, fig.show = "hide">>=
   data(cats, package = "MASS")
@@ -1037,16 +1006,16 @@ sapply(dat1, mean, trim = 0.1)
   Clearly, we have a problem if we pipe our data into the wrong argument.
   \vc
   \begin{itemize}
-  \item We can change this behavior with the \src{_} symbol.
+  \item We can change this behavior with the underscore symbol, \srcT{\_}.
     \vc
-  \item The \src{_} symbol acts as a placeholder for the data in a pipeline.
+  \item The \srcT{\_} symbol acts as a placeholder for the data in a pipeline.
   \end{itemize}
 
 \end{frame}
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{The Role of \src{_} in a Pipeline}
+\begin{frame}[fragile]{Using Uncooperative Functions in a Pipeline}
 
   <<out.width = "50%">>=
   cats |> plot(Hwt ~ Bwt, data = _)
@@ -1056,9 +1025,9 @@ sapply(dat1, mean, trim = 0.1)
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{Exposition Pipe: \expipe}
+\begin{frame}[fragile]{Exposition Pipe: \src{\expipe}}
 
-  The \pkg{magrittr} package provides several different flavors of pipe. The \emph{exposition pipe}, \expipe, is a
+  The \pkg{magrittr} package provides several different flavors of pipe. The \emph{exposition pipe}, \src{\expipe}, is a
   particularly useful variant.
 
   \vc
@@ -1108,19 +1077,28 @@ sapply(dat1, mean, trim = 0.1)
 \begin{frame}{Some Programming Tips}
 
   You can save yourself a great deal of heartache by following a few simple guidelines.
-
+  \vc
   \begin{itemize}
   \item Keep your code tidy.
     \vc
   \item Use comments to clarify what you are doing.
     \vc
-  \item When working with functions in RStudio, use the TAB key to quickly access the documentation of the function's
-    arguments.
+  \item In RStudio, use the TAB key to quickly access the documentation of the function's arguments.
     \vc
   \item Give your R scripts and objects meaningful names.
     \vc
   \item Use a consistent directory structure and RStudio projects.
   \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Project Organization}
+
+  \begin{center}
+    \huge{\rmsc{Demo Time!}}
+  \end{center}
 
 \end{frame}
 
@@ -1148,7 +1126,7 @@ Spacing and whitespace are your friends.
   \vc
 \item \src{a <- c(1, 2, 3, 4, 5)}
   \vc
-\item At least put spaces around assignment operators and after every comma!
+\item At least, put spaces around assignment operators and after commas!
 \end{itemize}
 
 \end{frame}

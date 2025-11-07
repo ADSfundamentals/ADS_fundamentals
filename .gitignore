@@ -81,3 +81,6 @@ Thumbs.db
 # Output directories (if customized)
 output/
 site_libs
+
+# Ghost files
+.fuse_hidden*

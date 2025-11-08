@@ -4,17 +4,15 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    types:
-      - closed # Don't trigger unless the PR is closed
-    branches:
-      - main
+  # pull_request:
+  #   types:
+  #     - closed # Don't trigger unless the PR is closed
+  #   branches:
+  #     - main
   workflow_dispatch:
 
 jobs:
   build-deploy:
-    # Only run if the closed PR was merged OR we push a new commit
-    if: ${{ github.event.pull_request.merged == true || github.event.push.created == true }}
     runs-on: ubuntu-latest
 
     permissions:

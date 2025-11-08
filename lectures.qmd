@@ -1,0 +1,38 @@
+---
+title: "Lectures"
+toc: false
+---
+
+Below, you can access the lecture slides and associated materials for each week.
+
+## Week 1 {#w1}
+
+R Programming Fundamentals
+
+- [Lecture Slides](lectures/l1/lecture1.pdf)
+- [Project Organization Demo](assets/project_organization.zip)
+   - This link will download a ZIP archive that you must unpack on your computer.
+
+## Week 2
+
+Data Visualization & Simple Linear Regression
+
+## Week 3
+
+Multiple Linear Regression
+
+## Week 4
+
+MLR Assumptions & Diagnostics
+
+## Week 5
+
+Generalized Linear Models & Logistic Regression
+
+## Week 6
+
+Logistic Regression Assumptions & Assessing Classification Performance
+
+## Week 7
+
+Wrap Up & Review

@@ -12,6 +12,7 @@ website:
         text: Course manual
       - href: preparation.qmd
         text: Preparation
+      - href: lectures.qmd
       - href: assignments.qmd
         text: Assignments
       - href: exam.qmd

@@ -1,0 +1,1143 @@
+%%% Title:    FTDS Lecture 1: R Programming Basics
+%%% Author:   Kyle M. Lang
+%%% Created:  2016-01-28
+%%% Modified: 2025-11-07
+
+\documentclass[10pt]{beamer}
+\usetheme{Utrecht}
+
+\usepackage{graphicx}
+\usepackage[natbibapa]{apacite}
+\usepackage[libertine]{newtxmath}
+% \usepackage{booktabs}
+% \usepackage{caption}
+% \usepackage{xspace}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+% \usepackage{fancyvrb}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor = uured,
+  urlcolor = uured
+}
+ 
+\definecolor{codebackground}{RGB}{224,234,238}
+\definecolor{codestring}{RGB}{191,3,3}
+\definecolor{codekeyword}{RGB}{1,1,129}
+\definecolor{codecomment}{RGB}{131,129,131}
+
+\newtcbox{\src}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+  }
+
+\newtcbox{\srcT}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+    height = 14pt,
+    valign = bottom,
+  }
+
+\newcommand{\rmsc}[1]{\textrm{\textsc{#1}}}
+\newcommand{\pkg}[1]{\textbf{#1}}
+
+\newcommand{\tightpipe}{\texttt{|>}}
+\newcommand{\pipe}{\tightpipe~}
+\newcommand{\expipe}{\texttt{\%\$\%}}
+\newcommand{\apipe}{\texttt{\%<>\%}}
+
+\title{R Programming Fundamentals}
+\subtitle{Fundamental Techniques in Data Science}
+\author{Kyle M. Lang}
+\institute{Department of Methodology \& Statistics\\Utrecht University}
+\date{}
+
+<<setup, include = FALSE, cache = FALSE>>=
+set.seed(235711)
+
+library(knitr)
+
+source(here::here("code", "supportFunctions.R"))
+
+options(width = 60)
+opts_chunk$set(size = "footnotesize",
+               fig.align = "center",
+               fig.path = "figure/r_basics-",
+               message = FALSE,
+               warning = FALSE,
+               comment = "",
+               root.dir = here::here("./")
+               )
+knit_theme$set('edit-kwrite')
+@
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{document}
+
+\begin{frame}[t, plain]
+  \titlepage
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Attribution}
+
+  This course was originally developed by Gerko Vink. You can access the original version of these materials on Dr.
+  Vink's GitHub page: \url{https://github.com/gerkovink/fundamentals}.
+
+  \va
+
+  The course materials have been (extensively) modified. Any errors or inaccuracies introduced via these modifications
+  are fully my own responsibility and shall not be taken as representing the views and/or beliefs of Dr. Vink.
+
+  \va
+
+  You can see Gerko's version of the course on his personal website: \url{https://www.gerkovink.com/fundamentals}.
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Prerequisite Knowledge}
+  
+  After completing the preparatory exercises, you should already be familiar with the following ideas.
+
+  \vb
+
+  \begin{itemize}
+    \item What is R?
+      \vc
+    \item What is RStudio?
+      \vc
+    \item Basic R data objects
+      \begin{itemize}
+        \item Atomic Vectors
+        \item Matrices
+        \item Lists
+        \item Data Frames
+        \item Factors
+      \end{itemize}
+      \vc
+    \item Visualization with Base R graphics
+  \end{itemize}
+
+  \vb
+
+  We will not cover these topics in the lectures.
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Related Topics}
+
+  As part of this week's lab exercises, you will complete detailed tutorials covering the following topics.
+
+  \vc
+
+  \begin{itemize}
+    \item How to create reproducible reports with Quarto
+      \vc
+    \item How to load data from external files
+  \end{itemize}
+
+  \vb
+
+  We will not cover these topics in the lectures.
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\sectionslide{Functions}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{R Functions}
+
+  Functions are the foundation of R programming.
+  \vc
+  \begin{itemize}
+  \item Other than data objects, almost everything else that you interact with
+    when using R is a function.
+    \vc
+  \item Any R command written as a word followed by parentheses, \src{()}, is a
+    function.
+    \vc
+    \begin{itemize}
+    \item \src{mean()}
+    \item \src{library()}
+    \item \src{mutate()}
+    \end{itemize}
+    \vc
+  \item Infix operators are aliased functions.
+    \vc
+    \begin{itemize}
+    \item \src{<-}
+    \item \src{+}, \src{-}, \src{*}
+    \item \src{>}, \src{<}, \src{==}
+    \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{User-Defined Functions}
+  
+  We can define our own functions using the \src{function()} function.
+
+  <<>>=
+  square <- function(x) {
+    out <- x^2
+    out
+  }
+  @
+
+  After defining a function, we call it in the usual way.
+
+  <<>>=
+  square(5)
+  @
+
+  One-line functions don't need braces.
+
+  <<>>=
+  square <- function(x) x^2
+  square(5)
+  @
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{User-Defined Functions}
+
+  Function arguments are not strictly typed.
+
+  <<>>=
+  square(1:5)
+  square(pi)
+  square(TRUE)
+  @
+
+  But there are limits.
+
+  <<>>=
+  square("bob") # But one can only try so hard
+  @
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{User-Defined Functions}
+ 
+  Functions can take multiple arguments.
+  
+  <<>>=
+  mod <- function(x, y) x %% y
+  mod(10, 3)
+  @
+  
+  Sometimes it's useful to specify a list of arguments.
+
+  <<>>=
+  getLsBeta <- function(datList) {
+    X <- datList$X
+    y <- datList$y
+ 
+    solve(crossprod(X)) %*% t(X) %*% y
+  }
+  @
+
+  \pagebreak
+
+  <<>>=
+  X       <- matrix(runif(500), ncol = 5)
+  datList <- list(y = X %*% rep(0.5, 5), X = X)
+  
+  getLsBeta(datList = datList)
+  @
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{User-Defined Functions}
+
+  R views unevaluated functions as special objects with type "closure".
+
+  <<>>=
+  class(getLsBeta)
+  typeof(getLsBeta)
+  @
+
+  An evaluated functions is equivalent to the objects it returns.
+
+  <<>>=
+  class(getLsBeta(datList))
+  typeof(getLsBeta(datList))
+  @
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Nested Functions}
+
+We can use functions as arguments to other operations and functions.
+
+<<>>=
+fun1 <- function(x, y) x + y
+
+## What will this command return?
+fun1(1, fun1(1, 1))
+@
+
+Why would we care?
+
+<<>>=
+s2 <- var(runif(100))
+x  <- rnorm(100, 0, sqrt(s2))
+@
+
+\pagebreak
+
+<<>>=
+X[1:8, ]
+
+c(1, 3, 6:9, 12)
+@
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\sectionslide{Iteration}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Loops}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Loops}
+
+  There are three types of loops in R: \emph{for}, \emph{while}, and \emph{until}.
+  \vc
+  \begin{itemize}
+    \item You'll rarely use anything but the \emph{for} loop.
+    \vc
+    \item So, we won't discuss \emph{while} or \emph{until} loops.
+  \end{itemize}
+
+  \va
+
+  A \emph{for loop} is defined as follows.
+
+<<eval = FALSE>>=
+for(INDEX in RANGE) {
+  Stuff To Do with the Current INDEX Value
+}
+@
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Loops}
+
+  For example, the following loop will sum the numbers from 1 to 100.
+
+<<>>=
+val <- 0
+for(i in 1:100) {
+  val <- val + i
+}
+
+val
+@
+
+\pagebreak
+
+  This loop will compute the mean of every column in the \src{mtcars} data.
+
+<<>>=
+means <- rep(0, ncol(mtcars))
+for(j in 1:ncol(mtcars)) {
+  means[j] <- mean(mtcars[ , j])
+}
+
+means
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Loops}
+
+Loops are often one of the least efficient solutions in R.
+
+<<>>=
+n <- 1e8
+
+t0 <- system.time({
+  val0 <- 0
+  for(i in 1:n) val0 <- val0 + i
+})
+
+t1 <- system.time(
+  val1 <- sum(1:n)
+)
+@
+
+\pagebreak
+
+Both approaches produce the same answer.
+
+<<>>=
+val0 - val1
+@
+
+But the loop is many times slower.
+
+<<>>=
+t0
+t1
+@
+
+\pagebreak
+
+There is often a built in routine for what you are trying to accomplish with
+the loop.
+
+<<>>=
+## The appropriate way to get variable means:
+colMeans(mtcars)
+@
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\subsection{Apply Statements}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Apply Statements}
+
+  In R, some flavor of \emph{apply statement} is often preferred to a loop.
+  \vc
+  \begin{itemize}
+    \item Apply statements broadcast some operation across the elements of a 
+      data object.
+      \vc
+    \item Apply statements can take advantage of internal optimizations that
+      loops can't use.
+  \end{itemize}
+
+  \va
+
+  There are many flavors of apply statement in R, but the three most common are:
+
+  \vc
+
+  \begin{itemize}
+    \item \src{apply()}
+      \vc
+    \item \src{lapply()}
+      \vc
+    \item \src{sapply()}
+  \end{itemize}
+
+  \pagebreak
+
+  Apply statements generally take one of two forms:
+
+<<eval = FALSE>>=
+apply(DATA, MARGIN, FUNCTION, ...)
+
+apply(DATA, FUNCTION, ...)
+@
+
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Apply Examples}
+
+<<>>=
+## Load some example data:
+data(mtcars)
+
+## Subset the data:
+dat1 <- mtcars[1:5, 1:3]
+
+## Find the range of each row:
+apply(dat1, 1, range)
+@
+
+\pagebreak
+
+<<>>=
+## Find the maximum value in each column:
+apply(dat1, 2, max)
+
+## Subtract 1 from every cell:
+apply(dat1, 1:2, function(x) x - 1)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Apply Examples}
+
+<<>>=
+## Create a toy list:
+l1 <- list()
+for(i in 1:3) l1[[i]] <- runif(10)
+
+## Find the mean of each list entry:
+lapply(l1, mean)
+
+## Same as above, but return the result as a vector:
+sapply(l1, mean)
+@
+
+\pagebreak
+
+<<>>=
+## Find the range of each list entry:
+lapply(l1, range)
+sapply(l1, range)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Apply Examples}
+
+We can add additional arguments needed by the function.
+  \begin{itemize}
+    \item These arguments must be named.
+  \end{itemize}
+
+<<>>=
+apply(dat1, 2, mean, trim = 0.1)
+sapply(dat1, mean, trim = 0.1)
+@
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\sectionslide{Data Manipulation}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Subsetting}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Base R Subsetting}
+
+  In Base R, we typically use three operators to subset objects:
+  \vc
+  \begin{itemize}
+  \item \src{[]}
+  \item \src{[[]]}
+  \item \src{\$}
+  \end{itemize}
+
+  \va
+
+  Which of these operators we choose to use (and how we implement the chosen
+  operator) will depend on two criteria:
+  \vc
+  \begin{itemize}
+  \item What type of object are we trying to subset?
+  \item How much of the original typing do we want to keep in the subset?
+  \end{itemize}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Example Data}
+
+  First, we'll create a data frame to work with in the next few slides.
+
+  <<>>=
+  d1 <- data.frame(
+    a = sample(c(TRUE, FALSE), 8, replace = TRUE),
+    b = sample(c("foo", "bar"), 8, replace = TRUE),
+    c = runif(8)
+  )
+  d1
+  @
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Tidyverse Subsetting}
+
+  The \pkg{dplyr} package provides many ways to subset data, but two functions are most frequently useful.
+
+  \vc
+
+  \begin{itemize}
+  \item \src{select()}: subset columns
+    \vc
+  \item \src{filter()}: subset rows
+  \end{itemize}
+
+  \va
+  
+  <<>>=
+  library(dplyr)
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Subsetting Columns: \src{select()}}
+
+  The \src{dplyr::select()} function provides a very intuitive syntax for variable selection and column-wise subsetting.
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      <<>>=
+      select(d1, a, b)
+      @
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<>>=
+      select(d1, -a)
+      @
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Subsetting Rows}
+
+  The \src{dplyr::filter()} function provides easy row subsetting:
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      <<>>=
+      filter(d1, c > 0.5)
+      @
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<>>=
+      filter(d1, c > 0.15, b == "foo")
+      @
+      
+    \end{column}
+  \end{columns}
+
+  \va
+  
+  We can achieve the same effect via logical indexing in Base R:
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      <<>>=
+      d1[d1$c > 0.5, ]
+      @
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<>>=
+      d1[d1$c > 0.15 & d1$b == "foo", ]
+      @
+      
+    \end{column}
+  \end{columns}
+  
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Transforming \& Rearranging}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+
+\begin{frame}[fragile]{Base R Variable Transformations}
+
+  There is nothing very special about the process of transforming variables in Base R.
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      <<>>=
+      d2   <- d1
+      d2$d <- scale(d2$c)
+      d2$e <- !d2$a
+      d2
+      @
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<>>=
+      d2   <- d1
+      d2$c <- scale(d2$c, scale = FALSE)
+      d2$a <- as.numeric(d2$a)
+      d2
+      @
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Tidyverse Variable Transformations}
+
+  The \src{mutate()} function from \pkg{dplyr} is the workhorse of Tidyverse transformation functions.
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      <<>>=
+      mutate(d1, d = rbinom(nrow(d1), 1, c))
+      @
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<>>=
+      mutate(d1,
+             d = rbinom(nrow(d1), 1, c),
+             e = d * c)
+      @
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Sorting \& Ordering}
+
+  To sort a single vector, the best option is the Base R \src{sort()} function.
+
+  <<>>=
+  sort(d1$c)
+  sort(d1$c, decreasing = TRUE)
+  @
+
+  \vb
+
+  To sort the rows of a data frame according to the order of one of its columns, the \src{dplyr::arrange()} function
+  works best.
+
+  \vc
+
+  \begin{itemize}
+  \item You can use the Base R \src{order()} function to achieve similar results.
+    \vc
+  \item The behavior of \src{order()} is (extremely) unintuitive.
+  \end{itemize}
+  
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Tidyverse Ordering}
+
+  Using \src{dplyr::arrange()} could not be simpler.
+  
+  \begin{columns}
+    \begin{column}{0.3\textwidth}
+
+      <<>>=
+      arrange(d1, a)
+      @
+      
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      
+      <<>>=
+      arrange(d1, -c)
+      @
+      
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      
+      <<>>=
+      arrange(d1, -a, c)
+      @
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\sectionslide{Pipes}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\subsection{The Basic Pipe: \tightpipe}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{The Basic Pipe: \src{|>}}
+
+  The \src{\pipe} symbol represents the \emph{pipe} operator.
+  \vc
+  \begin{itemize}
+  \item We use the pipe operator to compose functions into a \emph{pipeline}.
+  \end{itemize}
+
+  \vb
+
+  The following code represents a pipeline.
+
+  <<eval = FALSE>>=
+  firstBoys <-
+    here::here("data", "boys.rds") |>
+    readRDS() |>
+    head()
+  @
+  
+  This pipeline replaces the following code.
+
+  <<eval = FALSE>>=
+  firstBoys <- head(readRDS(here::here("data", "boys.rds"))
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Why are pipes useful?}
+
+  Let's assume that we want to:
+  \vc
+  \begin{enumerate}
+  \item Load data
+    \vc
+  \item Transform a variable
+    \vc
+  \item Filter cases
+    \vc
+  \item Select columns
+  \end{enumerate}
+
+  \vb
+
+  Without a pipe, we may do something like this:
+
+  <<>>=
+  library(dplyr)
+
+  boys <- readRDS(here::here("data", "boys.rds"))
+  boys <- transform(boys, hgt = hgt / 100)
+  boys <- filter(boys, age > 15)
+  boys <- subset(boys, select = c(hgt, wgt, bmi))
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Why are pipes useful?}
+
+  With the pipe, we could do something like this:
+
+  <<>>=
+  boys <-
+    here::here("data", "boys.rds") |>
+    readRDS() |>
+    transform(hgt = hgt / 100) |>
+    filter(age > 15) |>
+    subset(select = c(hgt, wgt, bmi))
+  @
+  
+  \vb
+
+  With a pipeline, our code more clearly represents the sequence of steps in our analysis.
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Benefits of Pipes}
+
+  When you use pipes, your code becomes more readable.
+  \vc
+  \begin{itemize}
+  \item Operations are structured from left-to-right instead of in-to-out.
+    \vc
+  \item You can avoid many nested function calls.
+    \vc
+  \item You don't have to keep track of intermediate objects.
+    \vc
+  \item It's easy to add steps to the sequence.
+  \end{itemize}
+
+  \va
+
+  In RStudio, you can use a keyboard shortcut to insert the \src{\pipe} symbol.
+  \vc
+  \begin{itemize}
+  \item  Windows/Linux: \emph{ctrl} + \emph{shift} + \emph{m}
+    \vc
+  \item Mac: \emph{cmd} + \emph{shift} + \emph{m}
+  \end{itemize}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{What do pipes do?}
+
+  Pipes compose R functions without nesting.
+  \vc
+  \begin{itemize}
+  \item \src{f(x)} becomes \src{x \pipe f()}
+  \end{itemize}
+
+  <<>>=
+  mean(rnorm(10))
+  rnorm(10) |> mean()
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{What do pipes do?}
+
+  Multiple function arguments are fine.
+  \vc
+  \begin{itemize}
+  \item \src{f(x, y)} becomes \src{x \pipe f(y)}
+  \end{itemize}
+
+  <<>>=
+  cor(boys, use = "pairwise.complete.obs")
+  boys |> cor(use = "pairwise.complete.obs")
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{What do pipes do?}
+
+  Composing more than two functions is easy, too.
+  \vc
+  \begin{itemize}
+  \item \src{h(g(f(x)))} becomes \src{x \pipe f() \pipe g() \pipe h()}
+  \end{itemize}
+
+  <<>>=
+  max(na.omit(subset(boys, select = wgt)))
+  boys |> 
+    subset(select = wgt) |>
+    na.omit() |>
+    max()
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Other Flavors of Pipe}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Using Uncooperative Functions in a Pipeline}
+
+  In the expression \src{a \pipe f(arg1, arg2, arg3)}, \src{a} will be "piped into" \src{f()} as \src{arg1}.
+
+  <<error = TRUE, fig.show = "hide">>=
+  data(cats, package = "MASS")
+  cats |> plot(Hwt ~ Bwt)
+  @
+  
+  Clearly, we have a problem if we pipe our data into the wrong argument.
+  \vc
+  \begin{itemize}
+  \item We can change this behavior with the underscore symbol, \srcT{\_}.
+    \vc
+  \item The \srcT{\_} symbol acts as a placeholder for the data in a pipeline.
+  \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Using Uncooperative Functions in a Pipeline}
+
+  <<out.width = "50%">>=
+  cats |> plot(Hwt ~ Bwt, data = _)
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Exposition Pipe: \src{\expipe}}
+
+  The \pkg{magrittr} package provides several different flavors of pipe. The \emph{exposition pipe}, \src{\expipe}, is a
+  particularly useful variant.
+
+  \vc
+
+  \begin{itemize}
+  \item The exposition pipe \emph{exposes} the contents of an object to the next function in the pipeline.
+  \end{itemize}
+
+  \vc
+
+  <<out.width = "40%">>=
+  library(magrittr)
+  cats %$% plot(Hwt ~ Bwt)
+  @
+  
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Performing a T-Test in a Pipeline}
+
+  <<eval = FALSE>>=
+  cats %$% t.test(Hwt ~ Sex)
+  @
+
+  $$\vx{-40}$$
+
+  <<echo = FALSE>>=
+  cats %$% t.test(Hwt ~ Sex) |> wrap(w = 80)
+  @
+  
+  The above is equivalent to either of the following.
+
+  <<eval = FALSE>>=
+  cats |> t.test(Hwt ~ Sex, data = _)
+  t.test(Hwt ~ Sex, data = cats)
+  @
+  
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\sectionslide{Workflow \& Project Management}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Some Programming Tips}
+
+  You can save yourself a great deal of heartache by following a few simple guidelines.
+  \vc
+  \begin{itemize}
+  \item Keep your code tidy.
+    \vc
+  \item Use comments to clarify what you are doing.
+    \vc
+  \item In RStudio, use the TAB key to quickly access the documentation of the function's arguments.
+    \vc
+  \item Give your R scripts and objects meaningful names.
+    \vc
+  \item Use a consistent directory structure and RStudio projects.
+  \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Project Organization}
+
+  \begin{center}
+    \huge{\rmsc{Demo Time!}}
+  \end{center}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{General Style Advice}
+
+Use common sense and BE CONSISTENT.
+\vc
+\begin{itemize}
+\item Browse the \href{https://style.tidyverse.org}{tidyverse style guide}.
+\begin{itemize}
+  \item The point of style guidelines is to enforce a common vocabulary.
+  \item You want people to concentrate on \emph{what} you're saying, not \emph{how} you're saying it.
+  \end{itemize}
+\vc
+\item If the code you add to a project/codebase looks drastically different from the extant code, the incongruity will
+  confuse readers and collaborators.
+\end{itemize}
+\vb
+Spacing and whitespace are your friends.
+\vc
+\begin{itemize}
+\item \src{a<-c(1,2,3,4,5)}
+  \vc
+\item \src{a <- c(1, 2, 3, 4, 5)}
+  \vc
+\item At least, put spaces around assignment operators and after commas!
+\end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+% \begin{frame}[allowframebreaks]{References}
+%   \bibliographystyle{apacite}
+%   \bibliography{bibtex/ftds_refs.bib}
+% \end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\end{document}

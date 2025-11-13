@@ -4,7 +4,6 @@
 /_book/
 /_manuscript/
 *.html
-*.pdf
 *.docx
 *.epub
 
@@ -13,7 +12,6 @@
 .Rhistory
 .RData
 .Ruserdata
-*.Rproj
 
 # Python
 __pycache__/
@@ -36,8 +34,6 @@ ENV/
 .idea/
 *.swp
 *.swo
-*~
-.DS_Store
 
 # Environment variables
 .env
@@ -55,6 +51,8 @@ node_modules/
 # Cache
 .cache/
 *.cache
+**/latex/cache/
+**/latex/figure/
 
 # Temporary files
 *.tmp
@@ -74,10 +72,9 @@ Thumbs.db
 *_files/
 *_cache/
 
-# knitr/rmarkdown/LaTeX caches
+# knitr/rmarkdown
 /*_cache/
 /cache/
-/**/cache/
 
 # Output directories (if customized)
 output/

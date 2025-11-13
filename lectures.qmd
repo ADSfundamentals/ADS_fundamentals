@@ -13,9 +13,12 @@ R Programming Fundamentals
 - [Project Organization Demo](assets/project_organization.zip)
    - This link will download a ZIP archive that you must unpack on your computer.
 
-## Week 2
+## Week 2 {#w2}
 
 Data Visualization & Simple Linear Regression
+
+- [Visualization Lecture Slides](lectures/l2/visualization.pdf)
+- [SLR Lecture Slides](lectures/l2/slr.pdf)
 
 ## Week 3
 

@@ -94,23 +94,60 @@ opts_chunk$set(size = "footnotesize",
 knit_theme$set('edit-kwrite')
 @
 
-% ------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[t,plain]
   \titlepage
 \end{frame}
 
-% ------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Outline}
   \tableofcontents
 \end{frame}
 
-%------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------%
 
-\section{Simple Linear Regression}
+\section{Defining Simple Linear Regression}
 
-%------------------------------------------------------------------------------%
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Visualizations of Simple Linear Regression}
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      Earlier, we used \src{geom\_smooth()} to visualize the \emph{best fit line} from a simple linear regression model.
+
+      <<eval = FALSE>>=
+      library(ggplot2)
+
+      here::here("data", "diabetes.rds") |>
+        readRDS() |>
+        ggplot(aes(bmi, glu)) +
+          geom_point() +
+          geom_smooth(method = "lm")
+      @
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<echo = FALSE>>=
+      library(ggplot2)
+
+      here::here("data", "diabetes.rds") |>
+        readRDS() |>
+        ggplot(mapping = aes(x = bmi, y = glu)) +
+          geom_point() +
+          geom_smooth(method = "lm")
+      @
+
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Visualizations of Simple Linear Regression}
   
@@ -137,9 +174,7 @@ knit_theme$set('edit-kwrite')
     \begin{column}{0.5\textwidth}
       
       \begin{figure}
-        \includegraphics[width = \textwidth]{%
-          lectures/l2/latex/figures/conditional_density_figure.png%
-        }\\
+        \includegraphics[width = \textwidth]{figures/conditional_density_figure.png}\\
         \va
         \tiny{Image retrieved from:
           \url{http://www.seaturtle.org/mtn/archives/mtn122/mtn122p1.shtml}
@@ -151,7 +186,7 @@ knit_theme$set('edit-kwrite')
   
 \end{frame}
 
-\watermarkon %-----------------------------------------------------------------%
+\watermarkon %---------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Simple Linear Regression Equation}
 
@@ -178,14 +213,13 @@ knit_theme$set('edit-kwrite')
 
 \end{frame}
 
-\watermarkoff %----------------------------------------------------------------%
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Thinking about Error}
 
   \begin{columns}[T]
     \begin{column}{0.5\textwidth}
-      The equation $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X$ only describes
-      the best fit line.
+      The equation $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X$ only describes the best fit line.
       \begin{itemize}
       \item It does not fully quantify the relationship between $Y$ and $X$.\\
       \end{itemize}
@@ -220,43 +254,41 @@ knit_theme$set('edit-kwrite')
 
 \end{frame}
 
-\watermarkon %-----------------------------------------------------------------%
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\section{Estimation}
+
+%----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Estimating the Regression Coefficients}
 
-  The purpose of regression analysis is to use a sample of $N$ observed $\{Y_n,
-  X_n\}$ pairs to find the best fit line defined by $\hat{\beta}_0$ and
-  $\hat{\beta}_1$.
+  The purpose of regression analysis is to use a sample of $N$ observed $\{Y_n, X_n\}$ pairs to find the best fit line
+  defined by $\hat{\beta}_0$ and $\hat{\beta}_1$.
   \vb
   \begin{itemize}
-  \item The most popular method of finding the best fit line involves minimizing
-    the sum of the squared residuals.
+  \item The most popular method of finding the best fit line involves minimizing the sum of the squared residuals.
     \vb
   \item $RSS = \sum_{n = 1}^N \hat{\varepsilon}_n^2$
   \end{itemize}
 
 \end{frame}
 
-\watermarkoff %----------------------------------------------------------------%
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Residuals as the Basis of Estimation}
 
   \begin{columns}
     \begin{column}{0.5\textwidth}
 
-      The $\hat{\varepsilon}_n$ are defined in terms of deviations between each
-      observed $Y_n$ value and the corresponding $\hat{Y}_n$.
+      The $\hat{\varepsilon}_n$ are defined in terms of deviations between each observed $Y_n$ value and the
+      corresponding $\hat{Y}_n$.
       \begin{align*}
-        \hat{\varepsilon}_n = Y_n - \hat{Y}_n =
-        Y_n - \left(\hat{\beta}_0 + \hat{\beta}_1 X_n\right)
+        \hat{\varepsilon}_n = Y_n - \hat{Y}_n = Y_n - \left(\hat{\beta}_0 + \hat{\beta}_1 X_n\right)
       \end{align*}
-      Each $\hat{\varepsilon}_n$ is squared before summing to remove negative
-      values.
+      Each $\hat{\varepsilon}_n$ is squared before summing to remove negative values.
       \begin{align*}
-        RSS &= \sum_{n = 1}^N \hat{\varepsilon}_n^2 =
-              \sum_{n = 1}^N \left(Y_n - \hat{Y}_n\right)^2\\
-            &= \sum_{n = 1}^N \left(Y_n - \hat{\beta}_0 - \hat{\beta}_1
-              X_n\right)^2
+        RSS &= \sum_{n = 1}^N \hat{\varepsilon}_n^2 = \sum_{n = 1}^N \left(Y_n - \hat{Y}_n\right)^2\\
+            &= \sum_{n = 1}^N \left(Y_n - \hat{\beta}_0 - \hat{\beta}_1 X_n\right)^2
       \end{align*}
     \end{column}
 
@@ -274,7 +306,7 @@ knit_theme$set('edit-kwrite')
 
 \end{frame}
 
-\watermarkon %-----------------------------------------------------------------%
+\watermarkon %---------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile]{Least Squares Example}
 
@@ -302,24 +334,22 @@ knit_theme$set('edit-kwrite')
   \vb
   The estimated slope is: $\hat{\beta}_1 = \Sexpr{b1}$.
   \begin{itemize}
-  \item For every additional \$1000 in price, a car is expected to gain
-    \Sexpr{b1} horsepower.
+  \item For every additional \$1000 in price, a car is expected to gain \Sexpr{b1} horsepower.
   \end{itemize}
 
 \end{frame}
 
-%------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------%
 
-\subsection{Model Fit}
+\section{Model Fit}
 
-\watermarkoff %----------------------------------------------------------------%
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Model Fit}
   We may also want to know how well our model explains the outcome.
   \begin{itemize}
   \item Our model explains some proportion of the outcome's variability.
-  \item The residual variance $\hat{\sigma}^2 = \textrm{Var}(\hat{\varepsilon})$
-    will be less than $\textrm{Var}(Y)$.
+  \item The residual variance $\hat{\sigma}^2 = \textrm{Var}(\hat{\varepsilon})$ will be less than $\textrm{Var}(Y)$.
   \end{itemize}
 
   \begin{columns}
@@ -382,19 +412,17 @@ knit_theme$set('edit-kwrite')
 
 \end{frame}
 
-\watermarkon %-----------------------------------------------------------------%
+\watermarkon %---------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[shrink = 5]{Model Fit}
 
-  We quantify the proportion of the outcome's variance that is explained by our
-  model using the $R^2$ statistic:
+  We quantify the proportion of the outcome's variance that is explained by our model using the $R^2$ statistic:
   \begin{align*}
     R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}
   \end{align*}
   where
   \begin{align*}
-    TSS = \sum_{n = 1}^N \left(Y_n - \bar{Y}\right)^2 =
-    \textrm{Var}(Y)\times (N - 1)
+    TSS = \sum_{n = 1}^N \left(Y_n - \bar{Y}\right)^2 = \textrm{Var}(Y)\times (N - 1)
   \end{align*}
 
   <<echo = FALSE, cache = TRUE>>=
@@ -405,25 +433,21 @@ knit_theme$set('edit-kwrite')
   
   For our example problem, we get:
   \begin{align*}
-    R^2 = 1 - \frac{\Sexpr{as.integer(ssr)}}{\Sexpr{as.integer(sst)}} \approx
-    \Sexpr{r2}
+    R^2 = 1 - \frac{\Sexpr{as.integer(ssr)}}{\Sexpr{as.integer(sst)}} \approx \Sexpr{r2}
   \end{align*}
-  Indicating that car price explains \Sexpr{r2 * 100}\% of the variability in
-  horsepower.
+  Indicating that car price explains \Sexpr{r2 * 100}\% of the variability in horsepower.
   
 \end{frame}
 
-%------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Model Fit for Prediction}
 
-  When assessing predictive performance, we will most often use the \emph{mean
-    squared error} (MSE) as our criterion.
+  When assessing predictive performance, we will most often use the \emph{mean squared error} (MSE) as our criterion.
   \vb
   \begin{align*}
     MSE &= \frac{1}{N} \sum_{n = 1}^N \left(Y_n - \hat{Y}_n\right)^2\\
-        &= \frac{1}{N} \sum_{n = 1}^N \left(Y_n - \hat{\beta}_0 -
-          \sum_{p = 1}^P \hat{\beta}_p X_{np} \right)^2\\
+        &= \frac{1}{N} \sum_{n = 1}^N \left(Y_n - \hat{\beta}_0 - \sum_{p = 1}^P \hat{\beta}_p X_{np} \right)^2\\
         &= \frac{RSS}{N}
   \end{align*}
   
@@ -438,7 +462,7 @@ knit_theme$set('edit-kwrite')
   
 \end{frame}
 
-%------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Interpreting MSE}
   
@@ -463,18 +487,18 @@ knit_theme$set('edit-kwrite')
   \end{align*}
   \vx{-8}
   \begin{itemize}
-  \item When using price as the only predictor of horsepower, we expect
-    prediction errors with magnitudes of \Sexpr{rmse} horsepower.
+  \item When using price as the only predictor of horsepower, we expect prediction errors with magnitudes of
+    \Sexpr{rmse} horsepower.
   \end{itemize}
   
 \end{frame}
 
-%------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Information Criteria}
   
-  We can use \emph{information criteria} to quickly compare \emph{non-nested}
-  models while accounting for model complexity.\\
+  We can use \emph{information criteria} to quickly compare \emph{non-nested} models while accounting for model
+  complexity.\\
 
   \vb
   
@@ -514,7 +538,7 @@ knit_theme$set('edit-kwrite')
 
 \end{frame}
 
-\watermarkoff %----------------------------------------------------------------%
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile]{Information Criteria}
   
@@ -544,15 +568,88 @@ knit_theme$set('edit-kwrite')
   
 \end{frame}
 
-\watermarkon %-----------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[allowframebreaks]{References}
+\section{Regression as Statistical Modeling}
 
-  \bibliographystyle{apacite}
-  \bibliography{bibtex/stat_meth_refs.bib}
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Linear Regression as a Statistical Model}
+  
+  Consider the implications of these two ways of visualizing a simple linear regression analysis. 
+
+  \va
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      <<echo = FALSE>>=
+      data(Cars93, package = "MASS")
+      
+      out1 <- lm(Horsepower ~ Price, data = Cars93)
+      Cars93$yHat  <- fitted(out1)
+      Cars93$yMean <- mean(Cars93$Horsepower)
+      
+      p <- ggplot(data = Cars93, aes(x = Price, y = Horsepower)) +
+          coord_cartesian() +
+          theme_classic() +
+          theme(text = element_text(size = 16, family = "Courier"))
+      p1 <- p + geom_point()
+      p1 + geom_smooth(method = 'lm', color = "blue", se = FALSE)
+      @
+      
+    \end{column}
+    
+    \begin{column}{0.5\textwidth}
+      
+      \begin{figure}
+        \includegraphics[width = \textwidth]{figures/conditional_density_figure.png}\\
+        \va
+        \tiny{Image retrieved from:
+          \url{http://www.seaturtle.org/mtn/archives/mtn122/mtn122p1.shtml}
+        }
+      \end{figure}
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Linear Regression as a Statistical Model}
+  
+  When we adopt a modeling perspective, we formulate our linear regression equation as a probability model.
+
+  \va
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      Partition the systematic and random components:
+      \begin{align*}
+        Y &= \eta + \varepsilon\\
+        \eta &= \beta_0 + \beta_1 X\\
+        \varepsilon &\sim \mathrm{N}(0, \sigma^2)
+      \end{align*}
+      Or, more succinctly:
+      \begin{align*}
+        Y &\sim \mathrm{N}(\eta, \sigma^2)\\
+        \eta &= \beta_0 + \beta_1 X
+      \end{align*}
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      \begin{figure}
+        \includegraphics[width = \textwidth]{figures/conditional_density_figure.png}
+      \end{figure}
+
+    \end{column}
+  \end{columns}
 
 \end{frame}
 
-%------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------------------------------------%
 
 \end{document}

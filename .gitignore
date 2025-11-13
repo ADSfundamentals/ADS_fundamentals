@@ -74,9 +74,10 @@ Thumbs.db
 *_files/
 *_cache/
 
-# knitr/rmarkdown cache
+# knitr/rmarkdown/LaTeX caches
 /*_cache/
 /cache/
+/**/cache/
 
 # Output directories (if customized)
 output/

@@ -40,7 +40,7 @@ Group assignment 2: Logistic regression
 
 -   **Grading:** 25% of your final grade
 
--   **Presentation:** WG meeting Thursday January 15
+-   **Presentation:** WG meeting Thursday January 15, from 09:00 to 12:45
 
 -   **Deadline:** Wednesday January 14, 15:00. Hand in your ZIP archive including your slides. Your WG instructor will set the slides up for the presentations on Thursday.
 

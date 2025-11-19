@@ -1,0 +1,655 @@
+%%% Title:    Simple Linear Regression
+%%% Author:   Kyle M. Lang
+%%% Created:  2018-04-12
+%%% Modified: 2025-11-12
+
+\documentclass[10pt]{beamer}
+\usetheme{Utrecht}
+
+\usepackage{graphicx}
+\usepackage[natbibapa]{apacite}
+\usepackage[libertine]{newtxmath}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{fancybox}
+\usepackage{booktabs}
+\usepackage{relsize}
+
+\hypersetup{
+  colorlinks = false,
+  linkcolor = blue,
+  filecolor = blue,
+  citecolor = black,
+  urlcolor = blue
+}
+
+\definecolor{codebackground}{RGB}{224,234,238}
+\definecolor{codestring}{RGB}{191,3,3}
+\definecolor{codekeyword}{RGB}{1,1,129}
+\definecolor{codecomment}{RGB}{131,129,131}
+
+\newtcbox{\src}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+  }
+
+\newtcbox{\srcT}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+    height = 14pt,
+    valign = bottom,
+  }
+
+\newcommand{\rmsc}[1]{\textrm{\textsc{#1}}}
+\newcommand{\pkg}[1]{\textbf{#1}}
+
+\newcommand{\tightpipe}{\texttt{|>}}
+\newcommand{\pipe}{\tightpipe~}
+\newcommand{\expipe}{\texttt{\%\$\%}}
+\newcommand{\apipe}{\texttt{\%<>\%}}
+
+\title{Simple Linear Regression}
+\subtitle{Fundamental Techniques in Data Science with R}
+\author{Kyle M. Lang}
+\institute{Department of Methodology \& Statistics\\Utrecht University}
+\date{}
+
+\begin{document}
+
+<<setup, include = FALSE, cache = FALSE>>=
+set.seed(235711)
+
+library(knitr)
+library(ggplot2)
+library(MASS)
+library(DAAG)
+library(xtable)
+library(MLmetrics)
+library(dplyr)
+
+dataDir <- "data"
+
+source(here::here("code", "supportFunctions.R"))
+
+options(width = 60)
+opts_chunk$set(size = "footnotesize",
+               fig.align = "center",
+               fig.path = "figure/slr-",
+               message = FALSE,
+               comment = "",
+               root.dir = here::here("./")
+)
+knit_theme$set('edit-kwrite')
+@
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[t,plain]
+  \titlepage
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\section{Defining Simple Linear Regression}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Visualizations of Simple Linear Regression}
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      Earlier, we used \src{geom\_smooth()} to visualize the \emph{best fit line} from a simple linear regression model.
+
+      <<eval = FALSE>>=
+      library(ggplot2)
+
+      here::here("data", "diabetes.rds") |>
+        readRDS() |>
+        ggplot(aes(bmi, glu)) +
+          geom_point() +
+          geom_smooth(method = "lm")
+      @
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<echo = FALSE>>=
+      library(ggplot2)
+
+      here::here("data", "diabetes.rds") |>
+        readRDS() |>
+        ggplot(mapping = aes(x = bmi, y = glu)) +
+          geom_point() +
+          geom_smooth(method = "lm")
+      @
+
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Visualizations of Simple Linear Regression}
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      <<echo = FALSE>>=
+      data(Cars93, package = "MASS")
+      
+      out1 <- lm(Horsepower ~ Price, data = Cars93)
+      Cars93$yHat  <- fitted(out1)
+      Cars93$yMean <- mean(Cars93$Horsepower)
+      
+      p <- ggplot(data = Cars93, aes(x = Price, y = Horsepower)) +
+          coord_cartesian() +
+          theme_classic() +
+          theme(text = element_text(size = 16, family = "Courier"))
+      p1 <- p + geom_point()
+      p1 + geom_smooth(method = 'lm', color = "blue", se = FALSE)
+      @
+      
+    \end{column}
+    
+    \begin{column}{0.5\textwidth}
+      
+      \begin{figure}
+        \includegraphics[width = \textwidth]{figures/conditional_density_figure.png}\\
+        \va
+        \tiny{Image retrieved from:
+          \url{http://www.seaturtle.org/mtn/archives/mtn122/mtn122p1.shtml}
+        }
+      \end{figure}
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Simple Linear Regression Equation}
+
+  The best fit line is defined by a simple equation:
+  \begin{align*}
+    \hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X
+  \end{align*}
+  The above should look very familiar:
+  \begin{align*}
+    Y &= m X + b\\
+      &= \hat{\beta}_1 X + \hat{\beta}_0
+  \end{align*}
+  $\hat{\beta}_0$ is the \emph{intercept}.
+  \begin{itemize}
+  \item The $\hat{Y}$ value when $X = 0$.
+  \item The expected value of $Y$ when $X = 0$.
+  \end{itemize}
+  \vb
+  $\hat{\beta}_1$ is the \emph{slope}.
+  \begin{itemize}
+  \item The change in $\hat{Y}$ for a unit change in $X$.
+  \item The expected change in $Y$ for a unit change in $X$.
+  \end{itemize}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Thinking about Error}
+
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      The equation $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X$ only describes the best fit line.
+      \begin{itemize}
+      \item It does not fully quantify the relationship between $Y$ and $X$.\\
+      \end{itemize}
+      \vb
+      \only<2>{
+        We still need to account for the estimation error.
+        \begin{align*}
+          Y = {\color{blue}\hat{\beta}_0 + \hat{\beta}_1 X} + {\color{red}\hat{\varepsilon}}
+        \end{align*}
+      }
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+
+      \only<1>{
+        <<echo = FALSE, cache = TRUE>>=
+        p1 + geom_smooth(method = 'lm', color = "blue", se = FALSE)
+        @
+      }
+      \only<2>{
+        <<echo = FALSE, cache = TRUE>>=
+        p2 <- p + geom_smooth(method = "lm", color = "blue", se = FALSE) +
+            geom_segment(aes(x = Price, y = Horsepower, xend = Price, yend = yHat),
+                         color = "red") +
+            geom_point()
+        p2
+        @
+      }
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\section{Estimation}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Estimating the Regression Coefficients}
+
+  The purpose of regression analysis is to use a sample of $N$ observed $\{Y_n, X_n\}$ pairs to find the best fit line
+  defined by $\hat{\beta}_0$ and $\hat{\beta}_1$.
+  \vb
+  \begin{itemize}
+  \item The most popular method of finding the best fit line involves minimizing the sum of the squared residuals.
+    \vb
+  \item $RSS = \sum_{n = 1}^N \hat{\varepsilon}_n^2$
+  \end{itemize}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Residuals as the Basis of Estimation}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      The $\hat{\varepsilon}_n$ are defined in terms of deviations between each observed $Y_n$ value and the
+      corresponding $\hat{Y}_n$.
+      \begin{align*}
+        \hat{\varepsilon}_n = Y_n - \hat{Y}_n = Y_n - \left(\hat{\beta}_0 + \hat{\beta}_1 X_n\right)
+      \end{align*}
+      Each $\hat{\varepsilon}_n$ is squared before summing to remove negative values.
+      \begin{align*}
+        RSS &= \sum_{n = 1}^N \hat{\varepsilon}_n^2 = \sum_{n = 1}^N \left(Y_n - \hat{Y}_n\right)^2\\
+            &= \sum_{n = 1}^N \left(Y_n - \hat{\beta}_0 - \hat{\beta}_1 X_n\right)^2
+      \end{align*}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+
+      <<echo = FALSE, cache = TRUE>>=
+      p + geom_smooth(method = "lm", color = "blue", se = FALSE) +
+          geom_segment(aes(x = Price, y = Horsepower, xend = Price, yend = yHat),
+                       color = "red") +
+          geom_point()
+      @
+      
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Least Squares Example}
+
+  Estimate the least squares coefficients for our example data:
+
+  <<cache = TRUE>>=
+  data(Cars93, package = "MASS")
+
+  out1 <- lm(Horsepower ~ Price, data = Cars93)
+  coef(out1)
+  @
+  
+  <<echo = FALSE, cache = TRUE>>=
+  Cars93$yMean <- mean(Cars93$Horsepower)
+  Cars93$yHat <- fitted(out1)
+  
+  b0 <- round(coef(out1)[1], 2)
+  b1 <- round(coef(out1)[2], 2)
+  @
+  
+  The estimated intercept is $\hat{\beta}_0 = \Sexpr{b0}$.
+  \begin{itemize}
+  \item A free car is expected to have \Sexpr{b0} horsepower.
+  \end{itemize}
+  \vb
+  The estimated slope is: $\hat{\beta}_1 = \Sexpr{b1}$.
+  \begin{itemize}
+  \item For every additional \$1000 in price, a car is expected to gain \Sexpr{b1} horsepower.
+  \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\section{Model Fit}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Model Fit}
+  We may also want to know how well our model explains the outcome.
+  \begin{itemize}
+  \item Our model explains some proportion of the outcome's variability.
+  \item The residual variance $\hat{\sigma}^2 = \textrm{Var}(\hat{\varepsilon})$ will be less than $\textrm{Var}(Y)$.
+  \end{itemize}
+
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+
+      \only<1>{
+        <<echo = FALSE>>=
+        dat3 <- data.frame(y = Cars93$Horsepower, r = resid(out1))
+        
+        p10 <- ggplot(data = dat3, aes(x = y)) +
+            coord_cartesian() + theme_classic() +
+            theme(text = element_text(size = 16, family = "Courier"))
+        
+        p10 + geom_density() + xlim(0, 350) + labs(x = "Original Outcome")
+        @
+      }
+      \only<2>{
+        <<echo = FALSE>>=
+        p5 <- ggplot(data = Cars93, aes(x = Price, y = Horsepower)) +
+            coord_cartesian() +
+            theme_classic() +
+            theme(text = element_text(size = 16, family = "Courier"))
+        
+        p5 + geom_smooth(method = "lm", formula = y ~ 1, color = "blue", se = FALSE) +
+            geom_segment(aes(x = Price, y = Horsepower, xend = Price, yend = yMean),
+                         color = "red") +
+            geom_point()
+        @
+      }
+      
+    \end{column}
+    \begin{column}{0.1\textwidth}
+
+      \Huge{$\rightarrow$}
+
+    \end{column}
+    \begin{column}{0.4\textwidth}
+
+      \only<1>{
+        <<echo = FALSE>>=
+        p11 <- ggplot(data = dat3, aes(x = r)) +
+            coord_cartesian() + theme_classic() +
+            theme(text = element_text(size = 16, family = "Courier"))
+        
+        p11 + geom_density() + xlim(-140, 150) + labs(x = "Residuals")
+        @
+      }
+      \only<2>{
+        <<echo = FALSE>>=
+        p7 <- p5 + geom_smooth(method = "lm", color = "blue", se = FALSE) +
+            geom_segment(aes(x = Price, y = Horsepower, xend = Price, yend = yHat),
+                         color = "red") +
+            geom_point()
+        p7
+        @
+      }
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[shrink = 5]{Model Fit}
+
+  We quantify the proportion of the outcome's variance that is explained by our model using the $R^2$ statistic:
+  \begin{align*}
+    R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}
+  \end{align*}
+  where
+  \begin{align*}
+    TSS = \sum_{n = 1}^N \left(Y_n - \bar{Y}\right)^2 = \textrm{Var}(Y)\times (N - 1)
+  \end{align*}
+
+  <<echo = FALSE, cache = TRUE>>=
+  ssr <- resid(out1) %>% crossprod() %>% round()
+  sst <- scale(Cars93$Horsepower, scale = FALSE) %>% crossprod() %>% round()
+  r2 <- round(1 - (ssr / sst), 2)
+  @
+  
+  For our example problem, we get:
+  \begin{align*}
+    R^2 = 1 - \frac{\Sexpr{as.integer(ssr)}}{\Sexpr{as.integer(sst)}} \approx \Sexpr{r2}
+  \end{align*}
+  Indicating that car price explains \Sexpr{r2 * 100}\% of the variability in horsepower.
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Model Fit for Prediction}
+
+  When assessing predictive performance, we will most often use the \emph{mean squared error} (MSE) as our criterion.
+  \vb
+  \begin{align*}
+    MSE &= \frac{1}{N} \sum_{n = 1}^N \left(Y_n - \hat{Y}_n\right)^2\\
+        &= \frac{1}{N} \sum_{n = 1}^N \left(Y_n - \hat{\beta}_0 - \sum_{p = 1}^P \hat{\beta}_p X_{np} \right)^2\\
+        &= \frac{RSS}{N}
+  \end{align*}
+  
+  <<echo = FALSE, cache = TRUE>>=
+  mse <- round(ssr / nrow(Cars93), 2)
+  @
+  
+  For our example problem, we get:
+  \begin{align*}
+    MSE = \frac{\Sexpr{as.integer(ssr)}}{\Sexpr{nrow(Cars93)}} \approx \Sexpr{mse}
+  \end{align*}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Interpreting MSE}
+  
+  <<echo = FALSE>>=
+  rmse <- round(sqrt(ssr/nrow(Cars93)), 2)
+  @
+  
+  The MSE quantifies the average squared prediction error.
+  \begin{itemize}
+  \item Taking the square root improves interpretation.
+  \end{itemize}
+  \begin{align*}
+    RMSE = \sqrt{MSE}
+  \end{align*}
+  The RMSE estimates the magnitude of the expected prediction error.
+  \begin{itemize}
+  \item For our example problem, we get:
+  \end{itemize}
+  \begin{align*}
+    RMSE = \sqrt{\frac{\Sexpr{as.integer(ssr)}}{\Sexpr{nrow(Cars93)}}} \approx
+    \Sexpr{rmse}
+  \end{align*}
+  \vx{-8}
+  \begin{itemize}
+  \item When using price as the only predictor of horsepower, we expect prediction errors with magnitudes of
+    \Sexpr{rmse} horsepower.
+  \end{itemize}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Information Criteria}
+  
+  We can use \emph{information criteria} to quickly compare \emph{non-nested} models while accounting for model
+  complexity.\\
+
+  \vb
+  
+  \begin{itemize}
+  \item Akaike's Information Criterion (AIC)
+    \only<1>{
+      \begin{align*}
+        AIC = 2K - 2\hat{\ell}(\theta|X)
+      \end{align*}
+    }
+    \only<2>{
+      \begin{align*}
+        AIC = {\color{red}2K} - 2 {\color{blue}\hat{\ell}(\theta|X)}
+      \end{align*}
+    }
+  \item Bayesian Information Criterion (BIC)
+    \only<1>{
+      \begin{align*}
+        BIC = K\ln(N) - 2\hat{\ell}(\theta|X)
+      \end{align*}
+    }
+    \only<2>{
+      \begin{align*}
+        BIC = {\color{red}K\ln(N)} - 2 {\color{blue}\hat{\ell}(\theta|X)}
+      \end{align*}
+    }
+  \end{itemize}
+  \onslide<2>{
+    Information criteria balance two competing forces.
+    \vc
+    \begin{itemize}
+    \item \blue{The optimized loglikelihood quantifies fit to the data.}
+      \vc
+    \item \red{The penalty term corrects for model complexity}.
+    \end{itemize}
+  }
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Information Criteria}
+  
+  <<include = FALSE>>=
+  ll1 <- logLik(out1)
+  
+  6 - 2 * ll1
+  AIC(out1)
+  
+  k <- 3
+  n <- nrow(Cars93)
+  @
+  
+  For our example, we get the following estimates of AIC and BIC:
+  \begin{align*}
+    AIC &= 2(\Sexpr{k}) - 2(\Sexpr{round(ll1, 2)})\\
+        &= \Sexpr{round(AIC(out1), 2)}\\[8pt]
+    BIC &= \Sexpr{k}\ln(\Sexpr{n}) - 2(\Sexpr{round(ll1, 2)})\\
+        &= \Sexpr{round(BIC(out1), 2)}
+  \end{align*}
+  
+  To compute the AIC/BIC from a fitted \texttt{lm()} object in R:
+  <<>>=
+  AIC(out1)
+  BIC(out1)
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\section{Regression as Statistical Modeling}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Linear Regression as a Statistical Model}
+  
+  Consider the implications of these two ways of visualizing a simple linear regression analysis. 
+
+  \va
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      <<echo = FALSE>>=
+      data(Cars93, package = "MASS")
+      
+      out1 <- lm(Horsepower ~ Price, data = Cars93)
+      Cars93$yHat  <- fitted(out1)
+      Cars93$yMean <- mean(Cars93$Horsepower)
+      
+      p <- ggplot(data = Cars93, aes(x = Price, y = Horsepower)) +
+          coord_cartesian() +
+          theme_classic() +
+          theme(text = element_text(size = 16, family = "Courier"))
+      p1 <- p + geom_point()
+      p1 + geom_smooth(method = 'lm', color = "blue", se = FALSE)
+      @
+      
+    \end{column}
+    
+    \begin{column}{0.5\textwidth}
+      
+      \begin{figure}
+        \includegraphics[width = \textwidth]{figures/conditional_density_figure.png}\\
+        \va
+        \tiny{Image retrieved from:
+          \url{http://www.seaturtle.org/mtn/archives/mtn122/mtn122p1.shtml}
+        }
+      \end{figure}
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Linear Regression as a Statistical Model}
+  
+  When we adopt a modeling perspective, we formulate our linear regression equation as a probability model.
+
+  \va
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      Partition the systematic and random components:
+      \begin{align*}
+        Y &= \eta + \varepsilon\\
+        \eta &= \beta_0 + \beta_1 X\\
+        \varepsilon &\sim \mathrm{N}(0, \sigma^2)
+      \end{align*}
+      Or, more succinctly:
+      \begin{align*}
+        Y &\sim \mathrm{N}(\eta, \sigma^2)\\
+        \eta &= \beta_0 + \beta_1 X
+      \end{align*}
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      \begin{figure}
+        \includegraphics[width = \textwidth]{figures/conditional_density_figure.png}
+      \end{figure}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\end{document}

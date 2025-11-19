@@ -1,9 +1,9 @@
 # -*- Makefile -*-
 
-TARGET=lecture2
-DEST=../
+TARGETS = visualization.pdf slr.pdf
+DEST = ../
 
-all: $(TARGET).pdf
+all: $(TARGETS)
 	
 %.pdf: %.tex
 	latexmk -pdf -f $^
@@ -14,10 +14,10 @@ all: $(TARGET).pdf
 .PHONY: nuke clean tidy
 
 nuke: clean
-	rm -f cache/* figure/* $(TARGET).pdf
+	rm -f cache/* figure/* $(TARGETS)
 
 tidy: clean
-	mv $(TARGET).pdf $(DEST)
+	mv $(TARGETS) $(DEST)
 
 clean:
 	rm -f *.tex *.aux *.log *.out *.nav *.snm *.toc *.vrb *.bbl *.blg *.fdb_latexmk *.fls

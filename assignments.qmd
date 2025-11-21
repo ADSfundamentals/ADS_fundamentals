@@ -6,9 +6,19 @@ Both assignments are group assignments. We will form groups of 4 at the first wo
 
 In order to be assigned to a group, presence at the first meeting is crucial!
 
+You can use the same dataset for both assigments. The minimum requirement for the dataset is that it contains:
+
+-   One continuous outcome variable (for linear regression)
+
+-   One binary outcome variable (for logistic regression)
+
+-   Two continuous predictor variables
+
+-   One categorical predictor variable
+
 ## Assignment 1: Linear regression
 
--   **Type of assignment:** Written report.
+-   **Type of assignment:** Written report in Quarto.
 
 -   **Grading:** 25% of your final grade
 
@@ -24,7 +34,7 @@ In order to be assigned to a group, presence at the first meeting is crucial!
 
 1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
 
-2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure.
+2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure (including moderation)
 
 3.  **Assumptions:** Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed.
 
@@ -36,7 +46,7 @@ In order to be assigned to a group, presence at the first meeting is crucial!
 
 Group assignment 2: Logistic regression
 
--   **Type of assignment:** Presentation and discussion
+-   **Type of assignment:** Presentation and discussion with slides in Quarto
 
 -   **Grading:** 25% of your final grade
 
@@ -51,7 +61,7 @@ Group assignment 2: Logistic regression
 -   **Description:** For this assignment, you perform and report a multiple logistic regression analysis in an R markdown document. The assignment will be graded on the following five dimensions:
 
 1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
-2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure.
+2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure (including moderation).
 3.  **Assumptions:** Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed.
 4.  **Interpretation:** Substantive interpretation of the final model (including the confusion matrix). Answering your research question.
 5.  **Layout:** Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations.

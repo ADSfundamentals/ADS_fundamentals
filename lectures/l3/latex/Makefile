@@ -1,6 +1,6 @@
 # -*- Makefile -*-
 
-TARGET = linearModel.pdf
+TARGET = mlr.pdf
 DEST = ../
 
 all: $(TARGET)

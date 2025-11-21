@@ -20,9 +20,11 @@ Data Visualization & Simple Linear Regression
 - [Visualization Lecture Slides](lectures/l2/visualization.pdf)
 - [SLR Lecture Slides](lectures/l2/slr.pdf)
 
-## Week 3
+## Week 3 {#w3}
 
 Multiple Linear Regression
+
+- [Lecture Slides](lectures/l3/mlr.pdf)
 
 ## Week 4
 

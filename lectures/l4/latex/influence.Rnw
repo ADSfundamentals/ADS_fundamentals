@@ -1,0 +1,601 @@
+%%% Title:    Influential Observations
+%%% Author:   Kyle M. Lang
+%%% Created:  2018-04-12
+%%% Modified: 2025-11-24
+
+\documentclass[10pt]{beamer}
+\usetheme{Utrecht}
+
+\usepackage{graphicx}
+\usepackage[natbibapa]{apacite}
+\usepackage[libertine]{newtxmath}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{fancybox}
+\usepackage{booktabs}
+\usepackage{relsize}
+
+\hypersetup{
+  colorlinks = false,
+  linkcolor = blue,
+  filecolor = blue,
+  citecolor = black,
+  urlcolor = blue
+}
+
+\definecolor{codebackground}{RGB}{224,234,238}
+\definecolor{codestring}{RGB}{191,3,3}
+\definecolor{codekeyword}{RGB}{1,1,129}
+\definecolor{codecomment}{RGB}{131,129,131}
+
+\newtcbox{\src}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+  }
+
+\newtcbox{\srcT}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+    height = 14pt,
+    valign = bottom,
+  }
+
+\newcommand{\eqit}[1]{\textrm{\textit{#1}}}
+\newcommand{\rmsc}[1]{\textrm{\textsc{#1}}}
+\newcommand{\pkg}[1]{\textbf{#1}}
+
+\newcommand{\tightpipe}{\texttt{|>}}
+\newcommand{\pipe}{\tightpipe~}
+\newcommand{\expipe}{\texttt{\%\$\%}}
+\newcommand{\apipe}{\texttt{\%<>\%}}
+
+\title{Influential Observations}
+\subtitle{Fundamental Techniques in Data Science with R}
+\author{Kyle M. Lang}
+\institute{Department of Methodology \& Statistics\\Utrecht University}
+\date{}
+
+\begin{document}
+
+<<setup, include = FALSE, cache = FALSE>>=
+set.seed(235711)
+
+dataDir <- "data"
+codeDir <- "code"
+
+library(knitr)
+library(ggplot2)
+library(MASS)
+library(DAAG)
+library(xtable)
+library(MLmetrics)
+library(dplyr)
+
+source(here::here(codeDir, "supportFunctions.R"))
+
+options(width = 60)
+opts_chunk$set(size = "footnotesize",
+               fig.align = "center",
+               fig.path = "figure/influence-",
+               message = FALSE,
+               comment = "",
+               root.dir = here::here("./")
+)
+knit_theme$set('edit-kwrite')
+@
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[t,plain]
+  \titlepage
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Influential Observations}
+
+  Influential observations contaminate analyses in two ways:
+  \vc
+  \begin{enumerate}
+  \item Exert too much influence on the fitted regression model
+    \vc
+  \item Invalidate estimates/inferences by violating assumptions
+  \end{enumerate}
+  \vb
+  There are two distinct types of influential observations:
+  \vc
+  \begin{enumerate}
+  \item Outliers
+    \vc
+    \begin{itemize}
+    \item Observations with extreme outcome values, relative to the other data.
+      \vc
+    \item Observations with outcome values that fit the model very badly.
+    \end{itemize}
+    \vb
+  \item High-leverage observations
+    \vc
+    \begin{itemize}
+    \item Observation with extreme predictor values, relative to other data.
+    \end{itemize}
+  \end{enumerate}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\section{Outliers}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Outliers}
+
+  Outliers can be identified by scrutinizing the residuals.
+  \vc
+  \begin{itemize}
+  \item Observations with residuals of large magnitude may be outliers.
+    \vc
+  \item The difficulty arises in quantifying what constitutes a "large" residual.
+  \end{itemize}
+  \vb
+  If the residuals do not have constant variance, then we cannot directly compare them.
+  \vc
+  \begin{itemize}
+  \item We need to standardize the residuals in some way.
+  \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Detecting Outliers}
+
+  We are specifically interested in \emph{externally studentized residuals}.
+  \vb
+  \begin{itemize}
+  \item We can't simply standardize the ordinary residuals.
+    \begin{itemize}
+    \item \emph{Internally studentized residuals}
+      \vc
+    \item Outliers can pull the regression line towards themselves.
+      \vc
+    \item The internally studentized residuals for outliers will be too small.
+    \end{itemize}
+  \end{itemize}
+  \vb
+  Begin by defining the concept of a \emph{deleted residual}:
+  \begin{align*}
+    \hat{\varepsilon}_{(n)} = Y_n - \hat{Y}_{(n)}
+  \end{align*}
+  \vx{-18}
+  \begin{itemize}
+    \item $\hat{\varepsilon}_{(n)}$ quantifies the distance of $Y_n$ from the regression line estimated after excluding
+      the $n$th observation.
+  \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Studentized Residuals}
+
+  If we standardize the deleted residual, $\hat{\varepsilon}_{(n)}$, we get the externally studentized residual:
+  \begin{align*}
+    t_{(n)} = \frac{\hat{\varepsilon}_{(n)}}{SE_{\hat{\varepsilon}_{(n)}}}
+  \end{align*}
+  The externally studentized residuals have two very useful properties:
+  \vb
+  \begin{enumerate}
+  \item Each $t_{(n)}$ is scaled equivalently.
+    \vc
+    \begin{itemize}
+    \item We can directly compare different $t_{(n)}$.
+    \end{itemize}
+    \vb
+  \item The $t_{(n)}$ are \emph{Student's t} distributed.
+    \vc
+    \begin{itemize}
+    \item We can quantify outliers in terms of quantiles of the $t$ distribution.
+      \vc
+    \item $|t_{(n)}| > 3.0$ is a common rule of thumb for flagging outliers.
+    \end{itemize}
+  \end{enumerate}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Studentized Residual Plots}
+
+  <<eval = FALSE>>=
+  out1 <- lm(Price ~ Horsepower, data = Cars93)
+  rstudent(out1) |> plot()
+  @
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      Index plots of the externally studentized residuals can help spotlight potential outliers.
+      \vb
+      \begin{itemize}
+      \item Look for observations that clearly "stand out from the crowd."
+      \end{itemize}
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<echo = FALSE>>=
+      out1 <- lm(Price ~ Horsepower, data = Cars93)
+      rstudent(out1) |> plot()
+      @
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\section{High-Leverage Cases}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{High-Leverage Points}
+
+  We identify high-leverage observations through their \emph{leverage} values.
+  \vb
+  \begin{itemize}
+  \item An observation's leverage, $h_n$, quantifies the extent to which its predictors affect the fitted regression
+    model.
+    \vb
+  \item Observations with $X$ values very far from the mean, $\bar{X}$, affect the fitted model disproportionately.
+  \end{itemize}
+  \vb
+  \pause
+  In simple linear regression, the $n$th leverage is given by:
+  \begin{align*}
+    h_n = \frac{1}{N} + \frac{\left(X_n - \bar{X}\right)^2}
+    {\sum_{m = 1}^N \left(X_{m} - \bar{X}\right)^2}
+  \end{align*}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Leverage Plots}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      Index plots of the leverage values can help spotlight high-leverage points.
+      \vb
+      \begin{itemize}
+      \item Again, look for observations that clearly "stand out from the crowd".
+      \end{itemize}
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<>>=
+      hatvalues(out1) |> plot()
+      @
+      
+      <<echo = FALSE, eval = FALSE>>=
+      n <- nrow(Cars93)
+      
+      p1 <- gg0(x = 1:n, y = hatvalues(out1))
+      
+      p1 + geom_hline(yintercept = 2 / n, colour = "red") +
+          xlab("Index") +
+          ylab("Leverage Values")
+      @
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\section{Influential Cases}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Outliers \& Leverages $\rightarrow$ Influential Points}
+
+  Observations with high leverage or large (externally) studentized residuals are not necessarily influential.
+  \vc
+  \begin{itemize}
+  \item High-leverage observations tend to be more influential than outliers.
+    \vc
+  \item The worst problems arise from observations that are both outliers and have high leverage.
+  \end{itemize}
+  \vb
+  \emph{Measures of influence} simultaneously consider extremity in both $X$ and $Y$ dimensions.
+  \vc
+  \begin{itemize}
+  \item Observations with high measures of influence are very likely to cause problems.
+  \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Measures of Influence}
+
+  All measures of influence use the same logic as the deleted residual.
+  \vc
+  \begin{itemize}
+  \item Compare models estimated from the whole sample to models estimated from samples excluding individual
+    observations.
+  \end{itemize}
+
+  \va
+
+ One of the most common measures of influence is \emph{Cook's Distance}.
+
+  \begin{align*}
+    D_n &= \frac{\sum_{n = 1}^N \left( \hat{Y}_n - \hat{Y}_{(n)} \right)^2}{\left(P + 1\right) \hat{\sigma}^2}\\[6pt]
+        &= (P + 1)^{-1} t_n^2 \frac{h_n}{1 - h_n}
+  \end{align*}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Plots of Cook's Distance}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      Index plots of Cook's distances can help spotlight the influential points.
+      \vb
+      \begin{itemize}
+      \item Look for observations that clearly "stand out from the crowd".
+      \end{itemize}
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<echo = FALSE, eval = FALSE>>=
+      fCrit <- qf(0.5, 2, n - 2)
+      
+      p1 <- gg0(x = 1:n, y = cooks.distance(out1))
+      
+      p1 + geom_hline(yintercept = c(fCrit), colour = "red") +
+          xlab("Index") +
+          ylab("Cook's Distance")
+      @
+      
+      <<>>=
+      cd <- cooks.distance(out1)
+      plot(cd)
+      @
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\section{Treating Influential Observations}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Removing Influential Observations}
+  
+  <<>>=
+  (maxD <- which.max(cd))
+  @
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      Observation number \Sexpr{maxD} was the most influential according to Cook's Distance.
+      \vb
+      \begin{itemize}
+      \item Removing that observation has a small impact on the fitted regression line.
+        \vc
+      \item Influential observations don't only affect the regression line, though.
+      \end{itemize}
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<echo = FALSE, message = FALSE>>=
+      x <- Cars93$Horsepower
+      y <- Cars93$Price
+      
+      x2 <- x[-maxD]
+      y2 <- y[-maxD]
+      
+      colVec <- rep("black", nrow(Cars93))
+      colVec[maxD] <- "red"
+      
+      p1 <- gg0(x = x, y = y, points = FALSE) +
+          geom_point(aes(colour = colVec), show.legend = FALSE, size = 2) +
+          xlab("Horsepower") +
+          ylab("Price")
+      
+      p1 + geom_smooth(method = "lm", se = FALSE, linewidth = 2) +
+          geom_smooth(mapping   = aes(x = x2, y = y2),
+                      method    = "lm",
+                      se        = FALSE,
+                      color     = "red",
+                      linetype  = "dashed",
+                      linewidth = 2) +
+          scale_colour_manual(values = c("black", "red"))
+      @
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Removing Influential Observations}
+  
+  <<>>=
+  ## Exclude the influential case:
+  Cars93.2 <- Cars93[-maxD, ]
+  
+  ## Fit model with reduced sample:
+  out2 <- lm(Price ~ Horsepower, data = Cars93.2)
+  
+  round(summary(out1)$coefficients, 6)
+  round(summary(out2)$coefficients, 6)
+  @
+  
+  \pagebreak
+  
+  <<>>=
+  partSummary(out1, 2)
+  partSummary(out2, 2)
+  @
+  
+  \pagebreak
+  
+  <<>>=
+  summary(out1)[c("sigma", "r.squared", "fstatistic")] |>
+      unlist() |>
+      head(3)
+  summary(out2)[c("sigma", "r.squared", "fstatistic")] |>
+      unlist() |>
+      head(3)
+  @
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Removing Influential Observations}
+  
+  <<>>=
+  (maxDs <- sort(cd) |> names() |> tail(2) |> as.numeric())
+  @
+  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      
+      If we remove the two most influential observations, \Sexpr{maxDs[1]} and \Sexpr{maxDs[2]}, the fitted regression
+      line barely changes at all.
+      \vc
+      \begin{itemize}
+      \item The influences of these two observations were counteracting one another.
+      \item We're probably still better off, though.
+      \end{itemize}
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      
+      <<echo = FALSE, message = FALSE>>=
+      x <- Cars93$Horsepower
+      y <- Cars93$Price
+      
+      x2 <- x[-maxDs]
+      y2 <- y[-maxDs]
+      
+      colVec <- rep("black", nrow(Cars93))
+      colVec[maxDs] <- "red"
+      
+      p1 <- gg0(x = x, y = y, points = FALSE) +
+          geom_point(aes(colour = colVec), show.legend = FALSE, size = 2) +
+          xlab("Horsepower") +
+          ylab("Price")
+      
+      p1 + geom_smooth(method = "lm", se = FALSE, linewidth = 2) +
+          geom_smooth(mapping   = aes(x = x2, y = y2),
+                      method    = "lm",
+                      se        = FALSE,
+                      color     = "red",
+                      linetype  = "dashed",
+                      linewidth = 2) +
+          scale_colour_manual(values = c("black", "red"))
+      @
+      
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Removing Influential Observations}
+  
+  <<>>=
+  ## Exclude influential cases:
+  Cars93.2 <- Cars93[-maxDs, ]
+  
+  ## Fit model with reduced sample:
+  out2.2 <- lm(Price ~ Horsepower, data = Cars93.2)
+  
+  round(summary(out1)$coefficients, 6)
+  round(summary(out2.2)$coefficients, 6)
+  @
+  
+  \pagebreak
+  
+  <<>>=
+  partSummary(out1, 2)
+  partSummary(out2.2, 2)
+  @
+  
+  \pagebreak
+  
+  <<>>=
+  summary(out1)[c("sigma", "r.squared", "fstatistic")] |>
+      unlist() |>
+      head(3)
+  summary(out2.2)[c("sigma", "r.squared", "fstatistic")] |>
+      unlist() |>
+      head(3)
+  @
+  
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Treating Influential Points}
+  
+  The most common way to address influential observations is simply to delete them and refit the model.
+  \vc
+  \begin{itemize}
+  \item This approach is often effective---and always simple---but it is not fool-proof.
+    \vc
+  \item Although an observation is influential, we may not be able to justify excluding it from the analysis.
+  \end{itemize}
+  \vb
+  Robust regression procedures can estimate the model directly in the presence of influential observations.
+  \vc
+  \begin{itemize}
+  \item Observations in the tails of the distribution are weighted less in the estimation process, so outliers and
+    high-leverage points cannot exert substantial influence on the fit.
+    \vc
+  \item We can do robust regression with the \src{rlm()} function from the \pkg{MASS} package.
+  \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\end{document}

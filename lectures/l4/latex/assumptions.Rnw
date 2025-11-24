@@ -114,7 +114,7 @@ knit_theme$set('edit-kwrite')
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}{Why Assume?}
+\begin{frame}{Assumptions for Identification}
 
   Consider the following equation:
   \begin{align*}
@@ -142,9 +142,28 @@ knit_theme$set('edit-kwrite')
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}{Why Assume?}
+\begin{frame}{Assumptions for Logical Inference}
 
-Given Foo, Bar $\rightarrow$ Baz
+  Given \{Assumptions, Estimates\} $\rightarrow$ Inference
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Assumptions vs. Estimates}
+
+  Model = Assumptions + Estimates
+
+  \begin{align*}
+    M &= \gamma_1 A + \gamma_2 E\\
+    1 &= \gamma A + (1 - \gamma) E
+  \end{align*}
+
+  \begin{itemize}
+    \item $\gamma = 1$: Because I said so
+    \item $\gamma = 0$: Infinite model complexity
+    \item $0 \ll \gamma \ll 1$: Useful models
+  \end{itemize}
 
 \end{frame}
 

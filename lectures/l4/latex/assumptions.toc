@@ -1,8 +1,8 @@
 \beamer@sectionintoc {1}{Motivation}{3}{0}{1}
-\beamer@sectionintoc {2}{Assumptions of MLR}{9}{0}{2}
-\beamer@sectionintoc {3}{Regression Diagnostics}{15}{0}{3}
-\beamer@subsectionintoc {3}{1}{Heteroscedasticity}{18}{0}{3}
-\beamer@subsectionintoc {3}{2}{Correlated Errors}{23}{0}{3}
-\beamer@subsectionintoc {3}{3}{Linearity}{28}{0}{3}
-\beamer@subsectionintoc {3}{4}{Omitted Variables}{32}{0}{3}
-\beamer@subsectionintoc {3}{5}{Normality}{35}{0}{3}
+\beamer@sectionintoc {2}{Assumptions of MLR}{10}{0}{2}
+\beamer@sectionintoc {3}{Regression Diagnostics}{16}{0}{3}
+\beamer@subsectionintoc {3}{1}{Heteroscedasticity}{19}{0}{3}
+\beamer@subsectionintoc {3}{2}{Correlated Errors}{24}{0}{3}
+\beamer@subsectionintoc {3}{3}{Linearity}{29}{0}{3}
+\beamer@subsectionintoc {3}{4}{Omitted Variables}{33}{0}{3}
+\beamer@subsectionintoc {3}{5}{Normality}{36}{0}{3}

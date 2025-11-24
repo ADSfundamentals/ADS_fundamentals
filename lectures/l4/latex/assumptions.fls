@@ -571,6 +571,12 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/ntxexa.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/ntxexa.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/sorkin/merriweather/Merriwthr-Italic-osf-ot1.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/sorkin/merriweather/Merriwthr-Italic-osf-ot1.tfm
+INPUT ./images/watermarkUU.png
+INPUT ./images/watermarkUU.png
+INPUT ./images/watermarkUU.png
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/newtx/ntxsy.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/txsys.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/txex-bar.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/ascender/opensans/OpenSans-Italic-OT1-TLF.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/ascender/opensans/OpenSans-Regular-OT1-TLF.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/ascender/opensans/OpenSans-Regular-OT1-TLF.tfm
@@ -583,9 +589,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/sorkin/merriweather/Merriwthr-Bold
 INPUT ./images/watermarkUU.png
 INPUT ./images/watermarkUU.png
 INPUT ./images/watermarkUU.png
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/newtx/ntxsy.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/txsys.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/txex-bar.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/ascender/opensans/OpenSans-Regular-OT1-TLF.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/ascender/opensans/OpenSans-Regular-OT1-TLF--base.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/newtx/nxlmia.vf
@@ -754,6 +757,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Italic.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Regular.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txexs.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb

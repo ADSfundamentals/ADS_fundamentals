@@ -3,8 +3,6 @@
 /_site/
 /_book/
 /_manuscript/
-*.html
-*.docx
 *.epub
 
 # R

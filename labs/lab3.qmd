@@ -154,10 +154,66 @@ grid.arrange(obspred1, obspred2, ncol = 2)
 # Above, the observed vs. predicted plots for both model 1 (1 predictor) and model 2 (an additional predictor) are shown. In the second plot, it can be seen that all the red lines are shorter, indicating less error, a lower sum of squares, and thus a better fit.
 ```
 
-## Calculating new predicted values
+## Calculating new predicted values with a regression equation
 
 A regression model can be used to predict values for new cases that were not used to built the model. The regression equation always consists of coefficients ($\beta$s) and observed variables ($X$):
 
-<br>
-
 $$\hat{y} = \beta_0 + \beta_1 * X_{a}* + \beta_2 * X_b +  \ldots  + \beta_n * X_n$$
+
+All terms can be made specific for the regression equation of the created model. For example, if we have a model where 'happiness' is predicted by age and income (scored from 1-50), the equation could look like:
+
+$$\hat{y}_{happiness} = \beta_{intercept} + \beta_{age} * X_{age} + \beta_{income} * X_{income}$$
+
+Then, we could impute the coefficients obtained through the model. Given $\beta_{intercept} = 10.2$, $\beta_{age} = 0.7$, and $\beta_{income} = 1.3$, the equation would become:
+
+$$\hat{y}_{happiness} = 10.2 + 0.7 * X_{age} + 1.3 * X_{income}$$
+
+If we now want to predict the happiness score for someone of age 28 and with an income score of 35, the prediction would become:
+
+$$\hat{y}_{happiness} = 10.2 + 0.7 * 28 + 1.3 * 35 = 75.3$$
+
+8.  **Given this regression equation, calculate the predicted value for someone of age 44 and an income score of 27.**
+
+```{r include = params$answers}
+# Calculate score
+10.2 + .7*44 + 1.3*27 # 76.1
+```
+
+## Prediction with a categorical variable
+
+Adding a categorical predictor to the regression equation gives the number of contrasts as coefficient terms added. The previous regression equation for predicting happiness could be adjusted by adding 'living density' as a categorical predictor with levels 'big city', 'smaller city', 'rural', where 'big city' would be the reference category. The equation could then be:
+
+$$\hat{y}_{happiness} = 10.2 + 0.7 * X_{age} + 1.3 * X_{income} + 8.4 * X_{smaller city} + 17.9 * X_{rural}$$
+
+When predicting a score for an equation with a categorical predictor, you just assign a 1 to the category that the observation belongs to, and 0s for all other categories.
+
+9.  **Given this equation, calculate the predicted score for someone of age 29, an income score of 21, and living in a smaller city. And what would this score be if the person would live in a big city instead?**
+
+```{r include = params$answers, eval=FALSE}
+# impute X_age with 29, X_income with 21, X_smallercity with 1, and X_rural with 0
+10.2 + .7*29 + 1.3*21 + 8.4*1 + 17.9*0 # = 66.2
+
+# If this person would live in a big city, the equation would become
+10.2 + .7*29 + 1.3*21 + 8.4*0 + 17.9*0 # = 57.8
+```
+
+## Prediction with an interaction
+
+In regression equations with an interaction, an extra coefficient is added to the equation. For example, the happiness equation with age and income as predictors could have an added interaction term. The equation could then look like:
+
+$$\hat{y}_{happiness} = 10.2 + 0.7 * X_{age} + 1.3 * X_{income} + 0.01 * X_{age} * X_{income}$$
+
+For a person of age 36 and income score 30, the predicted score would be:
+
+$$\hat{y}_{happiness} = 10.2 + 0.7 * 36 + 1.3 * 30 + 0.01 * 36 * 30 = 85.2$$
+
+10. **Given this regression equation with interaction term, what would be the predicted happiness score for someone of age 52 and income score 26?**
+
+```{r include=params$answers}
+# Imputed equation X_age = 52, X_income = 26
+10.2 + 0.7 * 52 + 1.3 * 26 + 0.01 * 52 * 26 # 93.92
+```
+
+------------------------------------------------------------------------
+
+# End of the practical

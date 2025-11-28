@@ -65,17 +65,9 @@ node_modules/
 ehthumbs.db
 Thumbs.db
 
-# Reveal.js (if using for presentations)
-*_files/
-*_cache/
-
 # knitr/rmarkdown
 /*_cache/
 /cache/
-
-# Output directories (if customized)
-output/
-site_libs
 
 # Ghost files
 .fuse_hidden*

@@ -58,7 +58,7 @@ Welcome to the course "Fundamental Techniques in Data Science with R".
 | 4      | 1-12 (Mon)  | Deadline lab 3: 15:00        | -   [Lab 3](labs/lab3.qmd) ([solutions](/labs/lab3_answers.qmd))                                                                       |
 |        |             |                              | -   [demo](labs/demo4.html)                                                                                                            |
 +--------+-------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-| 4      | 1-12 (Mon)  | Lecture                      | -   Read [SDAM](https://mspeekenbrink.github.io/sdam-book/index.html) Ch. 5.7 - 5.9                                                    |
+| 4      | 1-12 (Mon)  | [Lecture](lectures.qmd#w4)   | -   Read [SDAM](https://mspeekenbrink.github.io/sdam-book/index.html) Ch. 5.7 - 5.9                                                    |
 |        |             |                              | -   Read [this](https://stats.oarc.ucla.edu/r/dae/robust-regression/) and [this](https://stats.oarc.ucla.edu/r/dae/robust-regression/) |
 +--------+-------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
 | 4      | 2-12 (Tue)  | Q&A - online                 |                                                                                                                                        |

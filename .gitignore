@@ -3,7 +3,6 @@
 /_site/
 /_book/
 /_manuscript/
-*.epub
 
 # R
 .Rproj.user

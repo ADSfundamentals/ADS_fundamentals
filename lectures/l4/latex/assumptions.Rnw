@@ -1,7 +1,7 @@
 %%% Title:    Regression Assumptions & Diagnostics
 %%% Author:   Kyle M. Lang
 %%% Created:  2018-04-12
-%%% Modified: 2025-11-24
+%%% Modified: 2025-11-28
 
 \documentclass[10pt]{beamer}
 \usetheme{Utrecht}
@@ -16,6 +16,11 @@
 \usepackage{fancybox}
 \usepackage{booktabs}
 \usepackage{relsize}
+\usepackage{tikz} 
+\usetikzlibrary{arrows,calc,patterns,positioning,shapes,decorations.markings} 
+\usetikzlibrary{decorations.pathmorphing} 
+
+\graphicspath{{images/}}
 
 \hypersetup{
   colorlinks = false,
@@ -142,9 +147,137 @@ knit_theme$set('edit-kwrite')
 
 %----------------------------------------------------------------------------------------------------------------------%
 
+\def\fw{25mm}\relax  % Factor node width
+
 \begin{frame}{Assumptions for Logical Inference}
 
-  Given \{Assumptions, Estimates\} $\rightarrow$ Inference
+  In statistical modeling, we combine a priori \emph{assumptions} and empirical \emph{observations} to make logical
+  \emph{inferences} about the population.
+
+  \begin{align*}
+    \{\mathcal{A}, \mathcal{O}\} \Rightarrow \mathcal{I}
+  \end{align*}
+
+  \begin{figure}
+    \scalebox{0.7}{
+      \begin{tikzpicture}[
+          box/.style = {rectangle, draw = black, very thick, minimum size = 7mm},
+          arrow/.style = {->, very thick},
+        ]
+        \usetikzlibrary{shapes.geometric}
+
+        %% Nodes
+        \node[box, draw] at (0, 1) (assume) {
+          \parbox{\fw}{\centering Assumptions}
+        };
+
+        \node[box, draw] at (0, -1) (observe) {
+          \parbox{\fw}{\centering Observations}
+        };
+
+        \node[box, right = 3cm of assume] at (0, 0) (infer) {
+          \parbox{\fw}{\centering Inference}
+        };
+
+        %% Arrows
+
+        \draw[arrow] (assume.east) -- ($(infer.west) + (0, 0.1)$);
+        \draw[arrow] (observe.east) -- ($(infer.west) - (0, 0.1)$);
+
+      \end{tikzpicture}
+    }
+  \end{figure}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Assumptions for Logical Inference}
+
+  Alice consults the Oracle. The Oracle is \emph{omniscient} and \emph{never lies}.
+
+  \vb
+
+  \begin{description}
+    \item[Alice:] "How's the weather today?"
+      \vc
+    \item[Oracle:] "It will rain today."
+  \end{description}
+  
+  \vb
+  \pause
+
+  \emph{Should Alice bring an umbrella?}
+
+  \vb
+  \pause
+
+  \begin{description}
+    \item[Assumption:] All of the Oracle's statements are true.\\
+      \vc
+    \item[Observation:] The Oracle predicts rain.\\
+      \vc
+    \item[Conclusion:] It will rain. So, Alice should bring an umbrella.
+  \end{description}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Assumptions for Logical Inference}
+
+
+  Bob consults the Elcaro. The Elcaro is \emph{omniscient} but \emph{always lies}.
+
+  \vb
+
+  \begin{description}
+    \item[Bob:] "How's the weather today?"
+      \vc
+    \item[Elcaro:] "It will rain today."
+  \end{description}
+  
+  \vb
+  \pause
+
+  \emph{Should Bob bring an umbrella?}
+
+  \vb
+  \pause
+
+  \begin{description}
+    \item[Assumption:] All of the Elcaro's statements are false.\\
+      \vc
+    \item[Observation:] The Elcaro predicts rain.\\
+      \vc
+    \item[Conclusion:] It will not rain. So, Bob doesn't need an umbrella.
+  \end{description}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Assumptions for Simplification \& Focus}
+
+  Simplifying assumptions serve to focus our analysis by ignoring unnecessary detail.
+  \vc
+  \begin{itemize}
+    \item Point masses when computing mechanical trajectories
+      \vc
+    \item Ideal gasses when computing thermodynamic properties
+      \vc
+    \item Efficient markets for economic projections
+      \vc
+    \item Full compliance when testing pharmaceutical interventions
+      \vc
+    \item Infinite sample sizes for asymptotic derivations
+      \vc
+    \item Linear associations when modeling complex processes
+      \vc
+    \item Accurate responses in survey research
+      \vc
+    \item Representative samples in inferential modeling
+  \end{itemize}
 
 \end{frame}
 
@@ -152,16 +285,19 @@ knit_theme$set('edit-kwrite')
 
 \begin{frame}{Assumptions vs. Estimates}
 
-  Model = Assumptions + Estimates
-
+  All statistical models must balance assumptions and empirical observations/estimates:
+  \emph{Model = Assumptions + Estimates}
   \begin{align*}
-    M &= \gamma_1 A + \gamma_2 E\\
+    M &= \gamma_1 A + \gamma_2 E\\[3pt]
     1 &= \gamma A + (1 - \gamma) E
   \end{align*}
-
+  Conceptually speaking, we must choose an appropriate value for $\gamma$.
+  \vc
   \begin{itemize}
-    \item $\gamma = 1$: Because I said so
-    \item $\gamma = 0$: Infinite model complexity
+    \item $\gamma = 1$: I know everything, Infinite researcher hubris
+      \vc
+    \item $\gamma = 0$: I know nothing, Infinite model complexity
+      \vc
     \item $0 \ll \gamma \ll 1$: Useful models
   \end{itemize}
 
@@ -169,7 +305,7 @@ knit_theme$set('edit-kwrite')
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\section{Assumptions of MLR}
+\sectionslide{Assumptions of MLR}
 
 %----------------------------------------------------------------------------------------------------------------------%
 \begin{frame}[allowframebreaks]{Assumptions of MLR}
@@ -277,7 +413,7 @@ knit_theme$set('edit-kwrite')
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\section{Regression Diagnostics}
+\sectionslide{Regression Diagnostics}
 
 %----------------------------------------------------------------------------------------------------------------------%
 
@@ -437,7 +573,7 @@ plot(out1, 3)
   \item Use a \emph{Heteroscedasticity Consistent} (HC) estimate of the asymptotic covariance matrix.
     \vc
     \begin{itemize}
-    \item Robust standard errors, Huber-White standard errors, Sandwich estimators
+    \item Robust SEs, Huber-White SEs, Sandwich estimators
     \item HC estimators correct the standard errors for non-constant error variance.
     \end{itemize}
   \end{enumerate}
@@ -495,7 +631,7 @@ defTest
     \vb
   \item Clustering
     \begin{itemize}
-    \item Your data have some important, unmodeled, grouping structure.
+    \item Your data have some important, un-modeled, grouping structure.
       \begin{itemize}
       \item Children nested within classrooms
       \item Romantic couples
@@ -788,7 +924,7 @@ qqline(resid(out1))
 
 \watermarkon %---------------------------------------------------------------------------------------------------------%
 
-\begin{frame}{Consequences of Violating Normality}
+\begin{frame}[allowframebreaks]{Consequences of Violating Normality}
 
   In small samples, with \emph{\underline{fixed}} predictors, normally distributed errors imply normal sampling
   distributions for the regression coefficients.
@@ -798,7 +934,15 @@ qqline(resid(out1))
     regardless of the error distribution.
   \end{itemize}
   \va
-  \pause
+  If we view our regression equation as a statistical model, then non-normal errors imply a misspecified model.
+  \vc
+  \begin{itemize}
+    \item From a modeling perspective, violating the normality assumption tells us that we've gone wrong somewhere in
+      our model definition.
+  \end{itemize}
+  
+  \pagebreak
+
   Prediction intervals require normally distributed errors.
   \vc
   \begin{itemize}
@@ -806,7 +950,6 @@ qqline(resid(out1))
     distributions.
   \end{itemize}
   \va
-  \pause
   Parameter estimates will not be fully efficient.
   \vc
   \begin{itemize}

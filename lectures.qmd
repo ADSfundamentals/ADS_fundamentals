@@ -26,9 +26,12 @@ Multiple Linear Regression
 
 - [Lecture Slides](lectures/l3/mlr.pdf)
 
-## Week 4
+## Week 4 {#w4}
 
 MLR Assumptions & Diagnostics
+
+- [Assumptions Lecture Slides](lectures/l4/assumptions.pdf)
+- [Influential Observations Lecture Slides](lectures/l4/influence.pdf)
 
 ## Week 5
 

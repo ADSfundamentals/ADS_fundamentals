@@ -1,4 +1,0 @@
-\beamer@sectionintoc {1}{Outliers}{4}{0}{1}
-\beamer@sectionintoc {2}{High-Leverage Cases}{8}{0}{2}
-\beamer@sectionintoc {3}{Influential Cases}{11}{0}{3}
-\beamer@sectionintoc {4}{Treating Influential Observations}{14}{0}{4}

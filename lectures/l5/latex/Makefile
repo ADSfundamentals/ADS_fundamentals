@@ -1,9 +1,9 @@
 # -*- Makefile -*-
 
-TARGET = glm.pdf
+TARGETS = glm.pdf extra.pdf
 DEST = ../
 
-all: $(TARGET)
+all: $(TARGETS)
 	
 %.pdf: %.tex
 	latexmk -pdf -f $^
@@ -14,10 +14,10 @@ all: $(TARGET)
 .PHONY: nuke clean tidy
 
 nuke: clean
-	rm -f cache/* figure/* $(TARGET)
+	rm -f cache/* figure/* $(TARGETS)
 
 tidy: clean
-	mv $(TARGET) $(DEST)
+	mv $(TARGETS) $(DEST)
 
 clean:
 	rm -f *.tex *.aux *.log *.out *.nav *.snm *.toc *.vrb *.bbl *.blg *.fdb_latexmk *.fls

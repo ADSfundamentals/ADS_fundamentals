@@ -70,15 +70,21 @@ set.seed(235711)
 library(knitr)
 library(ggplot2)
 library(xtable)
-library(MLmetrics)
+# library(MLmetrics)
 library(dplyr)
-                                        #library(caret)
-                                        #library(pROC)
+
 dataDir <- "data"
 
 source(here::here("code", "supportFunctions.R"))
 
-opts_chunk$set(size = 'footnotesize', fig.align = 'center', message = FALSE, root.dir = here::here("./"))
+options(width = 60)
+opts_chunk$set(size = "footnotesize",
+               fig.align = "center",
+               fig.path = "figure/glm-",
+               message = FALSE,
+               comment = "",
+               root.dir = here::here("./")
+)
 knit_theme$set('edit-kwrite')
 @
 
@@ -260,45 +266,70 @@ knit_theme$set('edit-kwrite')
   
 \end{frame}
 
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Intuition of Link Functions}
+
+  Suppose you uncover a burgeoning conspiracy to insight widespread civil unrest through a coordinated campaign of loud
+  mobile phone conversations on public transit. 
+  \vc
+  \begin{itemize}
+    \item If you want to predict the potential size of this terrorist cell, you could use a simple model of exponential
+      growth.
+  \end{itemize}
+  \begin{align*}
+    \mu = n_0 (1 + n_1)^t
+  \end{align*}
+  Where:
+  \begin{itemize}
+    \item $\mu$ is the group size at time $t$
+    \item $n_0$ is the initial group size
+    \item $n_1$ is the number of new members each conspirator recruits in a unit of time
+  \end{itemize}
+
+\end{frame}
+
 \watermarkoff %--------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{Visualizing Link Functions}
+\begin{frame}[fragile]{Intuition of Link Functions}
 
   \begin{columns}
     \begin{column}{0.5\textwidth}
 
-<<echo = FALSE>>=
-x <- seq(-2, 3, length.out = 10000)
-y <- 3 * exp(x)
-
-dat2 <- data.frame(X = x, y)
-
-ggplot(dat2, aes(X, y)) +
-  geom_line(color = "blue", linewidth = 1) +
-  geom_hline(yintercept = 0) +
-  geom_vline(xintercept = 0) +
-  theme_minimal() +
-  scale_x_continuous(expand = c(0, 0)) +
-  ylab(expression(mu))  +
-  ggtitle("Raw Conditional Mean\n") +
-  theme(axis.title = element_text(family = "serif", face = "italic", size = 14),
-        plot.title = element_text(hjust = 0.5, face = "bold", size = 16)
-       )
-@
+      For this example, let's assume:
+      \vc
+      \begin{itemize}
+        \item The group has five members when you start tracking them.
+          \vc
+        \item Every conspirator recruits two new members per week.
+      \end{itemize}
+      \vc
+      Then, the number of aural assailants at Week $t$ is given by:
+      \begin{align*}
+        \mu = 5 (1 + 2)^t
+      \end{align*}
 
     \end{column}
     \begin{column}{0.5\textwidth}
 
 <<echo = FALSE>>=
-ggplot(dat2, aes(X, log(y))) +
+t  <- seq(0, 6, 0.1)
+n0 <- 5
+n1 <- 2
+y  <- n0 * (1 + n1)^t
+
+dat2 <- data.frame(t, y)
+
+ggplot(dat2, aes(t, y)) +
   geom_line(color = "blue", linewidth = 1) +
   geom_hline(yintercept = 0) +
   geom_vline(xintercept = 0) +
   theme_minimal() +
   scale_x_continuous(expand = c(0, 0)) +
-  ylab(expression(paste("g(", mu, ")"))) +
-  ggtitle("Linearized Conditional Mean\n") +
-  theme(axis.title = element_text(family = "serif", face = "italic", size = 14),
+  ylab(expression(paste(mu, " = Conspirators"))) +
+  xlab("Weeks") +
+  ggtitle("Exponential Model\n") +
+  theme(axis.title = element_text(family = "serif", size = 14),
         plot.title = element_text(hjust = 0.5, face = "bold", size = 16)
        )
 @
@@ -310,45 +341,73 @@ ggplot(dat2, aes(X, log(y))) +
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{Visualizing Link Functions}
+\begin{frame}[fragile]{Intuition of Link Functions}
 
   \begin{columns}
     \begin{column}{0.5\textwidth}
 
-<<echo = FALSE>>=
-x <- 3 + seq(-5, 5, length.out = 10000)
-y <- plogis(x - 3)
+      We can linearize the model by using the natural log as a link function.
+      \begin{align*}
+        \ln(\mu) &= \ln \left[ n_0 (1 + n_1)^t \right]\\
+        &= \ln(n_0) + \ln(1 + n_1) t
+      \end{align*}
 
-dat2 <- data.frame(X = x, y)
-
-ggplot(dat2, aes(X, y)) +
-  geom_line(color = "blue", linewidth = 1) +
-  geom_hline(yintercept = 0) +
-  geom_vline(xintercept = 0) +
-  theme_minimal() +
-  scale_x_continuous(expand = c(0, 0)) +
-  ylab(expression(mu))  +
-  ggtitle("Raw Conditional Mean\n") +
-  theme(axis.title = element_text(family = "serif", face = "italic", size = 14),
-        plot.title = element_text(hjust = 0.5, face = "bold", size = 16)
-       )
-@
+      For our example problem, we get:
+      \begin{align*}
+        \ln(\mu) &= \ln \left[ 5 (1 + 2)^t \right]\\
+        &= \ln(5) + \ln(3) t
+      \end{align*}
 
     \end{column}
     \begin{column}{0.5\textwidth}
 
 <<echo = FALSE>>=
-ggplot(dat2, aes(X, qlogis(y))) +
+ggplot(dat2, aes(t, log(y))) +
   geom_line(color = "blue", linewidth = 1) +
   geom_hline(yintercept = 0) +
   geom_vline(xintercept = 0) +
   theme_minimal() +
   scale_x_continuous(expand = c(0, 0)) +
-  ylab(expression(paste("g(", mu, ")"))) +
-  ggtitle("Linearized Conditional Mean\n") +
-  theme(axis.title = element_text(family = "serif", face = "italic", size = 14),
+  ylab(expression(paste("g(", mu, ") = ", ln, "(Conspirators)"))) +
+  xlab("Weeks") +
+  ggtitle("Log-Linear Model\n") +
+  theme(axis.title = element_text(family = "serif", size = 14),
         plot.title = element_text(hjust = 0.5, face = "bold", size = 16)
        )
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Intuition of Link Functions}
+
+  We can use the linearized model to estimate the $n_0$ and $n_1$ parameters with standard linear modeling techniques.
+
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+
+<<echo = FALSE, results = "asis">>=
+t <- 0:6
+dat3 <- data.frame(t, mu = n0 * (1 + n1)^t)
+xtable(dat3) |> print(include.rownames = FALSE)
+@
+
+    \end{column}
+    \begin{column}{0.6\textwidth}
+
+<<>>=
+# Estimate a log-linear model of group size:
+out <- lm(log(mu) ~ t, data = dat3)
+
+# Extract the estimated regression weights:
+(beta <- coef(out))
+
+# Convert the weights to a counts scale:
+exp(beta)
 @
 
     \end{column}
@@ -1013,7 +1072,7 @@ results <- getRegStats(fit, fit = FALSE)
   <<>>=
   library(dplyr)
   
-  coef(fit) %>% exp()
+  coef(fit) |> exp()
   @
 
   <<echo = FALSE, include = FALSE>>=
@@ -1161,7 +1220,7 @@ results <- getRegStats(fit, fit = FALSE)
   Compute odds ratios.
   
   <<>>=
-  (or <- coef(fit) %>% exp())
+  (or <- coef(fit) |> exp())
   @
 
   Odds ratios smaller than 1.0 can be difficult to explain.
@@ -1181,7 +1240,7 @@ results <- getRegStats(fit, fit = FALSE)
   <<>>=
   library(magrittr)
   
-  fit2 <- titanic %>%
+  fit2 <- titanic |>
       mutate(died = relevel(survived, ref = "yes")) %$% 
       glm(died ~ age + sex + class, family = "binomial")
   @
@@ -1201,7 +1260,7 @@ results <- getRegStats(fit, fit = FALSE)
   We get the same odds ratios that we derived through reciprocation.
   
   <<>>=
-  coef(fit2) %>% exp()
+  coef(fit2) |> exp()
   1 / or
   @
 
@@ -1462,118 +1521,3 @@ or2 <- round(1 / or, 2)
 \end{document}
 
 %----------------------------------------------------------------------------------------------------------------------%
-%----------------------------------------------------------------------------------------------------------------------%
-%----------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile]{Example}
-
-  Let's generate a grid of hypothetical passengers to explore the model's
-  predictions.
-  
-  <<>>=
-  passengers <-
-      expand.grid(
-          age   = 1:100,
-          sex   = c("male", "female"),
-          class = c("1st", "2nd", "3rd")
-      ) %>%
-      data.frame()
-  @
-
-\end{frame}
-
-\watermarkoff %--------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile, allowframebreaks]{Example}
-
-  View 10 random passengers.
-  
-  <<>>=
-  passengers %>% slice_sample(n = 10)
-  @ 
-
-  \pagebreak
-
-  We can generate predictions on the scale of the linear predictor (i.e.,
-  log-odds), or we can generate predicted probabilities.
-  
-  <<>>=
-  passengers %<>%
-      mutate( 
-          ## Predicted log odds of dying:
-          etaHat = predict(fit2, newdata = ., type = "link"),
-
-          ## Predicted probabilities of dying:
-          piHat = predict(fit2, newdata = ., type = "response")
-      )
-  @
-
-  We can then use the predicted probabilities of dying to classify:
-
-  <<>>=
-  passengers %<>%
-      mutate(dieHat = ifelse(piHat > 0.5, "dead", "alive") %>% factor())
-  @
-
-  \pagebreak
-
-  View the predictions for 10 random passengers:
-  
-  <<>>=
-  passengers %>% slice_sample(n = 10)
-  @
-
-  \pagebreak
-
-  We can visualize the predicted probabilities of dying.
-  
-  <<eval = FALSE>>=
-  library(ggplot2)
-  
-  ggplot(passengers, aes(age, piHat, color = sex)) +
-      geom_line() +
-      facet_wrap(vars(class)) +
-      ylab("Predicted Probability of Death")
-  @ 
-
-  \pagebreak
-
-  <<echo = FALSE, out.width = "65%">>=
-  library(ggplot2)
-  
-  ggplot(passengers, aes(age, piHat, color = sex)) +
-      geom_line() +
-      facet_wrap(vars(class)) +
-      ylab("Predicted Probability of Death")
-  @ 
-
-\end{frame}
-
-%----------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile, allowframebreaks]{Example}
-
-  We can also visualize the classifications the model would make.
-  
-  <<eval = FALSE>>=
-  ggplot(passengers, aes(dieHat, age, color = class)) +
-      geom_boxplot() +
-      facet_wrap(vars(sex)) +
-      xlab("Predicted Death")
-  @ 
-
-  \pagebreak
-
-  <<echo = FALSE, out.width = "65%">>=
-  ggplot(passengers, aes(dieHat, age, color = class)) +
-      geom_boxplot() +
-      facet_wrap(vars(sex)) +
-      xlab("Predicted Death")
-  @ 
-
-\end{frame}
-
-%----------------------------------------------------------------------------------------------------------------------%
-
-\end{document}
-

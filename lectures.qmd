@@ -33,9 +33,12 @@ MLR Assumptions & Diagnostics
 - [Assumptions Lecture Slides](lectures/l4/assumptions.pdf)
 - [Influential Observations Lecture Slides](lectures/l4/influence.pdf)
 
-## Week 5
+## Week 5 {#w5}
 
 Generalized Linear Models & Logistic Regression
+
+- [GLM & Logistic Regression Lecture Slides](lectures/l5/glm.pdf)
+- [Extra: Extended Example Slides](lectures/l5/extra.pdf)
 
 ## Week 6
 

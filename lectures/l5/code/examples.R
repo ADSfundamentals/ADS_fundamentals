@@ -1,19 +1,19 @@
-### Title:    Lecture 6 Examples
+### Title:    Lecture 5 Examples
 ### Author:   Kyle M. Lang
 ### Created:  2021-12-17
-### Modified: 2023-12-15
+### Modified: 2025-12-05
 
 library(openxlsx)
 library(dplyr)
 library(magrittr)
 library(ggplot2)
 
-dataDir <- "../data/"
+dataDir <- "data"
 fn      <- "utmb_2017.csv"
 
-utmb <- read.csv(paste0(dataDir, fn))
-penguin <- read.xlsx(paste0(dataDir, "penguin_counts.xlsx"))
-crossing <- read.csv(paste0(dataDir, "nyc-east-river-bicycle-counts.csv"), row.names = 1)
+utmb <- read.csv(here::here(dataDir, fn))
+penguin <- read.xlsx(here::here(dataDir, "penguin_counts.xlsx"))
+crossing <- read.csv(here::here(dataDir, "nyc-east-river-bicycle-counts.csv"), row.names = 1)
 
 dat1 <- data.frame(Sex = factor(grepl("H$", utmb$category), labels = c("Female", "Male")),
                    Finish = factor(utmb$time != " ", labels = c("No", "Yes"))
@@ -178,3 +178,45 @@ ggplot(dat2, aes(x, qlogis(y))) +
 
 plot(x)
 plot(log(x))
+
+#----------------------------------------------------------------------------------------------------------------------#
+
+x <- 0:6
+n0 <- 5
+n1 <- 2
+y <- n0 * (1 + n1)^x
+y2 <- log(n0) + log(1 + n1) * x
+
+out <- lm(log(y) ~ x)
+
+coef(out) |> exp()
+
+y2 - log(y)
+
+405 / 3
+135 / 3
+45 / 3
+
+plot(x, y)
+lines(x, y2)
+
+plot(x, log(y))
+
+dat <- data.frame(x, y)
+
+filter(dat, x == 0)
+filter(dat, x == 1)
+filter(dat, x == 2)
+filter(dat, x == 3)
+filter(dat, x == 4)
+
+ggplot(dat, aes(x, y)) +
+  geom_line() +
+  xlab("Time") +
+  ylab("Cases")
+
+ggplot(dat, aes(x, log(y))) +
+  geom_line() +
+  xlab("Time") +
+  ylab("ln(Cases)")
+

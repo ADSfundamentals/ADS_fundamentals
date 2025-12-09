@@ -6,6 +6,10 @@ params:
   answers: false
 ---
 
+```{r l4_options, include = FALSE}
+knitr::opts_chunk$set(root.dir = here::here("./"))
+```
+
 # Introduction
 
 ------------------------------------------------------------------------
@@ -25,7 +29,7 @@ library(MASS)
 
 # Data set: Loading & Inspection
 
-For the first part of this practical, a [dataset](Fish.csv) from a fish market is used. The variables in this fish data set are:
+For the first part of this practical, a [dataset](../data/Fish.csv) from a fish market is used. The variables in this fish data set are:
 
 -   Species of the fish
 
@@ -47,7 +51,7 @@ Download the dataset from the GitHub link, store it in the folder of your `Rproj
 
 ```{r}
 # Read in the data set
-data_fish <- read.csv("Fish.csv")
+data_fish <- read.csv(here::here("data", "Fish.csv"))
 
 colnames(data_fish) <- c("species", "weigth", "vertical_length", "diagonal_length", "cross_length", "height", "diagonal_width")
 

@@ -66,8 +66,10 @@ ehthumbs.db
 Thumbs.db
 
 # knitr/rmarkdown
-/*_cache/
+/**/*_cache/
+# /*_cache/
 /cache/
+/labs/*_files/
 
 # Ghost files
 .fuse_hidden*

@@ -6,8 +6,11 @@ params:
   answers: false
 ---
 
-We will use the following packages in this practical:
+```{r l5_options, include = FALSE}
+knitr::opts_chunk$set(root.dir = here::here("./"))
+```
 
+We will use the following packages in this practical:
 
 ```{r, message = FALSE, warning = FALSE}
 library(dplyr)
@@ -126,7 +129,7 @@ summary(glm(prop ~ conc,
 
 ## Titanic data
 
-You will work with the `titanic` data set which you can find in the surfdrive folder, containing information on the fate of passengers on the infamous voyage. 
+You will work with the `titanic` data set which you can download [here](../data/titanic.csv), containing information on the fate of passengers on the infamous voyage. 
 
 * `Survived`: this is the outcome variable that you are trying to predict, with 1 meaning a passenger survived and 0 meaning they did not
 * `Pclass`: this is the ticket class the passenger was travelling on, with 1, 2, and 3 representing 1st, 2nd and 3rd class respectively
@@ -136,7 +139,7 @@ You will work with the `titanic` data set which you can find in the surfdrive fo
 5. __Read in the data from the "titanic.csv" file, selecting only the variables `Survived`, `Pclass`, `Sex` and `Age`. If necessary, correct the class of the variables.__
 
 ```{r, include=params$answers}
-titanic <- read_csv("titanic.csv") %>% 
+titanic <- read_csv(here::here("data", "titanic.csv")) %>% 
   mutate(Survived = as.factor(Survived),
          Sex = as.factor(Sex),
          Pclass = as.factor(Pclass))

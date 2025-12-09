@@ -28,9 +28,9 @@ You can use the same dataset for both assigments. The minimum requirement for th
 
 -   **Where to submit:** [Here](https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN)
 
--   **What is graded:** Only your .html file is graded, so make sure all code, comments and output are visible!
+-   **What is graded:** Only your .html file is graded, so make sure all code, comments and output are visible! **Carefully check if the compiled .html file in your ZIP archive is correct and complete before submitting!**
 
--   **Description:** For this assignment, you perform and report a multiple linear regression analysis in an Quarto text document. The assignment will be graded on the following five dimensions:
+-   **Description:** For this assignment, you perform and report a multiple linear regression analysis in an Quarto text document. The assignment will be graded on the following six dimensions:
 
 1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
 
@@ -54,13 +54,13 @@ Group assignment 2: Logistic regression
 
 -   **Presentation:** WG meeting Thursday January 15, from 09:00 to 12:45
 
--   **Deadline:** Wednesday January 14, 15:00. Hand in your ZIP archive including your slides. Your WG instructor will set the slides up for the presentations on Thursday.
+-   **Deadline:** Wednesday January 14, 15:00. Hand in your ZIP archive including your slides. Your WG instructor will set the slides up for the presentations on Thursday. **Carefully check if the compiled .html file in your ZIP archive is correct and complete before submitting!**
 
 -   **What to submit:** A ZIP archive containing the complete R project (dataset, .qmd, slides)
 
 -   **Where to submit:** [Here](https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN)
 
--   **Description:** For this assignment, you perform and report a multiple logistic regression analysis in a Quarto presentation. The presentation will be graded on the following five dimensions:
+-   **Description:** For this assignment, you perform and report a multiple logistic regression analysis in a Quarto presentation. The presentation will be graded on the following six dimensions:
 
 1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
 2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure (including moderation).

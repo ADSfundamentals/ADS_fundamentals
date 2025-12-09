@@ -6,6 +6,10 @@ params:
   answers: false
 ---
 
+```{r l6_options, include = FALSE}
+knitr::opts_chunk$set(root.dir = here::here("./"))
+```
+
 # Part 1: Repeat from last week 
 
 We will use the following packages in this practical:
@@ -30,13 +34,13 @@ library(caret)
 
 ## Loading the data
 
-In this practical, you will perform logistic regression analyses again using `glm()` and discuss model assumptions and diagnostics `titanic` data set.
+In this practical, you will perform logistic regression analyses again using `glm()` and discuss model assumptions and diagnostics.
 
-**1. Read in the data from the "titanic.csv" file, which we also used for the previous practical.**
+**1. Read in the data from the ["titanic.csv"](../data/titanic.csv) file, which we also used for the previous practical.**
 
 ```{r, include=params$answers}
 # Load in the data
-titanic <- read_csv("titanic.csv") %>% 
+titanic <- read_csv(here::here("data", "titanic.csv")) %>% 
   mutate(Survived = as.factor(Survived),
          Sex = as.factor(Sex),
          Pclass = as.factor(Pclass))

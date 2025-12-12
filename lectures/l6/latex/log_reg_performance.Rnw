@@ -1,0 +1,480 @@
+%%% Title:    FTDS Lecture 6.2: Logistic Regression Performance
+%%% Author:   Kyle M. Lang & Mingyang Cai
+%%% Created:  2022-12-03
+%%% Modified: 2025-12-12
+
+\documentclass[10pt]{beamer}
+\usetheme{Utrecht}
+
+\usepackage{graphicx}
+\usepackage[natbibapa]{apacite}
+\usepackage[libertine]{newtxmath}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{listings}
+% \usepackage{xspace}
+\usepackage{tcolorbox}
+% \tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{caption}
+\captionsetup{labelformat=empty}
+
+\hypersetup{
+  colorlinks = false,
+  linkcolor = blue,
+  filecolor = blue,
+  citecolor = black,
+  urlcolor = blue
+}
+
+\definecolor{codebackground}{RGB}{224,234,238}
+\definecolor{codestring}{RGB}{191,3,3}
+\definecolor{codekeyword}{RGB}{1,1,129}
+\definecolor{codecomment}{RGB}{131,129,131}
+
+\newtcbox{\src}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+  }
+
+\newtcbox{\srcT}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+    height = 14pt,
+    valign = bottom,
+  }
+
+\newcommand{\eqit}[1]{\textrm{\textit{#1}}}
+\newcommand{\rmsc}[1]{\textrm{\textsc{#1}}}
+\newcommand{\pkg}[1]{\textbf{#1}}
+
+\newcommand{\tightpipe}{\texttt{|>}}
+\newcommand{\pipe}{\tightpipe~}
+\newcommand{\expipe}{\texttt{\%\$\%}}
+\newcommand{\apipe}{\texttt{\%<>\%}}
+\newcommand{\kfold}[0]{\emph{K}-fold cross-validation}
+
+\title{Logistic Regression Performance}
+\subtitle{Fundamental Techniques in Data Science}
+\author{Kyle M. Lang}
+\institute{Department of Methodology \& Statistics\\Utrecht University}
+\date{}
+
+<<setup, include = FALSE, cache = FALSE>>=
+set.seed(235711)
+
+library(knitr)
+library(dplyr)
+library(magrittr)
+library(ggplot2)
+library(xtable)
+library(kableExtra)
+library(readr)
+library(pROC)
+library(regclass)
+library(caret)
+library(robust)
+library(ROCR)
+library(OptimalCutpoints)
+
+source(here::here("code", "supportFunctions.R"))
+
+options(width = 60)
+opts_chunk$set(size = "footnotesize",
+               fig.align = "center",
+               fig.path = "figure/diagnostics-",
+               message = FALSE,
+               warning = FALSE,
+               comment = "",
+               root.dir = here::here("./")
+)
+knit_theme$set('edit-kwrite')
+@
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[t, plain]
+  \titlepage
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\section{Confusion Matrix}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Example Model}
+
+  First, we'll refit the logistic regression model that predicts the chances of Titanic passengers surviving based on
+  their age, sex, and ticket price
+  
+<<>>=
+## Read the data:
+titanic <- readRDS(here::here("data", "titanic.rds"))
+
+## Estimate the logistic regression model:
+glmFit <- glm(survived ~ age + sex + fare,
+              data = titanic,
+              family = "binomial")
+
+## Save the linear predictor estimates:
+titanic$etaHat <- predict(glmFit, type = "link")
+@
+
+  \pagebreak
+
+<<>>=
+partSummary(glmFit, -1)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Confusion Matrix}
+
+  One of the most direct ways to evaluate classification performance is the \emph{confusion matrix}.
+
+<<>>=
+library(magrittr)
+
+## Add predictions to the dataset:
+titanic %<>%
+  mutate(piHat = predict(glmFit, type = "response"),
+         yHat = as.factor(ifelse(piHat <= 0.5, "no", "yes"))
+        )
+@
+
+<<echo = FALSE, results = "asis">>=
+xTab <- titanic %$% 
+  table(Predicted = yHat, True = survived) |> 
+  xtable(caption ="Confusion Matrix of Predicted Survival", 
+         digits = 0)
+
+adds <- list(pos = list(0, 0),
+             command = c("& \\multicolumn{2}{c}{True} \\\\\n",
+                         "Predicted & no & yes \\\\\n")
+             )
+
+print(xTab, add.to.row = adds, include.colnames = FALSE)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Confusion Matrix}
+
+  Each cell in the confusion matrix represents a certain classification result.
+
+<<echo = FALSE, results = "asis">>=
+xTab <- titanic %$% 
+  matrix(c("True Negative", "False Positive", 
+           "False Negative", "True Positive"), 2, 2,
+         dimnames = list(c("Died", "Survived"),
+                         c("Died", "Survived")
+                         )
+         ) |>
+  xtable(caption ="Confusion Matrix of Predicted Survival", 
+         digits = 0)
+
+adds <- list(pos = list(0, 0),
+             command = c("& \\multicolumn{2}{c}{True} \\\\\n",
+                         "Predicted & Died & Survived \\\\\n")
+             )
+
+print(xTab, add.to.row = adds, include.colnames = FALSE)
+@
+
+  \begin{itemize}
+    \item \textbf{TP}: Correctly predict survival
+    \item \textbf{TN}: Correctly predict death
+    \item \textbf{FP}: Predict survival for dead people 
+    \item \textbf{FN}: Predict death for survivors
+  \end{itemize}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Confusion Matrix}
+
+<<>>=
+library(caret)
+
+cMat <- titanic %$% confusionMatrix(data = yHat, reference = survived)
+
+cMat$table
+cMat$overall
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Confusion Matrix}
+
+<<>>=
+cMat$byClass
+@
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Summaries of the Confusion Matrix}
+
+<<include = FALSE>>=
+acc <- cMat$overall["Accuracy"]
+err <- round(1 - acc, 2)
+acc <- round(acc, 2)
+sen <- round(cMat$byClass["Sensitivity"], 2)
+spe <- cMat$byClass["Specificity"]
+fpr <- round(1 - spe, 2)
+spe <- round(spe, 2)
+ppv <- round(cMat$byClass["Pos Pred Value"], 2)
+npv <- round(cMat$byClass["Neg Pred Value"], 2)
+@
+
+  \emph{Accuracy = (TP + TN) / (P + N)}
+  \begin{itemize}
+    \item In our example, Accuracy = \Sexpr{acc}
+    \item \Sexpr{100 * acc}\% are correctly classified
+  \end{itemize}
+
+  \vb
+
+  \emph{Error Rate = (FP + FN) / (P + N) = 1 - Accuracy}
+  \begin{itemize}
+    \item In our example, Error Rate = \Sexpr{err}
+    \item \Sexpr{100 * err}\% are incorrectly classified
+  \end{itemize}
+
+  \vb
+
+  \emph{Sensitivity = TP / (TP + FN)}
+  \begin{itemize}
+    \item In our example, Sensitivity = \Sexpr{sen}
+    \item \Sexpr{100 * sen}\% of survivors are correctly classified
+  \end{itemize}
+
+  \vb
+
+  \emph{Specificity = TN / (TN + FP)}
+  \begin{itemize}
+    \item In our example, Specificity = \Sexpr{spe}
+    \item \Sexpr{100 * spe}\% of deaths are correctly classified
+  \end{itemize}
+
+  \pagebreak
+
+  \emph{False Positive Rate (FPR) = FP / (TN + FP) = 1 - Specificity}
+  \begin{itemize}
+    \item In our example, FPR = \Sexpr{fpr}
+    \item \Sexpr{100 * fpr}\% of deaths are incorrectly classified as survivors
+  \end{itemize}
+
+  \vb
+
+  \emph{Positive Predictive Value (PPV) = TP / (TP + FP)}
+  \begin{itemize}
+    \item In our example, PPV = \Sexpr{ppv}
+    \item There is an \Sexpr{100 * ppv}\% chance that a passenger classified as
+      a survivor was classified correctly
+  \end{itemize}
+
+  \vb
+
+  \emph{Negative Predictive Value (NPV) = TN / (TN + FN)}
+  \begin{itemize}
+    \item In our example, NPV = \Sexpr{npv}
+    \item There is a \Sexpr{100 * npv}\% chance that a passenger classified as
+      dying was classified correctly
+  \end{itemize}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\section{ROC Curve}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{ROC Curve}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      A \emph{receiver operating characteristic} (ROC) curve illustrates the diagnostic ability of a binary classifier
+      for all possible values of the classification threshold. 
+      \vc
+      \begin{itemize}
+        \item The ROC curve plots sensitivity against specificity at different threshold values. 
+      \end{itemize}
+
+   \end{column}
+    \begin{column}{0.5\textwidth}
+      
+<<>>=
+rocData <- titanic %$% 
+  pROC::roc(survived, piHat)
+plot(rocData)
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{ROC Curve}
+
+  The \emph{area under the ROC curve} (AUC) is a one-number summary of the potential performance of the classifier.
+  \vc
+  \begin{itemize}
+    \item The AUC does not depend on the classification threshold.
+  \end{itemize}
+
+<<>>=
+pROC::auc(rocData)
+@
+
+  According to \citet{mandrekar:2010}:
+
+  \begin{itemize}
+    \item AUC value from 0.7 -- 0.8: Acceptable
+    \item AUC value from 0.8 -- 0.9: Excellent
+    \item AUC value over 0.9: Outstanding
+  \end{itemize}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Threshold Selection}
+
+  We can use numerical methods to estimate an optimal threshold value.
+
+<<>>=
+library(OptimalCutpoints)
+
+ocOut <- optimal.cutpoints(X = "piHat", 
+                           status = "survived",
+                           tag.healthy = "no",
+                           data = titanic,
+                           method = "ROC01"
+                           )
+@
+
+\pagebreak
+
+<<>>=
+partSummary(ocOut, -1)
+@
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\section{Alternative Performance Measures}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Alternative Performance Measures}
+  
+  Measuring classification performance from a confusion matrix can be problematic.
+  \vc
+  \begin{itemize}
+  \item Sometimes too coarse.
+  \end{itemize}
+
+  \vb
+
+  We can also base our error measure on the residual deviance with the \emph{Cross-Entropy Error}:
+  \begin{align*}
+    CEE = -N^{-1} \sum_{n = 1}^N Y_n \ln(\hat{\pi}_n) + (1 - Y_n)\ln(1 - \hat{\pi}_n)
+  \end{align*}
+  \vx{-6}
+  \begin{itemize}
+  \item The CEE is sensitive to classification confidence.
+  \item Stronger predictions are more heavily weighted.
+  \end{itemize}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Benefits of CEE}
+  
+<<echo = FALSE>>=
+library(MLmetrics)
+
+yTrue <- rbinom(100, 1, 0.5)
+
+pi1   <- yTrue * 0.9 + (1 - yTrue) * 0.1
+pred1 <- as.numeric(pi1 > 0.5)
+
+pi2   <- yTrue * 0.55 + (1 - yTrue) * 0.45
+pred2 <- as.numeric(pi2 > 0.5)
+
+cee1 <- LogLoss(y_pred = pi1, y_true = yTrue)
+cee2 <- LogLoss(y_pred = pi2, y_true = yTrue)
+@ 
+
+ The misclassification rate is a na\"{i}vely appealing option.
+  \begin{itemize}
+  \item The proportion of cases assigned to the wrong group
+  \end{itemize}
+  \vb
+  Consider two perfect classifiers:
+  \begin{enumerate}
+  \item $P(\hat{Y}_n = 1 | Y_n = 1) = 0.90$,  $P(\hat{Y}_n = 1 | Y_n = 0) = 0.10$, $n = 1, 2, \ldots, N$
+  \item $P(\hat{Y}_n = 1 | Y_n = 1) = 0.55$,  $P(\hat{Y}_n = 1 | Y_n = 0) = 0.45$, $n = 1, 2, \ldots, N$
+  \end{enumerate}
+  \vb
+  Both of these classifiers will have the same misclassification rate.
+  \begin{itemize}
+  \item Neither model ever makes an incorrect group assignment.
+  \end{itemize}
+  \vb
+  The first model will have a lower CEE.
+  \begin{itemize}
+  \item The classifications are made with higher confidence.
+  \item $CEE_1 = \Sexpr{round(cee1, 3)}$, $CEE_2 = \Sexpr{round(cee2, 3)}$
+  \end{itemize}
+  
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{References}
+
+  \bibliographystyle{apacite}
+  \bibliography{../../../bibtex/ftds_refs.bib}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\end{document}

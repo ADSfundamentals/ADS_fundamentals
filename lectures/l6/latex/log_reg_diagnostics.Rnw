@@ -1,0 +1,785 @@
+%%% Title:    FTDS Lecture 6: Logistic Regression Diagnostics
+%%% Author:   Kyle M. Lang & Mingyang Cai
+%%% Created:  2022-12-03
+%%% Modified: 2025-12-12
+
+\documentclass[10pt]{beamer}
+\usetheme{Utrecht}
+
+\usepackage{graphicx}
+\usepackage[natbibapa]{apacite}
+\usepackage[libertine]{newtxmath}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{listings}
+% \usepackage{xspace}
+\usepackage{tcolorbox}
+% \tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{caption}
+\captionsetup{labelformat=empty}
+
+\hypersetup{
+  colorlinks = false,
+  linkcolor = blue,
+  filecolor = blue,
+  citecolor = black,
+  urlcolor = blue
+}
+
+\definecolor{codebackground}{RGB}{224,234,238}
+\definecolor{codestring}{RGB}{191,3,3}
+\definecolor{codekeyword}{RGB}{1,1,129}
+\definecolor{codecomment}{RGB}{131,129,131}
+
+\newtcbox{\src}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+  }
+
+\newtcbox{\srcT}
+  {%
+    verbatim,
+    fontupper = \ttfamily,
+    colback = codebackground, 
+    colframe = codebackground,
+    left = 0pt, 
+    right = 0pt, 
+    height = 14pt,
+    valign = bottom,
+  }
+
+\newcommand{\eqit}[1]{\textrm{\textit{#1}}}
+\newcommand{\rmsc}[1]{\textrm{\textsc{#1}}}
+\newcommand{\pkg}[1]{\textbf{#1}}
+
+\newcommand{\tightpipe}{\texttt{|>}}
+\newcommand{\pipe}{\tightpipe~}
+\newcommand{\expipe}{\texttt{\%\$\%}}
+\newcommand{\apipe}{\texttt{\%<>\%}}
+\newcommand{\kfold}[0]{\emph{K}-fold cross-validation}
+
+\title{Logistic Regression Diagnostics}
+\subtitle{Fundamental Techniques in Data Science}
+\author{Kyle M. Lang}
+\institute{Department of Methodology \& Statistics\\Utrecht University}
+\date{}
+
+<<setup, include = FALSE, cache = FALSE>>=
+set.seed(235711)
+
+library(knitr)
+library(dplyr)
+library(magrittr)
+library(ggplot2)
+library(xtable)
+library(kableExtra)
+library(readr)
+library(pROC)
+library(regclass)
+library(caret)
+library(robust)
+library(ROCR)
+library(OptimalCutpoints)
+
+source(here::here("code", "supportFunctions.R"))
+
+options(width = 60)
+opts_chunk$set(size = "footnotesize",
+               fig.align = "center",
+               fig.path = "figure/diagnostics-",
+               message = FALSE,
+               warning = FALSE,
+               comment = "",
+               root.dir = here::here("./")
+)
+knit_theme$set('edit-kwrite')
+@
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[t, plain]
+  \titlepage
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Recap: Model Definition}
+
+  We define the logistic regression model as:
+  \begin{align*}
+    Y &\sim \mathrm{Bin}(\pi, 1)\\
+    \mathrm{logit}(\pi) &= \beta_0 + \sum_{p = 1}^P \beta_p X_p
+  \end{align*}
+  We denote the untransformed linear predictor as $\eta$:
+  \begin{align*}
+    \eta = \beta_0 + \sum_{p = 1}^P \beta_p X_p
+  \end{align*}
+  The logit link represents the natural log of the odds of success:
+  \begin{align*}
+    \mathrm{logit}(\pi) = \ln \left( \frac{\pi}{1 - \pi} \right)
+  \end{align*}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Recap: Inverse Link Function}
+
+  In logistic regression, the inverse link function, $g^{-1}(\cdot)$, is the \emph{logistic function}:
+  \begin{align*}
+    \mathrm{logistic}(X) = \frac{e^X}{1 + e^X}
+  \end{align*}
+  So, we convert $\eta$ to $\pi$ by:
+  \begin{align*}
+    \pi = \frac{e^{\eta}}{1 + e^{\eta}} =
+      \frac{\exp \left( \beta_0 + \sum_{p = 1}^P \beta_p X_p \right) }{1 + \exp \left( \beta_0 + \sum_{p = 1}^P \beta_p X_p \right) }
+  \end{align*}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\sectionslide{Assumptions \& Diagnostics}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Statistical Assumptions}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Assumptions of Logistic Regression}
+
+  The first two assumptions of logistic regression are shared with linear regression.
+  \vb
+  \begin{enumerate}
+  \item The model is linear in the parameters.
+    \vc
+    \begin{itemize}
+    \item This is OK: $logit(\pi) = \beta_0 + \beta_1X + \beta_2Z + \beta_3XZ + \beta_4X^2 + \beta_5X^3$
+      \vc
+    \item This is not: $logit(\pi) = \beta_0 X^{\beta_1}$
+    \end{itemize}
+    \vb
+  \item The predictor matrix is \emph{full rank}.
+    \vc
+    \begin{itemize}
+    \item $N > P$
+      \vc
+    \item No $X_p$ can be a linear combination of other predictors.
+    \end{itemize}
+
+  \end{enumerate}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Assumptions of Logistic Regression}
+
+  The distributional assumptions of logistic regression are not framed in terms of residuals.
+
+  \vb
+
+  \begin{itemize}
+    \item Linear regression
+      \begin{align*}
+        Y &\sim \mathrm{N}\left(\hat{Y}, \hat{\sigma}^2\right)\\
+        Y &= \hat{Y} + \hat{\varepsilon}\\
+        \varepsilon &\sim \mathrm{N}\left(0, \sigma^2\right)
+      \end{align*}
+    \item Logistic regression
+      \begin{align*}
+        Y \sim \text{Bin}\left(\hat{\pi}, 1\right)
+      \end{align*}
+  \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Assumptions of Logistic Regression}
+
+  The variance of the binomial distribution is a function of its mean.
+  \vb
+  \begin{itemize}
+    \item Linear regression
+      \begin{align*}
+        \bar{Y} = \hat{Y}, ~ \mathrm{var}(Y) = \hat{\sigma}^2
+      \end{align*}
+    \item Logistic regression
+      \begin{align*}
+        \bar{Y} = \hat{\pi}, ~ \mathrm{var}(Y) = \hat{\pi}\left(1 - \hat{\pi}\right)
+      \end{align*}
+  \end{itemize}
+
+  So, we consider the entire outcome distribution in logistic regression.
+  \vc
+  \begin{itemize}
+    \item We can succinctly summarize the distributional assumptions of logistic regression as: 
+  \end{itemize}
+  \begin{align*}
+    Y_i \overset{iid}{\sim} \textrm{Bin}\left(\hat{\pi}_i, 1\right)
+  \end{align*}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Assumptions of Logistic Regression}
+
+  We end up with three assumptions where the third assumption fills the role played by all residual-related assumptions
+  in linear regression.
+  \vb
+  \begin{enumerate}
+  \item The model is linear in the parameters.
+    \vb
+  \item The predictor matrix is \emph{full rank}.
+    \vb
+  \item The outcome is independently and identically binomially distributed.
+    \begin{align*}
+      Y_n &\overset{iid}{\sim} \textrm{Bin}\left(\hat{\pi}_n, 1\right)\\
+      \hat{\pi}_n &= \textrm{logistic}\left(\hat{\beta}_0 + \sum_{p = 1}^P\hat{\beta}_pX_{np}\right)
+    \end{align*}
+
+  \end{enumerate}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Residuals}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Example}
+
+  To demonstrate these ideas, we'll fit a logistic regression model that predicts the chances of Titanic passengers
+  surviving based on their age, sex, and ticket price
+  
+<<>>=
+## Read the data:
+titanic <- readRDS(here::here("data", "titanic.rds"))
+
+## Estimate the logistic regression model:
+glmFit <- glm(survived ~ age + sex + fare,
+              data = titanic,
+              family = "binomial")
+
+## Save the linear predictor estimates:
+titanic$etaHat <- predict(glmFit, type = "link")
+@
+
+  \pagebreak
+
+<<>>=
+partSummary(glmFit, -1)
+@
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Raw Residuals}
+
+  In logistic regression the outcome is binary, $Y \in \{0, 1\}$, but the parameter that we're trying to model is
+  continuous, $\pi \in (0, 1)$.
+  \vc
+  \begin{itemize}
+    \item Due to this mismatch in measurement levels, we don't have a natural definition of a "residual" in logistic
+      regression.
+      \vc
+    \item We have a few potential operationalizations.
+  \end{itemize}
+  
+  \vb
+
+  The most basic residual is the \emph{raw residual}, $e_n$.
+  \vc
+  \begin{itemize}
+    \item The difference between the observed outcome value and the predicted probability.
+  \end{itemize}
+  \begin{align*}
+    e_n = Y_n - \hat{\pi}_n
+  \end{align*}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Raw Residuals}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+<<eval = FALSE>>=
+library(ggplot)
+
+## Calculate the raw residuals:
+titanic$e <- 
+  resid(glmFit, type = "response")
+
+## Plot raw residuals vs. fitted
+## linear predictor values:
+ggplot(titanic, aes(etaHat, e)) + 
+  geom_point() + 
+  geom_smooth() +
+  theme_classic() +
+  xlab("Linear Predictor") +
+  ylab("Raw Residual")
+
+@
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<echo = FALSE>>=
+titanic$e <- resid(glmFit, type = "response")
+
+ggplot(titanic, aes(etaHat, e)) + 
+  geom_point() + 
+  geom_smooth() +
+  theme_classic() +
+  xlab("Linear Predictor") +
+  ylab("Raw Residual")
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Pearson Residuals}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      \emph{Pearson residuals}, $r_n$, are scaled raw residuals. 
+      \begin{align*}
+        r_n = \frac{e_n}{\sqrt{\hat{\pi}_n(1 - \hat{\pi}_n)}}
+      \end{align*}
+
+<<>>=
+## Calculate the Pearson residuals:
+titanic$r <- 
+  resid(glmFit, type = "pearson")
+@
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<echo = FALSE>>=
+ggplot(titanic, aes(etaHat, r)) + 
+  geom_point() + 
+  geom_smooth() +
+  theme_classic() +
+  xlab("Linear Predictor") +
+  ylab("Pearson Residual")
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Deviance Residuals}
+
+  \emph{Deviance residuals}, $d_n$, are derived directly from the objective function used to estimate the model. 
+
+  \begin{align*}
+    d_n = \mathrm{sign}(e_n) \sqrt{-2 \left[ Y_n \ln \left( \hat{\pi}_n \right) + (1 - Y_n) \ln \left( 1 - \hat{\pi}_n \right) \right]}
+  \end{align*}
+
+  \va
+
+  The \emph{residual deviance}, $D$, is the sum of squared deviance residuals.
+
+  \begin{align*}
+    D = \sum_{n = 1}^{N}d_n^2
+  \end{align*}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Deviance Residuals}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+## Calculate the deviance residuals:
+titanic$d <- 
+  resid(glmFit, type = "deviance")
+
+## Calculate the residual deviance:
+titanic$d^2 |> sum()
+summary(glmFit)$deviance
+@
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<echo = FALSE>>=
+ggplot(titanic, aes(etaHat, d)) + 
+  geom_point() + 
+  geom_smooth() +
+  theme_classic() +
+  xlab("Linear Predictor") +
+  ylab("Deviance Residual")
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Residual Deviance}
+
+  The residual deviance quantifies how well the model fits the data.
+
+<<>>=
+## Estimate a null model:
+nullFit <- glm(survived ~ 1, family = binomial, data = titanic)
+
+## Test the fit of our example model:
+anova(nullFit, glmFit, test = "Chisq")
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Diagnostics}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{A1: Linearity}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      Assumption 1 implies a linear relation between continuous predictors and the \emph{logit of the success probability}. 
+      \vc
+      \begin{itemize}
+        \item We can basically evaluate the linearity assumption using the same methods we applied with linear regression.
+          \vc
+        \item $\hat{Y} \rightarrow \hat{\eta} = \mathrm{logit}\left(\hat{\pi}\right)$
+      \end{itemize}
+ 
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+plot(glmFit, 1)
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{A1: Linearity}
+ 
+<<fig.asp = 0.6>>=
+car::crPlots(glmFit, terms = ~ age + fare)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{A2: Predictor Matrix Rank}
+
+  Assumption 2 implies two conditions:
+  \vc
+  \begin{enumerate}
+    \item $P < N$
+    \item No severe (multi)collinearity among the predictors
+  \end{enumerate}
+
+  \vb
+
+  We can quantify multicollinearity with the \emph{variance inflation factor} (VIF).
+
+<<>>=
+car::vif(glmFit)
+@
+
+  VIF $>$ 10 indicates severe multicollinearity.
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{A3: IID Binomial} 
+
+  Assumption 3 implies several conditions.
+  \vc
+  \begin{enumerate}
+    \item The outcome, $Y$, is binary.
+      \vc
+    \item The linear predictor, $\eta$, can explain all the systematic trends
+      in $\pi$.
+      \vc
+      \begin{itemize}
+        \item No residual clustering after accounting for $\mathbf{X}$.
+          \vc
+        \item No important variables omitted from $\mathbf{X}$.
+      \end{itemize}
+  \end{enumerate}
+
+  \vb
+
+  We can easily check the first condition with summary statistics.
+
+<<>>=
+levels(titanic$survived)
+table(titanic$survived)
+@
+
+ 
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Alternative Modeling Schemes}
+
+  If we have a non-binary, categorical outcome, we can use a different type of
+  model.
+  \vc
+  \begin{itemize}
+    \item Multiclass nominal variables: Multinomial logistic regression
+      \begin{itemize}
+        \item \src{nnet::multinom()}
+      \end{itemize}
+      \vc
+    \item Ordinal variables: Proportional odds logistic regression
+      \begin{itemize}
+        \item \src{MASS::polr()}
+      \end{itemize}
+      \vc
+    \item Counts: Poisson regression
+      \begin{itemize}
+        \item \src{glm()} with \src{family = 'poisson'}
+      \end{itemize}
+  \end{itemize}
+
+  \vb
+
+  The binomial distribution (and logistic regression) is also appropriate for modeling the proportion of successes in
+  $N$ trials.
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{A3: Clustering}
+
+  We can check for residual clustering by calculating the ICC using deviance residuals.
+
+<<>>=
+## Check for residual dependence induced by 'class':
+ICC::ICCbare(x = titanic$class, y = resid(glmFit, type = "deviance"))
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Computational Considerations}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{Computational Considerations}
+
+  In addition to the preceding statistical assumptions, we must satisfy three computational requirements that were not
+  necessary in linear regression.
+  \vb
+  \begin{enumerate}
+    \item The sample size is large enough to support the necessary numerical estimation.
+      \vc
+    \item The outcome classes are sufficiently balanced.
+      \vc
+    \item There is no perfect prediction.
+  \end{enumerate}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+
+\begin{frame}[fragile]{Sufficient Sample Size}
+
+  Logistic regression models are estimated with numerical methods, so we need larger samples than we would for linear
+  regression models.
+  \vc
+  \begin{itemize}
+    \item The sample size requirements increase with model complexity.
+  \end{itemize}
+
+  \vb
+
+  Some suggested rules of thumb:
+  \vc
+  \begin{itemize}
+    \item 10 cases for each predictor \citep{agresti:2018}
+      \vc
+    \item $N = 10P / \pi_0$ \citep{peduzziEtAl:1996}
+      \begin{itemize}
+        \item $P$: Number of predictors
+        \item $\pi_0$: Proportion of the minority class 
+      \end{itemize}
+      \vc
+    \item $N = 100 + 50P$ \citep{bujangEtAl:2018}
+  \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Balanced Outcomes}
+
+  The logistic regression may not perform well when the outcome classes are severely imbalanced.
+
+<<>>=
+with(titanic, table(survived) / length(survived))
+@
+
+We have a few possible solutions for problematic imbalance:
+\vc
+\begin{itemize}
+  \item Down-sampling the majority class
+    \vc
+  \item Up-sampling the minority class
+    \vc
+  \item Use weights when estimating the logistic regression model 
+    \begin{itemize}
+      \item \src{weights} argument in \src{glm()}
+    \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Perfect Prediction}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      We don't actually want to perfectly predict class membership.
+      \vc
+      \begin{itemize}
+        \item The model cannot estimate with perfectly separable classes.
+      \end{itemize}
+      \vb
+      Model regularization (e.g., ridge or LASSO penalty) may help.
+      \vc
+      \begin{itemize}
+        \item \src{glmnet::glmnet()}
+      \end{itemize}
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<echo = FALSE>>=
+beta <- c(-5.5, 1)
+x    <- runif(100, 0, 12)
+eta  <- beta[1] + beta[2] * x
+pi   <- exp(eta) / (1 + exp(eta))
+y    <- rbinom(100, 1, pi)
+
+dat1 <- data.frame(x, y)
+
+gg0(x = dat1$x, y = dat1$y) +
+  xlab("Hours of Study") +
+  ylab("Probability of Passing") +
+  geom_smooth(method = "glm", 
+              se = FALSE, 
+              method.args = list(family = "binomial")
+  )
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\subsection{Influential Cases}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Influential Cases}
+
+  As with linear regression, we need to deal with any overly influential cases. 
+  \vc
+  \begin{itemize}
+    \item We can use the linear predictor values to calculate Cook's Distances.
+      \vc
+    \item Any cases that exerts undue influence on the linear predictor will have the same effect of the predicted
+      success probabilities.
+  \end{itemize}
+
+\end{frame}
+
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Influential Cases}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+cooks.distance(glmFit) |> plot()
+@
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+plot(glmFit, 4)
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\begin{frame}{References}
+
+  \bibliographystyle{apacite}
+  \bibliography{../../../bibtex/ftds_refs.bib}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\end{document}

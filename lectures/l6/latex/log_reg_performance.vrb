@@ -1,0 +1,47 @@
+\frametitle{Threshold Selection}
+
+  We can use numerical methods to estimate an optimal threshold value.
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hldef{(OptimalCutpoints)}
+
+\hldef{ocOut} \hlkwb{<-} \hlkwd{optimal.cutpoints}\hldef{(}\hlkwc{X} \hldef{=} \hlsng{"piHat"}\hldef{,}
+                           \hlkwc{status} \hldef{=} \hlsng{"survived"}\hldef{,}
+                           \hlkwc{tag.healthy} \hldef{=} \hlsng{"no"}\hldef{,}
+                           \hlkwc{data} \hldef{= titanic,}
+                           \hlkwc{method} \hldef{=} \hlsng{"ROC01"}
+                           \hldef{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\pagebreak
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{partSummary}\hldef{(ocOut,} \hlopt{-}\hlnum{1}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+Area under the ROC curve (AUC):  0.83 (0.802, 0.858)
+
+CRITERION: ROC01
+Number of optimal cutoffs: 1
+
+                     Estimate
+cutoff              0.2360978
+Se                  0.7543860
+Sp                  0.7761468
+PPV                 0.6789474
+NPV                 0.8343195
+DLR.Positive        3.3700029
+DLR.Negative        0.3164531
+FP                122.0000000
+FN                 84.0000000
+Optimal criterion   0.1104365
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+

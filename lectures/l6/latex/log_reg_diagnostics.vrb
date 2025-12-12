@@ -1,0 +1,39 @@
+\frametitle{Influential Cases}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{cooks.distance}\hldef{(glmFit) |>} \hlkwd{plot}\hldef{()}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/diagnostics-unnamed-chunk-17-1}
+
+}
+
+
+\end{knitrout}
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hldef{(glmFit,} \hlnum{4}\hldef{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/diagnostics-unnamed-chunk-18-1}
+
+}
+
+
+\end{knitrout}
+
+    \end{column}
+  \end{columns}
+

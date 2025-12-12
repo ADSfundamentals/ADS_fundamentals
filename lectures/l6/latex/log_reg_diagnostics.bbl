@@ -1,0 +1,87 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Agresti%
+}{%
+Agresti%
+}{%
+{\protect \APACyear {2018}}%
+}]{%
+agresti:2018}
+\APACinsertmetastar {%
+agresti:2018}%
+\begin{APACrefauthors}%
+Agresti, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2018}.
+\newblock
+\APACrefbtitle {An introduction to categorical data analysis} {An introduction
+  to categorical data analysis}.
+\newblock
+\APACaddressPublisher{Hoboken, NJ}{John Wiley \& Sons}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Bujang%
+, Omar%
+\BCBL {}\ \BBA {} Baharum%
+}{%
+Bujang%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+bujangEtAl:2018}
+\APACinsertmetastar {%
+bujangEtAl:2018}%
+\begin{APACrefauthors}%
+Bujang, M\BPBI A.%
+, Omar, E\BPBI D.%
+\BCBL {}\ \BBA {} Baharum, N\BPBI A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A review on sample size determination for Cronbach’s
+  alpha test: a simple guide for researchers} {A review on sample size
+  determination for cronbach’s alpha test: a simple guide for
+  researchers}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{The Malaysian Journal of Medical Sciences}{25}{6}{85}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Peduzzi%
+, Concato%
+, Kemper%
+, Holford%
+\BCBL {}\ \BBA {} Feinstein%
+}{%
+Peduzzi%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1996}}%
+}]{%
+peduzziEtAl:1996}
+\APACinsertmetastar {%
+peduzziEtAl:1996}%
+\begin{APACrefauthors}%
+Peduzzi, P.%
+, Concato, J.%
+, Kemper, E.%
+, Holford, T\BPBI R.%
+\BCBL {}\ \BBA {} Feinstein, A\BPBI R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1996}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A simulation study of the number of events per variable
+  in logistic regression analysis} {A simulation study of the number of events
+  per variable in logistic regression analysis}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Clinical Epidemiology}{49}{12}{1373--1379}.
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

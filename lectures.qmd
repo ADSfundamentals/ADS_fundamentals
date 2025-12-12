@@ -44,6 +44,9 @@ Generalized Linear Models & Logistic Regression
 
 Logistic Regression Assumptions & Assessing Classification Performance
 
+- [Assumption \& Diagnostics Slides](lectures/l6/log_reg_diagnostics.pdf)
+- [Classification Performance Slides](lectures/l6/log_reg_performance.pdf)
+
 ## Week 7
 
 Wrap Up & Review

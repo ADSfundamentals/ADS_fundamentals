@@ -1,39 +1,23 @@
 \frametitle{Influential Cases}
 
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{cooks.distance}\hldef{(glmFit) |>} \hlkwd{plot}\hldef{()}
+\hlkwd{partSummary}\hldef{(glmFit,} \hlnum{4}\hldef{)}
 \end{alltt}
-\end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figure/diagnostics-unnamed-chunk-17-1}
-
-}
-
-
-\end{knitrout}
-
-    \end{column}
-    \begin{column}{0.5\textwidth}
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+    Null deviance: 1182.8  on 886  degrees of freedom
+Residual deviance:  881.4  on 883  degrees of freedom
+AIC: 889.4
+\end{verbatim}
 \begin{alltt}
-\hlkwd{plot}\hldef{(glmFit,} \hlnum{4}\hldef{)}
+\hlkwd{partSummary}\hldef{(glmFit3,} \hlnum{4}\hldef{)}
 \end{alltt}
+\begin{verbatim}
+    Null deviance: 1179.8  on 883  degrees of freedom
+Residual deviance:  870.8  on 880  degrees of freedom
+AIC: 878.8
+\end{verbatim}
 \end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figure/diagnostics-unnamed-chunk-18-1}
-
-}
-
-
 \end{knitrout}
-
-    \end{column}
-  \end{columns}
 

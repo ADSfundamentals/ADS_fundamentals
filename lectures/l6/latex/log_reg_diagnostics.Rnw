@@ -274,7 +274,7 @@ knit_theme$set('edit-kwrite')
   
 <<>>=
 ## Read the data:
-titanic <- readRDS(here::here("data", "titanic.rds"))
+titanic <- titanic0 <- readRDS(here::here("data", "titanic.rds"))
 
 ## Estimate the logistic regression model:
 glmFit <- glm(survived ~ age + sex + fare,
@@ -504,9 +504,22 @@ plot(glmFit, 1)
 
 \begin{frame}[fragile]{A1: Linearity}
  
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
 <<fig.asp = 0.6>>=
-car::crPlots(glmFit, terms = ~ age + fare)
+car::crPlot(glmFit, "age")
 @
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<fig.asp = 0.6>>=
+car::crPlot(glmFit, "fare")
+@
+
+    \end{column}
+  \end{columns}
 
 \end{frame}
 
@@ -768,6 +781,165 @@ plot(glmFit, 4)
 
     \end{column}
   \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Influential Cases}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+car::crPlots(glmFit, "fare")
+@
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+dfbetas(glmFit)[ , "fare"] |> plot()
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Influential Cases}
+
+<<>>=
+(maxCD  <- cooks.distance(glmFit) |> which.max())
+(maxDFB <- dfbetas(glmFit)[ , "fare"] |> abs() |> which.max())
+
+titanic0[maxDFB, ]
+@
+
+\newpage
+
+<<>>=
+# View the largest 12 fares:
+sortFare <- titanic$fare |> sort(decreasing = TRUE)
+head(sortFare, 12)
+
+# Find the observation number for the three largest fares:
+moneyBags <- which(titanic$fare %in% sortFare[1:3])
+
+# Refit the model excluding the cases with the three largest fares:
+titanic2 <- titanic[-moneyBags, ]
+glmFit2 <- update(glmFit, data = titanic2)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Influential Cases}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+car::crPlots(glmFit2, "age")
+@
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+car::crPlots(glmFit2, "fare")
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Influential Cases}
+
+<<>>=
+summary(glmFit)$coef |> round(3)
+summary(glmFit2)$coef |> round(3)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Influential Cases}
+
+<<>>=
+partSummary(glmFit, 4)
+partSummary(glmFit2, 4)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile, allowframebreaks]{Influential Cases}
+
+<<>>=
+# Find the three most influential cases:
+mostInf <- which(cooks.distance(glmFit) > 0.04)
+
+# View the three most influential cases:
+titanic0[mostInf, ]
+
+# Refit the model excluding the three most influential cases:
+titanic3 <- titanic[-mostInf, ]
+glmFit3 <- update(glmFit, data = titanic3)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Influential Cases}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+car::crPlots(glmFit3, "age")
+@
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<>>=
+car::crPlots(glmFit3, "fare")
+@
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Influential Cases}
+
+<<>>=
+summary(glmFit)$coef |> round(3)
+summary(glmFit3)$coef |> round(3)
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Influential Cases}
+
+<<>>=
+partSummary(glmFit, 4)
+partSummary(glmFit3, 4)
+@
 
 \end{frame}
 

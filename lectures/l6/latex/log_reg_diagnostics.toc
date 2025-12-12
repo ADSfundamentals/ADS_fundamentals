@@ -1,6 +1,0 @@
-\beamer@sectionintoc {1}{Statistical Assumptions}{3}{0}{1}
-\beamer@sectionintoc {2}{Diagnostics}{9}{0}{2}
-\beamer@subsectionintoc {2}{1}{Residuals}{10}{0}{2}
-\beamer@subsectionintoc {2}{2}{Checking Assumptions}{16}{0}{2}
-\beamer@sectionintoc {3}{Computational Considerations}{22}{0}{3}
-\beamer@sectionintoc {4}{Influential Cases}{29}{0}{4}

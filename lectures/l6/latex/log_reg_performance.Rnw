@@ -12,9 +12,7 @@
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{listings}
-% \usepackage{xspace}
 \usepackage{tcolorbox}
-% \tcbuselibrary{listings}
 \usepackage{hyperref}
 \usepackage{caption}
 \captionsetup{labelformat=empty}
@@ -78,13 +76,8 @@ library(dplyr)
 library(magrittr)
 library(ggplot2)
 library(xtable)
-library(kableExtra)
-library(readr)
 library(pROC)
-library(regclass)
 library(caret)
-library(robust)
-library(ROCR)
 library(OptimalCutpoints)
 
 source(here::here("code", "supportFunctions.R"))
@@ -92,7 +85,7 @@ source(here::here("code", "supportFunctions.R"))
 options(width = 60)
 opts_chunk$set(size = "footnotesize",
                fig.align = "center",
-               fig.path = "figure/diagnostics-",
+               fig.path = "figure/performance-",
                message = FALSE,
                warning = FALSE,
                comment = "",
@@ -121,7 +114,7 @@ knit_theme$set('edit-kwrite')
 
 \section{Confusion Matrix}
 
-%----------------------------------------------------------------------------------------------------------------------%
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile, allowframebreaks]{Example Model}
 
@@ -149,7 +142,7 @@ partSummary(glmFit, -1)
 
 \end{frame}
 
-%----------------------------------------------------------------------------------------------------------------------%
+\watermarkon %---------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile]{Confusion Matrix}
 
@@ -400,7 +393,7 @@ partSummary(ocOut, -1)
 \begin{frame}[fragile]{Optimized Confusion Matrix}
 
 <<>>=
-library(caret)
+## Extract the optimal cutpoint:
 optThresh <- ocOut$ROC01$Global$optimal.cutoff$cutoff
 
 ## Add optimized predictions to the dataset:
@@ -417,8 +410,54 @@ cMat2$table
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{Optimized Confusion Matrix}
+\begin{frame}[fragile]{Compare Thresholds}
 
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+<<echo = FALSE, results = "asis">>=
+cTab <- matrix(cMat$table, 2, 2,
+               dimnames =  list(c("Died", "Survived"), c("Died", "Survived"))
+               ) |> 
+  xtable(caption ="Naive Threshold", digits = 0)
+
+adds <- list(pos = list(0, 0),
+             command = c("& \\multicolumn{2}{c}{True} \\\\\n",
+                         "Predicted & Died & Survived \\\\\n")
+             )
+
+print(cTab, add.to.row = adds, include.colnames = FALSE)
+@
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<echo = FALSE, results = "asis">>=
+cTab2 <- matrix(cMat2$table, 2, 2,
+               dimnames =  list(c("Died", "Survived"), c("Died", "Survived"))
+               ) |> 
+  xtable(caption ="Optimized Threshold", digits = 0)
+
+adds <- list(pos = list(0, 0),
+             command = c("& \\multicolumn{2}{c}{True} \\\\\n",
+                         "Predicted & Died & Survived \\\\\n")
+             )
+
+print(cTab2, add.to.row = adds, include.colnames = FALSE)
+@
+
+    \end{column}
+  \end{columns}
+
+<<echo = FALSE, results = "asis">>=
+statMat <- rbind(
+  c(cMat$overall[1], cMat$byClass[1:4]),
+  c(cMat2$overall[1], cMat2$byClass[1:4])
+)
+dimnames(statMat) <- list(c("Naive", "Optimized"), c("Acc", "Sen", "Spe", "PPV", "NPV"))
+
+xtable(statMat, digits = 3)
+@
 
 \end{frame}
 
@@ -498,6 +537,8 @@ cee2 <- LogLoss(y_pred = pi2, y_true = yTrue)
 
 \begin{frame}[fragile]{CEE Example}
 
+  Fit an alternative model by adding ticket class to our running example.
+
 <<>>=
 glmFit2 <- update(glmFit, ". ~ . + class")
 partSummary(glmFit2, 2:4)
@@ -508,6 +549,8 @@ partSummary(glmFit2, 2:4)
 %----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile]{CEE Example}
+
+  Use the CEE to compare models.
 
 <<>>=
 library(MLmetrics)
@@ -521,6 +564,12 @@ LogLoss(y_pred = predict(glmFit, type = "response"), y_true = survived)
 # Compute the CEE for the larger model:
 LogLoss(y_pred = predict(glmFit2, type = "response"), y_true = survived)
 @
+
+Don't get too excited.
+  \begin{itemize}
+    \item We're using fitted values, not out-of-sample predictions.
+    \item The larger model will always have a lower training-set CEE.
+  \end{itemize}
 
 \end{frame}
 

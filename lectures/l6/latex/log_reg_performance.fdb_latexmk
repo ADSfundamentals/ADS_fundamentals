@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex log_reg_performance"] 1765535499.77824 "log_reg_performance.aux" "log_reg_performance.bbl" "log_reg_performance" 1765535502.07761 0
+["bibtex log_reg_performance"] 1765562882.14008 "log_reg_performance.aux" "log_reg_performance.bbl" "log_reg_performance" 1765562884.93054 0
   "../../../bibtex/ftds_refs.bib" 1764686051.57766 14192 3f5242c178ad30ad33cdf0b26d80851a ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/apacite/apacite.bst" 1374530685 141073 9d7b79dbf9d91133318126032cff8c27 ""
-  "log_reg_performance.aux" 1765535501.76528 3890 4359edac93957cddf6542d3081d4e6db "pdflatex"
+  "log_reg_performance.aux" 1765562884.51678 4274 ff73f0b06f1069d385ef69835c7a03d9 "pdflatex"
   (generated)
   "log_reg_performance.bbl"
   "log_reg_performance.blg"
   (rewritten before read)
-["pdflatex"] 1765535499.87137 "log_reg_performance.tex" "log_reg_performance.pdf" "log_reg_performance" 1765535502.07837 0
+["pdflatex"] 1765562882.2564 "log_reg_performance.tex" "log_reg_performance.pdf" "log_reg_performance" 1765562884.9314 0
   "/etc/texmf/web2c/texmf.cnf" 1742978687.48284 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/merriweather/merriwthr_jjwbah.enc" 1598908638 2968 c2e0debb5d656340ccb807497bea1e4e ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/opensans/a_iz27ck.enc" 1561498186 2880 c07f4a1ce14a88d4ebe18f1c7b4592c1 ""
@@ -286,16 +286,16 @@
   "beamerinnerthemeuufancy.sty" 1764686052.27042 6815 ec5b2987a93ad93c71da71658539311b ""
   "beamerouterthemeuulines.sty" 1764686052.27144 5888 f51a7c8b0256fb2bbb01446783b63f0d ""
   "beamerthemeUtrecht.sty" 1764686052.27233 2996 889501d3b56d915d01a7a6db4e1db7f9 ""
-  "figure/diagnostics-unnamed-chunk-9-1.pdf" 1765535494.51346 7254 b5b35b241f06da2d865885e4b4c308b1 ""
+  "figure/diagnostics-unnamed-chunk-9-1.pdf" 1765562879.32913 7254 a4918630d5bc5770fe27d7d266c707c1 ""
   "images/logoUU.png" 1764686052.29085 36397 40ba3dfc2f55a89f4d9018986beac89f ""
   "images/watermarkUU.png" 1764686052.29204 26960 3867cf5768c64bb104228863b6cea565 ""
-  "log_reg_performance.aux" 1765535501.76528 3890 4359edac93957cddf6542d3081d4e6db "pdflatex"
-  "log_reg_performance.bbl" 1765535499.86319 626 f1f653502e5eec22842d7e5788bad464 "bibtex log_reg_performance"
-  "log_reg_performance.nav" 1765535501.76752 2427 a7f9cedd48d8ee092d8022223db4c370 "pdflatex"
-  "log_reg_performance.out" 1765535501.76674 519 98e5d4625092d1122c5a75154b62017e "pdflatex"
-  "log_reg_performance.tex" 1765535494.70332 17527 ef9e2f771144d5763cd667e00eae355a ""
-  "log_reg_performance.toc" 1765535501.76757 167 36b246990a10183ddc352616420e1013 "pdflatex"
-  "log_reg_performance.vrb" 1765535501.589 1444 6412d038ff1eb25d2909dfcbc966d80a "pdflatex"
+  "log_reg_performance.aux" 1765562884.51678 4274 ff73f0b06f1069d385ef69835c7a03d9 "pdflatex"
+  "log_reg_performance.bbl" 1765562882.24701 626 f1f653502e5eec22842d7e5788bad464 "bibtex log_reg_performance"
+  "log_reg_performance.nav" 1765562884.52014 2703 ae76710dc6189a0682b65ecf980b795e "pdflatex"
+  "log_reg_performance.out" 1765562884.51902 519 98e5d4625092d1122c5a75154b62017e "pdflatex"
+  "log_reg_performance.tex" 1765562879.55968 21266 72448883aee1e877bd7bf6a4fa07293d ""
+  "log_reg_performance.toc" 1765562884.52024 167 c4bd2290eb7ea6a2f4256388b34daa73 "pdflatex"
+  "log_reg_performance.vrb" 1765562884.43258 994 62d9543779aeffbd63a5aa6c8b6cd7f9 "pdflatex"
   (generated)
   "log_reg_performance.aux"
   "log_reg_performance.log"

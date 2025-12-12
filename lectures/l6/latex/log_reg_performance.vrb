@@ -1,46 +1,25 @@
-\frametitle{Threshold Selection}
-
-  We can use numerical methods to estimate an optimal threshold value.
+\frametitle{CEE Example}
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{library}\hldef{(OptimalCutpoints)}
+\hlkwd{library}\hldef{(MLmetrics)}
 
-\hldef{ocOut} \hlkwb{<-} \hlkwd{optimal.cutpoints}\hldef{(}\hlkwc{X} \hldef{=} \hlsng{"piHat"}\hldef{,}
-                           \hlkwc{status} \hldef{=} \hlsng{"survived"}\hldef{,}
-                           \hlkwc{tag.healthy} \hldef{=} \hlsng{"no"}\hldef{,}
-                           \hlkwc{data} \hldef{= titanic,}
-                           \hlkwc{method} \hldef{=} \hlsng{"ROC01"}
-                           \hldef{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
+\hlcom{# Create a numeric version of our outcome variable:}
+\hldef{survived} \hlkwb{<-} \hlkwd{ifelse}\hldef{(titanic}\hlopt{$}\hldef{survived} \hlopt{==} \hlsng{"yes"}\hldef{,} \hlnum{1}\hldef{,} \hlnum{0}\hldef{)}
 
-\pagebreak
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{partSummary}\hldef{(ocOut,} \hlopt{-}\hlnum{1}\hldef{)}
+\hlcom{# Compute the CEE for the smaller model:}
+\hlkwd{LogLoss}\hldef{(}\hlkwc{y_pred} \hldef{=} \hlkwd{predict}\hldef{(glmFit,} \hlkwc{type} \hldef{=} \hlsng{"response"}\hldef{),} \hlkwc{y_true} \hldef{= survived)}
 \end{alltt}
 \begin{verbatim}
-Area under the ROC curve (AUC):  0.83 (0.802, 0.858)
-
-CRITERION: ROC01
-Number of optimal cutoffs: 1
-
-                     Estimate
-cutoff              0.2360978
-Se                  0.7543860
-Sp                  0.7761468
-PPV                 0.6789474
-NPV                 0.8343195
-DLR.Positive        3.3700029
-DLR.Negative        0.3164531
-FP                122.0000000
-FN                 84.0000000
-Optimal criterion   0.1104365
+[1] 0.496846
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Compute the CEE for the larger model:}
+\hlkwd{LogLoss}\hldef{(}\hlkwc{y_pred} \hldef{=} \hlkwd{predict}\hldef{(glmFit2,} \hlkwc{type} \hldef{=} \hlsng{"response"}\hldef{),} \hlkwc{y_true} \hldef{= survived)}
+\end{alltt}
+\begin{verbatim}
+[1] 0.451835
 \end{verbatim}
 \end{kframe}
 \end{knitrout}

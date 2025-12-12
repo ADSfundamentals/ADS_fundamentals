@@ -1,5 +1,7 @@
 \frametitle{Influential Cases}
 
+  The deviances are largely unchanged.
+
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.878, 0.918, 0.933}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -11,13 +13,18 @@ Residual deviance:  881.4  on 883  degrees of freedom
 AIC: 889.4
 \end{verbatim}
 \begin{alltt}
-\hlkwd{partSummary}\hldef{(glmFit3,} \hlnum{4}\hldef{)}
+\hlkwd{partSummary}\hldef{(glmFit2,} \hlnum{4}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-    Null deviance: 1179.8  on 883  degrees of freedom
-Residual deviance:  870.8  on 880  degrees of freedom
-AIC: 878.8
+    Null deviance: 1177.04  on 883  degrees of freedom
+Residual deviance:  881.34  on 880  degrees of freedom
+AIC: 889.34
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
+
+  The large-fare cases look weird, but they aren't influential.
+  \begin{itemize}
+    \item These cases follow the extrapolated trend implied by the other data.
+  \end{itemize}
 

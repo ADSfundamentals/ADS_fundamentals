@@ -614,6 +614,10 @@ OUTPUT log_reg_performance.vrb
 INPUT ./log_reg_performance.vrb
 INPUT ./log_reg_performance.vrb
 INPUT log_reg_performance.vrb
+OUTPUT log_reg_performance.vrb
+INPUT ./log_reg_performance.vrb
+INPUT ./log_reg_performance.vrb
+INPUT log_reg_performance.vrb
 INPUT ./images/watermarkUU.png
 INPUT ./images/watermarkUU.png
 INPUT ./images/watermarkUU.png
@@ -640,6 +644,14 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/stxscr.tfm
 INPUT ./images/watermarkUU.png
 INPUT ./images/watermarkUU.png
 INPUT ./images/watermarkUU.png
+OUTPUT log_reg_performance.vrb
+INPUT ./log_reg_performance.vrb
+INPUT ./log_reg_performance.vrb
+INPUT log_reg_performance.vrb
+OUTPUT log_reg_performance.vrb
+INPUT ./log_reg_performance.vrb
+INPUT ./log_reg_performance.vrb
+INPUT log_reg_performance.vrb
 INPUT ./log_reg_performance.bbl
 INPUT ./log_reg_performance.bbl
 INPUT log_reg_performance.bbl

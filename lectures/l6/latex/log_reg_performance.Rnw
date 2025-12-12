@@ -395,6 +395,33 @@ partSummary(ocOut, -1)
 
 \end{frame}
 
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Optimized Confusion Matrix}
+
+<<>>=
+library(caret)
+optThresh <- ocOut$ROC01$Global$optimal.cutoff$cutoff
+
+## Add optimized predictions to the dataset:
+titanic %<>%
+  mutate(yHat2 = as.factor(ifelse(piHat <= optThresh, "no", "yes")))
+
+## Compute the optimized confusion matrix:
+cMat2 <- titanic %$% confusionMatrix(data = yHat2, reference = survived)
+
+cMat2$table
+@
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Optimized Confusion Matrix}
+
+
+\end{frame}
+
 \watermarkon %---------------------------------------------------------------------------------------------------------%
 
 \section{Alternative Performance Measures}
@@ -419,6 +446,7 @@ partSummary(ocOut, -1)
   \begin{itemize}
   \item The CEE is sensitive to classification confidence.
   \item Stronger predictions are more heavily weighted.
+  \item The CEE doesn't depend on the classification threshold
   \end{itemize}
   
 \end{frame}
@@ -466,7 +494,37 @@ cee2 <- LogLoss(y_pred = pi2, y_true = yTrue)
   
 \end{frame}
 
+\watermarkoff %--------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{CEE Example}
+
+<<>>=
+glmFit2 <- update(glmFit, ". ~ . + class")
+partSummary(glmFit2, 2:4)
+@
+
+\end{frame}
+
 %----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{CEE Example}
+
+<<>>=
+library(MLmetrics)
+
+# Create a numeric version of our outcome variable:
+survived <- ifelse(titanic$survived == "yes", 1, 0)
+
+# Compute the CEE for the smaller model:
+LogLoss(y_pred = predict(glmFit, type = "response"), y_true = survived)
+
+# Compute the CEE for the larger model:
+LogLoss(y_pred = predict(glmFit2, type = "response"), y_true = survived)
+@
+
+\end{frame}
+
+\watermarkon %---------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{References}
 

@@ -1,4 +1,4 @@
-%%% Title:    FTDS Lecture 6: Logistic Regression Diagnostics
+%%% Title:    FTDS Lecture 6.1: Logistic Regression Diagnostics
 %%% Author:   Kyle M. Lang & Mingyang Cai
 %%% Created:  2022-12-03
 %%% Modified: 2025-12-12
@@ -12,9 +12,7 @@
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{listings}
-% \usepackage{xspace}
 \usepackage{tcolorbox}
-% \tcbuselibrary{listings}
 \usepackage{hyperref}
 \usepackage{caption}
 \captionsetup{labelformat=empty}
@@ -80,12 +78,12 @@ library(ggplot2)
 library(xtable)
 library(kableExtra)
 library(readr)
-library(pROC)
-library(regclass)
+#library(pROC)
+#library(regclass)
 library(caret)
-library(robust)
-library(ROCR)
-library(OptimalCutpoints)
+#library(robust)
+#library(ROCR)
+#library(OptimalCutpoints)
 
 source(here::here("code", "supportFunctions.R"))
 
@@ -119,7 +117,7 @@ knit_theme$set('edit-kwrite')
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}{Recap: Model Definition}
+\begin{frame}<0>{Recap: Model Definition} % HIDDEN
 
   We define the logistic regression model as:
   \begin{align*}
@@ -139,7 +137,7 @@ knit_theme$set('edit-kwrite')
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}{Recap: Inverse Link Function}
+\begin{frame}<0>{Recap: Inverse Link Function} % HIDDEN
 
   In logistic regression, the inverse link function, $g^{-1}(\cdot)$, is the \emph{logistic function}:
   \begin{align*}
@@ -155,17 +153,13 @@ knit_theme$set('edit-kwrite')
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\sectionslide{Assumptions \& Diagnostics}
-
-%----------------------------------------------------------------------------------------------------------------------%
-
-\subsection{Statistical Assumptions}
+\section{Statistical Assumptions}
 
 %----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Assumptions of Logistic Regression}
 
-  The first two assumptions of logistic regression are shared with linear regression.
+  The first two assumptions are shared with linear regression.
   \vb
   \begin{enumerate}
   \item The model is linear in the parameters.
@@ -261,10 +255,6 @@ knit_theme$set('edit-kwrite')
 
 \end{frame}
 
-%----------------------------------------------------------------------------------------------------------------------%
-
-\subsection{Residuals}
-
 \watermarkoff %--------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile, allowframebreaks]{Example}
@@ -294,6 +284,14 @@ partSummary(glmFit, -1)
 \end{frame}
 
 \watermarkon %---------------------------------------------------------------------------------------------------------%
+
+\sectionslide{Diagnostics}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Residuals}
+
+%----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Raw Residuals}
 
@@ -471,7 +469,7 @@ anova(nullFit, glmFit, test = "Chisq")
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\subsection{Diagnostics}
+\subsection{Checking Assumptions}
 
 %----------------------------------------------------------------------------------------------------------------------%
 
@@ -507,14 +505,14 @@ plot(glmFit, 1)
   \begin{columns}
     \begin{column}{0.5\textwidth}
 
-<<fig.asp = 0.6>>=
+<<>>=
 car::crPlot(glmFit, "age")
 @
 
     \end{column}
     \begin{column}{0.5\textwidth}
 
-<<fig.asp = 0.6>>=
+<<>>=
 car::crPlot(glmFit, "fare")
 @
 
@@ -623,17 +621,16 @@ ICC::ICCbare(x = titanic$class, y = resid(glmFit, type = "deviance"))
 
 %----------------------------------------------------------------------------------------------------------------------%
 
-\subsection{Computational Considerations}
+\sectionslide{Computational Considerations}
 
 %----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}{Computational Considerations}
 
-  In addition to the preceding statistical assumptions, we must satisfy three computational requirements that were not
-  necessary in linear regression.
+  We must also satisfy three computational requirements that were not necessary in linear regression.
   \vb
   \begin{enumerate}
-    \item The sample size is large enough to support the necessary numerical estimation.
+    \item The sample size is large enough to support numerical estimation.
       \vc
     \item The outcome classes are sufficiently balanced.
       \vc
@@ -701,22 +698,52 @@ We have a few possible solutions for problematic imbalance:
 
 \begin{frame}[fragile]{Perfect Prediction}
 
+  We don't actually want to perfectly predict class membership.
+
+  \va
+
   \begin{columns}
     \begin{column}{0.5\textwidth}
 
-      We don't actually want to perfectly predict class membership.
-      \vc
-      \begin{itemize}
-        \item The model cannot estimate with perfectly separable classes.
-      \end{itemize}
-      \vb
-      Model regularization (e.g., ridge or LASSO penalty) may help.
-      \vc
-      \begin{itemize}
-        \item \src{glmnet::glmnet()}
-      \end{itemize}
+<<echo = FALSE>>=
+beta <- c(-5.5, 1)
+x    <- runif(100, 0, 12)
+eta  <- beta[1] + beta[2] * x
+pi   <- exp(eta) / (1 + exp(eta))
+y    <- rbinom(100, 1, pi)
+
+dat1 <- data.frame(x, y)
+
+gg0(x = dat1$x, y = dat1$y) +
+  xlab("Hours of Study") +
+  ylab("Probability of Passing")
+@
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<echo = FALSE>>=
+age  <- runif(300, 12, 24)
+vote <- ifelse(age >= 18, 1, 0)
+
+gg0(x = age, y = vote) +
+  xlab("Age") +
+  ylab("Probability of Voting Rights")
+@
 
     \end{column}
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Perfect Prediction}
+
+  We don't actually want to perfectly predict class membership.
+
+  \va
+
+  \begin{columns}
     \begin{column}{0.5\textwidth}
 
 <<echo = FALSE>>=
@@ -736,21 +763,45 @@ gg0(x = dat1$x, y = dat1$y) +
               method.args = list(family = "binomial")
   )
 @
+    \end{column}
+    \begin{column}{0.5\textwidth}
+
+<<echo = FALSE>>=
+age  <- runif(300, 12, 24)
+vote <- ifelse(age >= 18, 1, 0)
+
+gg0(x = age, y = vote) +
+  xlab("Age") +
+  ylab("Probability of Voting Rights") +
+  geom_line(color = "blue", linewidth = 1)
+@
 
     \end{column}
   \end{columns}
 
 \end{frame}
 
+%----------------------------------------------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Perfect Prediction}
+
+The model won't estimate correctly with perfectly separable classes.
+
+<<>>=
+glm(vote ~ age, family = "binomial") |> summary()
+@
+
+\end{frame}
+
 \watermarkon %---------------------------------------------------------------------------------------------------------%
 
-\subsection{Influential Cases}
+\sectionslide{Influential Cases}
 
 %----------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile]{Influential Cases}
 
-  As with linear regression, we need to deal with any overly influential cases. 
+  As with linear regression, we need to deal with any influential cases. 
   \vc
   \begin{itemize}
     \item We can use the linear predictor values to calculate Cook's Distances.
@@ -788,6 +839,8 @@ plot(glmFit, 4)
 
 \begin{frame}[fragile]{Influential Cases}
 
+  Recall the weirdly large ticket fares we saw earlier.
+
   \begin{columns}
     \begin{column}{0.5\textwidth}
 
@@ -811,14 +864,21 @@ dfbetas(glmFit)[ , "fare"] |> plot()
 
 \begin{frame}[fragile, allowframebreaks]{Influential Cases}
 
-<<>>=
-(maxCD  <- cooks.distance(glmFit) |> which.max())
-(maxDFB <- dfbetas(glmFit)[ , "fare"] |> abs() |> which.max())
+  Let's see if the large fares are influential.
 
-titanic0[maxDFB, ]
+<<>>=
+# Find the three most influential cases:
+mostInf <- which(cooks.distance(glmFit) > 0.04)
+
+# View the problematic case:
+titanic0[mostInf, ]
 @
 
-\newpage
+Hmm...the most influential cases don't have especially large fares.
+
+\framebreak
+
+Let's turn our attention to the high-fare cases.
 
 <<>>=
 # View the largest 12 fares:
@@ -827,10 +887,17 @@ head(sortFare, 12)
 
 # Find the observation number for the three largest fares:
 moneyBags <- which(titanic$fare %in% sortFare[1:3])
+@
+
+\framebreak
+
+<<>>=
+# View the cases with the largest fares:
+titanic0[moneyBags, ]
 
 # Refit the model excluding the cases with the three largest fares:
 titanic2 <- titanic[-moneyBags, ]
-glmFit2 <- update(glmFit, data = titanic2)
+glmFit2  <- update(glmFit, data = titanic2)
 @
 
 \end{frame}
@@ -862,6 +929,8 @@ car::crPlots(glmFit2, "fare")
 
 \begin{frame}[fragile]{Influential Cases}
 
+  Nothing much happening with the coefficient estimates.
+
 <<>>=
 summary(glmFit)$coef |> round(3)
 summary(glmFit2)$coef |> round(3)
@@ -873,73 +942,17 @@ summary(glmFit2)$coef |> round(3)
 
 \begin{frame}[fragile]{Influential Cases}
 
+  The deviances are largely unchanged.
+
 <<>>=
 partSummary(glmFit, 4)
 partSummary(glmFit2, 4)
 @
 
-\end{frame}
-
-%----------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile, allowframebreaks]{Influential Cases}
-
-<<>>=
-# Find the three most influential cases:
-mostInf <- which(cooks.distance(glmFit) > 0.04)
-
-# View the three most influential cases:
-titanic0[mostInf, ]
-
-# Refit the model excluding the three most influential cases:
-titanic3 <- titanic[-mostInf, ]
-glmFit3 <- update(glmFit, data = titanic3)
-@
-
-\end{frame}
-
-%----------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile]{Influential Cases}
-
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-
-<<>>=
-car::crPlots(glmFit3, "age")
-@
-
-    \end{column}
-    \begin{column}{0.5\textwidth}
-
-<<>>=
-car::crPlots(glmFit3, "fare")
-@
-
-    \end{column}
-  \end{columns}
-
-\end{frame}
-
-%----------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile]{Influential Cases}
-
-<<>>=
-summary(glmFit)$coef |> round(3)
-summary(glmFit3)$coef |> round(3)
-@
-
-\end{frame}
-
-%----------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile]{Influential Cases}
-
-<<>>=
-partSummary(glmFit, 4)
-partSummary(glmFit3, 4)
-@
+  The large-fare cases look weird, but they aren't influential.
+  \begin{itemize}
+    \item These cases follow the extrapolated trend implied by the other data.
+  \end{itemize}
 
 \end{frame}
 

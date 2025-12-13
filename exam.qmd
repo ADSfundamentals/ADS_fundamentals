@@ -56,7 +56,7 @@ Of course, you should also be able to do basic arithmetic operations that are to
 
 -   The lecture on Monday January 12 will be completely devoted to a recap of the material and there will be plenty of time to answer all your questions. Send your questions in advance to Dr. Lang if you want to make sure you get an extensive answer!
 
--   A link to a practice exam will be provided later.
+-   You can find the practice exam [here](https://kylelang.shinyapps.io/practice_exam).
 
 ## What can I expect regarding the exam?
 

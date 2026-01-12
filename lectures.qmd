@@ -40,13 +40,15 @@ Generalized Linear Models & Logistic Regression
 - [GLM & Logistic Regression Lecture Slides](lectures/l5/glm.pdf)
 - [Extra: Extended Example Slides](lectures/l5/extra.pdf)
 
-## Week 6
+## Week 6 {#w6}
 
 Logistic Regression Assumptions & Assessing Classification Performance
 
 - [Assumption \& Diagnostics Slides](lectures/l6/log_reg_diagnostics.pdf)
 - [Classification Performance Slides](lectures/l6/log_reg_performance.pdf)
 
-## Week 7
+## Week 7 {#w7}
 
 Wrap Up & Review
+
+- [Lecture Slides](lectures/l7/summary.pdf)

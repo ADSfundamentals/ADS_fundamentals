@@ -2,35 +2,35 @@
 title: "Assignments"
 ---
 
-Both assignments are group assignments. We will form groups of 4 at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.
+Both assignments are group assignments. We will form groups of 3 or 4 students at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.
 
 In order to be assigned to a group, presence at the first meeting is crucial!
 
 You can use the same dataset for both assigments. The minimum requirement for the dataset is that it contains:
 
--   One continuous outcome variable (for linear regression)
+- One continuous outcome variable (for linear regression)
 
--   One binary outcome variable (for logistic regression)
+- One binary outcome variable (for logistic regression)
 
--   Two continuous predictor variables
+- Two continuous predictor variables
 
--   One categorical predictor variable
+- One categorical predictor variable
 
 ## Assignment 1: Linear regression
 
--   **Type of assignment:** Written report in Quarto.
+- **Type of assignment:** Written report in Quarto.
 
--   **Grading:** 25% of your final grade
+- **Grading:** 25% of your final grade
 
--   **Deadline:** Monday December 8, 15:00
+- **Deadline:** Friday December 11, 16:00
 
--   **What to submit:** A ZIP archive containing the complete R project (dataset, .qmd, HTML)
+- **What to submit:** A ZIP archive containing the complete R project (dataset, .qmd, HTML)
 
--   **Where to submit:** [Here](https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN)
+- **Where to submit:** [Here](https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN)
 
--   **What is graded:** Only your .html file is graded, so make sure all code, comments and output are visible! **Carefully check if the compiled .html file in your ZIP archive is correct and complete before submitting!**
+- **What is graded:** Only your .html file is graded, so make sure all code, comments and output are visible! **Carefully check if the compiled .html file in your ZIP archive is self-contained, correct and complete before submitting!**
 
--   **Description:** For this assignment, you perform and report a multiple linear regression analysis in an Quarto text document. The assignment will be graded on the following six dimensions:
+- **Description:** For this assignment, you perform and report a multiple linear regression analysis in a Quarto text document. The assignment will be graded on the following six dimensions:
 
 1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
 
@@ -48,19 +48,19 @@ You can use the same dataset for both assigments. The minimum requirement for th
 
 Group assignment 2: Logistic regression
 
--   **Type of assignment:** Presentation and discussion with slides in Quarto
+- **Type of assignment:** Presentation and discussion with slides in Quarto
 
--   **Grading:** 25% of your final grade
+- **Grading:** 25% of your final grade
 
--   **Presentation:** WG meeting Thursday January 15, from 09:00 to 12:45. Prepare a presentation of 15 min. and expect 5 min. of questions from students and teachers.
+- **Presentation:** WG meeting Tuesday January 19, from 13:15 to 17:00. Prepare a presentation of 15 min. and expect 5 min. of questions from students and teachers.
 
--   **Deadline:** Wednesday January 14, 15:00. Hand in your ZIP archive including your slides. Your WG instructor will set the slides up for the presentations on Thursday. **Carefully check if the compiled .html file in your ZIP archive is correct and complete before submitting!**
+- **Deadline:** Monday January 18, 15:00. Hand in your ZIP archive including your slides. Your WG instructor will set the slides up for the presentations on Thursday. **Carefully check if the compiled .html file in your ZIP archive is self-contained, correct and complete before submitting!**
 
--   **What to submit:** A ZIP archive containing the complete R project (dataset, .qmd, slides)
+- **What to submit:** A ZIP archive containing the complete R project (dataset, .qmd, slides)
 
--   **Where to submit:** [Here](https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN)
+- **Where to submit:** [Here](https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN)
 
--   **Description:** For this assignment, you perform and report a multiple logistic regression analysis in a Quarto presentation. The presentation will be graded on the following six dimensions:
+- **Description:** For this assignment, you perform and report a multiple logistic regression analysis in a Quarto presentation. The presentation will be graded on the following six dimensions:
 
 1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
 2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure (including moderation).

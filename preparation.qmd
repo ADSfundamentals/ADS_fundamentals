@@ -8,13 +8,21 @@ In this course, you will use both R and RStudio.
 
 If you have never worked with R before, use the tutorials from [Open Statistical Programming](https://www.openstatprog.com/) to be ready and prepared before the course starts. The materials discussed in the tutorials
 
--   Software setup
+- Software setup
 
--   First steps
+- Basics
 
--   Data types
+- Functions
 
--   Basic visualizations
+- Packages and documentation
+
+- Vectors and matrices
+
+- Lists and dataframes
+
+- Factors
+
+- Basic visualization
 
 are required knowledge before you start the course!
 
@@ -22,15 +30,15 @@ are required knowledge before you start the course!
 
 We expect you to be familiar with some basic statistical concepts such as:
 
--   Descriptive statistics
+- Descriptive statistics
 
--   Sampling
+- Sampling
 
--   Correlation
+- Correlation
 
--   T-test
+- T-test
 
--   P-values
+- P-values
 
 To refresh your memory, you can read [SDAM](https://mspeekenbrink.github.io/sdam-book/index.html) Ch. 1, 2 and 3.
 

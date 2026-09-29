@@ -10,7 +10,7 @@ Welcome to the course "Fundamental Techniques in Data Science with R".
 
 - Lecturer: [Dr K.M. Lang](https://www.uu.nl/staff/KMLang)
 
-- Instructors: [Dr A. Giachanou](https://www.uu.nl/medewerkers/AGiachanou) and [T.C. Carrière, MSc](https://www.uu.nl/medewerkers/TCCarriere)
+- Instructors: [Dr L. Boeschoten](https://www.uu.nl/medewerkers/LBoeschoten) and [N.E. van Vugt, MSc](https://www.uu.nl/medewerkers/NEvanVugt)
 
 - Rooms: See [MyTimetable](https://mytimetable.uu.nl/schedule)
 

@@ -1,0 +1,193 @@
+---
+title: "Work Group Meeting 6"
+author: "Fundamental Techniques in Data Science with R"
+format:
+  revealjs:
+    theme: dark
+    code-line-numbers: false
+    include-in-header:
+      text: |
+        <style>
+        /* Step flow boxes */
+        .flow { display: flex; flex-direction: column; gap: 0.5em; margin: 0.6em 0; }
+        .flow-row { display: flex; align-items: stretch; gap: 0.3em; }
+        .flow-row .arrow { align-self: center; }
+        .step { border: 2px solid #42affa; border-radius: 10px; padding: 0.45em 0.4em;
+                text-align: center; font-size: 0.85em; line-height: 1.3; flex: 1 1 0; }
+        .step b { display: block; color: #42affa; }
+        .step small { font-size: 0.85em; opacity: 0.85; }
+        .step.final, .step.now { background: #42affa; color: #191919; }
+        .step.final b, .step.now b { color: #191919; }
+        .step.done { opacity: 0.75; }
+        .step.next { border-style: dashed; }
+        .arrow { font-size: 1em; color: #42affa; }
+        .reveal pre { font-size: 0.66em; line-height: 1.35; }
+        .reveal pre code { max-height: none !important; }
+        .gradetable table { font-size: 0.8em; }
+        .infotable table { font-size: 0.85em; }
+        .infotable td:first-child { white-space: nowrap; font-weight: bold; }
+        .cmtable table { font-size: 0.9em; }
+        .cmtable td, .cmtable th { text-align: center !important; }
+        </style>
+---
+
+## Today
+
+- Assumptions and diagnostics
+
+- Confusion matrix
+
+- Details on Assignment 2
+
+## Where are we?
+
+This is our **final regular workgroup meeting**. Today: the second set of big steps for your logistic regression.
+
+```{=html}
+<div class="flow" style="font-size: 0.85em;">
+  <div class="flow-row">
+    <div class="step done"><b>Data prep</b><small>&check; done</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step done"><b>Logistic model</b><small>&check; interpreted</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step now"><b>Assumptions</b><small>today</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step now"><b>Confusion matrix</b><small>today</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step next"><b>Present</b><small>January 19</small></div>
+  </div>
+</div>
+```
+
+## Assumptions: check your final model
+
+::: gradetable
+| Assumption                                                           |
+|----------------------------------------------------------------------|
+| **1. Linear in the parameters** (logit scale)                        |
+| **2. Full rank:** no (severe) multicollinearity                      |
+| **3. Binary outcome? No omitted variable? No residual clustering?**  |
+:::
+
+::: {style="font-size: 0.75em;"}
+**Computational considerations** (not needed in linear regression):
+
+- Sufficient **sample size**, e.g. at least 10 cases per predictor
+- **Balanced** outcome classes
+- No **perfect prediction** (separation): watch out for huge, unstable estimates
+:::
+
+## Influential cases
+
+- Cook's distance
+- Influence on a specific coefficient
+
+**Example from the lecture:** Titanic passengers who paid very high fares look unusual. But after removing them and refitting, the coefficients barely change. They follow the trend of the other data, so they are **not influential**.
+
+Unusual is not the same as influential: always check by refitting!
+
+## Confusion matrix
+
+Classify with a threshold (here 0.5) and compare to the true outcome:
+
+``` r
+piHat <- predict(fit, type = "response")
+yHat  <- factor(ifelse(piHat <= 0.5, "no", "yes"))
+caret::confusionMatrix(data = yHat, reference = titanic$survived,
+                       positive = "yes")
+```
+
+::: cmtable
+|                    | True: died (no) | True: survived (yes) |
+|--------------------|:---------------:|:--------------------:|
+| **Predicted: no**  |    458 (TN)     |       106 (FN)       |
+| **Predicted: yes** |     87 (FP)     |       236 (TP)       |
+:::
+
+*Titanic example from lecture 6*
+
+## Reading the confusion matrix
+
+::: gradetable
+| Measure                                        | Formula        | Titanic |
+|------------------------------------------------|----------------|--------:|
+| **Accuracy**                                   | (TP + TN) / N  |    0.78 |
+| **Sensitivity**: survivors correctly predicted | TP / (TP + FN) |    0.69 |
+| **Specificity**: deaths correctly predicted    | TN / (TN + FP) |    0.84 |
+:::
+
+::: {style="font-size: 0.85em;"}
+- Compare accuracy to simply predicting the largest class: 0.61
+- `caret` uses the **first** factor level as positive class: set `positive = "yes"`!
+- Interpret what the errors mean for **your** research question
+:::
+
+## Assignment 2: logistic regression
+
+::: infotable
+|  |  |
+|------------------------------------|------------------------------------|
+| Type | Presentation and discussion with slides in Quarto |
+| Grading | 25% of your final grade |
+| Deadline | **Monday January 18, 15:00** |
+| What to submit | A ZIP archive with the complete R project (dataset, .qmd, slides) |
+| Where to submit | Brightspace |
+| Presentation | **Tuesday January 19**, 13:15 to 17:00, at the workgroup meeting |
+:::
+
+## The presentation
+
+- Prepare a presentation of **15 minutes**
+- Expect **5 minutes of questions** from students and teachers
+- Hand in your ZIP archive including your slides before the deadline: your WG instructor sets up the slides for the presentations
+
+::: {.callout-important appearance="simple" style="font-size: 1.2em;"}
+Carefully check that the compiled .html file in your ZIP archive is **self-contained, correct and complete** before submitting!
+:::
+
+## Grading: six dimensions
+
+You perform and report a multiple logistic regression analysis in a Quarto presentation.
+
+::: gradetable
+| Dimension | What we look for |
+|------------------------------------|------------------------------------|
+| **1. Preliminaries** | Introduction of your research questions, description and potential processing of your data |
+| **2. Model estimation** | Description of the model estimates, model fit, and model comparison procedure (including moderation) |
+| **3. Assumptions** | Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed |
+:::
+
+## Grading: six dimensions
+
+::: gradetable
+| Dimension | What we look for |
+|------------------------------------|------------------------------------|
+| **4. Interpretation** | Substantive interpretation of the final model (**including the confusion matrix**). Answering your research question |
+| **5. Layout** | Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations |
+| **6. Coding** | Use code from the labs and annotate what each piece of code does |
+:::
+
+## Plan the final steps as a group
+
+This is the last workgroup meeting before the deadline:
+
+- Look back at your group contract: is everybody still on track?
+- Agree on the final work to finish assignment 2
+- R**ehearse** the presentation together: does it fit in 15 minutes?
+- Make sure everybody can answer questions about the **whole** analysis
+
+## Continue working
+
+```{=html}
+<div class="flow">
+  <div class="flow-row">
+    <div class="step"><b>1. Check</b><small>assumptions &amp; influential cases</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>2. Classify</b><small>confusion matrix</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step final"><b>3. Present</b><small>build your Quarto slides</small></div>
+  </div>
+</div>
+```
+
+Use the code from this week's lab!

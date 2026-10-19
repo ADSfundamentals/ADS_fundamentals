@@ -1,0 +1,253 @@
+---
+title: "Work Group Meeting 3"
+author: "Fundamental Techniques in Data Science with R"
+format:
+  revealjs:
+    theme: dark
+    code-line-numbers: false
+    include-in-header:
+      text: |
+        <style>
+        /* Step flow boxes */
+        .flow { display: flex; flex-direction: column; gap: 0.5em; margin: 0.6em 0; }
+        .flow-row { display: flex; align-items: stretch; gap: 0.3em; }
+        .flow-row .arrow { align-self: center; }
+        .step { border: 2px solid #42affa; border-radius: 10px; padding: 0.45em 0.4em;
+                text-align: center; font-size: 0.85em; line-height: 1.3; flex: 1 1 0; }
+        .step b { display: block; color: #42affa; }
+        .step small { font-size: 0.85em; opacity: 0.85; }
+        .step.final, .step.now { background: #42affa; color: #191919; }
+        .step.final b, .step.now b { color: #191919; }
+        .step.done { opacity: 0.75; }
+        .step.next { border-style: dashed; }
+        .arrow { font-size: 1em; color: #42affa; }
+        .reveal pre { font-size: 0.66em; line-height: 1.35; }
+        .reveal pre code { max-height: none !important; }
+        .gradetable table { font-size: 0.8em; }
+        .goodtable table { font-size: 0.5em; }
+        .rout pre code { white-space: pre !important; overflow: visible; }
+        .rout pre { box-shadow: none; }
+        </style>
+---
+
+## Today
+
+Where are we?
+
+- Multiple linear regression
+  - Goal for today: your final model
+  - Document every step
+
+<!-- -->
+
+- Group contract check-in
+
+## Where are we?
+
+Assignment 1 is a written report: deadline **Friday December 11, 16:00**. The deadline is approaching!
+
+```{=html}
+<div class="flow" style="font-size: 0.85em;">
+  <div class="flow-row">
+    <div class="step done"><b>Data processing</b><small>&check; done</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step done"><b>Exploratory analysis</b><small>&check; done</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step done"><b>Simple regression</b><small>&check; done</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step now"><b>Multiple regression</b><small>this week</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step next"><b>Assumptions</b><small>next week</small></div>
+  </div>
+</div>
+```
+
+Not there yet? Catch up first, and ask your instructor if you are stuck.
+
+## Multiple linear regression
+
+- **Add more predictors** to your model
+- Don't forget to also test **interaction terms**!
+- Explain the **logic for the order** in which you add predictors: is your focus on **prediction** or on **estimation**?
+- **Compare** your models and interpret the **model fit** statistics
+
+## Goal for today: your final model
+
+```{=html}
+<div class="flow">
+  <div class="flow-row">
+    <div class="step now"><b>1. Final model</b><small>by the end of today</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>2. Interpret</b><small>substantively interpret the regression coefficients</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step next"><b>3. Assumptions</b><small>test them on this model next week</small></div>
+  </div>
+</div>
+```
+
+## Document every step
+
+- **Present output efficiently:** can you create "custom" tables or figures?
+- **Only show what matters:** everything you output should be important and needs to be interpreted
+- **Annotate your code:** can you explain what happens in each line?
+
+## Bad example
+
+::::::::: columns
+::::: {.column width="40%"}
+::: {style="font-size: 0.8em;"}
+``` r
+fit1 <- lm(wellbeing ~ income,
+           data = dat)
+summary(fit1)
+
+fit2 <- lm(wellbeing ~ income +
+             age * gender,
+           data = dat)
+summary(fit2)
+```
+:::
+
+::: {style="font-size: 0.7em;"}
+- No comments: *why* this model?
+- Full `summary()` of **every** model
+- No formal model comparison
+:::
+:::::
+
+::::: {.column width="60%"}
+::: {.rout style="font-size: 0.62em;"}
+```         
+Call:
+lm(formula = wellbeing ~ income + age * gender,
+   data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.9899 -0.6571 -0.0260  0.5825  3.5480 
+
+Coefficients:
+                Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     4.149593   0.277115  14.974  < 2e-16 ***
+income          0.398894   0.059574   6.696 1.08e-10 ***
+age             0.016979   0.004467   3.801 0.000175 ***
+gendermale      0.087982   0.329407   0.267 0.789584    
+age:gendermale -0.012401   0.006284  -1.973 0.049376 *  
+---
+Signif. codes:  
+0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.9781 on 295 degrees of freedom
+Multiple R-squared:  0.218, Adjusted R-squared:  0.2074 
+F-statistic: 20.56 on 4 and 295 DF,  p-value: 5.871e-15
+```
+:::
+
+::: {style="font-size: 0.7em;"}
+*... and the same full output for model 1, model 3, ...*
+:::
+:::::
+:::::::::
+
+## Good example
+
+::::::::: columns
+:::: {.column width="44%"}
+::: {style="font-size: 0.8em;"}
+``` r
+# Model 2: add age and its
+# interaction with gender
+fit2 <- lm(wellbeing ~ income +
+             age * gender,
+           data = dat)
+
+# Does model 2 fit significantly
+# better than model 1?
+anova(fit1, fit2)
+
+# Coefficients with 95% CIs,
+# rounded, in a clean table
+broom::tidy(fit2,
+            conf.int = TRUE) |>
+  knitr::kable(digits = 3)
+```
+:::
+::::
+
+:::::: {.column width="56%"}
+::: {.rout style="font-size: 0.62em;"}
+```         
+Analysis of Variance Table
+
+Model 1: wellbeing ~ income
+Model 2: wellbeing ~ income + age * gender
+  Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
+1    298 313.33                                  
+2    295 282.21  3    31.124 10.845 8.863e-07 ***
+```
+:::
+
+::: goodtable
+| term           | estimate | std.error | p.value | conf.low | conf.high |
+|:---------------|---------:|----------:|--------:|---------:|----------:|
+| (Intercept)    |    4.150 |     0.277 |   0.000 |    3.604 |     4.695 |
+| income         |    0.399 |     0.060 |   0.000 |    0.282 |     0.516 |
+| age            |    0.017 |     0.004 |   0.000 |    0.008 |     0.026 |
+| gendermale     |    0.088 |     0.329 |   0.790 |   -0.560 |     0.736 |
+| age:gendermale |   -0.012 |     0.006 |   0.049 |   -0.025 |     0.000 |
+:::
+
+::: {style="font-size: 0.7em;"}
+Only the output you will interpret, in a readable format.
+:::
+::::::
+:::::::::
+
+## What we grade on (relevant this week)
+
+::: gradetable
+| Element | What we look for |
+|----|----|
+| **Linear regression** | Description of the building process, the model fit, and the model comparison procedure |
+| **Interpretation** | Substantive interpretation of the final model. Answers to your research questions |
+| **Layout** | Structure of the document, output is efficiently presented, custom functions are developed when needed. Graphs are used where fitting |
+:::
+
+*Find the complete assignment description on the course website.*
+
+## Writing the report
+
+- We want a **concise** written report: not long and extensive, but make sure you cover **all the steps**
+- No extensive introduction with literature
+- But we do need to understand:
+  - the **logic** behind your research question
+  - where your **data** come from
+
+## Use the code from the lab
+
+- Each week, the lab contains the code you need for the steps in the assignment
+- Code borrowed from other courses or generated by AI (not allowed!) may do something slightly different, and you may end up applying the wrong method
+
+## Group contract check-in
+
+Take a moment to think back on your group contract:
+
+- Is everything still working?
+- Is everybody on track?
+- Do you need to adjust anything?
+
+## Continue working on assignment 1
+
+```{=html}
+<div class="flow">
+  <div class="flow-row">
+    <div class="step"><b>1. Add</b><small>predictors &amp; interactions</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>2. Compare</b><small>models &amp; model fit</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step final"><b>3. Final model</b><small>interpret coefficients</small></div>
+  </div>
+</div>
+```
+
+Use the code from this week's lab, and document every step!

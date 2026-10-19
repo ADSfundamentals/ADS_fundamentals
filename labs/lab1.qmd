@@ -5,182 +5,218 @@ params:
   answers: false
 ---
 
-From the [Open Statistical Programming](https://www.openstatprog.com/) modules, complete the following:
+```{r l1_options, include = FALSE}
+knitr::opts_chunk$set(root.dir = here::here("./"))
+```
+
+# 1. Open Stat Prog Modules
+
+From [Open Statistical Programming](https://www.openstatprog.com/) work on the modules:
+
+- Pipes
+
+- Descriptive statistics
 
 - Reproducible reporting
 
 - External data
 
-------------------------------------------------------------------------
+# 2. Hand-in assignment
 
-# Introduction
+With this hand-in assignment, you demonstrate that you can set up a project as you learned during the lecture, import external data, know how to work with pipes, calculate some descriptive statistics, and know how to make a reproducible report using Quarto.
 
-Welcome to the first practical of Fundamental Techniques in Data Science with R! In this part of the practical, you will learn about
+**Data:** [penguins.csv](../data/penguins.csv){download="penguins.csv"} (click to download) contains measurements of 344 penguins from the Palmer Archipelago in Antarctica. Note that the file uses **semicolons** to separate columns and **commas** as decimal marks.
 
-- Pipes
-- Data transformation
+::: callout-important
+## What to hand in
 
-------------------------------------------------------------------------
+- Hand in **only your rendered `.html` file**. Do not hand in your `.qmd` file, the data or a zip of your project.
+- Name your file **`lab1_firstname_lastname_studentnumber.html`**, for example `lab1_jane_doe_1234567.html`.
+- Use `embed-resources: true` in your header so that your figure is stored inside the `.html` file.
+:::
 
-We will work with the following packages today:
+## Set up your project
 
-```{r, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(kableExtra)
+**Exercise 1**
+
+Set up an R project with the same folder structure as the "good" example from the lecture (see the [Project Organization Demo](../assets/project_organization.zip)):
+
+1.  In RStudio, create a new project called `lab1` (*File \> New Project \> New Directory \> New Project*).
+2.  Inside the project folder, create the folders `code`, `data`, `figures` and `output`.
+3.  [Download penguins.csv](../data/penguins.csv){download="penguins.csv"} and save it in the `data` folder.
+4.  Create a new Quarto document (*File \> New File \> Quarto Document*) and save it in the `code` folder as `lab1_firstname_lastname_studentnumber.qmd`.
+
+``` markdown
+---
+title: "lab1_firstname_lastname_studentnumber"
+author: "Firstname Lastname"
+format:
+  html:
+    embed-resources: true
+---
 ```
 
-We are going to use the General Social Survey, which is a long-running [US survey](https://gss.norc.org/) conducted by the NORC at the University of Chicago. The survey monitors changes in social characteristics and attitudes. The survey is quite large, so we can access a smaller version in the `forcats` package. It has the following variables:
+Your project should now look like this:
 
-- **year**: year of the survey from 2000-2014
-- **marital**: marital status
-- **age**: max age is truncated to 89
-- **race**
-- **rincome**: reported income
-- **partyid**: political affiliation
-- **relig**: religion
-- **denom**: denomination
-- **tvhours**: hours per day watching tv
-
-If you want more information on the survey you can type `?gss_cat` into the console. Let's load the data.
-
-```{r}
-gss_cat <- forcats::gss_cat
+```         
+lab1/
+├── lab1.Rproj
+├── code/
+│   └── lab1_firstname_lastname_studentnumber.qmd
+├── data/
+│   └── penguins.csv
+├── figures/
+└── output/
 ```
 
-We can take a look at the data using `head()`, which shows us the first 6 rows of the data frame.
+## Import the data
 
-```{r}
-head(gss_cat)
+**Exercise 2**
+
+Add a code chunk that loads the `dplyr` package. Then, just like in the example from the lecture, define a variable for each folder in your project:
+
+``` r
+dataDir <- "data"
+outDir  <- "output"
+figDir  <- "figures"
 ```
 
-The `str()` function tells us what the class of each variable is. You will notice that most variables in the gss_cat data are factors with different levels. In this tutorial we will work mainly with these variables to learn techniques for working with factors.
+Read `penguins.csv` into an object called `penguins` with `read.csv2()` and `here::here(dataDir, "penguins.csv")`.
 
-```{r}
-str(gss_cat)
+How many rows and columns does `penguins` have?
+
+```{r, include = params$answers, message = FALSE}
+library(dplyr)
+
+dataDir <- "data"
+outDir  <- "output"
+figDir  <- "figures"
+
+penguins <- read.csv2(here::here(dataDir, "penguins.csv"))
+
+dim(penguins)  # 344 rows, 8 columns
 ```
 
-# Part 2: Pipes
-
-Pipes are a useful tool that make it easier to express a sequence of multiple operations in R. Pipes `%>%` come from the `magrittr` package, so they are automatically loaded when you use the `tidyverse`. Pipes make code more intuitive and easier to understand - which is good for practicing open science!
-
-Let's compare code written with - and without - pipes.
-
-Below you see how the `%>%` is used to pass information from one line to the next. It's easy to follow along and see exactly what is being done to the data, line by line.
-
-```{r, message=FALSE}
-gss_cat %>%
-  filter(relig == "Protestant") %>%
-  group_by(year, relig) %>%
-  summarise(tvhours = mean(tvhours, na.rm = TRUE))
+```{r, include = params$answers, echo = FALSE, results = "asis"}
+cat("**Answer:** The data has 344 rows and 8 columns.",
+    "With `read.csv()` (instead of `read.csv2()`) you would get only 1 column,",
+    "because `read.csv()` expects commas between columns.\n")
 ```
 
-In contrast, the following code performs the same operations but without piping. To understand what is happening you need to read the code from the inside out - which is much more difficult.
+## Descriptive statistics with pipes
 
-```{r, warning = FALSE, message=FALSE}
-# Using base R
-summarise(group_by(filter(gss_cat, 
-                          relig == "Protestant"), 
-                   year, 
-                   relig), 
-          tvhours = mean(tvhours, 
-                         na.rm = TRUE)
-          )
-```
+**Exercise 3**
 
-Pipes don't (automatically) assign a new object as a result of the operations you make. You need to specify `<-` at the beginning if you wish to save the results. There is a special variation of the pipe that allows assignments, `%<>%` but it is less obvious than `<-`.
-
-Pipes are not appropriate for every situation. You should consider not using pipes when:
-
-- The sequence of operations is longer than 10 steps. In this situation, it is useful to break up the code into intermediate steps and assign them to objects. This will be helpful if you need to identify any problems.
-- You have multiple inputs and outputs. If you are transforming more than one object it is better not to use pipes.
-
-*Note: `Cmd + Shift + M` (Mac) and `Ctrl + Shift + M` is a useful shorthand for the `%>%`.*
-
-------------------------------------------------------------------------
-
-# Part 3: Data transformation
-
-In this section we will practice data transformation using functions from the `dplyr` package in the core tidyverse. You should be familiar with some of these functions already, but today we will go a little further.
-
-Remember to use the `%>%` operator!
-
-## Filtering data
-
-The `filter()` function allows you to subset observations based on their values. The first argument is the name of the data frame. The second and subsequent arguments are the expressions that filter the data frame.
-
-R provides the following options for filtering: `>`, `>=`, `<`, `<=`, `!=` (not equal), and `==` (equal). You can also combine these with the following logical operators: `&` meaning "and", `|` meaning "or", and `!` meaning "not".
-
-1.  **Use the `filter()` function to display only married people in the gss_cat data set.**
+Convert `species` into a factor with the levels `"Adelie"`, `"Chinstrap"` and `"Gentoo"` (in that order). Then use `table()` to count the penguins of each species.
 
 ```{r, include = params$answers}
-gss_cat %>% 
-  filter(marital == "Married")
+penguins$species <- factor(penguins$species,
+                           levels = c("Adelie", "Chinstrap", "Gentoo"))
 
-# Since we only want to find married people we will use the equal operator, ==, and encase the observations we want in quotes.*
+table(penguins$species)
 ```
 
-2.  **Use the `filter()` function to display divorced AND widowed people in the gss_cat data set.**
+```{r, include = params$answers, echo = FALSE, results = "asis"}
+cat("**Answer:** Adelie: 152, Chinstrap: 68, Gentoo: 124.\n")
+```
+
+**Exercise 4**
+
+Calculate the mean body mass (`body_mass_g`) of all penguins, rounded to 1 decimal. Write this as **one pipeline** using the base R pipe `|>`. Remember that `body_mass_g` contains missing values.
 
 ```{r, include = params$answers}
-gss_cat %>% 
-  filter(marital == "Divorced" | marital == "Widowed")
-
-# In this case we need to combine logical operators. The or operator is appropriate here since we are looking for two kinds of matches in the same variable (& would not work since people cannot be both divorced and widowed). We combine this with the equal operator.
+penguins$body_mass_g |>
+  mean(na.rm = TRUE) |>
+  round(1)
 ```
 
-## Arranging data
+```{r, include = params$answers, echo = FALSE, results = "asis"}
+cat("**Answer:** 4201.8 grams. Without `na.rm = TRUE` the result is `NA`,",
+    "because 2 penguins have a missing body mass.\n")
+```
 
-3.  **Use the `arrange()` function to reorder the information in the data frame by the number of tv hours.**
+**Exercise 5**
+
+Use `group_by()` and `summarise()` in a pipeline to calculate the mean body mass **per species**, rounded to 1 decimal. Which species is the heaviest on average?
 
 ```{r, include = params$answers}
-gss_cat %>% 
-  arrange(tvhours)
-
-# Arrange only needs one argument, the variable you wish to reorder. Arrange orders the rows of a gss_cat by the tvhours column. The default here is to arrange in ascending order.
+penguins |>
+  group_by(species) |>
+  summarise(mean_mass = round(mean(body_mass_g, na.rm = TRUE), 1)) |>
+  as.data.frame()  # a tibble prints fewer digits (3701 instead of 3700.7)
 ```
 
-4.  **You can combine arrange() with functions like `desc()` to re-order a column in descending order. Try doing this.**
+```{r, include = params$answers, echo = FALSE, results = "asis"}
+cat("**Answer:** Adelie: 3700.7 g, Chinstrap: 3733.1 g, Gentoo: 5076.0 g.",
+    "Gentoo penguins are the heaviest on average.\n")
+```
+
+Store the result of your pipeline in an object called `mass_by_species`, and save it in your `output` folder:
+
+```{r, include = params$answers, eval = FALSE}
+mass_by_species <- penguins |>
+  group_by(species) |>
+  summarise(mean_mass = round(mean(body_mass_g, na.rm = TRUE), 1))
+
+saveRDS(mass_by_species, here::here(outDir, "mass_by_species.rds"))
+```
+
+## Reproducible reporting
+
+**Exercise 6**
+
+Write one sentence in your document (as normal text, **not** in a code chunk) that reports the mean body mass from Exercise 4. Do not type the number yourself: use **inline code** so that the number is calculated when you render the document.
+
+*Hint:* inline code looks like this: `` `r knitr::inline_expr("1 + 1")` ``
+
+```{r, include = params$answers, echo = FALSE, results = "asis"}
+mean_mass <- round(mean(penguins$body_mass_g, na.rm = TRUE), 1)
+
+cat("**Answer:** In the text of the document, write:\n\n",
+    "```markdown\n",
+    "The mean body mass of the penguins is `r round(mean(penguins$body_mass_g, na.rm = TRUE), 1)` grams.\n",
+    "```\n\n",
+    "which renders as:\n\n",
+    "> The mean body mass of the penguins is ", mean_mass, " grams.\n",
+    sep = "")
+```
+
+**Exercise 7**
+
+Make a boxplot of body mass per species with base R's `boxplot()` function. Add a caption to the figure with the chunk option `#| fig-cap:`, and give the axes clear labels.
 
 ```{r, include = params$answers}
-gss_cat %>%
-  arrange(desc(tvhours))
-
-# When combining these functions you need to wrap arrange around the operation you want to do.
+#| fig-cap: "Body mass of penguins per species."
+boxplot(body_mass_g ~ species,
+        data = penguins,
+        xlab = "Species",
+        ylab = "Body mass (g)")
 ```
 
-5.  **How would you filter only married people and arrange them by how much tv they watch?**
+Also save the boxplot as an image in your `figures` folder. `png()` opens an image file, the plot is drawn into that file, and `dev.off()` closes it:
 
-**Hint: You need to combine filter and arrange using the %\>%**
-
-```{r, include = params$answers}
-gss_cat %>% 
-  filter(marital == "Married") %>% 
-  arrange(tvhours)
-
-# Using the pipe we can perform multiple operations at once without needing to save each interim step as an object.
+``` r
+png(here::here(figDir, "boxplot_mass.png"))
+boxplot(body_mass_g ~ species, data = penguins,
+        xlab = "Species", ylab = "Body mass (g)")
+dev.off()
 ```
 
-6.  **How would you use `arrange()` and `count()` to find what the most common religion is?**
-
-```{r, include = params$answers}
-gss_cat %>%
-  count(relig) %>%
-  arrange(desc(n))
-
-# In this case, we are not passing a variable to arrange but a logical, n. This tells R to count all the categories in relig and subsequently order these categories in descending order.*
+```{r, include = params$answers, eval = FALSE}
+png(here::here(figDir, "boxplot_mass.png"))
+boxplot(body_mass_g ~ species, data = penguins,
+        xlab = "Species", ylab = "Body mass (g)")
+dev.off()
 ```
 
-## Summarizing data
+## Render and hand in
 
-7.  **How many hours of tv on average are watched by people of different religions?**
+**Exercise 8**
 
-**Hint: `select()`, `group_by()`, and `summarize()` are useful functions for this**
+Click **Render** in RStudio. Check that:
 
-```{r, include = params$answers}
-gss_cat %>%
-  select(relig, tvhours) %>% # also works without using select
-  group_by(relig) %>% 
-  summarise(tvhours = mean(tvhours, na.rm = TRUE))
+- the output file is called `lab1_firstname_lastname_studentnumber.html`;
+- all your code, output, your inline sentence and your boxplot show up in the `.html` file;
+- your `output` folder now contains `mass_by_species.rds` and your `figures` folder contains `boxplot_mass.png`.
 
-# Combining several operations can seem complex, but once you understand what is happening you can apply to most other cases. In this example we tell R to take the `gss_data`, select only `relig` and `tvhours`, group the different categories of `relig` and perform a summarising function on these groups in respect to tvhours. Inside the `summarise()` function we tell it to take an average and to remove missing values.* 
-```
+Hand in **only** the `.html` file.

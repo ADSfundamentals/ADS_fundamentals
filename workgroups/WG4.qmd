@@ -1,0 +1,178 @@
+---
+title: "Work Group Meeting 4"
+author: "Fundamental Techniques in Data Science with R"
+format:
+  revealjs:
+    theme: dark
+    code-line-numbers: false
+    include-in-header:
+      text: |
+        <style>
+        /* Step flow boxes */
+        .flow { display: flex; flex-direction: column; gap: 0.5em; margin: 0.6em 0; }
+        .flow-row { display: flex; align-items: stretch; gap: 0.3em; }
+        .flow-row .arrow { align-self: center; }
+        .step { border: 2px solid #42affa; border-radius: 10px; padding: 0.45em 0.4em;
+                text-align: center; font-size: 0.85em; line-height: 1.3; flex: 1 1 0; }
+        .step b { display: block; color: #42affa; }
+        .step small { font-size: 0.85em; opacity: 0.85; }
+        .step.final, .step.now { background: #42affa; color: #191919; }
+        .step.final b, .step.now b { color: #191919; }
+        .step.done { opacity: 0.75; }
+        .step.next { border-style: dashed; }
+        .arrow { font-size: 1em; color: #42affa; }
+        .reveal pre { font-size: 0.66em; line-height: 1.35; }
+        .reveal pre code { max-height: none !important; }
+        .gradetable table { font-size: 0.8em; }
+        .infotable table { font-size: 0.95em; }
+        .infotable td:first-child { white-space: nowrap; font-weight: bold; }
+        </style>
+---
+
+## Today
+
+Where are we?
+
+- Assumptions and diagnostics
+- Act on what you find
+- Interpret your final model
+
+<!-- -->
+
+- Prepare your assignment to hand in
+
+## Where are we?
+
+Assignment 1 deadline is **this Friday, December 11, 16:00!**
+
+```{=html}
+<div class="flow" style="font-size: 0.85em;">
+  <div class="flow-row">
+    <div class="step done"><b>Data prep</b><small>&check; done</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step done"><b>Regression</b><small>&check; final model</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step now"><b>Assumptions</b><small>this week</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step now"><b>Interpretation</b><small>this week</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step next"><b>Hand in</b><small>Friday 16:00</small></div>
+  </div>
+</div>
+```
+
+Not there yet? Talk to your instructor today!
+
+## Assumptions and diagnostics {.smaller}
+
+Check these on your **final model**, using the code and plots from this week's lab:
+
+::::: columns
+::: {.column width="58%"}
+**Assumptions**
+
+1.  Linear in the parameters
+2.  Full rank: no predictor is a linear combination of others
+3.  Exogenous predictors
+4.  Constant error variance
+5.  Uncorrelated errors: serial dependence, clustering
+6.  Normally distributed errors
+:::
+
+::: {.column width="42%"}
+**Influential observations**
+
+- Outliers
+- High leverage
+- Influence
+:::
+:::::
+
+## Act on what you find
+
+```{=html}
+<div class="flow">
+  <div class="flow-row">
+    <div class="step"><b>1. Check</b><small>assumptions &amp; diagnostics</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>2. Change</b><small>data or model, if needed</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>3. Refit</b><small>and check again</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step final"><b>4. Interpret</b><small>the final model</small></div>
+  </div>
+</div>
+```
+
+- Violation found? **Act upon it** and/or **reflect** on what it means for your results
+- Report **what** you changed and **why**
+
+## Interpret your final model
+
+::: {.callout-important appearance="simple" style="font-size: 1.4em;"}
+Interpret the final model **after** all changes have been made!
+:::
+
+- Give a **substantive** interpretation: what do the coefficients mean in the context of your data and variables?
+- Go back to your **research question(s)**: what is the answer?
+
+## Assignment 1: linear regression
+
+::: infotable
+|  |  |
+|------------------------------------|------------------------------------|
+| Type | Written report in Quarto |
+| Grading | 25% of your final grade |
+| Deadline | **Friday December 11, 16:00** |
+| What to submit | A ZIP archive with the complete R project (dataset, .qmd, HTML) |
+| Where to submit | Brightspace |
+| What is graded | **Only** your .html file |
+:::
+
+## Only the .html file is graded!
+
+- Make sure **all code, comments and output** are visible
+- Carefully check that the compiled .html file in your ZIP archive is:
+  - **self-contained**
+  - **correct**
+  - **complete**
+
+Tip: add `embed-resources: true` to the html format in your YAML header, so figures and styles are stored inside the .html file.
+
+## Grading: six dimensions
+
+You perform and report a multiple linear regression analysis in a Quarto document.
+
+::: gradetable
+| Dimension | What we look for |
+|------------------------------------|------------------------------------|
+| **1. Preliminaries** | Introduction of your research questions, description and potential processing of your data |
+| **2. Model estimation** | Description of the model estimates, model fit, and model comparison procedure (including moderation) |
+| **3. Assumptions** | Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed |
+:::
+
+## Grading: six dimensions
+
+::: gradetable
+| Dimension | What we look for |
+|------------------------------------|------------------------------------|
+| **4. Interpretation** | Substantive interpretation of the final model. Answering your research question |
+| **5. Layout** | Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations |
+| **6. Coding** | Use code from the labs and annotate what each piece of code does |
+:::
+
+## Checklist before you hand in
+
+- Are all six dimensions covered?
+- Is your research question answered?
+- Is every piece of code annotated?
+- Is all output you show also interpreted?
+- Does the .html render without errors and show all code and output?
+- Is the ZIP complete: dataset, .qmd and .html?
+- Are the names of **all group members** in the report?
+
+## Continue working
+
+- Finish assumptions, diagnostics and interpretation
+- Use the code from this week's lab
+- Read the full report and then hand it in before **Friday December 11, 16:00**

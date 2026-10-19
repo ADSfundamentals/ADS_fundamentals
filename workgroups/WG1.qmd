@@ -4,6 +4,29 @@ author: "Fundamental Techniques in Data Science with R"
 format: 
   revealjs:
     theme: dark
+    code-line-numbers: false
+    include-in-header:
+      text: |
+        <style>
+        /* Data processing flow (slide "Data processing") */
+        .flow { display: flex; flex-direction: column; gap: 0.5em; margin: 0.6em 0; }
+        .flow-row { display: flex; align-items: stretch; gap: 0.3em; }
+        .flow-row .arrow { align-self: center; }
+        .flow-row.second { flex-direction: row-reverse; padding-left: 14%; }
+        .step { border: 2px solid #42affa; border-radius: 10px; padding: 0.45em 0.4em;
+                text-align: center; font-size: 0.85em; line-height: 1.3; flex: 1 1 0; }
+        .step b { display: block; color: #42affa; }
+        .step small { font-size: 0.85em; opacity: 0.85; }
+        .step.final { background: #42affa; color: #191919; }
+        .step.final b { color: #191919; }
+        .arrow { font-size: 1em; color: #42affa; }
+        .turn { text-align: right; padding-right: 10%; font-size: 1em; color: #42affa; line-height: 0.8; }
+        /* Slightly larger code than the .smaller default */
+        .reveal pre { font-size: 0.66em; line-height: 1.35; }
+        .reveal pre code { max-height: none !important; }
+        /* Assignment tables */
+        .gradetable table { font-size: 0.8em; }
+        </style>
 ---
 
 ## Today
@@ -63,19 +86,43 @@ Assignment 2
 :::
 :::::
 
+## Assignment 1: Linear regression
+
+You perform a multiple linear regression analysis in R and report this using R markdown. The assignment is graded on the following elements:
+
+::: gradetable
+| Element | Content | Week |
+|---------------|--------------------------------------------|:------:|
+| **Context** | Introduction of your research questions, description and potential processing of your data | 1 |
+| **Exploratory data analysis** | Inspection of potentially interesting relations in the data | 2 |
+| **Linear regression** | Description of the building process, the model fit, and the model comparison procedure | 3 |
+:::
+
+## Assignment 1: Linear regression
+
+The assignment is graded on the following elements:
+
+::: gradetable
+| Element | Content | Week |
+|-------------|---------------------------------------------------|:------:|
+| **Assumptions** | Testing of model assumptions, checking for outliers and influential cases. Act upon and reflect on violations when needed | 4 |
+| **Interpretation** | Substantive interpretation of the final model. Answers to your research questions | 4 |
+| **Layout** | Structure of the document, output is efficiently presented, custom functions are developed when needed. Graphs are used where fitting | all |
+:::
+
+Find the complete assignment description on the course website.
+
 ## Assignments
 
 Grading:
 
 - Both group assignments contribute 25% to your final grade
-- All group members receive the same grade
 - If names are omitted from groups/assignments, we assume everyone is aware of this.
 
 ## Assignments
 
 Hand in:
 
-- Through Filedrop (link is on website)
 - Hand in a .zip file with R project and all files (html, qmd, dataset)
 - Make sure all code and text are visible in the html files
 - Only content in html files is graded!!!!
@@ -84,10 +131,11 @@ Hand in:
 ## This week:
 
 - Make groups of max. 4 students
+- Set up a group contract
 - Look for a dataset
 - Inspect variables
 - Come up with research questions for linear and logistic regression
-- Pre-processing of the dataset where needed
+- Start pre-processing the dataset
 
 ## Dataset requirements
 
@@ -108,6 +156,12 @@ We use real-world data from large scale international surveys for the assignment
 - ESS: European Social Study
 - TIMSS: Trends in International Mathematics and Science Study
 
+## Pay attention!
+
+Most datasets have rules and requirements about how you can use them. Carefully check this and make sure you meet the requirements.
+
+For example: The LISS panel requires you to sign a statement.
+
 ## Example research questions
 
 Linear regression:
@@ -117,17 +171,105 @@ Linear regression:
 
 Logistic regression:
 
-- Do body weight, calorie intake, fate intake and age have an influence on the occurence of a heart attack?
+- Do body weight, calorie intake, fat intake and age have an influence on the occurrence of a heart attack?
 - What variables can be used to predict whether students pass a driving test?
 
 ## Data processing
 
-Examples:
+Found a dataset? **Start processing it right away**, so it is ready when we start analysing.
 
-- Are the character classes set correctly? Adjust with functions such as `as_factor()` or `as_numeric()`
-- Are missing values correctly recognized?
-- Do you need to calculate any sumscores or meanscores?
-- Do you need to link multiple separate datasets?
+```{=html}
+<div class="flow">
+  <div class="flow-row">
+    <div class="step"><b>1. Raw data</b><small>.sav / .csv / .dta</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>2. Import</b><small>&amp; inspect</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>3. Fix classes</b><small>factor / numeric</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>4. Recode</b><small>missing values</small></div>
+  </div>
+  <div class="turn">&darr;</div>
+  <div class="flow-row second">
+    <div class="step"><b>5. Compute</b><small>scale scores</small></div>
+    <div class="arrow">&larr;</div>
+    <div class="step"><b>6. Select &amp; link</b><small>datasets</small></div>
+    <div class="arrow">&larr;</div>
+    <div class="step final"><b>7. Ready!</b><small>for analysis</small></div>
+  </div>
+</div>
+```
+
+Keep **all** processing steps in your .qmd file, so every step is reproducible (and visible in the html!).
+
+## Data processing: what to check
+
+:::::: {style="font-size: 0.75em;"}
+::::: columns
+::: {.column width="50%"}
+**Classes**
+
+- Are character classes set correctly?
+- Survey data from SPSS often come as *labelled* variables
+- Adjust with `as_factor()` or `as.numeric()`
+
+**Missing values**
+
+- Are missing values recognized as `NA`?
+- Surveys often use codes such as `-9`, `77`, `88`, `99` for "don't know" or "refused"
+- Check the codebook!
+:::
+
+::: {.column width="50%"}
+**Scale scores**
+
+- Do you need to calculate sum scores or mean scores of multiple items?
+- Are some items reverse coded?
+
+**Linking & selecting**
+
+- Do you need to link multiple separate datasets (e.g. students and schools)?
+- Select only the variables (and cases) you need
+:::
+:::::
+::::::
+
+## Data processing: examples in R
+
+``` r
+library(tidyverse)
+library(haven)
+
+# Import and inspect
+dat <- read_sav("data/survey.sav")
+glimpse(dat)
+summary(dat)
+
+# Fix classes
+dat <- dat |>
+  mutate(gender = as_factor(gender),
+         age    = as.numeric(age))
+```
+
+## Data processing: examples in R
+
+``` r
+# Recode missing value codes to NA
+dat <- dat |>
+  mutate(across(c(item1, item2, item3), ~ na_if(.x, 99)))
+
+# Reverse code an item (scale 1-5)
+dat <- dat |>
+  mutate(item3_r = 6 - item3)
+
+# Compute a mean score
+dat <- dat |>
+  mutate(wellbeing = rowMeans(pick(item1, item2, item3_r),
+                              na.rm = TRUE))
+
+# Link two datasets on a shared ID
+full <- left_join(students, schools, by = "school_id")
+```
 
 ## Use of Generative AI
 
@@ -141,12 +283,44 @@ You are not allowed to:
 - Submit generated text or code as if it was written by you
 - Have text or code revised
 
+## Making groups
+
+- You can form a group with 3 or 4 students
+
+- One rule: every group member must come from a different bachelor's program
+
+- Next: set up a group contract together
+
+## Group contract
+
+Take 10 minutes to agree on **how you collaborate**, both at and in between workgroup meetings.
+
+:::::: {style="font-size: 0.8em;"}
+::::: columns
+::: {.column width="50%"}
+- How is **everyone involved in decision making**?
+- What **skills and expertise** does everyone bring?
+- How do you **communicate**?
+:::
+
+::: {.column width="50%"}
+- How do you **share the work**?
+- How much **time and effort** can you expect from everyone?
+- What if someone **breaks the agreements**?
+:::
+:::::
+::::::
+
+::: {.callout-warning appearance="simple" style="font-size: 1.15em;"}
+Splitting up the work and only joining it right before the deadline does **not** work well! Each part builds on the previous one, and everyone needs to understand the full analysis.
+:::
+
 ## Before the end of the meeting
 
 As a group, send an email to your WG instructor with:
 
 - Names of group members
-- How you agree to collaborate
+- Your group contract
 - Selected data set (topic and link)
 - Research questions you want to answer in your assignments
 

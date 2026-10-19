@@ -1,7 +1,6 @@
 ---
 title: "Lab 2"
 output-file: "lab2_answers.html"
-#output-file: "lab2.html"
 params:
   answers: true
 ---

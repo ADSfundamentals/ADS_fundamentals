@@ -164,8 +164,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#data-set-loading-inspection" id="toc-data-set-loading-inspection" class="nav-link" data-scroll-target="#data-set-loading-inspection">Data set: Loading &amp; Inspection</a></li>
+  <li><a href="#hand-in-assignment" id="toc-hand-in-assignment" class="nav-link active" data-scroll-target="#hand-in-assignment">Hand-in assignment</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#loading-and-inspecting-your-dataset" id="toc-loading-and-inspecting-your-dataset" class="nav-link" data-scroll-target="#loading-and-inspecting-your-dataset">Loading and inspecting your dataset</a></li>
   <li><a href="#model-assumptions" id="toc-model-assumptions" class="nav-link" data-scroll-target="#model-assumptions">Model assumptions</a>
   <ul class="collapse">
   <li><a href="#linearity" id="toc-linearity" class="nav-link" data-scroll-target="#linearity">Linearity</a></li>
@@ -180,6 +182,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers">Outliers</a></li>
   <li><a href="#high-leverage-observations" id="toc-high-leverage-observations" class="nav-link" data-scroll-target="#high-leverage-observations">High-leverage observations</a></li>
   <li><a href="#influence-on-the-model" id="toc-influence-on-the-model" class="nav-link" data-scroll-target="#influence-on-the-model">Influence on the model</a></li>
+  </ul></li>
+  <li><a href="#render-and-hand-in" id="toc-render-and-hand-in" class="nav-link" data-scroll-target="#render-and-hand-in">Render and hand in</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -206,21 +210,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<hr>
-<p>In this practical, the assumptions of the linear regression model will be discussed. You will practice with checking the different assumptions, and practice with accounting for some of the assumptions with additional steps. Please note that these assumptions can only be checked once you have selected a (final) model, as these assumptions ‘need’ a model that they apply to.</p>
+<section id="hand-in-assignment" class="level1">
+<h1>Hand-in assignment</h1>
+<p>With this hand-in assignment, you demonstrate that you can check different assumptions and you can account for some of those assumptions with additional steps.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What to hand in
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Hand in <strong>only your rendered <code>.html</code> file</strong>. Do not hand in your <code>.qmd</code> file or a zip of your project.</li>
+<li>Name your file <strong><code>lab4_firstname_lastname_studentnumber.html</code></strong>, for example <code>lab4_jane_doe_1234567.html</code>.</li>
+<li>Your <code>.html</code> file must be <strong>self-contained</strong>: use <code>embed-resources: true</code> in your YAML header, so that your plots are stored inside the <code>.html</code> file. Without it, your plots will be missing when we open your file.</li>
+</ul>
+</div>
+</div>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p><strong>Exercise 1</strong></p>
+<ol type="1">
+<li>Open the R project you made for Lab 1.</li>
+<li>Create a new Quarto document (<em>File &gt; New File &gt; Quarto Document</em>) and save it in the <code>code</code> folder as <code>lab4_firstname_lastname_studentnumber.qmd</code>.</li>
+<li>Replace the YAML header with the header below and fill in your own details:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "lab4_firstname_lastname_studentnumber"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Firstname Lastname"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We will use the following packages in this practical:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(regclass)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(regclass)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
-<section id="data-set-loading-inspection" class="level1">
-<h1>Data set: Loading &amp; Inspection</h1>
+<section id="loading-and-inspecting-your-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="loading-and-inspecting-your-dataset">Loading and inspecting your dataset</h2>
 <p>For the first part of this practical, a <a href="../data/Fish.csv">dataset</a> from a fish market is used. The variables in this fish data set are:</p>
 <ul>
 <li><p>Species of the fish</p></li>
@@ -229,19 +263,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Diagonal length of the fish in cm</p></li>
 <li><p>Cross length of the fish in cm</p></li>
 <li><p>Height of the fish in cm</p></li>
-<li><p>Diagonal width of the fish in cm</p>
-</li>
+<li><p>Diagonal width of the fish in cm</p></li>
 </ul>
-<p>Download the dataset from the GitHub link, store it in the folder of your <code>Rproject</code> for this practical and open it in <code>R</code>. Also, adjust the column names according to the code below to make them a bit more intuitive.</p>
+<p><strong>Exercise 2</strong></p>
+<ol type="1">
+<li>Download the dataset and save it in your <code>data</code> folder in your <code>Rproject</code> and open it in <code>R</code>.</li>
+<li>Adjust the column names according to the code below to make them a bit more intuitive.</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data set</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Fish.csv"</span>))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_fish) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"weigth"</span>, <span class="st">"vertical_length"</span>, <span class="st">"diagonal_length"</span>, <span class="st">"cross_length"</span>, <span class="st">"height"</span>, <span class="st">"diagonal_width"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the data set with the 'head' function to have a general impression.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data_fish <span class="sc">%&gt;%</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data set</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dataDir <span class="ot">&lt;-</span> <span class="st">"data"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>outDir  <span class="ot">&lt;-</span> <span class="st">"output"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>figDir  <span class="ot">&lt;-</span> <span class="st">"figures"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data_fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(dataDir, <span class="st">"Fish.csv"</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_fish) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"weigth"</span>, <span class="st">"vertical_length"</span>, <span class="st">"diagonal_length"</span>, <span class="st">"cross_length"</span>, <span class="st">"height"</span>, <span class="st">"diagonal_width"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the data set with the 'head' function to have a general impression.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>data_fish <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  species weigth vertical_length diagonal_length cross_length  height
 1   Bream    242            23.2            25.4         30.0 11.5200
@@ -259,124 +300,134 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 6         4.9274</code></pre>
 </div>
 </div>
-<hr>
 </section>
-<section id="model-assumptions" class="level1">
-<h1>Model assumptions</h1>
+<section id="model-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="model-assumptions">Model assumptions</h2>
 <p>We will now discuss and check the various model assumptions of linear regression. If steps can be taken to account for a violated assumption, this will also be touched upon.</p>
-<hr>
-<section id="linearity" class="level2">
-<h2 class="anchored" data-anchor-id="linearity">Linearity</h2>
-<p>With the assumption of linearity, it is assumed that the relation between the dependent and independent variables is (more or less) linear. You can check this by generating a scatterplot using a predictor variable and outcome variable of the regression model.</p>
+<section id="linearity" class="level3">
+<h3 class="anchored" data-anchor-id="linearity">Linearity</h3>
+<p>With the assumption of linearity, it is assumed that the relation between the dependent and independent variables is (more or less) linear. You can check this by generating a scatter-plot using a predictor variable and outcome variable of the regression model.</p>
+<p><strong>Exercise 3</strong></p>
 <ol type="1">
 <li><p><strong>Check whether there is a linear relation between the variables vertical length and the cross length.</strong></p></li>
-<li><p><strong>Next check the relation between weight and height.</strong></p></li>
+<li><p><strong>Check the relation between weight and height.</strong></p></li>
 <li><p><strong>Describe both plots. What differences do you see?</strong></p></li>
 </ol>
 <p>When a non-linear relation is present, you can either choose another model to use, or transform the predictor before adding it to the model, for example using a log-transformation. Applying a transformation, however, will not always solve the problem, and makes interpretation of the model less intuitive.</p>
-<ol start="4" type="1">
+<p><strong>Exercise 4</strong></p>
+<ol type="1">
 <li><p><strong>Apply a log-transformation to the weight variable.</strong></p></li>
 <li><p><strong>Plot the relation between length and weight again, but now including the transformed variable.</strong></p></li>
 <li><p><strong>Describe if the transformation improved the linear relation.</strong></p></li>
 </ol>
-<hr>
 </section>
-<section id="predictor-matrix-full-rank" class="level2">
-<h2 class="anchored" data-anchor-id="predictor-matrix-full-rank">Predictor matrix full rank</h2>
+<section id="predictor-matrix-full-rank" class="level3">
+<h3 class="anchored" data-anchor-id="predictor-matrix-full-rank">Predictor matrix full rank</h3>
 <p>This assumption states that:</p>
-<li>
-<p>there need to be more observations than predictors (n &gt; P).</p>
-</li><li>
-no predictor can be a linear combination of other predictors; predictors cannot have a very high correlation (multicollinearity).
-</li>
-<p><br></p>
+<ul>
+<li><p>there need to be more observations than predictors (n &gt; P).</p></li>
+<li><p>no predictor can be a linear combination of other predictors;</p></li>
+<li><p>predictors cannot have a very high correlation (multicollinearity).</p></li>
+</ul>
 <p>The first part of this assumption is easy to check: see if the number of observations minus the number of predictors is a positive number. The second part can be checked by either obtaining correlations between the predictors, or by determining the VIF (variance inflation factor). When the VIF is above 10, this indicate high multicollinearity. To account for this, predictors can be excluded from the model, or a new variable can be constructed based on predictors with a high correlation.</p>
-<p>To examine VIF scores, the function <code>VIF()</code> from the <code>regclass</code> can be used on a prespecified model. If this model includes a categorical variable with multiple categories, such as ‘species’ in the example data, the generalized VIF is used, and we have to look at the third column (GVIF^*(1/(2*Df))), these values can be compared to normal VIF values.</p>
-<ol start="7" type="1">
+<p>To examine VIF scores, the function <code>VIF()</code> from the <code>regclass</code> can be used on a prespecified model. If this model includes a categorical variable with multiple categories, such as ‘species’ in the example data, the generalized VIF is used, and we have to look at the third column <code>(GVIF^*(1/(2*Df)))</code>, these values can be compared to normal VIF values.</p>
+<p><strong>Exercise 5</strong></p>
+<ol type="1">
 <li><p><strong>Specify a linear model with <code>weight</code> as outcome variable using all other variables in the dataset as predictors. Save this model as <code>model_fish1</code>. Calculate VIF values for this model.</strong></p></li>
 <li><p><strong>Check the VIF scores. If VIF scores exceed a score of 10, give substantial explanation why the VIF scores are this high.</strong></p></li>
 <li><p><strong>What adjustments can be made to the model to account for multicollinearity in this case?</strong></p></li>
 <li><p><strong>Run a new model which only includes one of the three length variables and call it <code>model_fish2</code>. Describe if there is an improvement.</strong></p></li>
 <li><p><strong>What happens with the regression model when there are more predictors than observations?</strong></p></li>
 </ol>
-<hr>
 </section>
-<section id="exogenous-predictors" class="level2">
-<h2 class="anchored" data-anchor-id="exogenous-predictors">Exogenous predictors</h2>
+<section id="exogenous-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="exogenous-predictors">Exogenous predictors</h3>
 <p>For this assumption, the expected value of the errors (mean of the errors) must be 0. Furthermore, The errors must be independent of the predictors.</p>
-<ol start="12" type="1">
+<p><strong>Exercise 6</strong></p>
+<ol type="1">
 <li><strong>What is the possible consequence of not meeting this assumption?</strong></li>
 </ol>
-<hr>
 </section>
-<section id="constant-finite-error-variance" class="level2">
-<h2 class="anchored" data-anchor-id="constant-finite-error-variance">Constant, finite error variance</h2>
+<section id="constant-finite-error-variance" class="level3">
+<h3 class="anchored" data-anchor-id="constant-finite-error-variance">Constant, finite error variance</h3>
 <p>This assumptions is also called ‘the assumption of homoscedasticity’. It states that the variance of the error terms should be constant over all levels of the predictors. This can be checked by plotting the residuals against the fitted values. These plots can be obtained by simply taking the first plot of a specified model, <code>plot(model_x)</code>.</p>
-<ol start="13" type="1">
+<p><strong>Exercise 7</strong></p>
+<ol type="1">
 <li><p><strong>Create a residual vs fitted values plot for <code>model_fish1</code>, which is the first plot generated by the <code>plot()</code> function.</strong></p></li>
 <li><p><strong>Load in the <code>iris</code> data, and specify a model where sepal length is predicted by all other variables and save this as <code>model_iris1</code>.</strong></p></li>
 <li><p><strong>Create a residual vs fitted plot for this model as well.</strong></p></li>
 <li><p><strong>Discuss both plots and indicate whether the assumption is met.</strong></p></li>
 <li><p><strong>Discuss what the consequence would be if this assumption is violated.</strong></p></li>
 </ol>
-<hr>
 </section>
-<section id="independent-errors" class="level2">
-<h2 class="anchored" data-anchor-id="independent-errors">Independent errors</h2>
+<section id="independent-errors" class="level3">
+<h3 class="anchored" data-anchor-id="independent-errors">Independent errors</h3>
 <p>This assumption states that error terms should have no correlation. Dependence of the errors can result from multiple things. First, there is a possible dependence in the error terms when there is serial dependence, for example because the data contains variables that are measured over time. Another reason can be when there is a cluster structure in the data, for example students in classes in schools.</p>
-<ol start="18" type="1">
+<p><strong>Exercise 8</strong></p>
+<ol type="1">
 <li><strong>How can both causes of correlated error terms be detected, and what can be done to solve the problem?</strong></li>
 </ol>
-<hr>
 </section>
-<section id="normally-distributed-errors" class="level2">
-<h2 class="anchored" data-anchor-id="normally-distributed-errors">Normally distributed errors</h2>
+<section id="normally-distributed-errors" class="level3">
+<h3 class="anchored" data-anchor-id="normally-distributed-errors">Normally distributed errors</h3>
 <p>This assumption states that errors should be roughly normally distributed. Like the assumption of homoscedasticity, this can be checked by model plots, provided by R.</p>
-<ol start="19" type="1">
+<p><strong>Exercise 9</strong></p>
+<ol type="1">
 <li><p><strong>Create a QQ plot for <code>model_iris1</code>, which is the second plot generated by the <code>plot()</code> function. Indicate whether the assumption is met.</strong></p></li>
 <li><p><strong>Create a new model using the fish data, where <code>diagonal_width</code> is predicted by <code>cross_length</code>, and store the model as <code>model_fish3</code>.</strong></p></li>
 <li><p><strong>Create a QQ plot for <code>model_fish3</code>.</strong></p></li>
 <li><p><strong>Interpret the two plots. Is the assumption met in both cases?</strong></p></li>
 <li><p><strong>In what cases is it problematic that the assumption is not met? And in what cases is it no problem?</strong></p></li>
 </ol>
-<hr>
 </section>
 </section>
-<section id="influential-observations" class="level1">
-<h1>Influential observations</h1>
-<hr>
-<section id="outliers" class="level2">
-<h2 class="anchored" data-anchor-id="outliers">Outliers</h2>
+<section id="influential-observations" class="level2">
+<h2 class="anchored" data-anchor-id="influential-observations">Influential observations</h2>
+<section id="outliers" class="level3">
+<h3 class="anchored" data-anchor-id="outliers">Outliers</h3>
 <p>Outliers are observations that show extreme outcomes compared to the other data, or observations with outcome values that fit the model very badly. Outliers can be detected by inspecting the <em>externally studentized residuals</em>.</p>
-<ol start="24" type="1">
+<p><strong>Exercise 10</strong></p>
+<ol type="1">
 <li><p><strong>Make a plot of studentized residuals by using the functions <code>rstudent</code> and <code>plot</code> for `model_fish1. What do you conclude?</strong></p></li>
 <li><p><strong>Make a plot of studentized residuals for <code>model_iris1</code>.</strong></p></li>
 <li><p><strong>Store the dataset <code>Animals</code> from the <code>MASS</code> package. Define a regression model where animals’ body weight is predicted by brain weight and store it as <code>model_animals1</code>.</strong></p></li>
 <li><p><strong>Make a plot of the studentized residuals for <code>model_animals1</code>.</strong></p></li>
 </ol>
-<hr>
 </section>
-<section id="high-leverage-observations" class="level2">
-<h2 class="anchored" data-anchor-id="high-leverage-observations">High-leverage observations</h2>
+<section id="high-leverage-observations" class="level3">
+<h3 class="anchored" data-anchor-id="high-leverage-observations">High-leverage observations</h3>
 <p>High-leverage observations are observations with extreme predictor values. To detect these observations, we look at their <em>leverage values</em>. These values can be summarized in a leverage plot.</p>
-<ol start="28" type="1">
+<p><strong>Exercise 11</strong></p>
+<ol type="1">
 <li><strong>For the model specified under model_animals1, create a leverage plot by plotting the <code>hatvalues()</code> of the model.</strong></li>
 </ol>
-<hr>
 </section>
-<section id="influence-on-the-model" class="level2">
-<h2 class="anchored" data-anchor-id="influence-on-the-model">Influence on the model</h2>
+<section id="influence-on-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="influence-on-the-model">Influence on the model</h3>
 <p>Both outliers and observations with high leverage are not necessarily a problem. Cases that are both, however, seem to form more of a problem. These cases can influence the model heavily and can therefore be problematic.</p>
 <p>Influence measures come in two sorts: Cook’s distance checks for influential observations, while DFBETAS check for influential, and possible problematic, observations per regression coefficients.</p>
-<ol start="29" type="1">
+<p><strong>Exercise 12</strong></p>
+<ol type="1">
 <li><p><strong>For <code>model_animals1</code>, check Cooks distance by plotting the <code>cooks.distance</code> of the model.</strong></p></li>
 <li><p><strong>For <code>model_animals1</code>, check the DFBETAS by using the function <code>dfbetas</code>.</strong></p></li>
 <li><p><strong>Describe what you see in the plots for Cook’s distance and DFBETAS. What do you conclude?</strong></p></li>
-<li><p><strong>Delete the problematic observation that you found in Question 12 and store the dataset under a new name.</strong></p></li>
+<li><p><strong>Delete the problematic observation that you found in the previous exercise and store the dataset under a new name.</strong></p></li>
 <li><p><strong>Fit the regression model where animals’ body weight is predicted by brain weight using the adjusted dataset and store it as <code>model_animals2</code>.</strong></p></li>
 <li><p><strong>Compare the output to <code>model_animals1</code> and describe the changes.</strong></p></li>
 <li><p><strong>Run the plots for influential observations again on this new model and see if anything changes.</strong></p></li>
 </ol>
+</section>
+</section>
+<section id="render-and-hand-in" class="level2">
+<h2 class="anchored" data-anchor-id="render-and-hand-in">Render and hand in</h2>
+<p><strong>Exercise 13</strong></p>
+<p>Click <strong>Render</strong> in RStudio. Check that:</p>
+<ul>
+<li>the output file is called <code>lab4_firstname_lastname_studentnumber.html</code> and has the same name as the <code>title</code> in your YAML header;</li>
+<li>all your code, output, answers and plots show up in the <code>.html</code> file;</li>
+<li>the file is self-contained: <code>embed-resources: true</code> is in your YAML header.</li>
+</ul>
+<p>Hand in <strong>only</strong> the <code>.html</code> file.</p>
 
 
 </section>

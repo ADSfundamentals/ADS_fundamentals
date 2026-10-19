@@ -164,8 +164,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#data-set-loading-inspection" id="toc-data-set-loading-inspection" class="nav-link" data-scroll-target="#data-set-loading-inspection">Data set: Loading &amp; Inspection</a></li>
+  <li><a href="#hand-in-assignment" id="toc-hand-in-assignment" class="nav-link active" data-scroll-target="#hand-in-assignment">Hand-in assignment</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#loading-and-inspecting-your-dataset" id="toc-loading-and-inspecting-your-dataset" class="nav-link" data-scroll-target="#loading-and-inspecting-your-dataset">Loading and inspecting your dataset</a></li>
   <li><a href="#model-assumptions" id="toc-model-assumptions" class="nav-link" data-scroll-target="#model-assumptions">Model assumptions</a>
   <ul class="collapse">
   <li><a href="#linearity" id="toc-linearity" class="nav-link" data-scroll-target="#linearity">Linearity</a></li>
@@ -180,6 +182,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers">Outliers</a></li>
   <li><a href="#high-leverage-observations" id="toc-high-leverage-observations" class="nav-link" data-scroll-target="#high-leverage-observations">High-leverage observations</a></li>
   <li><a href="#influence-on-the-model" id="toc-influence-on-the-model" class="nav-link" data-scroll-target="#influence-on-the-model">Influence on the model</a></li>
+  </ul></li>
+  <li><a href="#render-and-hand-in" id="toc-render-and-hand-in" class="nav-link" data-scroll-target="#render-and-hand-in">Render and hand in</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -206,21 +210,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<hr>
-<p>In this practical, the assumptions of the linear regression model will be discussed. You will practice with checking the different assumptions, and practice with accounting for some of the assumptions with additional steps. Please note that these assumptions can only be checked once you have selected a (final) model, as these assumptions ‘need’ a model that they apply to.</p>
+<section id="hand-in-assignment" class="level1">
+<h1>Hand-in assignment</h1>
+<p>With this hand-in assignment, you demonstrate that you can check different assumptions and you can account for some of those assumptions with additional steps.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What to hand in
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Hand in <strong>only your rendered <code>.html</code> file</strong>. Do not hand in your <code>.qmd</code> file or a zip of your project.</li>
+<li>Name your file <strong><code>lab4_firstname_lastname_studentnumber.html</code></strong>, for example <code>lab4_jane_doe_1234567.html</code>.</li>
+<li>Your <code>.html</code> file must be <strong>self-contained</strong>: use <code>embed-resources: true</code> in your YAML header, so that your plots are stored inside the <code>.html</code> file. Without it, your plots will be missing when we open your file.</li>
+</ul>
+</div>
+</div>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p><strong>Exercise 1</strong></p>
+<ol type="1">
+<li>Open the R project you made for Lab 1.</li>
+<li>Create a new Quarto document (<em>File &gt; New File &gt; Quarto Document</em>) and save it in the <code>code</code> folder as <code>lab4_firstname_lastname_studentnumber.qmd</code>.</li>
+<li>Replace the YAML header with the header below and fill in your own details:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "lab4_firstname_lastname_studentnumber"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Firstname Lastname"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We will use the following packages in this practical:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(regclass)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(regclass)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
-<section id="data-set-loading-inspection" class="level1">
-<h1>Data set: Loading &amp; Inspection</h1>
+<section id="loading-and-inspecting-your-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="loading-and-inspecting-your-dataset">Loading and inspecting your dataset</h2>
 <p>For the first part of this practical, a <a href="../data/Fish.csv">dataset</a> from a fish market is used. The variables in this fish data set are:</p>
 <ul>
 <li><p>Species of the fish</p></li>
@@ -229,19 +263,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Diagonal length of the fish in cm</p></li>
 <li><p>Cross length of the fish in cm</p></li>
 <li><p>Height of the fish in cm</p></li>
-<li><p>Diagonal width of the fish in cm</p>
-</li>
+<li><p>Diagonal width of the fish in cm</p></li>
 </ul>
-<p>Download the dataset from the GitHub link, store it in the folder of your <code>Rproject</code> for this practical and open it in <code>R</code>. Also, adjust the column names according to the code below to make them a bit more intuitive.</p>
+<p><strong>Exercise 2</strong></p>
+<ol type="1">
+<li>Download the dataset and save it in your <code>data</code> folder in your <code>Rproject</code> and open it in <code>R</code>.</li>
+<li>Adjust the column names according to the code below to make them a bit more intuitive.</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data set</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Fish.csv"</span>))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_fish) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"weigth"</span>, <span class="st">"vertical_length"</span>, <span class="st">"diagonal_length"</span>, <span class="st">"cross_length"</span>, <span class="st">"height"</span>, <span class="st">"diagonal_width"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the data set with the 'head' function to have a general impression.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data_fish <span class="sc">%&gt;%</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data set</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dataDir <span class="ot">&lt;-</span> <span class="st">"data"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>outDir  <span class="ot">&lt;-</span> <span class="st">"output"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>figDir  <span class="ot">&lt;-</span> <span class="st">"figures"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data_fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(dataDir, <span class="st">"Fish.csv"</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_fish) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"weigth"</span>, <span class="st">"vertical_length"</span>, <span class="st">"diagonal_length"</span>, <span class="st">"cross_length"</span>, <span class="st">"height"</span>, <span class="st">"diagonal_width"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the data set with the 'head' function to have a general impression.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>data_fish <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  species weigth vertical_length diagonal_length cross_length  height
 1   Bream    242            23.2            25.4         30.0 11.5200
@@ -259,26 +300,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 6         4.9274</code></pre>
 </div>
 </div>
-<hr>
 </section>
-<section id="model-assumptions" class="level1">
-<h1>Model assumptions</h1>
+<section id="model-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="model-assumptions">Model assumptions</h2>
 <p>We will now discuss and check the various model assumptions of linear regression. If steps can be taken to account for a violated assumption, this will also be touched upon.</p>
-<hr>
-<section id="linearity" class="level2">
-<h2 class="anchored" data-anchor-id="linearity">Linearity</h2>
-<p>With the assumption of linearity, it is assumed that the relation between the dependent and independent variables is (more or less) linear. You can check this by generating a scatterplot using a predictor variable and outcome variable of the regression model.</p>
+<section id="linearity" class="level3">
+<h3 class="anchored" data-anchor-id="linearity">Linearity</h3>
+<p>With the assumption of linearity, it is assumed that the relation between the dependent and independent variables is (more or less) linear. You can check this by generating a scatter-plot using a predictor variable and outcome variable of the regression model.</p>
+<p><strong>Exercise 3</strong></p>
 <ol type="1">
 <li><strong>Check whether there is a linear relation between the variables vertical length and the cross length.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_fish, </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> vertical_length, <span class="at">y =</span> cross_length)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"linear relation is present"</span>) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"vertical length in cm"</span>) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"cross length in cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_fish, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> vertical_length, <span class="at">y =</span> cross_length)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"linear relation is present"</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"vertical length in cm"</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"cross length in cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><strong>Check the relation between weight and height.</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_fish, <span class="fu">aes</span>(<span class="at">x =</span> weigth, <span class="at">y =</span> height)) <span class="sc">+</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"linear relation is missing"</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Weigth in gram"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"heigth in cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -287,84 +345,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<ol start="2" type="1">
-<li><strong>Next check the relation between weight and height.</strong></li>
+<ol start="3" type="1">
+<li><strong>Describe both plots. What differences do you see?</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_fish, <span class="fu">aes</span>(<span class="at">x =</span> weigth, <span class="at">y =</span> height)) <span class="sc">+</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"linear relation is missing"</span>) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Weigth in gram"</span>) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"heigth in cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The first plot shows a case where there is a more or less linear relation (Vertical length of the fish and cross length of the fish). In the second plot, the relation is clearly not linear.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When a non-linear relation is present, you can either choose another model to use, or transform the predictor before adding it to the model, for example using a log-transformation. Applying a transformation, however, will not always solve the problem, and makes interpretation of the model less intuitive.</p>
+<p><strong>Exercise 4</strong></p>
+<ol type="1">
+<li><strong>Apply a log-transformation to the weight variable.</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_fish<span class="sc">$</span>weigth_trans <span class="ot">&lt;-</span> data_fish<span class="sc">$</span>weigth <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Plot the relation between length and weight again, but now including the transformed variable.</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_fish, <span class="fu">aes</span>(<span class="at">x =</span> weigth_trans, <span class="at">y =</span> height)) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"linear relation improved"</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Weigth in gram"</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"heigth in cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <ol start="3" type="1">
-<li><strong>Describe both plots. What differences do you see?</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The first plot shows a case where there is a more or less linear relation (Vertical length of the fish and cross length of the fish). In the second plot, the relation is clearly not linear.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>When a non-linear relation is present, you can either choose another model to use, or transform the predictor before adding it to the model, for example using a log-transformation. Applying a transformation, however, will not always solve the problem, and makes interpretation of the model less intuitive.</p>
-<ol start="4" type="1">
-<li><strong>Apply a log-transformation to the weight variable.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_fish<span class="sc">$</span>weigth_trans <span class="ot">&lt;-</span> data_fish<span class="sc">$</span>weigth <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="5" type="1">
-<li><strong>Plot the relation between length and weight again, but now including the transformed variable.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_fish, <span class="fu">aes</span>(<span class="at">x =</span> weigth_trans, <span class="at">y =</span> height)) <span class="sc">+</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"linear relation improved"</span>) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Weigth in gram"</span>) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"heigth in cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<ol start="6" type="1">
 <li><strong>Describe if the transformation improved the linear relation.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You see that the relation is still not completely linear, but a lot more linear than before the transformation (plot 2).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You see that the relation is still not completely linear, but a lot more linear than before the transformation (plot 2).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
-<section id="predictor-matrix-full-rank" class="level2">
-<h2 class="anchored" data-anchor-id="predictor-matrix-full-rank">Predictor matrix full rank</h2>
+<section id="predictor-matrix-full-rank" class="level3">
+<h3 class="anchored" data-anchor-id="predictor-matrix-full-rank">Predictor matrix full rank</h3>
 <p>This assumption states that:</p>
-<li>
-<p>there need to be more observations than predictors (n &gt; P).</p>
-</li><li>
-no predictor can be a linear combination of other predictors; predictors cannot have a very high correlation (multicollinearity).
-</li>
-<p><br></p>
+<ul>
+<li><p>there need to be more observations than predictors (n &gt; P).</p></li>
+<li><p>no predictor can be a linear combination of other predictors;</p></li>
+<li><p>predictors cannot have a very high correlation (multicollinearity).</p></li>
+</ul>
 <p>The first part of this assumption is easy to check: see if the number of observations minus the number of predictors is a positive number. The second part can be checked by either obtaining correlations between the predictors, or by determining the VIF (variance inflation factor). When the VIF is above 10, this indicate high multicollinearity. To account for this, predictors can be excluded from the model, or a new variable can be constructed based on predictors with a high correlation.</p>
-<p>To examine VIF scores, the function <code>VIF()</code> from the <code>regclass</code> can be used on a prespecified model. If this model includes a categorical variable with multiple categories, such as ‘species’ in the example data, the generalized VIF is used, and we have to look at the third column (GVIF^*(1/(2*Df))), these values can be compared to normal VIF values.</p>
-<ol start="7" type="1">
+<p>To examine VIF scores, the function <code>VIF()</code> from the <code>regclass</code> can be used on a prespecified model. If this model includes a categorical variable with multiple categories, such as ‘species’ in the example data, the generalized VIF is used, and we have to look at the third column <code>(GVIF^*(1/(2*Df)))</code>, these values can be compared to normal VIF values.</p>
+<p><strong>Exercise 5</strong></p>
+<ol type="1">
 <li><strong>Specify a linear model with <code>weight</code> as outcome variable using all other variables in the dataset as predictors. Save this model as <code>model_fish1</code>. Calculate VIF values for this model.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model_fish1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weigth <span class="sc">~</span>., </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> data_fish[,<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>])</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>model_fish1 <span class="sc">%&gt;%</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">VIF</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model_fish1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weigth <span class="sc">~</span>., </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> data_fish[,<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>model_fish1 <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">VIF</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                      GVIF Df GVIF^(1/(2*Df))
 species         1509.77571  6        1.840388
@@ -375,27 +415,27 @@ height            56.20370  1        7.496913
 diagonal_width    29.16651  1        5.400602</code></pre>
 </div>
 </div>
-<ol start="8" type="1">
+<ol start="2" type="1">
 <li><strong>Check the VIF scores. If VIF scores exceed a score of 10, give substantial explanation why the VIF scores are this high.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The VIF values in this first model are extreme in some cases, more specifically for the three variables that all measure some aspect of length, it makes sense that these values can be highly correlated. One way to solve this, is excluding predictors that almost measure the same thing as another variable.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The VIF values in this first model are extreme in some cases, more specifically for the three variables that all measure some aspect of length, it makes sense that these values can be highly correlated. One way to solve this, is excluding predictors that almost measure the same thing as another variable.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="9" type="1">
+<ol start="3" type="1">
 <li><strong>What adjustments can be made to the model to account for multicollinearity in this case?</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A straightforward solution is to include only one of the variables measuring an aspect of length. More elaborate solutions exist but are not covered in this course.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A straightforward solution is to include only one of the variables measuring an aspect of length. More elaborate solutions exist but are not covered in this course.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="10" type="1">
+<ol start="4" type="1">
 <li><strong>Run a new model which only includes one of the three length variables and call it <code>model_fish2</code>. Describe if there is an improvement.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>model_fish2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weigth <span class="sc">~</span> species <span class="sc">+</span> diagonal_length <span class="sc">+</span> height <span class="sc">+</span> diagonal_width, </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> data_fish)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>model_fish2 <span class="sc">%&gt;%</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">VIF</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model_fish2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weigth <span class="sc">~</span> species <span class="sc">+</span> diagonal_length <span class="sc">+</span> height <span class="sc">+</span> diagonal_width, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> data_fish)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>model_fish2 <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">VIF</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                     GVIF Df GVIF^(1/(2*Df))
 species         218.36805  6        1.566507
@@ -403,159 +443,174 @@ diagonal_length  28.17950  1        5.308437
 height           54.91084  1        7.410185
 diagonal_width   28.52222  1        5.340620</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We chose to go with a model which only includes `diagonal_length`, as this variable had the highest VIF value and therefore is able to best grasp the variance that is also measured by the other two length variables. However which strategy is most appropriate can differ per situation. We see now that the VIF values have returned to 'normal' values (although still a bit high).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We chose to go with a model which only includes `diagonal_length`, as this variable had the highest VIF value and therefore is able to best grasp the variance that is also measured by the other two length variables. However which strategy is most appropriate can differ per situation. We see now that the VIF values have returned to 'normal' values (although still a bit high).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="11" type="1">
+<ol start="5" type="1">
 <li><strong>What happens with the regression model when there are more predictors than observations?</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If there are more predictors than observations, the model can not be identified and the parameters cannot be estimated</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If there are more predictors than observations, the model can not be identified and the parameters cannot be estimated</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
-<section id="exogenous-predictors" class="level2">
-<h2 class="anchored" data-anchor-id="exogenous-predictors">Exogenous predictors</h2>
+<section id="exogenous-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="exogenous-predictors">Exogenous predictors</h3>
 <p>For this assumption, the expected value of the errors (mean of the errors) must be 0. Furthermore, The errors must be independent of the predictors.</p>
-<ol start="12" type="1">
+<p><strong>Exercise 6</strong></p>
+<ol type="1">
 <li><strong>What is the possible consequence of not meeting this assumption?</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Not meeting this assumption results in biased estimates for the regression coefficients.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Not meeting this assumption results in biased estimates for the regression coefficients.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
-<section id="constant-finite-error-variance" class="level2">
-<h2 class="anchored" data-anchor-id="constant-finite-error-variance">Constant, finite error variance</h2>
+<section id="constant-finite-error-variance" class="level3">
+<h3 class="anchored" data-anchor-id="constant-finite-error-variance">Constant, finite error variance</h3>
 <p>This assumptions is also called ‘the assumption of homoscedasticity’. It states that the variance of the error terms should be constant over all levels of the predictors. This can be checked by plotting the residuals against the fitted values. These plots can be obtained by simply taking the first plot of a specified model, <code>plot(model_x)</code>.</p>
-<ol start="13" type="1">
+<p><strong>Exercise 7</strong></p>
+<ol type="1">
 <li><strong>Create a residual vs fitted values plot for <code>model_fish1</code>, which is the first plot generated by the <code>plot()</code> function.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model_fish1 <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model_fish1 <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<ol start="14" type="1">
+<ol start="2" type="1">
 <li><strong>Load in the <code>iris</code> data, and specify a model where sepal length is predicted by all other variables and save this as <code>model_iris1</code>.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>data_iris   <span class="ot">&lt;-</span> iris</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>model_iris1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> ., </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> data_iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data_iris   <span class="ot">&lt;-</span> iris</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>model_iris1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> ., </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> data_iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="15" type="1">
+<ol start="3" type="1">
 <li><strong>Create a residual vs fitted plot for this model as well.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model_iris1 <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model_iris1 <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<ol start="16" type="1">
+<ol start="4" type="1">
 <li><strong>Discuss both plots and indicate whether the assumption is met.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the `iris_data` plot, it can be seen that the red line is quite constant. Also, the dots seem to have a rather constant variance. In the `fish_data` plot, however, the variance in error terms seems smaller for the lower values than for the higher values. This second plot indicates heteroscedasticity and indicates that the assumption is violated.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the `iris_data` plot, it can be seen that the red line is quite constant. Also, the dots seem to have a rather constant variance. In the `fish_data` plot, however, the variance in error terms seems smaller for the lower values than for the higher values. This second plot indicates heteroscedasticity and indicates that the assumption is violated.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="17" type="1">
+<ol start="5" type="1">
 <li><strong>Discuss what the consequence would be if this assumption is violated.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If this assumption is violated, estimated standard errors are biased.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If this assumption is violated, estimated standard errors are biased.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
-<section id="independent-errors" class="level2">
-<h2 class="anchored" data-anchor-id="independent-errors">Independent errors</h2>
+<section id="independent-errors" class="level3">
+<h3 class="anchored" data-anchor-id="independent-errors">Independent errors</h3>
 <p>This assumption states that error terms should have no correlation. Dependence of the errors can result from multiple things. First, there is a possible dependence in the error terms when there is serial dependence, for example because the data contains variables that are measured over time. Another reason can be when there is a cluster structure in the data, for example students in classes in schools.</p>
-<ol start="18" type="1">
+<p><strong>Exercise 8</strong></p>
+<ol type="1">
 <li><strong>How can both causes of correlated error terms be detected, and what can be done to solve the problem?</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Temporal dependence can be checked by investigating the autocorrelation, while clustered data can be found by investigating the intra class correlation (ICC).</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># More important: dealing with these dependencies requires another model (multilevel for clustered data, or a model that account for the time aspect). Those models are out of the scope of this course, but always be aware of a theoretical dependency between your errors.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Temporal dependence can be checked by investigating the autocorrelation, while clustered data can be found by investigating the intra class correlation (ICC).</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># More important: dealing with these dependencies requires another model (multilevel for clustered data, or a model that account for the time aspect). Those models are out of the scope of this course, but always be aware of a theoretical dependency between your errors.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
-<section id="normally-distributed-errors" class="level2">
-<h2 class="anchored" data-anchor-id="normally-distributed-errors">Normally distributed errors</h2>
+<section id="normally-distributed-errors" class="level3">
+<h3 class="anchored" data-anchor-id="normally-distributed-errors">Normally distributed errors</h3>
 <p>This assumption states that errors should be roughly normally distributed. Like the assumption of homoscedasticity, this can be checked by model plots, provided by R.</p>
-<ol start="19" type="1">
+<p><strong>Exercise 9</strong></p>
+<ol type="1">
 <li><strong>Create a QQ plot for <code>model_iris1</code>, which is the second plot generated by the <code>plot()</code> function. Indicate whether the assumption is met.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model_iris1 <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model_iris1 <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<ol start="20" type="1">
+<ol start="2" type="1">
 <li><strong>Create a new model using the fish data, where <code>diagonal_width</code> is predicted by <code>cross_length</code>, and store the model as <code>model_fish3</code>.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model_fish3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(diagonal_width <span class="sc">~</span> cross_length, </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> data_fish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model_fish3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(diagonal_width <span class="sc">~</span> cross_length, </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> data_fish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="21" type="1">
+<ol start="3" type="1">
 <li><strong>Create a QQ plot for <code>model_fish3</code>.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model_fish3 <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>model_fish3 <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<ol start="22" type="1">
+<ol start="4" type="1">
 <li><strong>Interpret the two plots. Is the assumption met in both cases?</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the two plots above, QQ plots are provided for the 2 models. For the first model, the error terms follow the ideal line pretty well, and the assumption holds. In the second plot, the tails deviate quite a lot from the intended line, and it can be debated that the assumption is violated.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the two plots above, QQ plots are provided for the 2 models. For the first model, the error terms follow the ideal line pretty well, and the assumption holds. In the second plot, the tails deviate quite a lot from the intended line, and it can be debated that the assumption is violated.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="23" type="1">
+<ol start="5" type="1">
 <li><strong>In what cases is it problematic that the assumption is not met? And in what cases is it no problem?</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The assumption is important in smaller samples (n &lt; 30). In bigger samples, violating the assumption is less of a big problem. For prediction intervals however, normality of errors is always wanted.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The assumption is important in smaller samples (n &lt; 30). In bigger samples, violating the assumption is less of a big problem. For prediction intervals however, normality of errors is always wanted.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
 </section>
-<section id="influential-observations" class="level1">
-<h1>Influential observations</h1>
-<hr>
-<section id="outliers" class="level2">
-<h2 class="anchored" data-anchor-id="outliers">Outliers</h2>
+<section id="influential-observations" class="level2">
+<h2 class="anchored" data-anchor-id="influential-observations">Influential observations</h2>
+<section id="outliers" class="level3">
+<h3 class="anchored" data-anchor-id="outliers">Outliers</h3>
 <p>Outliers are observations that show extreme outcomes compared to the other data, or observations with outcome values that fit the model very badly. Outliers can be detected by inspecting the <em>externally studentized residuals</em>.</p>
-<ol start="24" type="1">
+<p><strong>Exercise 10</strong></p>
+<ol type="1">
 <li><strong>Make a plot of studentized residuals by using the functions <code>rstudent</code> and <code>plot</code> for `model_fish1. What do you conclude?</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>model_fish1 <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rstudent</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>model_fish1 <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rstudent</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There is at least one clear outlier around observation number 70.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Make a plot of studentized residuals for <code>model_iris1</code>.</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>model_iris1 <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rstudent</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -563,40 +618,45 @@ diagonal_width   28.52222  1        5.340620</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There is at least one clear outlier around observation number 70.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="25" type="1">
-<li><strong>Make a plot of studentized residuals for <code>model_iris1</code>.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>model_iris1 <span class="sc">%&gt;%</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rstudent</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<ol start="26" type="1">
+<ol start="3" type="1">
 <li><strong>Store the dataset <code>Animals</code> from the <code>MASS</code> package. Define a regression model where animals’ body weight is predicted by brain weight and store it as <code>model_animals1</code>.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>data_animals   <span class="ot">&lt;-</span> Animals</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>model_animals1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(body <span class="sc">~</span> brain,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> data_animals)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># There are not really any clear outliers to worry about.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>data_animals   <span class="ot">&lt;-</span> Animals</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>model_animals1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(body <span class="sc">~</span> brain,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> data_animals)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># There are not really any clear outliers to worry about.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="27" type="1">
+<ol start="4" type="1">
 <li><strong>Make a plot of the studentized residuals for <code>model_animals1</code>.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model_animals1 <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rstudent</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model_animals1 <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rstudent</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observation number 26 is an extreme outlier.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="high-leverage-observations" class="level3">
+<h3 class="anchored" data-anchor-id="high-leverage-observations">High-leverage observations</h3>
+<p>High-leverage observations are observations with extreme predictor values. To detect these observations, we look at their <em>leverage values</em>. These values can be summarized in a leverage plot.</p>
+<p><strong>Exercise 11</strong></p>
+<ol type="1">
+<li><strong>For the model specified under model_animals1, create a leverage plot by plotting the <code>hatvalues()</code> of the model.</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model_animals1 <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hatvalues</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -604,20 +664,23 @@ diagonal_width   28.52222  1        5.340620</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observation number 26 is an extreme outlier.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the leverage plot, observation 7 and 15 stand out from the other observations. When you look at the data set, you can notice that both of these observations are elephant species.</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A case with high leverage is not necessarily bad: the influence on the model is more important.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
-<section id="high-leverage-observations" class="level2">
-<h2 class="anchored" data-anchor-id="high-leverage-observations">High-leverage observations</h2>
-<p>High-leverage observations are observations with extreme predictor values. To detect these observations, we look at their <em>leverage values</em>. These values can be summarized in a leverage plot.</p>
-<ol start="28" type="1">
-<li><strong>For the model specified under model_animals1, create a leverage plot by plotting the <code>hatvalues()</code> of the model.</strong></li>
+<section id="influence-on-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="influence-on-the-model">Influence on the model</h3>
+<p>Both outliers and observations with high leverage are not necessarily a problem. Cases that are both, however, seem to form more of a problem. These cases can influence the model heavily and can therefore be problematic.</p>
+<p>Influence measures come in two sorts: Cook’s distance checks for influential observations, while DFBETAS check for influential, and possible problematic, observations per regression coefficients.</p>
+<p><strong>Exercise 12</strong></p>
+<ol type="1">
+<li><strong>For <code>model_animals1</code>, check Cooks distance by plotting the <code>cooks.distance</code> of the model.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>model_animals1 <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hatvalues</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model_animals1 <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cooks.distance</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -625,23 +688,13 @@ diagonal_width   28.52222  1        5.340620</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the leverage plot, observation 7 and 15 stand out from the other observations. When you look at the data set, you can notice that both of these observations are elephant species.</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A case with high leverage is not necessarily bad: the influence on the model is more important.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
-</section>
-<section id="influence-on-the-model" class="level2">
-<h2 class="anchored" data-anchor-id="influence-on-the-model">Influence on the model</h2>
-<p>Both outliers and observations with high leverage are not necessarily a problem. Cases that are both, however, seem to form more of a problem. These cases can influence the model heavily and can therefore be problematic.</p>
-<p>Influence measures come in two sorts: Cook’s distance checks for influential observations, while DFBETAS check for influential, and possible problematic, observations per regression coefficients.</p>
-<ol start="29" type="1">
-<li><strong>For <code>model_animals1</code>, check Cooks distance by plotting the <code>cooks.distance</code> of the model.</strong></li>
+<ol start="2" type="1">
+<li><strong>For <code>model_animals1</code>, check the DFBETAS by using the function <code>dfbetas</code>.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>model_animals1 <span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cooks.distance</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">dfbetas</span>(model_animals1)[,<span class="dv">1</span>],</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"intercept"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -649,55 +702,41 @@ diagonal_width   28.52222  1        5.340620</code></pre>
 </figure>
 </div>
 </div>
-</div>
-<ol start="30" type="1">
-<li><strong>For <code>model_animals1</code>, check the DFBETAS by using the function <code>dfbetas</code>.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">dfbetas</span>(model_animals1)[,<span class="dv">1</span>],</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"intercept"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">dfbetas</span>(model_animals1)[,<span class="dv">2</span>],</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"slope"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-33-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">dfbetas</span>(model_animals1)[,<span class="dv">2</span>],</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"slope"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-34-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that because of the structure of the output of `dfbetas` it is not very convenient to process it using a pipe structure.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that because of the structure of the output of `dfbetas` it is not very convenient to process it using a pipe structure.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="31" type="1">
+<ol start="3" type="1">
 <li><strong>Describe what you see in the plots for Cook’s distance and DFBETAS. What do you conclude?</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Case 26, the earlier spotted outlier, has in all three plots an outstanding value. There is reason to assume that this observation is problematic.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Case 26, the earlier spotted outlier, has in all three plots an outstanding value. There is reason to assume that this observation is problematic.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="32" type="1">
-<li><strong>Delete the problematic observation that you found in Question 12 and store the dataset under a new name.</strong></li>
+<ol start="4" type="1">
+<li><strong>Delete the problematic observation that you found in the previous exercise and store the dataset under a new name.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>data_animals2 <span class="ot">&lt;-</span> data_animals[<span class="sc">-</span><span class="dv">26</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>data_animals2 <span class="ot">&lt;-</span> data_animals[<span class="sc">-</span><span class="dv">26</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="33" type="1">
+<ol start="5" type="1">
 <li><strong>Fit the regression model where animals’ body weight is predicted by brain weight using the adjusted dataset and store it as <code>model_animals2</code>.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>model_animals2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(body <span class="sc">~</span> brain, </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> data_animals2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>model_animals2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(body <span class="sc">~</span> brain, </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> data_animals2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="34" type="1">
+<ol start="6" type="1">
 <li><strong>Compare the output to <code>model_animals1</code> and describe the changes.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_animals1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_animals1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -716,7 +755,7 @@ Residual standard error: 16790 on 26 degrees of freedom
 Multiple R-squared:  2.853e-05, Adjusted R-squared:  -0.03843 
 F-statistic: 0.0007417 on 1 and 26 DF,  p-value: 0.9785</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_animals2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_animals2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -735,42 +774,54 @@ Residual standard error: 2930 on 25 degrees of freedom
 Multiple R-squared:  0.09501,   Adjusted R-squared:  0.05881 
 F-statistic: 2.625 on 1 and 25 DF,  p-value: 0.1178</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We see that the model changes quite a bit: the intercept becomes much lower, and the slope even changes direction (negative to positive).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We see that the model changes quite a bit: the intercept becomes much lower, and the slope even changes direction (negative to positive).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="35" type="1">
+<ol start="7" type="1">
 <li><strong>Run the plots for influential observations again on this new model and see if anything changes.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>model_animals2 <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cooks.distance</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>model_animals2 <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cooks.distance</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">dfbetas</span>(model_animals2)[,<span class="dv">1</span>],</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"intercept"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">dfbetas</span>(model_animals2)[,<span class="dv">1</span>],</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"intercept"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">dfbetas</span>(model_animals2)[,<span class="dv">2</span>],</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"slope"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">dfbetas</span>(model_animals2)[,<span class="dv">2</span>],</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"slope"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab4_answers_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab4_answers_files/figure-html/unnamed-chunk-38-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We see that new influential observations arise. These were earlier overshadowed by observation 26. If you look at these cases, you see these are the cases with very heavy animals. In this case the solution should be to transform the data and take the log of the weights, instead of these values. This means that the assumption of linearity was probably not met for this data set.*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We see that new influential observations arise. These were earlier overshadowed by observation 26. If you look at these cases, you see these are the cases with very heavy animals. In this case the solution should be to transform the data and take the log of the weights, instead of these values. This means that the assumption of linearity was probably not met for this data set.*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+</section>
+<section id="render-and-hand-in" class="level2">
+<h2 class="anchored" data-anchor-id="render-and-hand-in">Render and hand in</h2>
+<p><strong>Exercise 13</strong></p>
+<p>Click <strong>Render</strong> in RStudio. Check that:</p>
+<ul>
+<li>the output file is called <code>lab4_firstname_lastname_studentnumber.html</code> and has the same name as the <code>title</code> in your YAML header;</li>
+<li>all your code, output, answers and plots show up in the <code>.html</code> file;</li>
+<li>the file is self-contained: <code>embed-resources: true</code> is in your YAML header.</li>
+</ul>
+<p>Hand in <strong>only</strong> the <code>.html</code> file.</p>
 
 
 </section>

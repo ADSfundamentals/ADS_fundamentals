@@ -193,19 +193,18 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-repeat-from-last-week" id="toc-part-1-repeat-from-last-week" class="nav-link active" data-scroll-target="#part-1-repeat-from-last-week">Part 1: Repeat from last week</a></li>
-  <li><a href="#part-2-multiple-linear-regression" id="toc-part-2-multiple-linear-regression" class="nav-link" data-scroll-target="#part-2-multiple-linear-regression">Part 2: Multiple linear regression</a>
+  <li><a href="#hand-in-assignment" id="toc-hand-in-assignment" class="nav-link active" data-scroll-target="#hand-in-assignment">1. Hand-in assignment</a>
   <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple linear regression</a></li>
   <li><a href="#categorical-predictors" id="toc-categorical-predictors" class="nav-link" data-scroll-target="#categorical-predictors">Categorical predictors</a></li>
-  </ul></li>
-  <li><a href="#part-3-model-comparison" id="toc-part-3-model-comparison" class="nav-link" data-scroll-target="#part-3-model-comparison">Part 3: Model comparison</a></li>
-  <li><a href="#part-4-residuals-observed-vs.-predicted" id="toc-part-4-residuals-observed-vs.-predicted" class="nav-link" data-scroll-target="#part-4-residuals-observed-vs.-predicted">Part 4: Residuals: observed vs.&nbsp;predicted</a>
-  <ul class="collapse">
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model comparison</a></li>
+  <li><a href="#residuals-observed-vs.-predicted" id="toc-residuals-observed-vs.-predicted" class="nav-link" data-scroll-target="#residuals-observed-vs.-predicted">Residuals: observed vs.&nbsp;predicted</a></li>
   <li><a href="#calculating-new-predicted-values-with-a-regression-equation" id="toc-calculating-new-predicted-values-with-a-regression-equation" class="nav-link" data-scroll-target="#calculating-new-predicted-values-with-a-regression-equation">Calculating new predicted values with a regression equation</a></li>
   <li><a href="#prediction-with-a-categorical-variable" id="toc-prediction-with-a-categorical-variable" class="nav-link" data-scroll-target="#prediction-with-a-categorical-variable">Prediction with a categorical variable</a></li>
   <li><a href="#prediction-with-an-interaction" id="toc-prediction-with-an-interaction" class="nav-link" data-scroll-target="#prediction-with-an-interaction">Prediction with an interaction</a></li>
+  <li><a href="#render-and-hand-in" id="toc-render-and-hand-in" class="nav-link" data-scroll-target="#render-and-hand-in">Render and hand in</a></li>
   </ul></li>
-  <li><a href="#end-of-the-practical" id="toc-end-of-the-practical" class="nav-link" data-scroll-target="#end-of-the-practical">End of the practical</a></li>
   </ul>
 </nav>
     </div>
@@ -231,20 +230,53 @@ window.Quarto = {
 </header>
 
 
-<section id="part-1-repeat-from-last-week" class="level1">
-<h1>Part 1: Repeat from last week</h1>
+<section id="hand-in-assignment" class="level1">
+<h1>1. Hand-in assignment</h1>
+<p>With this hand-in assignment, you demonstrate that you can extend a simple linear regression to a multiple linear regression in R, including both continuous and categorical predictors; interpret the resulting coefficients substantively, including dummy variables; compare the fit of competing models, evaluate model fit visually and calculate predicted values.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What to hand in
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Hand in <strong>only your rendered <code>.html</code> file</strong>. Do not hand in your <code>.qmd</code> file or a zip of your project.</li>
+<li>Name your file <strong><code>lab3_firstname_lastname_studentnumber.html</code></strong>, for example <code>lab3_jane_doe_1234567.html</code>.</li>
+<li>Your <code>.html</code> file must be <strong>self-contained</strong>: use <code>embed-resources: true</code> in your YAML header, so that your plots are stored inside the <code>.html</code> file. Without it, your plots will be missing when we open your file.</li>
+</ul>
+</div>
+</div>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p><strong>Exercise 1</strong></p>
+<ol type="1">
+<li>Open the R project you made for Lab 1.</li>
+<li>Create a new Quarto document (<em>File &gt; New File &gt; Quarto Document</em>) and save it in the <code>code</code> folder as <code>lab3_firstname_lastname_studentnumber.qmd</code>.</li>
+<li>Replace the YAML header with the header below and fill in your own details:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "lab3_firstname_lastname_studentnumber"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Firstname Lastname"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We will use the following packages in this practical:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We will use the same data that we used last week to perform a simple linear regression, the Iris dataset. But now, we will extend on this simple model with multiple variables.</p>
+<p>We will use the same data that we used last week to perform a simple linear regression, the Iris dataset. But now, we will extend on the simple model with multiple variables.</p>
 <p>In order to do this, we first need to load the data again and run the simple model where Sepal length is predicted by Petal width.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> iris <span class="co"># load the data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)   <span class="co"># inspect the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> iris <span class="co"># load the data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)   <span class="co"># inspect the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 1          5.1         3.5          1.4         0.2  setosa
@@ -256,12 +288,12 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specify model</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Petal.Width, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> data)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ask for summary</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specify model</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Petal.Width, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> data)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ask for summary</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -284,23 +316,26 @@ F-statistic: 299.2 on 1 and 148 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
-<section id="part-2-multiple-linear-regression" class="level1">
-<h1>Part 2: Multiple linear regression</h1>
+<section id="multiple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple linear regression</h2>
 <p>You can add additional predictors to a model. This can improve the fit and the predictions. When multiple predictors are used in a regression model, it’s called a Multiple linear regression. You specify this model as <code>outcome_variable ~ predictor_1 + predictor_2 + ... + predictor_n</code>.</p>
+<p><strong>Exercise 2</strong></p>
 <ol type="1">
-<li><strong>Add Petal length as a second predictor to the model specified as <code>model1</code> and store this under the name <code>model2</code>, and supply summary statistics. Again, give a substantive interpretation of the coefficients and the model.</strong></li>
+<li><strong>Add Petal length as a second predictor to the model specified as <code>model1</code> and store this under the name <code>model2</code>, and supply summary statistics.</strong></li>
+<li><strong>Give a substantive interpretation of the coefficients and the model.</strong></li>
 </ol>
+</section>
 <section id="categorical-predictors" class="level2">
 <h2 class="anchored" data-anchor-id="categorical-predictors">Categorical predictors</h2>
-<p>Up to here, we only included continuous predictors in our models. We will now include a categorical predictor in the model as well.</p>
-<p>When a categorical predictor is added, this predictor is split in several contrasts (or dummies), where each group is compared to a reference group. In our example Iris data, the variable ‘Species’ is a categorical variable that indicate the species of flower. This variable can be added as example for a categorical predictor. Contrasts, and thus the dummy coding, can be inspected through <code>contrasts()</code>.</p>
-<ol start="2" type="1">
-<li><strong>Add species as a predictor to the model specified as <code>model2</code>, store it under the name <code>model3</code> and interpret the categorical coefficients of this new model.</strong></li>
+<p>We will now include a categorical predictor in the model as well. When a categorical predictor is added, this predictor is split in several contrasts (or dummies), where each group is compared to a reference group. In our example Iris data, the variable ‘Species’ is a categorical variable that indicate the species of flower. This variable can be added as example for a categorical predictor. Contrasts, and thus the dummy coding, can be inspected through <code>contrasts()</code>.</p>
+<p><strong>Exercise 3</strong></p>
+<ol type="1">
+<li><strong>Add species as a predictor to the model specified as <code>model2</code>, store it under the name <code>model3</code>.</strong></li>
+<li><strong>Interpret the categorical coefficients of this new model.</strong></li>
 </ol>
 </section>
-</section>
-<section id="part-3-model-comparison" class="level1">
-<h1>Part 3: Model comparison</h1>
+<section id="model-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison">Model comparison</h2>
 <p>Now you have created multiple models, you can compare how well these models function (compare the model fit). There are multiple ways of testing the model fit and to compare models, as explained in the lecture and the reading material. In this practical, we use the following:</p>
 <ul>
 <li>AIC (use the function <code>AIC()</code> on the model object)</li>
@@ -308,22 +343,30 @@ F-statistic: 299.2 on 1 and 148 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>MSE (use <code>MSE()</code> of the <code>MLmetrics</code> package, or calculate by transforming the <code>model$residuals</code>)</li>
 <li>Deviance test (use <code>anova()</code> to compare 2 models)</li>
 </ul>
-<ol start="3" type="1">
-<li><strong>Compare the fit of the model specified under question 5 and the model specified under question 8. Use all four fit comparison methods listed above. Interpret the fit statistics you obtain/tests you use to compare the fit.</strong></li>
+<p><strong>Exercise 4</strong></p>
+<ol type="1">
+<li><strong>Compare the fit of the model specified under model 1 and the model specified under model 2. Use all four fit comparison methods listed above.</strong></li>
+<li><strong>Interpret the fit statistics you obtain/tests you use to compare the fit.</strong></li>
 </ol>
 </section>
-<section id="part-4-residuals-observed-vs.-predicted" class="level1">
-<h1>Part 4: Residuals: observed vs.&nbsp;predicted</h1>
+<section id="residuals-observed-vs.-predicted" class="level2">
+<h2 class="anchored" data-anchor-id="residuals-observed-vs.-predicted">Residuals: observed vs.&nbsp;predicted</h2>
 <p>When fitting a regression line, the predicted values have some error in comparison to the observed values. The sum of the squared values of these errors is the sum of squares. A regression analysis finds the line such that the lowest sum of squares possible is obtained.</p>
 <p>The image below shows how the predicted (on the blue regression line) and observed values (black dots) differ and how the predicted values have some error (red vertical lines).</p>
 <p><img src="errorterms.PNG" class="img-fluid"></p>
 <p>When having multiple predictors, it becomes harder or impossible to make such a plot as above (you need a plot with more dimensions). You can, however, still plot the observed values against the predicted values and infer the error terms from there.</p>
-<ol start="4" type="1">
+<p><strong>Exercise 5</strong></p>
+<ol type="1">
 <li><p><strong>Create a dataset of predicted values for model 1 by taking the outcome variable <code>Sepal.Length</code> and the <code>fitted.values</code> from the model.</strong></p></li>
-<li><p><strong>Create an observed vs.&nbsp;predicted plot for model 1 (the red vertial lines are no must).</strong></p></li>
+<li><p><strong>Create an observed vs.&nbsp;predicted plot for model 1 (the red vertical lines are no must).</strong></p></li>
 <li><p><strong>Create a dataset of predicted values and create a plot for model 2.</strong></p></li>
-<li><p><strong>Compare the two plots and discuss the fit of the models based on what you see in the plots. You can combine them in one figure using the <code>grid.arrange()</code> function.</strong></p></li>
 </ol>
+<p><strong>Exercise 6</strong></p>
+<ol type="1">
+<li><strong>Compare the two plots and discuss the fit of the models based on what you see in the plots.</strong></li>
+<li><strong>Combine the two plots in one figure using the <code>grid.arrange()</code> function.</strong></li>
+</ol>
+</section>
 <section id="calculating-new-predicted-values-with-a-regression-equation" class="level2">
 <h2 class="anchored" data-anchor-id="calculating-new-predicted-values-with-a-regression-equation">Calculating new predicted values with a regression equation</h2>
 <p>A regression model can be used to predict values for new cases that were not used to built the model. The regression equation always consists of coefficients (<span class="math inline">\(\beta\)</span>s) and observed variables (<span class="math inline">\(X\)</span>):</p>
@@ -334,8 +377,9 @@ F-statistic: 299.2 on 1 and 148 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span class="math display">\[\hat{y}_{happiness} = 10.2 + 0.7 * X_{age} + 1.3 * X_{income}\]</span></p>
 <p>If we now want to predict the happiness score for someone of age 28 and with an income score of 35, the prediction would become:</p>
 <p><span class="math display">\[\hat{y}_{happiness} = 10.2 + 0.7 * 28 + 1.3 * 35 = 75.3\]</span></p>
-<ol start="8" type="1">
-<li><strong>Given this regression equation, calculate the predicted value for someone of age 44 and an income score of 27.</strong></li>
+<p><strong>Exercise 7</strong></p>
+<ol type="1">
+<li><strong>Given the regression equation, calculate the predicted value for someone of age 44 and an income score of 27.</strong></li>
 </ol>
 </section>
 <section id="prediction-with-a-categorical-variable" class="level2">
@@ -343,8 +387,10 @@ F-statistic: 299.2 on 1 and 148 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Adding a categorical predictor to the regression equation gives the number of contrasts as coefficient terms added. The previous regression equation for predicting happiness could be adjusted by adding ‘living density’ as a categorical predictor with levels ‘big city’, ‘smaller city’, ‘rural’, where ‘big city’ would be the reference category. The equation could then be:</p>
 <p><span class="math display">\[\hat{y}_{happiness} = 10.2 + 0.7 * X_{age} + 1.3 * X_{income} + 8.4 * X_{smaller city} + 17.9 * X_{rural}\]</span></p>
 <p>When predicting a score for an equation with a categorical predictor, you just assign a 1 to the category that the observation belongs to, and 0s for all other categories.</p>
-<ol start="9" type="1">
-<li><strong>Given this equation, calculate the predicted score for someone of age 29, an income score of 21, and living in a smaller city. And what would this score be if the person would live in a big city instead?</strong></li>
+<p><strong>Exercise 8</strong></p>
+<ol type="1">
+<li><strong>Given the equation, calculate the predicted score for someone of age 29, an income score of 21, and living in a smaller city.</strong></li>
+<li><strong>What would this score be if the person would live in a big city instead?</strong></li>
 </ol>
 </section>
 <section id="prediction-with-an-interaction" class="level2">
@@ -353,16 +399,24 @@ F-statistic: 299.2 on 1 and 148 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span class="math display">\[\hat{y}_{happiness} = 10.2 + 0.7 * X_{age} + 1.3 * X_{income} + 0.01 * X_{age} * X_{income}\]</span></p>
 <p>For a person of age 36 and income score 30, the predicted score would be:</p>
 <p><span class="math display">\[\hat{y}_{happiness} = 10.2 + 0.7 * 36 + 1.3 * 30 + 0.01 * 36 * 30 = 85.2\]</span></p>
-<ol start="10" type="1">
-<li><strong>Given this regression equation with interaction term, what would be the predicted happiness score for someone of age 52 and income score 26?</strong></li>
+<p><strong>Exercise 9</strong></p>
+<ol type="1">
+<li><strong>Given the regression equation with interaction term, what would be the predicted happiness score for someone of age 52 and income score 26?</strong></li>
 </ol>
-<hr>
 </section>
-</section>
-<section id="end-of-the-practical" class="level1">
-<h1>End of the practical</h1>
+<section id="render-and-hand-in" class="level2">
+<h2 class="anchored" data-anchor-id="render-and-hand-in">Render and hand in</h2>
+<p><strong>Exercise 10</strong></p>
+<p>Click <strong>Render</strong> in RStudio. Check that:</p>
+<ul>
+<li>the output file is called <code>lab3_firstname_lastname_studentnumber.html</code> and has the same name as the <code>title</code> in your YAML header;</li>
+<li>all your code, output, answers and plots show up in the <code>.html</code> file;</li>
+<li>the file is self-contained: <code>embed-resources: true</code> is in your YAML header.</li>
+</ul>
+<p>Hand in <strong>only</strong> the <code>.html</code> file.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

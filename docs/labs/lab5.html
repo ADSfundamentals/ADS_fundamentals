@@ -195,7 +195,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-logistic-regression" id="toc-part-1-logistic-regression" class="nav-link active" data-scroll-target="#part-1-logistic-regression">Part 1: Logistic regression</a>
+  <li><a href="#hand-in-assignment" id="toc-hand-in-assignment" class="nav-link active" data-scroll-target="#hand-in-assignment">Hand-in assignment</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic regression</a>
   <ul class="collapse">
   <li><a href="#working-with-odds-and-log-odds" id="toc-working-with-odds-and-log-odds" class="nav-link" data-scroll-target="#working-with-odds-and-log-odds">Working with odds and log-odds</a></li>
   <li><a href="#titanic-data" id="toc-titanic-data" class="nav-link" data-scroll-target="#titanic-data">Titanic data</a></li>
@@ -205,12 +208,14 @@ window.Quarto = {
   <li><a href="#continuous-predictor" id="toc-continuous-predictor" class="nav-link" data-scroll-target="#continuous-predictor">Continuous predictor</a></li>
   <li><a href="#multinomial-model-with-an-interaction-term" id="toc-multinomial-model-with-an-interaction-term" class="nav-link" data-scroll-target="#multinomial-model-with-an-interaction-term">Multinomial model with an interaction term</a></li>
   </ul></li>
-  <li><a href="#part-2-model-fit" id="toc-part-2-model-fit" class="nav-link" data-scroll-target="#part-2-model-fit">Part 2: Model fit</a>
+  <li><a href="#model-fit" id="toc-model-fit" class="nav-link" data-scroll-target="#model-fit">Model fit</a>
   <ul class="collapse">
   <li><a href="#deviance" id="toc-deviance" class="nav-link" data-scroll-target="#deviance">Deviance</a></li>
-  <li><a href="#information-criteria" id="toc-information-criteria" class="nav-link" data-scroll-target="#information-criteria">Information criteria</a></li>
   </ul></li>
-  <li><a href="#part-3-predicted-probabilites" id="toc-part-3-predicted-probabilites" class="nav-link" data-scroll-target="#part-3-predicted-probabilites">Part 3: Predicted probabilites</a></li>
+  <li><a href="#information-criteria" id="toc-information-criteria" class="nav-link" data-scroll-target="#information-criteria">Information criteria</a></li>
+  <li><a href="#predicted-probabilites" id="toc-predicted-probabilites" class="nav-link" data-scroll-target="#predicted-probabilites">Predicted probabilites</a></li>
+  <li><a href="#render-and-hand-in" id="toc-render-and-hand-in" class="nav-link" data-scroll-target="#render-and-hand-in">Render and hand in</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -236,20 +241,54 @@ window.Quarto = {
 </header>
 
 
+<section id="hand-in-assignment" class="level1">
+<h1>Hand-in assignment</h1>
+<p>With this hand-in assignment, you demonstrate that you know how to perform a logistic regression analysis using <code>glm()</code> and can inspect variables by plotting them using <code>ggplot()</code>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What to hand in
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Hand in <strong>only your rendered <code>.html</code> file</strong>. Do not hand in your <code>.qmd</code> file or a zip of your project.</li>
+<li>Name your file <strong><code>lab5_firstname_lastname_studentnumber.html</code></strong>, for example <code>lab5_jane_doe_1234567.html</code>.</li>
+<li>Your <code>.html</code> file must be <strong>self-contained</strong>: use <code>embed-resources: true</code> in your YAML header, so that your plots are stored inside the <code>.html</code> file. Without it, your plots will be missing when we open your file.</li>
+</ul>
+</div>
+</div>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p><strong>Exercise 1</strong></p>
+<ol type="1">
+<li>Open the R project you made for Lab 1.</li>
+<li>Create a new Quarto document (<em>File &gt; New File &gt; Quarto Document</em>) and save it in the <code>code</code> folder as <code>lab5_firstname_lastname_studentnumber.qmd</code>.</li>
+<li>Replace the YAML header with the header below and fill in your own details:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "lab5_firstname_lastname_studentnumber"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Firstname Lastname"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We will use the following packages in this practical:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In this practical, you will perform regression analyses using <code>glm()</code> and inspect variables by plotting these variables, using <code>ggplot()</code>.</p>
-<hr>
-<section id="part-1-logistic-regression" class="level1">
-<h1>Part 1: Logistic regression</h1>
+</section>
+<section id="logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="logistic-regression">Logistic regression</h2>
 <p>Logistic regression is a supervised learning algorithm that classifies data into categories, by predicting the probability that an observation falls into a particular category based on its features. In this tutorial we will consider binary classification, where we determine which of two categories a data point belongs to.</p>
 <p>The logistic function can be described as:</p>
 <p><span class="math display">\[ P(y = 1|X) = sigmoid(z) = \frac{1}{1+e^{-z}}   \]</span> where</p>
@@ -257,19 +296,18 @@ window.Quarto = {
 <p>The <code>glm()</code> function is used to specify several different models, among which the logistic regression model. The logistic regression model can be specified by setting the <code>family</code> argument to <em>“binomial”</em>. You can save a model in an object and request summary statistics with the <code>summary()</code> command.</p>
 <p>For logistic regression, it important to know and check what category the predicted probabilities refer to, so you can interpret the model and it’s coefficients correctly. If your outcome variable is coded as a factor, the <code>glm()</code> function predicts the 2nd category, which is by default the alphabetical latter one. For example, if the categories are coded as 0 and 1, the probability of belonging to “1” is predicted by the model.</p>
 <p>When a model is stored in an object you can ask for the coefficients <em>(model$coeffients)</em>, the predicted probabilities of belonging to the ‘higher’ category category <em>(model$fitted.values)</em>, and the aic <em>(model$aic)</em>. To investigate all additional model information that is stored in the object, check out the list of the model by selecting it in the environment-list.</p>
-<hr>
-<section id="working-with-odds-and-log-odds" class="level2">
-<h2 class="anchored" data-anchor-id="working-with-odds-and-log-odds">Working with odds and log-odds</h2>
+<section id="working-with-odds-and-log-odds" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-odds-and-log-odds">Working with odds and log-odds</h3>
 <p>Before we get started with logistic modelling it helps to understand how odds, log-odds, and probability are related. Essentially, they are all just different expressions of the same thing and converting between them involve simple formulas.</p>
 <p>Coefficients calculated using the <code>glm()</code> function returns log-odds by default. Most of us find it difficult to think in terms of log-odds, so instead we convert them to odds (or odds-ratios) using the <code>exp()</code> function. If we want to go from odds to log-odds, we just take the logarithm using <code>log()</code>.</p>
 <p>An odds-ratio is the probability of success and is defined as <span class="math inline">\(Odds = \frac{P}{1-P}\)</span>, where <span class="math inline">\(P\)</span> is the probability of an event happening and <span class="math inline">\(1-P\)</span> is the probability that it does not happen. For example, if we have an 80% chance of a sunny day, then we have a 20% chance of a rainy day. The odds would then equal <span class="math inline">\(\frac{.80}{.20} = 4\)</span>, meaning the odds of a sunny day are 4 to 1. Let’s consider this further with an example.</p>
 <p>The code below creates a data frame called <code>data</code> with a column called <code>conc</code> showing the number of trials wherein different concentrations of the peptide-C protein inhibited the flow of current across a membrane. The <code>yes</code> column contains counts of trials where this occured.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">conc =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">150</span>),</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">no =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">13</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">yes =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span> ,<span class="dv">7</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                   ) </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">conc =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">150</span>),</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">no =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">13</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">yes =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span> ,<span class="dv">7</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                   ) </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    conc no yes
 1    0.1  7   0
@@ -285,6 +323,7 @@ window.Quarto = {
 11 150.0  3   7</code></pre>
 </div>
 </div>
+<p><strong>Exercise 2</strong></p>
 <ol type="1">
 <li><strong>Add the following variables to the dataset:</strong></li>
 </ol>
@@ -308,10 +347,9 @@ window.Quarto = {
 <li><strong>the number of total trials per row are used as weights (we need this because a different number of trials can go into defining each observation of <code>prop</code>)</strong></li>
 </ul>
 <p><strong>Interpret the slope estimate.</strong></p>
-<hr>
 </section>
-<section id="titanic-data" class="level2">
-<h2 class="anchored" data-anchor-id="titanic-data">Titanic data</h2>
+<section id="titanic-data" class="level3">
+<h3 class="anchored" data-anchor-id="titanic-data">Titanic data</h3>
 <p>You will work with the <code>titanic</code> data set which you can download <a href="../data/titanic.csv">here</a>, containing information on the fate of passengers on the infamous voyage.</p>
 <ul>
 <li><code>Survived</code>: this is the outcome variable that you are trying to predict, with 1 meaning a passenger survived and 0 meaning they did not</li>
@@ -319,102 +357,102 @@ window.Quarto = {
 <li><code>Age</code>: this is the age of the passenger in years</li>
 <li><code>Sex</code>: this is the sex of the passenger, either male or female</li>
 </ul>
-<ol start="5" type="1">
+<p><strong>Exercise 3</strong></p>
+<ol type="1">
 <li><p><strong>Read in the data from the “titanic.csv” file, selecting only the variables <code>Survived</code>, <code>Pclass</code>, <code>Sex</code> and <code>Age</code>. If necessary, correct the class of the variables.</strong></p></li>
 <li><p><strong>What relationships do you expect to find between the predictor variables and the outcome?</strong></p></li>
 <li><p><strong>Investigate how many passengers survived in each class. You can do this visually by creating a bar plot, or by using the <code>table()</code> function. Search <code>??table</code> for more information.</strong></p></li>
 <li><p><strong>Similarly, investigate the relationship between survival and sex by creating a bar plot and a table.</strong></p></li>
 <li><p><strong>Investigate the relationship between age and survival by creating a histogram of the age of survivors versus non-survivors.</strong></p></li>
 </ol>
-<hr>
 </section>
-<section id="no-predictors" class="level2">
-<h2 class="anchored" data-anchor-id="no-predictors">No predictors</h2>
-<ol start="10" type="1">
+<section id="no-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="no-predictors">No predictors</h3>
+<p>*Exercise 4**</p>
+<ol type="1">
 <li><strong>Specify a logistic regression model where “Survived” is the outcome and there are no predictors.</strong></li>
 </ol>
-<hr>
 </section>
-<section id="binary-predictor" class="level2">
-<h2 class="anchored" data-anchor-id="binary-predictor">Binary predictor</h2>
-<ol start="11" type="1">
+<section id="binary-predictor" class="level3">
+<h3 class="anchored" data-anchor-id="binary-predictor">Binary predictor</h3>
+<p><strong>Exercise 5</strong></p>
+<ol type="1">
 <li><p><strong>Specify a logistic regression model where “Survived” is the outcome and “Sex” is the only predictor.</strong></p></li>
 <li><p><strong>What does the intercept mean? What are the odds and what are the log-odds of survival for males?</strong></p></li>
 </ol>
-<hr>
 </section>
-<section id="categorical-predictor-more-than-2-categories" class="level2">
-<h2 class="anchored" data-anchor-id="categorical-predictor-more-than-2-categories">Categorical predictor (more than 2 categories)</h2>
-<ol start="13" type="1">
+<section id="categorical-predictor-more-than-2-categories" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-predictor-more-than-2-categories">Categorical predictor (more than 2 categories)</h3>
+<p><strong>Exercise 6</strong></p>
+<ol type="1">
 <li><p><strong>Specify a logistic regression model where “Survived” is the outcome and “Pclass” is the only predictor.</strong></p></li>
 <li><p><strong>Which category is the reference group? What are their odds of survival?</strong></p></li>
 <li><p><strong>What are the chances of survival for 2nd and 3rd class passengers?</strong></p></li>
 </ol>
-<hr>
 </section>
-<section id="continuous-predictor" class="level2">
-<h2 class="anchored" data-anchor-id="continuous-predictor">Continuous predictor</h2>
-<ol start="16" type="1">
+<section id="continuous-predictor" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-predictor">Continuous predictor</h3>
+<p><strong>Exercise 7</strong></p>
+<ol type="1">
 <li><strong>Specify a logistic regression model where “Survived” is the outcome and “Age” is the only predictor.</strong></li>
 </ol>
 <p><strong>Save this model as you will come back to it later.</strong></p>
-<ol start="17" type="1">
+<ol start="2" type="1">
 <li><p><strong>What does the intercept mean when there is a continuous predictor?</strong></p></li>
 <li><p><strong>How are the odds and log-odds interpreted for a continuous predictor?</strong></p></li>
 </ol>
-<hr>
 </section>
-<section id="multinomial-model-with-an-interaction-term" class="level2">
-<h2 class="anchored" data-anchor-id="multinomial-model-with-an-interaction-term">Multinomial model with an interaction term</h2>
-<ol start="19" type="1">
+<section id="multinomial-model-with-an-interaction-term" class="level3">
+<h3 class="anchored" data-anchor-id="multinomial-model-with-an-interaction-term">Multinomial model with an interaction term</h3>
+<p><strong>Exercise 8</strong></p>
+<ol type="1">
 <li><strong>Specify a logistic regression model <code>Survived</code> is the outcome and <code>Pclass</code> plus an interaction between <code>Sex</code> and <code>Age</code> as the predictor.</strong></li>
 </ol>
 <p><strong>Save this model as we will return to it later.</strong></p>
-<ol start="20" type="1">
+<ol start="2" type="1">
 <li><strong>How is the significant interaction term interpreted in this model?</strong></li>
 </ol>
-<hr>
 </section>
 </section>
-<section id="part-2-model-fit" class="level1">
-<h1>Part 2: Model fit</h1>
+<section id="model-fit" class="level2">
+<h2 class="anchored" data-anchor-id="model-fit">Model fit</h2>
 <p>Model selection is an important step and there are several metrics for assessing model fit to help us select the best performing model. We will use deviance and information criterion to compare the fit of two models you saved before: <code>fit1</code> and <code>fit2</code>.</p>
-<hr>
-<section id="deviance" class="level2">
-<h2 class="anchored" data-anchor-id="deviance">Deviance</h2>
+<section id="deviance" class="level3">
+<h3 class="anchored" data-anchor-id="deviance">Deviance</h3>
 <p><strong>Deviance</strong> is measure of the goodness-of-fit in a GLM where lower deviance indicates a better fitting model. R reports two types of deviance:</p>
 <ul>
 <li><strong>null deviance:</strong> how well the outcome is predicted by the intercept-only model</li>
 <li><strong>residual deviance:</strong> how well the outcome is predicted by the model with the predictors added</li>
 </ul>
-<ol start="21" type="1">
+<p><strong>Exercise 9</strong></p>
+<ol type="1">
 <li><strong>Get the model summaries and indicate what the null and residual deviance are.</strong></li>
 </ol>
 <p>We can use the <code>anova()</code> function to perform an analysis of deviance that compares the difference in deviances between competing models.</p>
-<ol start="22" type="1">
+<ol start="2" type="1">
 <li><strong>Compare the fit of model 1 with the fit of model 2 using <code>anova() and</code>test = “Chisq”`.</strong></li>
 </ol>
-<hr>
+</section>
 </section>
 <section id="information-criteria" class="level2">
 <h2 class="anchored" data-anchor-id="information-criteria">Information criteria</h2>
 <p><strong>AIC</strong> is the <em>Akaike’s Information Criterion</em>, a method for assessing model quality through comparison of related models. AIC is based on the deviance but introduces a penalty for more complex models. The number itself is not meaninful, and it is only useful when comparing models against one another. Like deviance, the model with the lowest AIC is best.</p>
-<ol start="23" type="1">
+<p><strong>Exercise 10</strong></p>
+<ol type="1">
 <li><strong>Use the <code>AIC()</code> function to get the AIC value for model 1 and model 2.</strong></li>
 </ol>
 <p><strong>BIC</strong> is the Bayesian Information Criterion and is very similar to AIC, but penalises a complex model <em>more</em> than the AIC would. Complex models will have a larger score indicating worse fit. One difference to the AIC is that the probability of selecting the correct model with the BIC increases as the sample size of the training set increases.</p>
-<ol start="24" type="1">
+<ol start="2" type="1">
 <li><p><strong>Use the <code>BIC()</code> function to get the BIC value for model 1 and model 2.</strong></p></li>
 <li><p><strong>Which model should we proceed with?</strong></p></li>
 </ol>
-<hr>
 </section>
-</section>
-<section id="part-3-predicted-probabilites" class="level1">
-<h1>Part 3: Predicted probabilites</h1>
+<section id="predicted-probabilites" class="level2">
+<h2 class="anchored" data-anchor-id="predicted-probabilites">Predicted probabilites</h2>
 <p>Often with logistic regression we are interested in how well our model can predict the outcome. The <code>predict()</code> function allows us to do this, taking the model and some data as its main arguments. Additionally, you can specify whether you want <code>predict()</code> to give you predictions as logit or probabilities.</p>
 <p>Proceed using the model you selected in the previous question.</p>
-<ol start="26" type="1">
+<p><strong>Exercise 11</strong></p>
+<ol type="1">
 <li><strong>Use the <code>predict()</code> function to generate predicted probabilities for the multivariate logistic model. <code>predict()</code> takes the following arguments:</strong></li>
 </ol>
 <ul>
@@ -424,13 +462,24 @@ window.Quarto = {
 <li><strong><code>se.fit</code>, i.e.&nbsp;set to <code>TRUE</code> to estimate the standard error of the probabilities</strong></li>
 </ul>
 <p><strong>Remember to save the output to an object.</strong></p>
-<ol start="27" type="1">
+<ol start="2" type="1">
 <li><p><strong>Add the predicted probabilities and standard errors to the data set.</strong></p></li>
 <li><p><strong>Calculate the confidence intervals for the predicted probabilities and add them to the data.</strong></p></li>
 </ol>
-<hr>
+</section>
+<section id="render-and-hand-in" class="level2">
+<h2 class="anchored" data-anchor-id="render-and-hand-in">Render and hand in</h2>
+<p><strong>Exercise 12</strong></p>
+<p>Click <strong>Render</strong> in RStudio. Check that:</p>
+<ul>
+<li>the output file is called <code>lab5_firstname_lastname_studentnumber.html</code> and has the same name as the <code>title</code> in your YAML header;</li>
+<li>all your code, output, answers and plots show up in the <code>.html</code> file;</li>
+<li>the file is self-contained: <code>embed-resources: true</code> is in your YAML header.</li>
+</ul>
+<p>Hand in <strong>only</strong> the <code>.html</code> file.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

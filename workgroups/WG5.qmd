@@ -1,0 +1,164 @@
+---
+title: "Work Group Meeting 5"
+author: "Fundamental Techniques in Data Science with R"
+format:
+  revealjs:
+    theme: dark
+    code-line-numbers: false
+    include-in-header:
+      text: |
+        <style>
+        /* Step flow boxes */
+        .flow { display: flex; flex-direction: column; gap: 0.5em; margin: 0.6em 0; }
+        .flow-row { display: flex; align-items: stretch; gap: 0.3em; }
+        .flow-row .arrow { align-self: center; }
+        .step { border: 2px solid #42affa; border-radius: 10px; padding: 0.45em 0.4em;
+                text-align: center; font-size: 0.85em; line-height: 1.3; flex: 1 1 0; }
+        .step b { display: block; color: #42affa; }
+        .step small { font-size: 0.85em; opacity: 0.85; }
+        .step.final, .step.now { background: #42affa; color: #191919; }
+        .step.final b, .step.now b { color: #191919; }
+        .step.done { opacity: 0.75; }
+        .step.next { border-style: dashed; }
+        .arrow { font-size: 1em; color: #42affa; }
+        .reveal pre { font-size: 0.66em; line-height: 1.35; }
+        .reveal pre code { max-height: none !important; }
+        .gradetable table { font-size: 0.8em; }
+        .infotable table { font-size: 0.95em; }
+        .infotable td:first-child { white-space: nowrap; font-weight: bold; }
+        .infotable.cmp table { font-size: 0.92em; }
+        </style>
+---
+
+## Today
+
+- Assignment 2: Quarto presentation
+
+- Group contract check-in
+
+- Processing and exploring your (new) data
+
+- Multiple logistic regression
+
+- Interpreting logistic regression coefficients
+
+## Assignment 2
+
+::: infotable
+|              |                                                  |
+|--------------|--------------------------------------------------|
+| Topic        | Logistic regression                              |
+| Type         | Presentation, made in Quarto                     |
+| Group        | Same group as assignment 1                       |
+| Grading      | 25% of your final grade                          |
+| Presentation | **Tuesday January 19**, at the workgroup meeting |
+:::
+
+## Group contract check-in
+
+You continue in the **same group** as for assignment 1. Check in again:
+
+- What did you agree on in your group contract?
+- Did this work well during assignment 1?
+- What can be **improved or changed** for assignment 2?
+
+Update your group contract where needed.
+
+## What changes in assignment 2?
+
+::: {.infotable .cmp}
+|   | Assignment 1 | Assignment 2 |
+|------------------------|------------------------|------------------------|
+| **Research question** | For linear regression | A **different** research question |
+| **Outcome** | Continuous | **Binary** (two categories) |
+| **Predictors** | Your chosen predictors | Potentially different predictors |
+| **Dataset** | Your chosen dataset | Potentially even a different dataset |
+| **Output** | Written report | **Presentation** |
+:::
+
+## New variables? Process them again!
+
+Do your new or other variables require processing?
+
+- Follow the same steps as in assignment 1:
+  - classes, missing values, scale scores, linking
+- **Briefly** report on these steps in assignment 2
+- Do **exploratory data analysis** again
+
+## Multiple logistic regression
+
+- **Justify** the logic of your model building
+- **Build** your models and **compare** them
+  - Likelihood ratio test: `anova(fit0, fit, test = "LRT")`
+  - Information criteria: `AIC()`, `BIC()`
+- **Interpret** the coefficients
+- Use the **lab material** as an example
+
+## Interpreting coefficients is harder
+
+A logistic regression coefficient can be expressed on three scales:
+
+```{=html}
+<div class="flow">
+  <div class="flow-row">
+    <div class="step"><b>Log-odds</b><small>&beta;: additive change<br>in the logit</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step final"><b>Odds ratio</b><small>e<sup>&beta;</sup>: odds are<br>multiplied by this</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>Probability</b><small>&pi; = odds / (1 + odds)<br>not a constant effect</small></div>
+  </div>
+</div>
+```
+
+- e<sup>β</sup> \> 1: higher odds of the outcome; e<sup>β</sup> \< 1: lower odds
+- Odds ratio below 1? Its reciprocal (1 / e<sup>β</sup>) is often easier to explain
+
+## Example: passing an exam
+
+logit(passing) = −3.414 + 0.683 × study hours
+
+- **Intercept:** a student who does not study has log-odds of passing of −3.41, so odds of e<sup>−3.414</sup> = **0.03**
+- **Slope:** each extra hour of study increases the log-odds by 0.683, so the **odds** of passing are multiplied by e<sup>0.683</sup> = **1.98**
+
+::: {.callout-warning appearance="simple" style="font-size: 1.25em;"}
+Odds are not probabilities: 1.98 times the **odds** of passing is not 1.98 times the **probability** of passing!
+:::
+
+## Example: surviving the Titanic
+
+`glm(survived ~ age + sex + class, family = "binomial")`
+
+::: gradetable
+| Term | β | Odds ratio | Interpretation (controlling for the other predictors) |
+|----------|-------:|---------:|--------------------------------------------|
+| age | −0.034 | 0.97 | Each extra year: odds of survival × 0.97 |
+| sexmale | −2.589 | 0.08 | Men: 0.08 times the odds of survival of women, or 13.3 times the odds of **death** |
+| class3rd | −2.455 | 0.09 | 3rd vs 1st class: 0.09 times the odds of survival, or 11.7 times the odds of death |
+:::
+
+*Examples from lecture 5.*
+
+## Making a presentation in Quarto
+
+- Use `format: revealjs` in the YAML header
+- Each `##` heading starts a new slide
+- Keep slides **concise**: little text, meaningful visuals, no long code blocks
+- Add `embed-resources: true`, so your slides are one self-contained .html file
+
+More tips: open-stat-prog module [Creating presentations with Quarto](https://www.openstatprog.com/reproducible-reporting/tutorials/quarto_markdown/presentations.html)
+
+## By the end of this meeting
+
+```{=html}
+<div class="flow">
+  <div class="flow-row">
+    <div class="step"><b>1. Process</b><small>your data where necessary</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>2. Explore</b><small>exploratory data analysis</small></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step final"><b>3. Model</b><small>multiple logistic regression with interpretation</small></div>
+  </div>
+</div>
+```
+
+Use the code from this week's lab!

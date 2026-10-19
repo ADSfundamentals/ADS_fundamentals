@@ -10,6 +10,35 @@ params:
 knitr::opts_chunk$set(root.dir = here::here("./"))
 ```
 
+# Hand-in assignment
+
+With this hand-in assignment, you demonstrate that you know how to perform a logistic regression analysis using `glm()` and can inspect variables by plotting them using `ggplot()`.
+
+::: callout-important
+## What to hand in
+
+- Hand in **only your rendered `.html` file**. Do not hand in your `.qmd` file or a zip of your project.
+- Name your file **`lab5_firstname_lastname_studentnumber.html`**, for example `lab5_jane_doe_1234567.html`.
+- Your `.html` file must be **self-contained**: use `embed-resources: true` in your YAML header, so that your plots are stored inside the `.html` file. Without it, your plots will be missing when we open your file.
+:::
+
+## Setup
+
+**Exercise 1**
+
+1.  Open the R project you made for Lab 1.
+2.  Create a new Quarto document (*File \> New File \> Quarto Document*) and save it in the `code` folder as `lab5_firstname_lastname_studentnumber.qmd`.
+3.  Replace the YAML header with the header below and fill in your own details:
+
+``` markdown
+---
+title: "lab5_firstname_lastname_studentnumber"
+author: "Firstname Lastname"
+format:
+  html:
+    embed-resources: true
+---
+```
 We will use the following packages in this practical:
 
 ```{r, message = FALSE, warning = FALSE}
@@ -22,38 +51,30 @@ library(janitor)
 library(readr)
 ```
 
-In this practical, you will perform regression analyses using `glm()` and inspect variables by plotting these variables, using `ggplot()`.
-
----
-
-# Part 1: Logistic regression
+## Logistic regression
 
 Logistic regression is a supervised learning algorithm that classifies data into categories, by predicting the probability that an observation falls into a particular category based on its features. In this tutorial we will consider binary classification, where we determine which of two categories a data point belongs to.
 
 The logistic function can be described as:
 
-$$ P(y = 1|X) = sigmoid(z) = \frac{1}{1+e^{-z}}   $$
-where
+$$ P(y = 1|X) = sigmoid(z) = \frac{1}{1+e^{-z}}   $$ where
 
-$$ z = \hat{\beta_0} + \hat{\beta_1}x_1 + \hat{\beta_2}x_2 + ... + \hat{\beta_k}x_k $$
-$z$ is like the linear predictor in linear regression, but it is transformed by the sigmoid function so that results can be interpreted as probabilities (between 0 and 1). The probability is compared to a threshold to determine what class $y$ belongs to based on $X$. You can choose what this threshold is and it is context dependent. For example, if you are predicting the chances of recovery in a clinical trial you might set a very high threshold of 0.90. A common threshold for low-stakes research is 0.50. 
+$$ z = \hat{\beta_0} + \hat{\beta_1}x_1 + \hat{\beta_2}x_2 + ... + \hat{\beta_k}x_k $$ $z$ is like the linear predictor in linear regression, but it is transformed by the sigmoid function so that results can be interpreted as probabilities (between 0 and 1). The probability is compared to a threshold to determine what class $y$ belongs to based on $X$. You can choose what this threshold is and it is context dependent. For example, if you are predicting the chances of recovery in a clinical trial you might set a very high threshold of 0.90. A common threshold for low-stakes research is 0.50.
 
-The `glm()` function is used to specify several different models, among which the logistic regression model. The logistic regression model can be specified by setting the `family` argument to _"binomial"_. You can save a model in an object and request summary statistics with the `summary()` command. 
+The `glm()` function is used to specify several different models, among which the logistic regression model. The logistic regression model can be specified by setting the `family` argument to *"binomial"*. You can save a model in an object and request summary statistics with the `summary()` command.
 
-For logistic regression, it important to know and check what category the predicted probabilities refer to, so you can interpret the model and it's coefficients correctly. If your outcome variable is coded as a factor, the `glm()` function predicts the 2nd category, which is by default the alphabetical latter one. For example, if the categories are coded as 0 and 1, the probability of belonging to "1" is predicted by the model. 
+For logistic regression, it important to know and check what category the predicted probabilities refer to, so you can interpret the model and it's coefficients correctly. If your outcome variable is coded as a factor, the `glm()` function predicts the 2nd category, which is by default the alphabetical latter one. For example, if the categories are coded as 0 and 1, the probability of belonging to "1" is predicted by the model.
 
-When a model is stored in an object you can ask for the coefficients _(model\$coeffients)_, the predicted probabilities of belonging to the 'higher' category category _(model\$fitted.values)_, and the aic _(model\$aic)_. To investigate all additional model information that is stored in the object, check out the list of the model by selecting it in the environment-list.
+When a model is stored in an object you can ask for the coefficients *(model\$coeffients)*, the predicted probabilities of belonging to the 'higher' category category *(model\$fitted.values)*, and the aic *(model\$aic)*. To investigate all additional model information that is stored in the object, check out the list of the model by selecting it in the environment-list.
 
----
 
-## Working with odds and log-odds 
+### Working with odds and log-odds
 
-Before we get started with logistic modelling it helps to understand how odds, log-odds, and probability are related. Essentially, they are all just different expressions of the same thing and converting between them involve simple formulas. 
+Before we get started with logistic modelling it helps to understand how odds, log-odds, and probability are related. Essentially, they are all just different expressions of the same thing and converting between them involve simple formulas.
 
-Coefficients calculated using the `glm()` function returns log-odds by default. Most of us find it difficult to think in terms of log-odds, so instead we convert them to odds (or odds-ratios) using the `exp()` function. If we want to go from odds to log-odds, we just take the logarithm using `log()`. 
+Coefficients calculated using the `glm()` function returns log-odds by default. Most of us find it difficult to think in terms of log-odds, so instead we convert them to odds (or odds-ratios) using the `exp()` function. If we want to go from odds to log-odds, we just take the logarithm using `log()`.
 
-An odds-ratio is the probability of success and is defined as $Odds = \frac{P}{1-P}$, where $P$ is the probability of an event happening and $1-P$ is the probability that it does not happen. For example, if we have an 80% chance of a sunny day, then we have a 20% chance of a rainy day. The odds would then equal $\frac{.80}{.20} = 4$, meaning the odds of a sunny day are 4 to 1. 
-Let's consider this further with an example. 
+An odds-ratio is the probability of success and is defined as $Odds = \frac{P}{1-P}$, where $P$ is the probability of an event happening and $1-P$ is the probability that it does not happen. For example, if we have an 80% chance of a sunny day, then we have a 20% chance of a rainy day. The odds would then equal $\frac{.80}{.20} = 4$, meaning the odds of a sunny day are 4 to 1. Let's consider this further with an example.
 
 The code below creates a data frame called `data` with a column called `conc` showing the number of trials wherein different concentrations of the peptide-C protein inhibited the flow of current across a membrane. The `yes` column contains counts of trials where this occured.
 
@@ -65,11 +86,13 @@ data <- data.frame(conc = c(0.1, 0.5, 1, 10, 20, 30, 50, 70, 80, 100, 150),
 data
 ```
 
-1. __Add the following variables to the dataset:__
+**Exercise 2**
 
-* **the total number of trials for each observation (i.e., the sum of the `no` and `yes` trials for each row)**
-* **the proportion of yes trials in each row (i.e. yes divided by the total)**
-* **the log-odds of inhibition for each row (i.e. the log-odds of `yes` vs `no`)**
+1.  **Add the following variables to the dataset:**
+
+- **the total number of trials for each observation (i.e., the sum of the `no` and `yes` trials for each row)**
+- **the proportion of yes trials in each row (i.e. yes divided by the total)**
+- **the log-odds of inhibition for each row (i.e. the log-odds of `yes` vs `no`)**
 
 ```{r, include=params$answers}
 data <- 
@@ -82,7 +105,7 @@ data <-
 # The `qlogis()` function is equivalent to the log-odds (i.e, logit) function.
 ```
 
-2. __Inspect the new columns. Do you notice anything unusual?__
+2.  **Inspect the new columns. Do you notice anything unusual?**
 
 ```{r, include=params$answers}
 head(data)
@@ -90,8 +113,7 @@ head(data)
 #There are many zero proportions which produce logit values of infinity. We can work around this issue by adding a constant (usually 0.5) to all cells before calculating the log-odds. We add the same value to the numerator and denominator of our odds formula, so we don't change the relative interpretations of the odds. We could also add a 1 to each cell. This option is conceptually interesting because the log of 1 equals 0. It's almost like we're adding zero to the odds and still correcting the issue.
 ```
 
-
-3. __Add a new column to your dataset containing the corrected odds.__
+3.  **Add a new column to your dataset containing the corrected odds.**
 
 You can compute the value of this column using the following formulation of the log-odds:
 
@@ -106,11 +128,11 @@ data <- data %>%
 data
 ```
 
-4. __Fit a logistic regression model where:__
+4.  **Fit a logistic regression model where:**
 
-* **`prop` is the outcome**
-* **`conc` is the only predictor**
-* **the number of total trials per row are used as weights (we need this because a different number of trials can go into defining each observation of `prop`)**
+- **`prop` is the outcome**
+- **`conc` is the only predictor**
+- **the number of total trials per row are used as weights (we need this because a different number of trials can go into defining each observation of `prop`)**
 
 **Interpret the slope estimate.**
 
@@ -125,28 +147,32 @@ summary(glm(prop ~ conc,
 # If we exponentiate the slope estimate, we can get an interpretation in odds units, but the effect becomes multiplicative instead of additive. So for every unit increase in conc, the odds of inhibition are 1.01215 times higher. Note then that odds above 1 indicate inhibition is x-times higher, while odds below 1 indicate inhibition is x-times less.
 ```
 
----
 
-## Titanic data
+### Titanic data
 
-You will work with the `titanic` data set which you can download [here](../data/titanic.csv), containing information on the fate of passengers on the infamous voyage. 
+You will work with the `titanic` data set which you can download [here](../data/titanic.csv), containing information on the fate of passengers on the infamous voyage.
 
-* `Survived`: this is the outcome variable that you are trying to predict, with 1 meaning a passenger survived and 0 meaning they did not
-* `Pclass`: this is the ticket class the passenger was travelling on, with 1, 2, and 3 representing 1st, 2nd and 3rd class respectively
-* `Age`: this is the age of the passenger in years
-* `Sex`: this is the sex of the passenger, either male or female
+- `Survived`: this is the outcome variable that you are trying to predict, with 1 meaning a passenger survived and 0 meaning they did not
+- `Pclass`: this is the ticket class the passenger was travelling on, with 1, 2, and 3 representing 1st, 2nd and 3rd class respectively
+- `Age`: this is the age of the passenger in years
+- `Sex`: this is the sex of the passenger, either male or female
 
-5. __Read in the data from the "titanic.csv" file, selecting only the variables `Survived`, `Pclass`, `Sex` and `Age`. If necessary, correct the class of the variables.__
+**Exercise 3**
+
+1.  **Read in the data from the "titanic.csv" file, selecting only the variables `Survived`, `Pclass`, `Sex` and `Age`. If necessary, correct the class of the variables.**
 
 ```{r, include=params$answers}
-titanic <- read_csv(here::here("data", "titanic.csv")) %>% 
+dataDir <- "data"
+outDir  <- "output"
+figDir  <- "figures"
+
+titanic <- read_csv(here::here(dataDir, "titanic.csv")) %>% 
   mutate(Survived = as.factor(Survived),
          Sex = as.factor(Sex),
          Pclass = as.factor(Pclass))
 ```
 
-
-6. __What relationships do you expect to find between the predictor variables and the outcome?__
+2.  **What relationships do you expect to find between the predictor variables and the outcome?**
 
 ```{r, include=params$answers}
 # We could say that:
@@ -155,8 +181,7 @@ titanic <- read_csv(here::here("data", "titanic.csv")) %>%
 # age is related to the outcome as younger passengers have a higher probability of survival
 ```
 
-
-7. __Investigate how many passengers survived in each class. You can do this visually by creating a bar plot, or by using the `table()` function. Search `??table` for more information.__
+3.  **Investigate how many passengers survived in each class. You can do this visually by creating a bar plot, or by using the `table()` function. Search `??table` for more information.**
 
 ```{r, include=params$answers}
 titanic %>% 
@@ -176,7 +201,7 @@ titanic %$%
 
 ```
 
-8. __Similarly, investigate the relationship between survival and sex by creating a bar plot and a table.__
+4.  **Similarly, investigate the relationship between survival and sex by creating a bar plot and a table.**
 
 ```{r, include=params$answers}
 titanic %$% 
@@ -195,8 +220,7 @@ titanic %>%
 
 ```
 
-
-9. __Investigate the relationship between age and survival by creating a histogram of the age of survivors versus non-survivors.__
+5.  **Investigate the relationship between age and survival by creating a histogram of the age of survivors versus non-survivors.**
 
 ```{r, include=params$answers}
 titanic %>% 
@@ -210,12 +234,11 @@ titanic %>%
 # The distribution of age is different for survivors and non-survivors. Younger passengers have higher chances of survival compared to older passengers.
 ```
 
+### No predictors
 
----
+*Exercise 4**
 
-## No predictors
-
-10. __Specify a logistic regression model where "Survived" is the outcome and there are no predictors.__
+1. **Specify a logistic regression model where "Survived" is the outcome and there are no predictors.**
 
 ```{r, include=params$answers}
 glm(Survived ~ 1, 
@@ -235,11 +258,12 @@ titanic %>%
   kable_paper(bootstrap_options = "striped", full_width = FALSE)
 ```
 
----
 
-## Binary predictor 
+### Binary predictor
 
-11. __Specify a logistic regression model where "Survived" is the outcome and "Sex" is the only predictor.__
+**Exercise 5**
+
+1. **Specify a logistic regression model where "Survived" is the outcome and "Sex" is the only predictor.**
 
 ```{r, include=params$answers}
 glm(Survived ~ Sex, 
@@ -248,7 +272,7 @@ glm(Survived ~ Sex,
   summary()
 ```
 
-12. __What does the intercept mean? What are the odds and what are the log-odds of survival for males?__
+2. **What does the intercept mean? What are the odds and what are the log-odds of survival for males?**
 
 ```{r, include=params$answers}
 # In the model with one dichotomous predictor we are modelling logit(p) = beta0 + beta1*male.
@@ -258,11 +282,12 @@ glm(Survived ~ Sex,
 # The log-odds of survival for men is -2.5137 lower than for women. The odds of survival for men is 0.081, or 92% lower than females.
 ```
 
----
 
-## Categorical predictor (more than 2 categories)
+### Categorical predictor (more than 2 categories)
 
-13. __Specify a logistic regression model where "Survived" is the outcome and "Pclass" is the only predictor.__
+**Exercise 6**
+
+1. **Specify a logistic regression model where "Survived" is the outcome and "Pclass" is the only predictor.**
 
 ```{r, include=params$answers}
 glm(Survived ~ Pclass, 
@@ -271,7 +296,7 @@ glm(Survived ~ Pclass,
   summary()
 ```
 
-14. __Which category is the reference group? What are their odds of survival?__
+2. **Which category is the reference group? What are their odds of survival?**
 
 ```{r, include=params$answers}
 # The reference group are 1st class passengers, represented by the intercept.
@@ -279,7 +304,7 @@ glm(Survived ~ Pclass,
 # The odds are 1.70, meaning 1st class passengers are 70% more likely to survive.
 ```
 
-15. __What are the chances of survival for 2nd and 3rd class passengers?__
+3. **What are the chances of survival for 2nd and 3rd class passengers?**
 
 ```{r, include=params$answers}
 # For 2nd class passengers, the log-odds of survival is -0.6394.
@@ -289,11 +314,11 @@ glm(Survived ~ Pclass,
 # The odds are 0.188, meaning 3nd class passengers are 81% less likely to survive than 1st class passengers.
 ```
 
----
+### Continuous predictor
 
-## Continuous predictor
+**Exercise 7**
 
-16. __Specify a logistic regression model where "Survived" is the outcome and "Age" is the only predictor.__
+1. **Specify a logistic regression model where "Survived" is the outcome and "Age" is the only predictor.**
 
 **Save this model as you will come back to it later.**
 
@@ -304,13 +329,13 @@ fit1 <- glm(Survived ~ Age,
 summary(fit1)
 ```
 
-17. __What does the intercept mean when there is a continuous predictor?__
+2. **What does the intercept mean when there is a continuous predictor?**
 
 ```{r, include=params$answers}
 # In the case of a continuous predictor there is no real reference group. Instead, the intercept is the log-odds of survival when age = 0. In this model, the log-odds of survival for passengers of age 0 is -0.143, corresponding with the odds of survival at 0.867 (= exp(log odds)).
 ```
 
-18. __How are the odds and log-odds interpreted for a continuous predictor?__
+3. **How are the odds and log-odds interpreted for a continuous predictor?**
 
 ```{r, include=params$answers}
 # For continuous predictors, the log-odds either increase or decrease with every unit increase in the continuous predictor. So, in our model:
@@ -318,11 +343,11 @@ summary(fit1)
 # For every increase in age of one year, the odds of survival are 0.99 (= exp(-0.0112)) times the odds of those with one age unit less, or -1.09%.
 ```
 
----
+### Multinomial model with an interaction term
 
-## Multinomial model with an interaction term
+**Exercise 8**
 
-19. __Specify a logistic regression model `Survived` is the outcome and `Pclass` plus an interaction between `Sex` and `Age` as the predictor.__
+1. **Specify a logistic regression model `Survived` is the outcome and `Pclass` plus an interaction between `Sex` and `Age` as the predictor.**
 
 **Save this model as we will return to it later.**
 
@@ -331,28 +356,27 @@ fit2 <- glm(Survived ~ Pclass + Sex*Age, family = binomial, data = titanic)
 summary(fit2)
 ```
 
-20. __How is the significant interaction term interpreted in this model?__
+2. **How is the significant interaction term interpreted in this model?**
 
 ```{r, include=params$answers}
 # The interaction between age and sex is significant, suggesting the slopes for age on survival are different for males and females.
 ```
 
----
 
-# Part 2: Model fit 
+## Model fit
 
-Model selection is an important step and there are several metrics for assessing model fit to help us select the best performing model. We will use deviance and information criterion to compare the fit of two models you saved before: `fit1` and `fit2`. 
+Model selection is an important step and there are several metrics for assessing model fit to help us select the best performing model. We will use deviance and information criterion to compare the fit of two models you saved before: `fit1` and `fit2`.
 
----
-
-## Deviance 
+### Deviance
 
 **Deviance** is measure of the goodness-of-fit in a GLM where lower deviance indicates a better fitting model. R reports two types of deviance:
 
-* **null deviance:** how well the outcome is predicted by the intercept-only model
-* **residual deviance:** how well the outcome is predicted by the model with the predictors added
+- **null deviance:** how well the outcome is predicted by the intercept-only model
+- **residual deviance:** how well the outcome is predicted by the model with the predictors added
 
-21. __Get the model summaries and indicate what the null and residual deviance are.__
+**Exercise 9**
+
+1. **Get the model summaries and indicate what the null and residual deviance are.**
 
 ```{r, include=params$answers}
 # You can use the `summary()` command to get the deviance statistics for each model. The null and residual deviance are below the model coefficients. 
@@ -363,9 +387,9 @@ summary(fit2)
 # For model 1, the null deviance is 1186.7 and the residual deviance is 1182.3 For model 2, the null deviance is 1186.66 and the residual deviance is 793.82
 ```
 
-We can use the `anova()` function to perform an analysis of deviance that compares the difference in deviances between competing models.  
+We can use the `anova()` function to perform an analysis of deviance that compares the difference in deviances between competing models.
 
-22. __Compare the fit of model 1 with the fit of model 2 using `anova() and `test = "Chisq"`.__
+2. **Compare the fit of model 1 with the fit of model 2 using `anova() and`test = "Chisq"\`.**
 
 ```{r, include=params$answers}
 anova(fit1, fit2, test = "Chisq")
@@ -373,13 +397,13 @@ anova(fit1, fit2, test = "Chisq")
 # The analysis of deviance indicates that there is a reduction in residual deviance of 388.46 that is statistically significant. Model 2 is a better model. For a binomial model, the statistical test should be the chi-square difference test.
 ```
 
----
-
-## Information criteria 
+## Information criteria
 
 **AIC** is the *Akaike's Information Criterion*, a method for assessing model quality through comparison of related models. AIC is based on the deviance but introduces a penalty for more complex models. The number itself is not meaninful, and it is only useful when comparing models against one another. Like deviance, the model with the lowest AIC is best.
 
-23. __Use the `AIC()` function to get the AIC value for model 1 and model 2.__
+**Exercise 10**
+
+1. **Use the `AIC()` function to get the AIC value for model 1 and model 2.**
 
 ```{r, include=params$answers}
 AIC(fit1, fit2)
@@ -387,45 +411,47 @@ AIC(fit1, fit2)
 # The AIC for model 2 is lower than the AIC for model 1, indicating that model 2 has a better fit
 ```
 
-**BIC** is the Bayesian Information Criterion and is very similar to AIC, but penalises a complex model *more* than the AIC would. Complex models will have a larger score indicating worse fit. One difference to the AIC is that the probability of selecting the correct model with the BIC increases as the sample size of the training set increases. 
+**BIC** is the Bayesian Information Criterion and is very similar to AIC, but penalises a complex model *more* than the AIC would. Complex models will have a larger score indicating worse fit. One difference to the AIC is that the probability of selecting the correct model with the BIC increases as the sample size of the training set increases.
 
-24. __Use the `BIC()` function to get the BIC value for model 1 and model 2.__
+2. **Use the `BIC()` function to get the BIC value for model 1 and model 2.**
+
 ```{r, include=params$answers}
 BIC(fit1, fit2)
 
 # The BIC for model 2 is lower than the BIC for model 1, indicating that model 2 has a better fit
 ```
 
-
-25. __Which model should we proceed with?__
+3. **Which model should we proceed with?**
 
 ```{r, include=params$answers}
 # Model 2, as it has lower residual deviance, AIC and BIC.
 ```
 
----
 
-# Part 3: Predicted probabilites
+## Predicted probabilites
 
-Often with logistic regression we are interested in how well our model can predict the outcome. The `predict()` function allows us to do this, taking the model and some data as its main arguments. Additionally, you can specify whether you want `predict()` to give you predictions as logit or probabilities. 
+Often with logistic regression we are interested in how well our model can predict the outcome. The `predict()` function allows us to do this, taking the model and some data as its main arguments. Additionally, you can specify whether you want `predict()` to give you predictions as logit or probabilities.
 
-Proceed using the model you selected in the previous question. 
+Proceed using the model you selected in the previous question.
 
-26. __Use the `predict()` function to generate predicted probabilities for the multivariate logistic model. `predict()` takes the following arguments:__
+**Exercise 11**
 
-* **`object`, i.e. the logistic model**
-* **`newdata`, i.e. a data set where we want to predict the outcome  (we will use `titanic`)**
-* **`type`, i.e. can be `"logit"` for log-odds or `"response"` for probabilities (we will use `type = "response"`)**
-* **`se.fit`, i.e. set to `TRUE` to estimate the standard error of the probabilities**
+1. **Use the `predict()` function to generate predicted probabilities for the multivariate logistic model. `predict()` takes the following arguments:**
+
+- **`object`, i.e. the logistic model**
+- **`newdata`, i.e. a data set where we want to predict the outcome (we will use `titanic`)**
+- **`type`, i.e. can be `"logit"` for log-odds or `"response"` for probabilities (we will use `type = "response"`)**
+- **`se.fit`, i.e. set to `TRUE` to estimate the standard error of the probabilities**
 
 **Remember to save the output to an object.**
+
 ```{r, include=params$answers}
 preds <- data.frame(predict(fit2, type = "response", se.fit = TRUE))
 
 # The `type="response"` option tells R to output probabilities of the form P(Y = 1|X), as opposed to other information such as the logit.
 ```
 
-27. __Add the predicted probabilities and standard errors to the data set.__
+2. **Add the predicted probabilities and standard errors to the data set.**
 
 ```{r, include=params$answers}
 titanic$probs <- preds$fit
@@ -434,7 +460,7 @@ titanic$se    <- preds$se.fit
 # You can access the predicted probabilities using `$fit` and the standard errors as `$se.fit`.
 ```
 
-24. __Calculate the confidence intervals for the predicted probabilities and add them to the data.__
+3. **Calculate the confidence intervals for the predicted probabilities and add them to the data.**
 
 ```{r, include=params$answers}
 titanic %<>% 
@@ -453,4 +479,15 @@ titanic %>%
     facet_wrap(vars(Sex))
 ```
 
----
+## Render and hand in
+
+**Exercise 12**
+
+Click **Render** in RStudio. Check that:
+
+- the output file is called `lab5_firstname_lastname_studentnumber.html` and has the same name as the `title` in your YAML header;
+- all your code, output, answers and plots show up in the `.html` file;
+- the file is self-contained: `embed-resources: true` is in your YAML header.
+
+Hand in **only** the `.html` file.
+

@@ -207,7 +207,7 @@ Only the output you will interpret, in a readable format.
 
 ::: gradetable
 | Element | What we look for |
-|----|----|
+|------------------------------------|------------------------------------|
 | **Linear regression** | Description of the building process, the model fit, and the model comparison procedure |
 | **Interpretation** | Substantive interpretation of the final model. Answers to your research questions |
 | **Layout** | Structure of the document, output is efficiently presented, custom functions are developed when needed. Graphs are used where fitting |
@@ -235,6 +235,7 @@ Take a moment to think back on your group contract:
 - Is everything still working?
 - Is everybody on track?
 - Do you need to adjust anything?
+- Mail your working agreements and changes to the contract to your workgroup instructor
 
 ## Continue working on assignment 1
 

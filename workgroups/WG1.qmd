@@ -92,10 +92,10 @@ You perform a multiple linear regression analysis in R and report this using R m
 
 ::: gradetable
 | Element | Content | Week |
-|---------------|--------------------------------------------|:------:|
-| **Context** | Introduction of your research questions, description and potential processing of your data | 1 |
-| **Exploratory data analysis** | Inspection of potentially interesting relations in the data | 2 |
-| **Linear regression** | Description of the building process, the model fit, and the model comparison procedure | 3 |
+|------------|-------------------------------------------|:-------------:|
+| **Context** | Introduction of research questions, data description and processing | 1 |
+| **Exploratory data analysis** | Inspection of relations in data | 2 |
+| **Linear regression** | Description of the building process, model fit, and model comparison | 3 |
 :::
 
 ## Assignment 1: Linear regression
@@ -104,10 +104,10 @@ The assignment is graded on the following elements:
 
 ::: gradetable
 | Element | Content | Week |
-|-------------|---------------------------------------------------|:------:|
-| **Assumptions** | Testing of model assumptions, checking for outliers and influential cases. Act upon and reflect on violations when needed | 4 |
-| **Interpretation** | Substantive interpretation of the final model. Answers to your research questions | 4 |
-| **Layout** | Structure of the document, output is efficiently presented, custom functions are developed when needed. Graphs are used where fitting | all |
+|--------------|---------------------------------------------|:------------:|
+| **Assumptions** | Testing of model assumptions, outliers and influential cases. Act upon and reflect on violations | 4 |
+| **Interpretation** | Substantive interpretation of the final model. Answer research questions | 4 |
+| **Layout** | Structure of the document, efficient output, custom functions when needed. Graphs are used where fitting | all |
 :::
 
 Find the complete assignment description on the course website.
@@ -118,6 +118,7 @@ Grading:
 
 - Both group assignments contribute 25% to your final grade
 - If names are omitted from groups/assignments, we assume everyone is aware of this.
+- Group contract
 
 ## Assignments
 
@@ -283,37 +284,67 @@ You are not allowed to:
 - Submit generated text or code as if it was written by you
 - Have text or code revised
 
-## Making groups
+## Starting the group work
 
-- You can form a group with 3 or 4 students
+1. **Form your group** (5–10 min)
+2. **Individual reflection** (2 min)
+3. **Set up your group contract** (15 min)
+4. **Start searching for a dataset**
 
-- One rule: every group member must come from a different bachelor's program
+## Part 1: Form your group
 
-- Next: set up a group contract together
+- Form a group of **3 or 4 students**
+- One rule: every group member comes from a **different bachelor's program**
+- Walk around, introduce yourself, and find your group
 
-## Group contract
+::: {.notes}
+Check in after 5 minutes: are all groups formed? Help students who are still looking.
+:::
 
-Take 10 minutes to agree on **how you collaborate**, both at and in between workgroup meetings.
+## Part 2: Individual reflection
 
-:::::: {style="font-size: 0.8em;"}
-::::: columns
+Take **2 minutes on your own** to write down:
+
+- **Four ground rules** that will benefit you and your group
+  (e.g., meeting every week at a fixed time)
+- **1–4 things** you have experienced in past group work that you
+  **do not** want to happen again, and how you think they can be prevented
+
+## Part 3: Group contract
+
+Take **15 minutes** to agree on how you collaborate during and between workgroup meetings.
+
+:::: {.columns}
 ::: {.column width="50%"}
-- How is **everyone involved in decision making**?
-- What **skills and expertise** does everyone bring?
-- How do you **communicate**?
-:::
+**Working together**
 
+- Communication: where? How fast do you respond?
+- Meetings: when? How often?
+- Decision making: How is everyone involved?
+- Skills and expertise: What does everyone bring?
+:::
 ::: {.column width="50%"}
-- How do you **share the work**?
-- How much **time and effort** can you expect from everyone?
-- What if someone **breaks the agreements**?
-:::
-:::::
-::::::
+**Getting the work done**
 
-::: {.callout-warning appearance="simple" style="font-size: 1.15em;"}
-Splitting up the work and only joining it right before the deadline does **not** work well! Each part builds on the previous one, and everyone needs to understand the full analysis.
+- Roles: who does what?
+- Internal deadlines and quality standards
+- Time and effort: what can you expect from each other?
+- What happens if someone breaks the agreements?
 :::
+::::
+
+## Warning
+
+Splitting up the work and only combining it right before the deadline **does not work**!
+
+- Each part builds on the previous one
+- Everyone needs to understand the full analysis
+
+Send your contract to your workgroup instructor, and check every week whether it still works.
+
+## Part 4: Find a dataset
+
+Your group is ready to go: start searching for a dataset!
 
 ## Before the end of the meeting
 

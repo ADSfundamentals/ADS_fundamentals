@@ -62,11 +62,11 @@ This is our **final regular workgroup meeting**. Today: the second set of big st
 ## Assumptions: check your final model
 
 ::: gradetable
-| Assumption                                                           |
-|----------------------------------------------------------------------|
-| **1. Linear in the parameters** (logit scale)                        |
-| **2. Full rank:** no (severe) multicollinearity                      |
-| **3. Binary outcome? No omitted variable? No residual clustering?**  |
+| Assumption                                                          |
+|---------------------------------------------------------------------|
+| **1. Linear in the parameters** (logit scale)                       |
+| **2. Full rank:** no (severe) multicollinearity                     |
+| **3. Binary outcome? No omitted variable? No residual clustering?** |
 :::
 
 ::: {style="font-size: 0.75em;"}
@@ -191,3 +191,13 @@ This is the last workgroup meeting before the deadline:
 ```
 
 Use the code from this week's lab!
+
+
+## Group contract check-in
+
+Take a moment to think back on your group contract:
+
+- Is everything still working?
+- Is everybody on track?
+- Do you need to adjust anything?
+- Mail your working agreements and changes to the contract to your workgroup instructor

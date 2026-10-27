@@ -61,6 +61,7 @@ You continue in the **same group** as for assignment 1. Check in again:
 - What did you agree on in your group contract?
 - Did this work well during assignment 1?
 - What can be **improved or changed** for assignment 2?
+- Mail your working agreements and changes to the contract to your workgroup instructor
 
 Update your group contract where needed.
 
@@ -130,7 +131,7 @@ Odds are not probabilities: 1.98 times the **odds** of passing is not 1.98 times
 
 ::: gradetable
 | Term | β | Odds ratio | Interpretation (controlling for the other predictors) |
-|----------|-------:|---------:|--------------------------------------------|
+|------------|-----------:|-----------:|------------------------------------|
 | age | −0.034 | 0.97 | Each extra year: odds of survival × 0.97 |
 | sexmale | −2.589 | 0.08 | Men: 0.08 times the odds of survival of women, or 13.3 times the odds of **death** |
 | class3rd | −2.455 | 0.09 | 3rd vs 1st class: 0.09 times the odds of survival, or 11.7 times the odds of death |

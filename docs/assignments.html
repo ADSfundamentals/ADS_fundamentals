@@ -129,7 +129,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#assignment-1-linear-regression" id="toc-assignment-1-linear-regression" class="nav-link active" data-scroll-target="#assignment-1-linear-regression">Assignment 1: Linear regression</a></li>
+  <li><a href="#two-group-assignments" id="toc-two-group-assignments" class="nav-link active" data-scroll-target="#two-group-assignments">Two group assignments</a>
+  <ul class="collapse">
+  <li><a href="#group-participation" id="toc-group-participation" class="nav-link" data-scroll-target="#group-participation">Group participation</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  </ul></li>
+  <li><a href="#assignment-1-linear-regression" id="toc-assignment-1-linear-regression" class="nav-link" data-scroll-target="#assignment-1-linear-regression">Assignment 1: Linear regression</a></li>
   <li><a href="#assignment-2-logistic-regression" id="toc-assignment-2-logistic-regression" class="nav-link" data-scroll-target="#assignment-2-logistic-regression">Assignment 2: Logistic regression</a></li>
   </ul>
 </nav>
@@ -156,8 +161,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="two-group-assignments" class="level1">
+<h1>Two group assignments</h1>
+<section id="group-participation" class="level2">
+<h2 class="anchored" data-anchor-id="group-participation">Group participation</h2>
 <p>Both assignments are group assignments. We will form groups of 3 or 4 students at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.</p>
-<p>In order to be assigned to a group, presence at the first meeting is crucial!</p>
+<p><strong>In order to be assigned to a group, presence at the first meeting is crucial!</strong></p>
+<p>To collaborate effectively on the group assignments, each group draws up a <strong>group contract</strong> in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Each week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor.</p>
+</section>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <p>You can use the same dataset for both assigments. The minimum requirement for the dataset is that it contains:</p>
 <ul>
 <li><p>One continuous outcome variable (for linear regression)</p></li>
@@ -165,14 +178,16 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Two continuous predictor variables</p></li>
 <li><p>One categorical predictor variable</p></li>
 </ul>
-<section id="assignment-1-linear-regression" class="level2">
-<h2 class="anchored" data-anchor-id="assignment-1-linear-regression">Assignment 1: Linear regression</h2>
+</section>
+</section>
+<section id="assignment-1-linear-regression" class="level1">
+<h1>Assignment 1: Linear regression</h1>
 <ul>
 <li><p><strong>Type of assignment:</strong> Written report in Quarto.</p></li>
 <li><p><strong>Grading:</strong> 25% of your final grade</p></li>
 <li><p><strong>Deadline:</strong> Friday December 11, 16:00</p></li>
 <li><p><strong>What to submit:</strong> A ZIP archive containing the complete R project (dataset, .qmd, HTML)</p></li>
-<li><p><strong>Where to submit:</strong> <a href="https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN">Here</a></p></li>
+<li><p><strong>Where to submit:</strong> Brightspace</p></li>
 <li><p><strong>What is graded:</strong> Only your .html file is graded, so make sure all code, comments and output are visible! <strong>Carefully check if the compiled .html file in your ZIP archive is self-contained, correct and complete before submitting!</strong></p></li>
 <li><p><strong>Description:</strong> For this assignment, you perform and report a multiple linear regression analysis in a Quarto text document. The assignment will be graded on the following six dimensions:</p></li>
 </ul>
@@ -183,10 +198,11 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Interpretation:</strong> Substantive interpretation of the final model. Answering your research question.</p></li>
 <li><p><strong>Layout:</strong> Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations.</p></li>
 <li><p><strong>Coding:</strong> Use code from the labs and annotate what each piece of code does.</p></li>
+<li><p><strong>Group process:</strong> Set up a group contract, stick with the agreements made, review them regularly and report to your workgroup instructor weekly.</p></li>
 </ol>
 </section>
-<section id="assignment-2-logistic-regression" class="level2">
-<h2 class="anchored" data-anchor-id="assignment-2-logistic-regression">Assignment 2: Logistic regression</h2>
+<section id="assignment-2-logistic-regression" class="level1">
+<h1>Assignment 2: Logistic regression</h1>
 <p>Group assignment 2: Logistic regression</p>
 <ul>
 <li><p><strong>Type of assignment:</strong> Presentation and discussion with slides in Quarto</p></li>
@@ -194,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Presentation:</strong> WG meeting Tuesday January 19, from 13:15 to 17:00. Prepare a presentation of 15 min. and expect 5 min. of questions from students and teachers.</p></li>
 <li><p><strong>Deadline:</strong> Monday January 18, 15:00. Hand in your ZIP archive including your slides. Your WG instructor will set the slides up for the presentations on Thursday. <strong>Carefully check if the compiled .html file in your ZIP archive is self-contained, correct and complete before submitting!</strong></p></li>
 <li><p><strong>What to submit:</strong> A ZIP archive containing the complete R project (dataset, .qmd, slides)</p></li>
-<li><p><strong>Where to submit:</strong> <a href="https://surfdrive.surf.nl/index.php/s/vDu5h9LNlwE6KhN">Here</a></p></li>
+<li><p><strong>Where to submit:</strong> Brightspace</p></li>
 <li><p><strong>Description:</strong> For this assignment, you perform and report a multiple logistic regression analysis in a Quarto presentation. The presentation will be graded on the following six dimensions:</p></li>
 </ul>
 <ol type="1">
@@ -204,6 +220,7 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Interpretation:</strong> Substantive interpretation of the final model (including the confusion matrix). Answering your research question.</li>
 <li><strong>Layout:</strong> Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations.</li>
 <li><strong>Coding:</strong> Use code from the labs and annotate what each piece of code does.</li>
+<li><strong>Group process:</strong> Set up a group contract, stick with the agreements made, review them regularly and report to your workgroup instructor weekly.</li>
 </ol>
 
 

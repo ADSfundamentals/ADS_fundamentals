@@ -12,13 +12,13 @@ This course will introduce students to the principles of analytical data science
 
 In seven weeks, you will learn the basics of data handling and statistical programming with R and details about regression techniques in the context of statistical inference, prediction, and classification. Each week will comprise four activities:
 
--   During the weekly **in-person lectures**, we will cover the theoretical content.
+- During the weekly **in-person lectures**, we will cover the theoretical content.
 
--   During the weekly **in-person workgroup** meetings, you will work on real-world data analysis with a group of your peers.
+- During the weekly **in-person workgroup** meetings, you will work on real-world data analysis with a group of your peers.
 
--   Weekly **self-study practical exercises** connect the statistical theory to practice by applying the lecture content in the R statistical programming language.
+- Weekly **self-study practical exercises** connect the statistical theory to practice by applying the lecture content in the R statistical programming language.
 
--   There is an **online weekly Q&A** session in case you get stuck or have questions.
+- There is an **online weekly Q&A** session in case you get stuck or have questions.
 
 ## How to pass the course
 
@@ -30,11 +30,14 @@ Your final grade consists of three elements:
 | Group assignment 2      | 25%    | 5.5                    |
 | Written exam in Remindo | 50%    | 5.5                    |
 
-### Attendance
-
 During this course, you will attend 7 lectures, 7 workgroup sessions and work on 6 practical assignments.
 
+### Attendance
+
 **Attendance** for the lectures and the workgroup sessions **is mandatory**. You work on your group assignments during the workgroup meetings. For a collaborative spirit, attendance is crucial.
+
+### Online labs
+The six online labs **must be submitted on Brightspace** every Friday before 16:00. The labs are not graded, but submitting them is expected, as they are your main preparation for the exam. If you do not pass the exam, resit support from the teaching team is available only to students who submitted all six labs. We are happy to invest in your learning, only if you do too.
 
 ## Course objectives and learning outcomes
 
@@ -44,21 +47,21 @@ At the end of this course, students are able to:
 
 1.  Identify key statistical concepts such as:
 
--   (Conditional) probability
+- (Conditional) probability
 
--   Inference
+- Inference
 
--   Estimation
+- Estimation
 
--   Prediction
+- Prediction
 
--   Classification
+- Classification
 
--   Sampling variability
+- Sampling variability
 
--   Statistical modeling
+- Statistical modeling
 
--   Residuals Fitted values
+- Residuals Fitted values
 
 2.  Choose an appropriate regression model for a given research scenario.
 

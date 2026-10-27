@@ -25,7 +25,7 @@
     "href": "manual.html#how-to-pass-the-course",
     "title": "Course manual",
     "section": "How to pass the course",
-    "text": "How to pass the course\nYour final grade consists of three elements:\n\n\n\nGrade component\nWeight\nRequired minimum grade\n\n\n\n\nGroup assignment 1\n25%\n5.5\n\n\nGroup assignment 2\n25%\n5.5\n\n\nWritten exam in Remindo\n50%\n5.5\n\n\n\n\nAttendance\nDuring this course, you will attend 7 lectures, 7 workgroup sessions and work on 6 practical assignments.\nAttendance for the lectures and the workgroup sessions is mandatory. You work on your group assignments during the workgroup meetings. For a collaborative spirit, attendance is crucial."
+    "text": "How to pass the course\nYour final grade consists of three elements:\n\n\n\nGrade component\nWeight\nRequired minimum grade\n\n\n\n\nGroup assignment 1\n25%\n5.5\n\n\nGroup assignment 2\n25%\n5.5\n\n\nWritten exam in Remindo\n50%\n5.5\n\n\n\nDuring this course, you will attend 7 lectures, 7 workgroup sessions and work on 6 practical assignments.\n\nAttendance\nAttendance for the lectures and the workgroup sessions is mandatory. You work on your group assignments during the workgroup meetings. For a collaborative spirit, attendance is crucial.\n\n\nOnline labs\nThe six online labs must be submitted on Brightspace every Friday before 16:00. The labs are not graded, but submitting them is expected, as they are your main preparation for the exam. If you do not pass the exam, resit support from the teaching team is available only to students who submitted all six labs. We are happy to invest in your learning, only if you do too."
   },
   {
     "objectID": "manual.html#course-objectives-and-learning-outcomes",
@@ -102,7 +102,7 @@
     "href": "workgroups/WG5.html#group-contract-check-in",
     "title": "Work Group Meeting 5",
     "section": "Group contract check-in",
-    "text": "Group contract check-in\nYou continue in the same group as for assignment 1. Check in again:\n\nWhat did you agree on in your group contract?\nDid this work well during assignment 1?\nWhat can be improved or changed for assignment 2?\n\nUpdate your group contract where needed."
+    "text": "Group contract check-in\nYou continue in the same group as for assignment 1. Check in again:\n\nWhat did you agree on in your group contract?\nDid this work well during assignment 1?\nWhat can be improved or changed for assignment 2?\nMail your working agreements and changes to the contract to your workgroup instructor\n\nUpdate your group contract where needed."
   },
   {
     "objectID": "workgroups/WG5.html#what-changes-in-assignment-2",
@@ -200,21 +200,21 @@
     "href": "workgroups/WG1.html#assignment-1-linear-regression",
     "title": "Work Group Meeting 1",
     "section": "Assignment 1: Linear regression",
-    "text": "Assignment 1: Linear regression\nYou perform a multiple linear regression analysis in R and report this using R markdown. The assignment is graded on the following elements:\n\n\n\n\n\n\n\n\n\nElement\nContent\nWeek\n\n\n\n\nContext\nIntroduction of your research questions, description and potential processing of your data\n1\n\n\nExploratory data analysis\nInspection of potentially interesting relations in the data\n2\n\n\nLinear regression\nDescription of the building process, the model fit, and the model comparison procedure\n3"
+    "text": "Assignment 1: Linear regression\nYou perform a multiple linear regression analysis in R and report this using R markdown. The assignment is graded on the following elements:\n\n\n\n\n\n\n\n\n\nElement\nContent\nWeek\n\n\n\n\nContext\nIntroduction of research questions, data description and processing\n1\n\n\nExploratory data analysis\nInspection of relations in data\n2\n\n\nLinear regression\nDescription of the building process, model fit, and model comparison\n3"
   },
   {
     "objectID": "workgroups/WG1.html#assignment-1-linear-regression-1",
     "href": "workgroups/WG1.html#assignment-1-linear-regression-1",
     "title": "Work Group Meeting 1",
     "section": "Assignment 1: Linear regression",
-    "text": "Assignment 1: Linear regression\nThe assignment is graded on the following elements:\n\n\n\n\n\n\n\n\n\nElement\nContent\nWeek\n\n\n\n\nAssumptions\nTesting of model assumptions, checking for outliers and influential cases. Act upon and reflect on violations when needed\n4\n\n\nInterpretation\nSubstantive interpretation of the final model. Answers to your research questions\n4\n\n\nLayout\nStructure of the document, output is efficiently presented, custom functions are developed when needed. Graphs are used where fitting\nall\n\n\n\n\nFind the complete assignment description on the course website."
+    "text": "Assignment 1: Linear regression\nThe assignment is graded on the following elements:\n\n\n\n\n\n\n\n\n\nElement\nContent\nWeek\n\n\n\n\nAssumptions\nTesting of model assumptions, outliers and influential cases. Act upon and reflect on violations\n4\n\n\nInterpretation\nSubstantive interpretation of the final model. Answer research questions\n4\n\n\nLayout\nStructure of the document, efficient output, custom functions when needed. Graphs are used where fitting\nall\n\n\n\n\nFind the complete assignment description on the course website."
   },
   {
     "objectID": "workgroups/WG1.html#assignments-1",
     "href": "workgroups/WG1.html#assignments-1",
     "title": "Work Group Meeting 1",
     "section": "Assignments",
-    "text": "Assignments\nGrading:\n\nBoth group assignments contribute 25% to your final grade\nIf names are omitted from groups/assignments, we assume everyone is aware of this."
+    "text": "Assignments\nGrading:\n\nBoth group assignments contribute 25% to your final grade\nIf names are omitted from groups/assignments, we assume everyone is aware of this.\nGroup contract"
   },
   {
     "objectID": "workgroups/WG1.html#assignments-2",
@@ -294,18 +294,46 @@
     "text": "Use of Generative AI\nYou are allowed to:\n\nGain inspiration\nAsk for help how to tackle an assignment\n\nYou are not allowed to:\n\nSubmit generated text or code as if it was written by you\nHave text or code revised"
   },
   {
-    "objectID": "workgroups/WG1.html#making-groups",
-    "href": "workgroups/WG1.html#making-groups",
+    "objectID": "workgroups/WG1.html#starting-the-group-work",
+    "href": "workgroups/WG1.html#starting-the-group-work",
     "title": "Work Group Meeting 1",
-    "section": "Making groups",
-    "text": "Making groups\n\nYou can form a group with 3 or 4 students\nOne rule: every group member must come from a different bachelor’s program\nNext: set up a group contract together"
+    "section": "Starting the group work",
+    "text": "Starting the group work\n\nForm your group (5–10 min)\nIndividual reflection (2 min)\nSet up your group contract (15 min)\nStart searching for a dataset"
   },
   {
-    "objectID": "workgroups/WG1.html#group-contract",
-    "href": "workgroups/WG1.html#group-contract",
+    "objectID": "workgroups/WG1.html#part-1-form-your-group",
+    "href": "workgroups/WG1.html#part-1-form-your-group",
     "title": "Work Group Meeting 1",
-    "section": "Group contract",
-    "text": "Group contract\nTake 10 minutes to agree on how you collaborate, both at and in between workgroup meetings.\n\n\n\n\nHow is everyone involved in decision making?\nWhat skills and expertise does everyone bring?\nHow do you communicate?\n\n\n\nHow do you share the work?\nHow much time and effort can you expect from everyone?\nWhat if someone breaks the agreements?\n\n\n\n\n\n\n\n\n\n\nSplitting up the work and only joining it right before the deadline does not work well! Each part builds on the previous one, and everyone needs to understand the full analysis."
+    "section": "Part 1: Form your group",
+    "text": "Part 1: Form your group\n\nForm a group of 3 or 4 students\nOne rule: every group member comes from a different bachelor’s program\nWalk around, introduce yourself, and find your group\n\n\nCheck in after 5 minutes: are all groups formed? Help students who are still looking."
+  },
+  {
+    "objectID": "workgroups/WG1.html#part-2-individual-reflection",
+    "href": "workgroups/WG1.html#part-2-individual-reflection",
+    "title": "Work Group Meeting 1",
+    "section": "Part 2: Individual reflection",
+    "text": "Part 2: Individual reflection\nTake 2 minutes on your own to write down:\n\nFour ground rules that will benefit you and your group (e.g., meeting every week at a fixed time)\n1–4 things you have experienced in past group work that you do not want to happen again, and how you think they can be prevented"
+  },
+  {
+    "objectID": "workgroups/WG1.html#part-3-group-contract",
+    "href": "workgroups/WG1.html#part-3-group-contract",
+    "title": "Work Group Meeting 1",
+    "section": "Part 3: Group contract",
+    "text": "Part 3: Group contract\nTake 15 minutes to agree on how you collaborate during and between workgroup meetings.\n\n\nWorking together\n\nCommunication: where? How fast do you respond?\nMeetings: when? How often?\nDecision making: How is everyone involved?\nSkills and expertise: What does everyone bring?\n\n\nGetting the work done\n\nRoles: who does what?\nInternal deadlines and quality standards\nTime and effort: what can you expect from each other?\nWhat happens if someone breaks the agreements?"
+  },
+  {
+    "objectID": "workgroups/WG1.html#warning",
+    "href": "workgroups/WG1.html#warning",
+    "title": "Work Group Meeting 1",
+    "section": "Warning",
+    "text": "Warning\nSplitting up the work and only combining it right before the deadline does not work!\n\nEach part builds on the previous one\nEveryone needs to understand the full analysis\n\nSend your contract to your workgroup instructor, and check every week whether it still works."
+  },
+  {
+    "objectID": "workgroups/WG1.html#part-4-find-a-dataset",
+    "href": "workgroups/WG1.html#part-4-find-a-dataset",
+    "title": "Work Group Meeting 1",
+    "section": "Part 4: Find a dataset",
+    "text": "Part 4: Find a dataset\nYour group is ready to go: start searching for a dataset!"
   },
   {
     "objectID": "workgroups/WG1.html#before-the-end-of-the-meeting",
@@ -375,7 +403,7 @@
     "href": "workgroups/WG2.html#group-contract-check-in",
     "title": "Work Group Meeting 2",
     "section": "Group contract check-in",
-    "text": "Group contract check-in\nTake a couple of minutes to reflect on your group contract:\n\nWhat did you agree on?\nIs everything and everybody still on track?\nIs it working? Do you need to adjust anything?"
+    "text": "Group contract check-in\nTake a couple of minutes to reflect on your group contract:\n\nWhat did you agree on?\nIs everything and everybody still on track?\nIs it working? Do you need to adjust anything?\nMail your working agreements and changes to the contract to your workgroup instructor"
   },
   {
     "objectID": "workgroups/WG2.html#continue-working-on-assignment-1",
@@ -963,21 +991,21 @@
     "href": "assignments.html",
     "title": "Assignments",
     "section": "",
-    "text": "Both assignments are group assignments. We will form groups of 3 or 4 students at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.\nIn order to be assigned to a group, presence at the first meeting is crucial!\nYou can use the same dataset for both assigments. The minimum requirement for the dataset is that it contains:"
+    "text": "Both assignments are group assignments. We will form groups of 3 or 4 students at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.\nIn order to be assigned to a group, presence at the first meeting is crucial!\nTo collaborate effectively on the group assignments, each group draws up a group contract in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Each week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor.\n\n\n\nYou can use the same dataset for both assigments. The minimum requirement for the dataset is that it contains:\n\nOne continuous outcome variable (for linear regression)\nOne binary outcome variable (for logistic regression)\nTwo continuous predictor variables\nOne categorical predictor variable"
   },
   {
-    "objectID": "assignments.html#assignment-1-linear-regression",
-    "href": "assignments.html#assignment-1-linear-regression",
+    "objectID": "assignments.html#group-participation",
+    "href": "assignments.html#group-participation",
     "title": "Assignments",
-    "section": "Assignment 1: Linear regression",
-    "text": "Assignment 1: Linear regression\n\nType of assignment: Written report in Quarto.\nGrading: 25% of your final grade\nDeadline: Friday December 11, 16:00\nWhat to submit: A ZIP archive containing the complete R project (dataset, .qmd, HTML)\nWhere to submit: Here\nWhat is graded: Only your .html file is graded, so make sure all code, comments and output are visible! Carefully check if the compiled .html file in your ZIP archive is self-contained, correct and complete before submitting!\nDescription: For this assignment, you perform and report a multiple linear regression analysis in a Quarto text document. The assignment will be graded on the following six dimensions:\n\n\nPreliminaries: Introduction of your research questions, description and potential processing of your data.\nModel estimation: Description of the model estimates, model fit, and model comparison procedure (including moderation)\nAssumptions: Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed.\nInterpretation: Substantive interpretation of the final model. Answering your research question.\nLayout: Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations.\nCoding: Use code from the labs and annotate what each piece of code does."
+    "section": "",
+    "text": "Both assignments are group assignments. We will form groups of 3 or 4 students at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.\nIn order to be assigned to a group, presence at the first meeting is crucial!\nTo collaborate effectively on the group assignments, each group draws up a group contract in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Each week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor."
   },
   {
-    "objectID": "assignments.html#assignment-2-logistic-regression",
-    "href": "assignments.html#assignment-2-logistic-regression",
+    "objectID": "assignments.html#dataset",
+    "href": "assignments.html#dataset",
     "title": "Assignments",
-    "section": "Assignment 2: Logistic regression",
-    "text": "Assignment 2: Logistic regression\nGroup assignment 2: Logistic regression\n\nType of assignment: Presentation and discussion with slides in Quarto\nGrading: 25% of your final grade\nPresentation: WG meeting Tuesday January 19, from 13:15 to 17:00. Prepare a presentation of 15 min. and expect 5 min. of questions from students and teachers.\nDeadline: Monday January 18, 15:00. Hand in your ZIP archive including your slides. Your WG instructor will set the slides up for the presentations on Thursday. Carefully check if the compiled .html file in your ZIP archive is self-contained, correct and complete before submitting!\nWhat to submit: A ZIP archive containing the complete R project (dataset, .qmd, slides)\nWhere to submit: Here\nDescription: For this assignment, you perform and report a multiple logistic regression analysis in a Quarto presentation. The presentation will be graded on the following six dimensions:\n\n\nPreliminaries: Introduction of your research questions, description and potential processing of your data.\nModel estimation: Description of the model estimates, model fit, and model comparison procedure (including moderation).\nAssumptions: Testing of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed.\nInterpretation: Substantive interpretation of the final model (including the confusion matrix). Answering your research question.\nLayout: Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations.\nCoding: Use code from the labs and annotate what each piece of code does."
+    "section": "",
+    "text": "You can use the same dataset for both assigments. The minimum requirement for the dataset is that it contains:\n\nOne continuous outcome variable (for linear regression)\nOne binary outcome variable (for logistic regression)\nTwo continuous predictor variables\nOne categorical predictor variable"
   },
   {
     "objectID": "workgroups/WG3.html#today",
@@ -1054,7 +1082,7 @@
     "href": "workgroups/WG3.html#group-contract-check-in",
     "title": "Work Group Meeting 3",
     "section": "Group contract check-in",
-    "text": "Group contract check-in\nTake a moment to think back on your group contract:\n\nIs everything still working?\nIs everybody on track?\nDo you need to adjust anything?"
+    "text": "Group contract check-in\nTake a moment to think back on your group contract:\n\nIs everything still working?\nIs everybody on track?\nDo you need to adjust anything?\nMail your working agreements and changes to the contract to your workgroup instructor"
   },
   {
     "objectID": "workgroups/WG3.html#continue-working-on-assignment-1",
@@ -1138,7 +1166,7 @@
     "href": "workgroups/WG4.html#continue-working",
     "title": "Work Group Meeting 4",
     "section": "Continue working",
-    "text": "Continue working\n\nFinish assumptions, diagnostics and interpretation\nUse the code from this week’s lab\nRead the full report and then hand it in before Friday December 11, 16:00"
+    "text": "Continue working\n\nFinish assumptions, diagnostics and interpretation\nUse the code from this week’s lab\nRead the full report and then hand it in before Friday December 11, 16:00\nMail any final changes to the group contract to your workgroup instructor"
   },
   {
     "objectID": "workgroups/WG6.html#today",
@@ -1223,6 +1251,13 @@
     "title": "Work Group Meeting 6",
     "section": "Continue working",
     "text": "Continue working\n\n  \n    1. Checkassumptions & influential cases\n    →\n    2. Classifyconfusion matrix\n    →\n    3. Presentbuild your Quarto slides\n  \n\nUse the code from this week’s lab!"
+  },
+  {
+    "objectID": "workgroups/WG6.html#group-contract-check-in",
+    "href": "workgroups/WG6.html#group-contract-check-in",
+    "title": "Work Group Meeting 6",
+    "section": "Group contract check-in",
+    "text": "Group contract check-in\nTake a moment to think back on your group contract:\n\nIs everything still working?\nIs everybody on track?\nDo you need to adjust anything?\nMail your working agreements and changes to the contract to your workgroup instructor"
   },
   {
     "objectID": "exam.html",

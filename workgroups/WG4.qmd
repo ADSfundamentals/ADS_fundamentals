@@ -176,3 +176,4 @@ You perform and report a multiple linear regression analysis in a Quarto documen
 - Finish assumptions, diagnostics and interpretation
 - Use the code from this week's lab
 - Read the full report and then hand it in before **Friday December 11, 16:00**
+- Mail any final changes to the group contract to your workgroup instructor

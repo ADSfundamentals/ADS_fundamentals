@@ -95,9 +95,9 @@ ggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +
   theme_minimal()
 ```
 
-A smooth curve helps to see the general shape of the relation. You can add one with `geom_smooth()`. With `method = "loess"` you get a flexible curve that follows the data, and `se = FALSE` leaves out the confidence band.
-
 **Exercise 4**
+
+A smooth curve helps to see the general shape of the relation. You can add one with `geom_smooth()`. With `method = "loess"` you get a flexible curve that follows the data, and `se = FALSE` leaves out the confidence band.
 
 Add a loess curve to your plot from Exercise 3 with `geom_smooth(method = "loess", se = FALSE)`.
 

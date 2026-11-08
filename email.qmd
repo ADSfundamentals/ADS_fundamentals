@@ -1,0 +1,25 @@
+---
+title: "Weekly group update"
+---
+
+
+After each workgroup meeting, your group sends a short update email to your workgroup instructor. Take turns writing it, agree on the content as a group, and **always CC every group member**.
+
+## Template
+
+**Current status**
+
+- Done this week:
+- Next steps and who does what:
+
+**Decisions and new agreements**
+
+- Project decisions or changes to how we work / our contract:
+
+**Group contract follow-up**
+
+- Agreements not met (e.g., absence, not prepared, missed deadline) and what we did about it:
+- Follow-up on earlier issues:
+
+**Questions for the instructor** *(optional)*
+

@@ -32,7 +32,7 @@ With this hand-in assignment, you demonstrate that you can set up a project as y
 
 - Hand in **only your rendered `.html` file**. Do not hand in your `.qmd` file, the data or a zip of your project.
 - Name your file **`lab1_firstname_lastname_studentnumber.html`**, for example `lab1_jane_doe_1234567.html`.
-- Use `embed-resources: true` in your header so that your figure is stored inside the `.html` file.
+- Use `embed-resources: true` in your YAML header so that your figure is stored inside the `.html` file.
 :::
 
 ## Set up your project
@@ -45,6 +45,7 @@ Set up an R project with the same folder structure as the "good" example from th
 2.  Inside the project folder, create the folders `code`, `data`, `figures` and `output`.
 3.  [Download penguins.csv](../data/penguins.csv){download="penguins.csv"} and save it in the `data` folder.
 4.  Create a new Quarto document (*File \> New File \> Quarto Document*) and save it in the `code` folder as `lab1_firstname_lastname_studentnumber.qmd`.
+5.  Replace the YAML header with the header below and fill in your own details:
 
 ``` markdown
 ---
@@ -196,13 +197,19 @@ boxplot(body_mass_g ~ species,
 Also save the boxplot as an image in your `figures` folder. `png()` opens an image file, the plot is drawn into that file, and `dev.off()` closes it:
 
 ``` r
+#| fig-cap: "Body mass of penguins per species."
+
 png(here::here(figDir, "boxplot_mass.png"))
-boxplot(body_mass_g ~ species, data = penguins,
-        xlab = "Species", ylab = "Body mass (g)")
-dev.off()
+boxplot(y ~ x, 
+        data = data, 
+        xlab = "x axis label", 
+        ylab = "y axis label")
+dev. Off()
+
 ```
 
 ```{r, include = params$answers, eval = FALSE}
+#| fig-cap: "Body mass of penguins per species."
 png(here::here(figDir, "boxplot_mass.png"))
 boxplot(body_mass_g ~ species, data = penguins,
         xlab = "Species", ylab = "Body mass (g)")

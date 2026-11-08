@@ -225,7 +225,7 @@ What to hand in
 <ul>
 <li>Hand in <strong>only your rendered <code>.html</code> file</strong>. Do not hand in your <code>.qmd</code> file, the data or a zip of your project.</li>
 <li>Name your file <strong><code>lab1_firstname_lastname_studentnumber.html</code></strong>, for example <code>lab1_jane_doe_1234567.html</code>.</li>
-<li>Use <code>embed-resources: true</code> in your header so that your figure is stored inside the <code>.html</code> file.</li>
+<li>Use <code>embed-resources: true</code> in your YAML header so that your figure is stored inside the <code>.html</code> file.</li>
 </ul>
 </div>
 </div>
@@ -238,6 +238,7 @@ What to hand in
 <li>Inside the project folder, create the folders <code>code</code>, <code>data</code>, <code>figures</code> and <code>output</code>.</li>
 <li><a href="../data/penguins.csv" download="penguins.csv">Download penguins.csv</a> and save it in the <code>data</code> folder.</li>
 <li>Create a new Quarto document (<em>File &gt; New File &gt; Quarto Document</em>) and save it in the <code>code</code> folder as <code>lab1_firstname_lastname_studentnumber.qmd</code>.</li>
+<li>Replace the YAML header with the header below and fill in your own details:</li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "lab1_firstname_lastname_studentnumber"</span></span>
@@ -284,10 +285,14 @@ What to hand in
 <p><strong>Exercise 7</strong></p>
 <p>Make a boxplot of body mass per species with base R’s <code>boxplot()</code> function. Add a caption to the figure with the chunk option <code>#| fig-cap:</code>, and give the axes clear labels.</p>
 <p>Also save the boxplot as an image in your <code>figures</code> folder. <code>png()</code> opens an image file, the plot is drawn into that file, and <code>dev.off()</code> closes it:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(here<span class="sc">::</span><span class="fu">here</span>(figDir, <span class="st">"boxplot_mass.png"</span>))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(body_mass_g <span class="sc">~</span> species, <span class="at">data =</span> penguins,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Species"</span>, <span class="at">ylab =</span> <span class="st">"Body mass (g)"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Body mass of penguins per species."</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(here<span class="sc">::</span><span class="fu">here</span>(figDir, <span class="st">"boxplot_mass.png"</span>))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(y <span class="sc">~</span> x, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> data, </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"x axis label"</span>, </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"y axis label"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>dev. <span class="fu">Off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="render-and-hand-in" class="level2">
 <h2 class="anchored" data-anchor-id="render-and-hand-in">Render and hand in</h2>

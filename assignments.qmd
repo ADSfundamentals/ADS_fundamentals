@@ -10,7 +10,9 @@ Both assignments are group assignments. We will form groups of 3 or 4 students a
 
 **In order to be assigned to a group, presence at the first meeting is crucial!**
 
-To collaborate effectively on the group assignments, each group draws up a **group contract** in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Each week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor.
+To collaborate effectively on the group assignments, each group draws up a **group contract** in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Here is a [Contract Template](contract.qmd) you can use. 
+
+Each week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor. Here is a suggested [Email Template](email.qmd) you can use.
 
 
 ## Dataset

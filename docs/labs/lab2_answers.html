@@ -294,8 +294,8 @@ What to hand in
 </div>
 </div>
 </div>
-<p>A smooth curve helps to see the general shape of the relation. You can add one with <code>geom_smooth()</code>. With <code>method = "loess"</code> you get a flexible curve that follows the data, and <code>se = FALSE</code> leaves out the confidence band.</p>
 <p><strong>Exercise 4</strong></p>
+<p>A smooth curve helps to see the general shape of the relation. You can add one with <code>geom_smooth()</code>. With <code>method = "loess"</code> you get a flexible curve that follows the data, and <code>se = FALSE</code> leaves out the confidence band.</p>
 <p>Add a loess curve to your plot from Exercise 3 with <code>geom_smooth(method = "loess", se = FALSE)</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Petal.Width)) <span class="sc">+</span></span>

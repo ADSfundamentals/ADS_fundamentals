@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Group contract – ADS_fundamentals</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d904793c2fe8b9f05fdc73cba6253167.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ADS_fundamentals</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./manual.html"> 
+<span class="menu-text">Course manual</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./preparation.html"> 
+<span class="menu-text">Preparation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./lectures.html"> 
+<span class="menu-text">Lectures</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./assignments.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./exam.html"> 
+<span class="menu-text">Exam</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contract-template" id="toc-contract-template" class="nav-link active" data-scroll-target="#contract-template">Contract template</a>
+  <ul class="collapse">
+  <li><a href="#example-text" id="toc-example-text" class="nav-link" data-scroll-target="#example-text">Example text</a>
+  <ul class="collapse">
+  <li><a href="#participation" id="toc-participation" class="nav-link" data-scroll-target="#participation">Participation</a></li>
+  </ul></li>
+  <li><a href="#meetings" id="toc-meetings" class="nav-link" data-scroll-target="#meetings">Meetings:</a></li>
+  <li><a href="#conduct" id="toc-conduct" class="nav-link" data-scroll-target="#conduct">Conduct:</a></li>
+  <li><a href="#academic-integrity." id="toc-academic-integrity." class="nav-link" data-scroll-target="#academic-integrity.">Academic Integrity.</a></li>
+  <li><a href="#conflict" id="toc-conflict" class="nav-link" data-scroll-target="#conflict">Conflict:</a></li>
+  <li><a href="#deadlines" id="toc-deadlines" class="nav-link" data-scroll-target="#deadlines">Deadlines:</a></li>
+  <li><a href="#consequences-for-unmet-responsibilities" id="toc-consequences-for-unmet-responsibilities" class="nav-link" data-scroll-target="#consequences-for-unmet-responsibilities">Consequences for Unmet Responsibilities</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Group contract</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="contract-template" class="level1">
+<h1>Contract template</h1>
+<p>Below you can find a template of a group contract. This is based on the template shared in the course <a href="https://digitaltracedata.github.io/"><code>Digital Trace Data</code></a>. Use it as inspiration to make your own contract, and sign it to ensure you all commit to it.</p>
+<section id="example-text" class="level2">
+<h2 class="anchored" data-anchor-id="example-text">Example text</h2>
+<p>This contract represents our collective commitment to the successful completion of our group project. By signing below, each member agrees to the terms outlined.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name Team Member</th>
+<th>Signature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Member 1 …</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Member 2 …</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="participation" class="level3">
+<h3 class="anchored" data-anchor-id="participation">Participation</h3>
+<p>We agree to…</p>
+<ul>
+<li><p>Attend Labs Regularly: All members commit to attending labs. If I am unable to attend a lab session, I will take personal responsibility to acquire all necessary notes and updates from my team members. • Engage Actively: Every member is expected to actively participate in discussions and tasks. No member should consistently take on all the work, nor should any member fail to contribute. Communication: I agree to…</p></li>
+<li><p>Prompt Communication: In case of illness or an emergency that prevents me from attending class or meeting a deadline, I will promptly notify my team members. This includes making arrangements to submit my work on time, even if I am unable to attend in person.</p></li>
+<li><p>Regular Updates: I will keep the team informed about my progress on assigned tasks, any obstacles encountered, and any changes in my availability.</p></li>
+</ul>
+</section>
+</section>
+<section id="meetings" class="level2">
+<h2 class="anchored" data-anchor-id="meetings">Meetings:</h2>
+<p>I agree to…</p>
+<ul>
+<li><p>Schedule Regular Meetings: Our team will hold regular meetings to discuss ongoing work. These meetings will take place on [Day, e.g., Wednesdays] at [Time, e.g., 13:00], either online or on campus, depending on the group’s consensus.</p></li>
+<li><p>Meeting Attendance: All members commit to attending these scheduled meetings. If a member cannot attend, they will inform the group in advance and catch up on what was missed.</p></li>
+<li><p>Attend Workgroup Meetings: I commit to attending the workgroup meetings. I commit to come prepared, including having covered the lecture and lab materials am prepared to discuss any questions related to this material.</p></li>
+</ul>
+</section>
+<section id="conduct" class="level2">
+<h2 class="anchored" data-anchor-id="conduct">Conduct:</h2>
+<p>I agree to…</p>
+<ul>
+<li><p>Share Work Equitably: All team members will contribute fairly to the workload. No member will be expected to complete tasks alone, nor will any member be allowed to avoid contributing.</p></li>
+<li><p>Cultural Awareness and Equitable Participation: I commit to respecting each other’s cultural backgrounds, ensuring all voices are heard, and sharing speaking time equitably, so that every member has an equal opportunity to contribute to the project.</p></li>
+<li><p>Support Team Members: I will offer help to my fellow team members when needed and will not hesitate to ask for assistance if I encounter difficulties. Open communication about concerns related to group work is essential.</p></li>
+<li><p>Report Issues: Any issues that affect team functioning will be communicated to the group promptly. If the problem persists, the instructor will be informed.</p></li>
+</ul>
+</section>
+<section id="academic-integrity." class="level2">
+<h2 class="anchored" data-anchor-id="academic-integrity.">Academic Integrity.</h2>
+<p>I acknowledge that I will not:</p>
+<ul>
+<li><p>Copy Work: I will not copy from others, including textbooks, other students, or generative AI tools, without proper citation.</p></li>
+<li><p>Paraphrase Unethically: I will not paraphrase the work of others (including LLMs) merely by changing wording without giving proper credit.</p></li>
+<li><p>Allow Plagiarism: I will not allow my work to be used by others in a manner that constitutes academic dishonesty.</p></li>
+</ul>
+</section>
+<section id="conflict" class="level2">
+<h2 class="anchored" data-anchor-id="conflict">Conflict:</h2>
+<p>I agree to…</p>
+<ul>
+<li><p>Address Conflicts Early: Any conflicts or disagreements within the team will be addressed as soon as they arise. The group will work together to resolve issues respectfully and constructively.</p></li>
+<li><p>Escalate When Necessary: If a conflict cannot be resolved within the group, we will seek the assistance of the instructor to mediate and help find a solution.</p></li>
+</ul>
+</section>
+<section id="deadlines" class="level2">
+<h2 class="anchored" data-anchor-id="deadlines">Deadlines:</h2>
+<p>I agree to…</p>
+<ul>
+<li><p>Respect Deadlines: All members will adhere to the deadlines agreed upon for the project. This includes submitting individual contributions on time to ensure the group can meet the final project deadline.</p></li>
+<li><p>Accountability: If a member is unable to meet a deadline, they must notify the group in advance and work with the team to mitigate any impact on the overall project timeline.</p></li>
+</ul>
+</section>
+<section id="consequences-for-unmet-responsibilities" class="level2">
+<h2 class="anchored" data-anchor-id="consequences-for-unmet-responsibilities">Consequences for Unmet Responsibilities</h2>
+<p>We agree that if a group member does not fulfill their responsibilities, the following steps will be taken:</p>
+<ol type="1">
+<li><p>Initial Warning: The team member will receive an initial, informal reminder from the group. This reminder will clearly communicate the specific task or responsibility that was not completed and emphasize the importance of meeting future obligations.</p></li>
+<li><p>Group Discussion: If the issue persists after the initial warning, a formal group discussion will be held, either during a scheduled meeting or separately. During this discussion, the team member will be given the opportunity to explain the reasons for not fulfilling their responsibilities. The group will work together to find a solution, such as reassigning tasks or providing additional support.</p></li>
+<li><p>Documentation of Issues: If the problem continues, the group will document the issues in writing, including specific instances of unmet responsibilities and the steps taken to address them. This documentation will be shared with the team member in question to ensure transparency.</p></li>
+<li><p>Instructor Involvement: If the team member continues to fail in their responsibilities despite the previous steps, the group will escalate the issue to the instructor. The documented issues will be presented, and the instructor may be asked to intervene. This could involve mediation, reallocation of tasks, or potential academic consequences. If the instructor determines that a team member has not contributed fairly, that member’s grade may be adjusted to reflect their lack of participation. This may include receiving a lower grade or even a zero for the group project.</p></li>
+<li><p>Reallocation of Work: Should a team member consistently fail to contribute, the remaining members may decide to reallocate the uncompleted work among themselves to ensure the project’s success. The non-contributing member will be informed of this decision.</p></li>
+<li><p>Final Decision: In extreme cases, if the team member’s non-participation significantly jeopardizes the project, the group may collectively decide to exclude the member from the project. This decision will be made in consultation with the instructor and will be based on documented evidence of repeated non-compliance with the group contract.</p></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

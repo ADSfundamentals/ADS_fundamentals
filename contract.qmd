@@ -1,0 +1,91 @@
+---
+title: "Group contract"
+---
+
+# Contract template
+
+Below you can find a template of a group contract. This is based on the template shared in the course [`Digital Trace Data`](https://digitaltracedata.github.io/). Use it as inspiration to make your own contract, and sign it to ensure you all commit to it.
+
+## Example text
+
+This contract represents our collective commitment to the successful completion of our group project. By signing below, each member agrees to the terms outlined.
+
+| Name Team Member | Signature |
+|------------------|-----------|
+| Member 1 ...     |           |
+| Member 2 ...     |           |
+| ...              |           |
+
+### Participation
+
+We agree to…
+
+- Attend Labs Regularly: All members commit to attending labs. If I am unable to attend a lab session, I will take personal responsibility to acquire all necessary notes and updates from my team members. • Engage Actively: Every member is expected to actively participate in discussions and tasks. No member should consistently take on all the work, nor should any member fail to contribute. Communication: I agree to…
+
+- Prompt Communication: In case of illness or an emergency that prevents me from attending class or meeting a deadline, I will promptly notify my team members. This includes making arrangements to submit my work on time, even if I am unable to attend in person.
+
+- Regular Updates: I will keep the team informed about my progress on assigned tasks, any obstacles encountered, and any changes in my availability.
+
+## Meetings: 
+
+I agree to… 
+
+- Schedule Regular Meetings: Our team will hold regular meetings to discuss ongoing work. These meetings will take place on \[Day, e.g., Wednesdays\] at \[Time, e.g., 13:00\], either online or on campus, depending on the group’s consensus. 
+
+- Meeting Attendance: All members commit to attending these scheduled meetings. If a member cannot attend, they will inform the group in advance and catch up on what was missed. 
+
+- Attend Workgroup Meetings: I commit to attending the workgroup meetings. I commit to come prepared, including having covered the lecture and lab materials am prepared to discuss any questions related to this material. 
+
+## Conduct: 
+
+I agree to… 
+
+
+- Share Work Equitably: All team members will contribute fairly to the workload. No member will be expected to complete tasks alone, nor will any member be allowed to avoid contributing. 
+
+- Cultural Awareness and Equitable Participation: I commit to respecting each other's cultural backgrounds, ensuring all voices are heard, and sharing speaking time equitably, so that every member has an equal opportunity to contribute to the project.
+
+- Support Team Members: I will offer help to my fellow team members when needed and will not hesitate to ask for assistance if I encounter difficulties. Open communication about concerns related to group work is essential. 
+
+- Report Issues: Any issues that affect team functioning will be communicated to the group promptly. If the problem persists, the instructor will be informed. 
+
+## Academic Integrity. 
+I acknowledge that I will not: 
+
+- Copy Work: I will not copy from others, including textbooks, other students, or generative AI tools, without proper citation. 
+
+- Paraphrase Unethically: I will not paraphrase the work of others (including LLMs) merely by changing wording without giving proper credit. 
+
+- Allow Plagiarism: I will not allow my work to be used by others in a manner that constitutes academic dishonesty. 
+
+## Conflict: 
+
+I agree to… 
+
+- Address Conflicts Early: Any conflicts or disagreements within the team will be addressed as soon as they arise. The group will work together to resolve issues respectfully and constructively. 
+
+- Escalate When Necessary: If a conflict cannot be resolved within the group, we will seek the assistance of the instructor to mediate and help find a solution.
+
+## Deadlines: 
+
+I agree to… 
+
+- Respect Deadlines: All members will adhere to the deadlines agreed upon for the project. This includes submitting individual contributions on time to ensure the group can meet the final project deadline. 
+
+- Accountability: If a member is unable to meet a deadline, they must notify the group in advance and work with the team to mitigate any impact on the overall project timeline.
+
+## Consequences for Unmet Responsibilities 
+
+We agree that if a group member does not fulfill their responsibilities, the following steps will be taken: 
+
+1. Initial Warning: The team member will receive an initial, informal reminder from the group. This reminder will clearly communicate the specific task or responsibility that was not completed and emphasize the importance of meeting future obligations. 
+
+2. Group Discussion: If the issue persists after the initial warning, a formal group discussion will be held, either during a scheduled meeting or separately. During this discussion, the team member will be given the opportunity to explain the reasons for not fulfilling their responsibilities. The group will work together to find a solution, such as reassigning tasks or providing additional support. 
+
+3. Documentation of Issues: If the problem continues, the group will document the issues in writing, including specific instances of unmet responsibilities and the steps taken to address them. This documentation will be shared with the team member in question to ensure transparency. 
+
+4. Instructor Involvement: If the team member continues to fail in their responsibilities despite the previous steps, the group will escalate the issue to the instructor. The documented issues will be presented, and the instructor may be asked to intervene. This could involve mediation, reallocation of tasks, or potential academic consequences. If the instructor determines that a team member has not contributed fairly, that member’s grade may be adjusted to reflect their lack of participation. This may include receiving a lower grade or even a zero for the group project. 
+
+5. Reallocation of Work: Should a team member consistently fail to contribute, the remaining members may decide to reallocate the uncompleted work among themselves to ensure the project’s success. The non-contributing member will be informed of this decision. 
+
+6. Final Decision: In extreme cases, if the team member’s non-participation significantly jeopardizes the project, the group may collectively decide to exclude the member from the project. This decision will be made in consultation with the instructor and will be based on documented evidence of repeated non-compliance with the group contract.

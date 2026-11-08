@@ -42,375 +42,368 @@
     "text": "Important notice about Generative AI in this course\n\nDefinition\nGenerative AI (GenAI) is a type of artificial intelligence that can create new content, such as images, videos, audio and text. An example is the chatbot ChatGPT. GenAI generates new and unique output based on a prompt from a user by analysing large amounts of existing data.\n\n\nGuidelines\nUtrecht University has these guidelines regarding GenAI.\nYou are always responsible for your own work and are never allowed to submit work developed entirely by GenAI as your own. If this does happen, it is considered fraud. See for more information the relevant parts of the EER. GenAI use includes, but is not limited to, generating text, audio, images, video and code. Regarding code, you may use AI tools to assist you in generating code that results in reproducible data sets. However, you may not generate data sets.\nWe would like to emphasize that taking this course is an investment in your own development. The material has been carefully put together to deepen your understanding of the field and strengthen your skills. By distributing or even selling this material, you violate the intellectual property of the UU. We therefore ask you to respect these guidelines and contribute to a fair and honest learning environment.\n\n\nScenario for this course\nYou may use GenAI to prepare the work you hand in. You can use GenAI to gain inspiration for research questions, or help with debugging your R code.\nYou CANNOT use genAI to generate text or code for the two assignments that you hand in.\nYou CANNOT generate data sets with GenAI.\n\n\n\n\n\n\nWarning\n\n\n\nThere is information in these materials that exceeds legal use of copyright materials in academic settings, or that cannot not be part of the public domain.\nYou CANNOT submit any content in this course as input to generative AI tools. This also includes staff names.\n\n\n\n\nTo which assignments does this scenario apply\nThe two assignments of this course."
   },
   {
-    "objectID": "preparation.html",
-    "href": "preparation.html",
-    "title": "Preparation",
+    "objectID": "lectures.html",
+    "href": "lectures.html",
+    "title": "Lectures",
     "section": "",
-    "text": "In this course, you will use both R and RStudio.\nIf you have never worked with R before, use the tutorials from Open Statistical Programming to be ready and prepared before the course starts. The materials discussed in the tutorials\n\nSoftware setup\nBasics\nFunctions\nPackages and documentation\nVectors and matrices\nLists and dataframes\nFactors\nBasic visualization\n\nare required knowledge before you start the course!"
+    "text": "Below, you can access the lecture slides and associated materials for each week."
   },
   {
-    "objectID": "preparation.html#required-r-skills",
-    "href": "preparation.html#required-r-skills",
-    "title": "Preparation",
+    "objectID": "lectures.html#w1",
+    "href": "lectures.html#w1",
+    "title": "Lectures",
+    "section": "Week 1",
+    "text": "Week 1\nR Programming Fundamentals\n\nLecture Slides\nProject Organization Demo\n\nThis link will download a ZIP archive that you must unpack on your computer."
+  },
+  {
+    "objectID": "lectures.html#w2",
+    "href": "lectures.html#w2",
+    "title": "Lectures",
+    "section": "Week 2",
+    "text": "Week 2\nData Visualization & Simple Linear Regression\n\nVisualization Lecture Slides\nSLR Lecture Slides"
+  },
+  {
+    "objectID": "lectures.html#w3",
+    "href": "lectures.html#w3",
+    "title": "Lectures",
+    "section": "Week 3",
+    "text": "Week 3\nMultiple Linear Regression\n\nLecture Slides"
+  },
+  {
+    "objectID": "lectures.html#w4",
+    "href": "lectures.html#w4",
+    "title": "Lectures",
+    "section": "Week 4",
+    "text": "Week 4\nMLR Assumptions & Diagnostics\n\nAssumptions Lecture Slides\nInfluential Observations Lecture Slides"
+  },
+  {
+    "objectID": "lectures.html#w5",
+    "href": "lectures.html#w5",
+    "title": "Lectures",
+    "section": "Week 5",
+    "text": "Week 5\nGeneralized Linear Models & Logistic Regression\n\nGLM & Logistic Regression Lecture Slides\nExtra: Extended Example Slides"
+  },
+  {
+    "objectID": "lectures.html#w6",
+    "href": "lectures.html#w6",
+    "title": "Lectures",
+    "section": "Week 6",
+    "text": "Week 6\nLogistic Regression Assumptions & Assessing Classification Performance\n\nAssumption & Diagnostics Slides\nClassification Performance Slides"
+  },
+  {
+    "objectID": "lectures.html#w7",
+    "href": "lectures.html#w7",
+    "title": "Lectures",
+    "section": "Week 7",
+    "text": "Week 7\nWrap Up & Review\n\nLecture Slides"
+  },
+  {
+    "objectID": "exam.html",
+    "href": "exam.html",
+    "title": "Exam",
     "section": "",
-    "text": "In this course, you will use both R and RStudio.\nIf you have never worked with R before, use the tutorials from Open Statistical Programming to be ready and prepared before the course starts. The materials discussed in the tutorials\n\nSoftware setup\nBasics\nFunctions\nPackages and documentation\nVectors and matrices\nLists and dataframes\nFactors\nBasic visualization\n\nare required knowledge before you start the course!"
+    "text": "Anything mentioned in the lectures may appear on the exam.\nThis includes both information printed in the lecture slides and information delivered verbally during a lecture itself.Anything covered in the required readings may appear on the exam.\nObviously, this is a lot of material. To prioritize, keep in mind that topics mentioned in the lectures and topics directly related to ideas covered in the lectures are most likely to appear on the exam.\nThe materials presented on the “preparation” page can also be part of the exam since this is required knowledge.\nSummary of the required readings:\n\nR4DS: Ch. 1, 3, 4, 7, 9, 10, 13, 16.\nSDAM: Ch. 1, 2, 3, 4, 5, 6.1, 12.1-12.5, 12.8.\nBook420: Ch.17.4.\nhttps://stats.oarc.ucla.edu/r/dae/robust-regression/\nhttps://stats.oarc.ucla.edu/r/dae/robust-regression/\nhttps://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/\nhttps://stats.oarc.ucla.edu/r/dae/logit-regression/"
   },
   {
-    "objectID": "preparation.html#required-statistical-knowledge",
-    "href": "preparation.html#required-statistical-knowledge",
-    "title": "Preparation",
-    "section": "Required statistical knowledge",
-    "text": "Required statistical knowledge\nWe expect you to be familiar with some basic statistical concepts such as:\n\nDescriptive statistics\nSampling\nCorrelation\nT-test\nP-values\n\nTo refresh your memory, you can read SDAM Ch. 1, 2 and 3.\nThe course material builds on this knowledge, and it can also be part of the exam.\nNote: if you followed the course ADS-BOS, you have covered these topics and you should be good to go!"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ADS fundamentals",
+    "objectID": "exam.html#what-will-be-tested",
+    "href": "exam.html#what-will-be-tested",
+    "title": "Exam",
     "section": "",
-    "text": "Welcome to the course “Fundamental Techniques in Data Science with R”."
+    "text": "Anything mentioned in the lectures may appear on the exam.\nThis includes both information printed in the lecture slides and information delivered verbally during a lecture itself.Anything covered in the required readings may appear on the exam.\nObviously, this is a lot of material. To prioritize, keep in mind that topics mentioned in the lectures and topics directly related to ideas covered in the lectures are most likely to appear on the exam.\nThe materials presented on the “preparation” page can also be part of the exam since this is required knowledge.\nSummary of the required readings:\n\nR4DS: Ch. 1, 3, 4, 7, 9, 10, 13, 16.\nSDAM: Ch. 1, 2, 3, 4, 5, 6.1, 12.1-12.5, 12.8.\nBook420: Ch.17.4.\nhttps://stats.oarc.ucla.edu/r/dae/robust-regression/\nhttps://stats.oarc.ucla.edu/r/dae/robust-regression/\nhttps://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/\nhttps://stats.oarc.ucla.edu/r/dae/logit-regression/"
   },
   {
-    "objectID": "index.html#important-links",
-    "href": "index.html#important-links",
-    "title": "ADS fundamentals",
-    "section": "Important links",
-    "text": "Important links\n\nCoordinator: Dr L. Boeschoten\nLecturer: Dr K.M. Lang\nInstructors: Dr L. Boeschoten and N.E. van Vugt, MSc\nRooms: See MyTimetable\nCourse manual\nInstructions group assignments\nExam information"
+    "objectID": "exam.html#what-about-equations",
+    "href": "exam.html#what-about-equations",
+    "title": "Exam",
+    "section": "What about equations?",
+    "text": "What about equations?\nThis is not a math class; we are not trying to test your ability to do calculations or manipulate equations. That being said, a certain degree of mathematical literacy is crucial to statistics and data science, so you will have to do some simple calculations on the exam. For example, you should be comfortable with the following.\n\nWorking with the linear regression equation, \\(Y_i = \\beta_0 + \\beta_1 X_i +\\varepsilon_i\\), to:\n\nCalculate predicted values give certain inputs\nInterpret parameter estimates\nEvaluate hypotheses/research questions\n\nThe differences between:\n\nThe full regression model: \\(Y_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_i +\\hat{\\varepsilon}_i\\)\nThe equation for the best-fit line: \\(\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_i\\)\n\nThe definition of a residual:\n\n\\(\\hat{\\varepsilon}_i = Y_i - \\hat{Y}_i\\)\n\nThe relationship between probabilities (\\(p\\)) and odds (for binary outcomes):\n\n\\(\\text{odds} = \\frac{p}{1-p}\\)\n\nThe definition of the logit function:\n\n\\(\\ln(\\text{odds}) = \\ln\\left(\\frac{p}{1-p}\\right) = \\text{logit}(p)\\)\n\nThe definition of the logistic function, its relation to the logit function, and its role in logistic regression:\n\n\\(\\text{logistic}(\\eta_i) = \\text{logit}^{-1}(p_i) = \\frac{\\exp(\\eta_i)}{1+\\exp(\\eta_i)} = \\frac{\\exp(\\hat{\\beta}_0 + \\hat{\\beta}_1 X_i)}{1 + \\exp(\\hat{\\beta}_0 + \\hat{\\beta}_1 X_i)} = \\hat{p}_i\\)\n\n\nOf course, you should also be able to do basic arithmetic operations that are too trivial to detail here (e.g., calculating the difference between the \\(R^2\\) statistics from two models that you are trying to compare).\nNote: Although all examples above are shown in terms of simple linear regression models, you should also be able to do these calculations/interpretations using multiple linear regression models and models that include dummy codes and interactions."
   },
   {
-    "objectID": "index.html#weekly-schedule",
-    "href": "index.html#weekly-schedule",
-    "title": "ADS fundamentals",
-    "section": "Weekly schedule",
-    "text": "Weekly schedule\n\n\n\nWeek\nDate\nContent\nPrepare\n\n\n0\n\nSelf-study\nBefore you start the course:\n\nRead the course manual\nWork through the preparation material\n\n\n\n1\n17-11 (Tue)\nLecture 1\n\nRead R4DS Ch. 3, 4, 7, 13, 16\n\n\n\n1\n17-11 (Tue)\nWG 1\n\nIf you’re not present, you fail the course!\nStart with Lab 1\n\n\n\n1\n19-11 (Thu)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n1\n20-11 (Fri)\nDeadline Lab 1: 16:00\n\nHand in on Brightspace\nLab 1 (see solutions here)\n\n\n\n2\n24-11 (Tue)\nLecture 2\n\nRead R4DS Ch. 1, 9, 10\nRead SDAM Ch. 4\n\n\n\n2\n24-11 (Tue)\nWG 2\n\nAttendance required\nStart with Lab 2\n\n\n\n2\n26-11 (Tue)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n2\n27-11 (Fri)\nDeadline Lab 2: 16:00\n\nLab 2 (see solutions here)\n\n\n\n3\n1-12 (Tue)\nLecture 3\n\nRead SDAM Ch. 5.1 - 5.6, 6.1\n\n\n\n3\n1-12 (Tue)\nWG 3\n\nAttendance required\nStart withLab 3\nCheck out this demo\n\n\n\n3\n3-12 (Thu)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n3\n4-12 (Fri)\nDeadline Lab 3: 16:00\n\nLab 3 (see solutions here)\n\n\n\n4\n8-12 (Tue)\nLecture 4\n\nRead SDAM Ch. 5.7 - 5.9\nRead this page and this page\n\n\n\n4\n8-12 (Tue)\nWG 4\n\nAttendance required\nStart with Lab 4\n\n\n\n4\n10-12 (Thu)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n4\n11-12 (Fri)\nDeadline Lab 4: 16:00\n\nLab 4 (see solutions here)\n\n\n\n4\n11-12 (Fri)\nDeadline assignment 1: 16:00\n\nHand in on Brightspace\n\n\n\n5\n15-12 (Tue)\nLecture 5\n\nRead SDAM Ch. 12.1 - 12.5, 12.8\nRead this page\n\n\n\n5\n15-12 (Tue)\nWG 5\n\nAttendance required\nStart with Lab 5\n\n\n\n5\n17-12 (Thu)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n5\n18-12 (Fri)\nDeadline Lab 5: 16:00\n\nLab 5 (see solutions here)\n\n\n\n6\n5-1 (Tue)\nLecture 6\n\nRead this page\nRead Book420 CH. 17.4\n\n\n\n6\n5-1 (Tue)\nWG 6\n\nAttendance required\nStart with Lab 6\n\n\n\n6\n7-1 (Thu)\nQ&A - Online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n6\n8-1 (Fri)\nDeadline Lab 6:16:00\n\nLab 6 (see solutions here)\n\n\n\n7\n19-1 (Tue)\nWG 7\n\nPresentations assignment 2\nBe present to pass the course\nHand in on Brightspace\n\n\n\n7\n21-1 (Thu)\nLecture 7\n\nRecap lecture\nFinal opportunity to ask questions in preparation for the exam\n\n\n\n8\n28-1 (Thu)\nExam\n\nSee this page on how to prepare for the exam"
+    "objectID": "exam.html#qa-and-practice-exam",
+    "href": "exam.html#qa-and-practice-exam",
+    "title": "Exam",
+    "section": "Q&A and practice exam",
+    "text": "Q&A and practice exam\n\nThe lecture on Monday January 12 will be completely devoted to a recap of the material and there will be plenty of time to answer all your questions. Send your questions in advance to Dr. Lang if you want to make sure you get an extensive answer!\nYou can find the practice exam here."
   },
   {
-    "objectID": "workgroups/WG5.html#today",
-    "href": "workgroups/WG5.html#today",
-    "title": "Work Group Meeting 5",
+    "objectID": "exam.html#what-can-i-expect-regarding-the-exam",
+    "href": "exam.html#what-can-i-expect-regarding-the-exam",
+    "title": "Exam",
+    "section": "What can I expect regarding the exam?",
+    "text": "What can I expect regarding the exam?\nThe exam takes place on January 22. Keep an eye out on MyTimetable for the timing, location. These can change very last-minute!\nThe exam takes place on laptops that are provided in the room, and we use the software program Remindo. Please read the instructions on how to use Remindo carefully. You can also practice making an exam in Remindo. Remindo has a small built-in calculator, so you don’t need to bring one.\nRegulations during the exam:\n\nTurn of your phone and smartwatch and stow them away. You cannot use them in any way during the exam.\nYou are not allowed to use any teaching materials or dictionaries during the exam.\nClose your bag and do not store it in the walkway.\nYou cannot leave in the first 30 minutes.\nYou are not allowed to visit the bathroom during the exam.\nMake sure your ID is visible on your table during the exam.\nIf you are more than 30 minutes late to the exam, you are not allowed to participate.\n\nWhat to bring:\n\nIdentification card.\nSolid ID and password for logging in to Remindo."
+  },
+  {
+    "objectID": "exam.html#testing-procedure",
+    "href": "exam.html#testing-procedure",
+    "title": "Exam",
+    "section": "Testing procedure",
+    "text": "Testing procedure\nThere are two opportunities per year to take a test.\n\nShould circumstances prevent you from taking the first opportunity, you will be invited to the second. It is not necessary to deregister.\nIf you do not obtain a satisfactory final grade on the second opportunity, you will have to retake the course in the 2026-2027 academic year. See detailed information on testing on the student website.\nbut you have obtained a pass for one part (e.g. an assignment or the exam), then you do not have to redo this part next year."
+  },
+  {
+    "objectID": "workgroups/WG6.html#today",
+    "href": "workgroups/WG6.html#today",
+    "title": "Work Group Meeting 6",
     "section": "Today",
-    "text": "Today\n\nAssignment 2: Quarto presentation\nGroup contract check-in\nProcessing and exploring your (new) data\nMultiple logistic regression\nInterpreting logistic regression coefficients"
+    "text": "Today\n\nAssumptions and diagnostics\nConfusion matrix\nDetails on Assignment 2"
   },
   {
-    "objectID": "workgroups/WG5.html#assignment-2",
-    "href": "workgroups/WG5.html#assignment-2",
-    "title": "Work Group Meeting 5",
-    "section": "Assignment 2",
-    "text": "Assignment 2\n\n\n\n\nTopic\nLogistic regression\n\n\nType\nPresentation, made in Quarto\n\n\nGroup\nSame group as assignment 1\n\n\nGrading\n25% of your final grade\n\n\nPresentation\nTuesday January 19, at the workgroup meeting"
-  },
-  {
-    "objectID": "workgroups/WG5.html#group-contract-check-in",
-    "href": "workgroups/WG5.html#group-contract-check-in",
-    "title": "Work Group Meeting 5",
-    "section": "Group contract check-in",
-    "text": "Group contract check-in\nYou continue in the same group as for assignment 1. Check in again:\n\nWhat did you agree on in your group contract?\nDid this work well during assignment 1?\nWhat can be improved or changed for assignment 2?\nMail your working agreements and changes to the contract to your workgroup instructor\n\nUpdate your group contract where needed."
-  },
-  {
-    "objectID": "workgroups/WG5.html#what-changes-in-assignment-2",
-    "href": "workgroups/WG5.html#what-changes-in-assignment-2",
-    "title": "Work Group Meeting 5",
-    "section": "What changes in assignment 2?",
-    "text": "What changes in assignment 2?\n\n\n\n\n\n\n\n\n\n\nAssignment 1\nAssignment 2\n\n\n\n\nResearch question\nFor linear regression\nA different research question\n\n\nOutcome\nContinuous\nBinary (two categories)\n\n\nPredictors\nYour chosen predictors\nPotentially different predictors\n\n\nDataset\nYour chosen dataset\nPotentially even a different dataset\n\n\nOutput\nWritten report\nPresentation"
-  },
-  {
-    "objectID": "workgroups/WG5.html#new-variables-process-them-again",
-    "href": "workgroups/WG5.html#new-variables-process-them-again",
-    "title": "Work Group Meeting 5",
-    "section": "New variables? Process them again!",
-    "text": "New variables? Process them again!\nDo your new or other variables require processing?\n\nFollow the same steps as in assignment 1:\n\nclasses, missing values, scale scores, linking\n\nBriefly report on these steps in assignment 2\nDo exploratory data analysis again"
-  },
-  {
-    "objectID": "workgroups/WG5.html#multiple-logistic-regression",
-    "href": "workgroups/WG5.html#multiple-logistic-regression",
-    "title": "Work Group Meeting 5",
-    "section": "Multiple logistic regression",
-    "text": "Multiple logistic regression\n\nJustify the logic of your model building\nBuild your models and compare them\n\nLikelihood ratio test: anova(fit0, fit, test = \"LRT\")\nInformation criteria: AIC(), BIC()\n\nInterpret the coefficients\nUse the lab material as an example"
-  },
-  {
-    "objectID": "workgroups/WG5.html#interpreting-coefficients-is-harder",
-    "href": "workgroups/WG5.html#interpreting-coefficients-is-harder",
-    "title": "Work Group Meeting 5",
-    "section": "Interpreting coefficients is harder",
-    "text": "Interpreting coefficients is harder\nA logistic regression coefficient can be expressed on three scales:\n\n  \n    Log-oddsβ: additive changein the logit\n    →\n    Odds ratioeβ: odds aremultiplied by this\n    →\n    Probabilityπ = odds / (1 + odds)not a constant effect\n  \n\n\neβ &gt; 1: higher odds of the outcome; eβ &lt; 1: lower odds\nOdds ratio below 1? Its reciprocal (1 / eβ) is often easier to explain"
-  },
-  {
-    "objectID": "workgroups/WG5.html#example-passing-an-exam",
-    "href": "workgroups/WG5.html#example-passing-an-exam",
-    "title": "Work Group Meeting 5",
-    "section": "Example: passing an exam",
-    "text": "Example: passing an exam\nlogit(passing) = −3.414 + 0.683 × study hours\n\nIntercept: a student who does not study has log-odds of passing of −3.41, so odds of e−3.414 = 0.03\nSlope: each extra hour of study increases the log-odds by 0.683, so the odds of passing are multiplied by e0.683 = 1.98\n\n\n\n\n\n\n\n\nOdds are not probabilities: 1.98 times the odds of passing is not 1.98 times the probability of passing!"
-  },
-  {
-    "objectID": "workgroups/WG5.html#example-surviving-the-titanic",
-    "href": "workgroups/WG5.html#example-surviving-the-titanic",
-    "title": "Work Group Meeting 5",
-    "section": "Example: surviving the Titanic",
-    "text": "Example: surviving the Titanic\nglm(survived ~ age + sex + class, family = \"binomial\")\n\n\n\n\n\n\n\n\n\n\nTerm\nβ\nOdds ratio\nInterpretation (controlling for the other predictors)\n\n\n\n\nage\n−0.034\n0.97\nEach extra year: odds of survival × 0.97\n\n\nsexmale\n−2.589\n0.08\nMen: 0.08 times the odds of survival of women, or 13.3 times the odds of death\n\n\nclass3rd\n−2.455\n0.09\n3rd vs 1st class: 0.09 times the odds of survival, or 11.7 times the odds of death\n\n\n\n\nExamples from lecture 5."
-  },
-  {
-    "objectID": "workgroups/WG5.html#making-a-presentation-in-quarto",
-    "href": "workgroups/WG5.html#making-a-presentation-in-quarto",
-    "title": "Work Group Meeting 5",
-    "section": "Making a presentation in Quarto",
-    "text": "Making a presentation in Quarto\n\nUse format: revealjs in the YAML header\nEach ## heading starts a new slide\nKeep slides concise: little text, meaningful visuals, no long code blocks\nAdd embed-resources: true, so your slides are one self-contained .html file\n\nMore tips: open-stat-prog module Creating presentations with Quarto"
-  },
-  {
-    "objectID": "workgroups/WG5.html#by-the-end-of-this-meeting",
-    "href": "workgroups/WG5.html#by-the-end-of-this-meeting",
-    "title": "Work Group Meeting 5",
-    "section": "By the end of this meeting",
-    "text": "By the end of this meeting\n\n  \n    1. Processyour data where necessary\n    →\n    2. Exploreexploratory data analysis\n    →\n    3. Modelmultiple logistic regression with interpretation\n  \n\nUse the code from this week’s lab!"
-  },
-  {
-    "objectID": "workgroups/WG1.html#today",
-    "href": "workgroups/WG1.html#today",
-    "title": "Work Group Meeting 1",
-    "section": "Today",
-    "text": "Today\n\nIntroduction\nCourse structure\nWork group structure\nAssignments\n\nbreak\n\nStart first assignment"
-  },
-  {
-    "objectID": "workgroups/WG1.html#introduction",
-    "href": "workgroups/WG1.html#introduction",
-    "title": "Work Group Meeting 1",
-    "section": "Introduction",
-    "text": "Introduction\n\nIntroduce yourself\nWhat is your background (study)?\nWhy did you choose this minor/course?"
-  },
-  {
-    "objectID": "workgroups/WG1.html#course-structure",
-    "href": "workgroups/WG1.html#course-structure",
-    "title": "Work Group Meeting 1",
-    "section": "Course structure",
-    "text": "Course structure\n\nTuesday 13:15: Lecture by Dr. K. Lang on location\nTuesday 15:15: Workgroup meetings on location\nThursday 11:00: Q&A by Dr. K. Lang online\n\nBy yourself:\n\nDo the required reading\nWork on practicals (deadline is each Friday 16:00)\nContinue work on group assignment"
-  },
-  {
-    "objectID": "workgroups/WG1.html#workgroup-meetings",
-    "href": "workgroups/WG1.html#workgroup-meetings",
-    "title": "Work Group Meeting 1",
-    "section": "Workgroup meetings",
-    "text": "Workgroup meetings\n\nApply the lecture topics to your own (real!) datasets\nMeet your group to work together\nPrepare by starting on the practicals before the meeting (it contains most of the code you need for the assignment)"
-  },
-  {
-    "objectID": "workgroups/WG1.html#assignments",
-    "href": "workgroups/WG1.html#assignments",
-    "title": "Work Group Meeting 1",
-    "section": "Assignments",
-    "text": "Assignments\n\n\nAssignment 1\n\nGroup assignment\nGroups with max. 4 members\nLinear regression\nHand in written report on Friday Dec. 11, 16:00\n\n\nAssignment 2\n\nGroup assignment\nSame group as assignment 1\nLogistic regression\nPresentation on Tuesday Jan. 19 at workgroup meeting"
-  },
-  {
-    "objectID": "workgroups/WG1.html#assignment-1-linear-regression",
-    "href": "workgroups/WG1.html#assignment-1-linear-regression",
-    "title": "Work Group Meeting 1",
-    "section": "Assignment 1: Linear regression",
-    "text": "Assignment 1: Linear regression\nYou perform a multiple linear regression analysis in R and report this using R markdown. The assignment is graded on the following elements:\n\n\n\n\n\n\n\n\n\nElement\nContent\nWeek\n\n\n\n\nContext\nIntroduction of research questions, data description and processing\n1\n\n\nExploratory data analysis\nInspection of relations in data\n2\n\n\nLinear regression\nDescription of the building process, model fit, and model comparison\n3"
-  },
-  {
-    "objectID": "workgroups/WG1.html#assignment-1-linear-regression-1",
-    "href": "workgroups/WG1.html#assignment-1-linear-regression-1",
-    "title": "Work Group Meeting 1",
-    "section": "Assignment 1: Linear regression",
-    "text": "Assignment 1: Linear regression\nThe assignment is graded on the following elements:\n\n\n\n\n\n\n\n\n\nElement\nContent\nWeek\n\n\n\n\nAssumptions\nTesting of model assumptions, outliers and influential cases. Act upon and reflect on violations\n4\n\n\nInterpretation\nSubstantive interpretation of the final model. Answer research questions\n4\n\n\nLayout\nStructure of the document, efficient output, custom functions when needed. Graphs are used where fitting\nall\n\n\n\n\nFind the complete assignment description on the course website."
-  },
-  {
-    "objectID": "workgroups/WG1.html#assignments-1",
-    "href": "workgroups/WG1.html#assignments-1",
-    "title": "Work Group Meeting 1",
-    "section": "Assignments",
-    "text": "Assignments\nGrading:\n\nBoth group assignments contribute 25% to your final grade\nIf names are omitted from groups/assignments, we assume everyone is aware of this.\nGroup contract"
-  },
-  {
-    "objectID": "workgroups/WG1.html#assignments-2",
-    "href": "workgroups/WG1.html#assignments-2",
-    "title": "Work Group Meeting 1",
-    "section": "Assignments",
-    "text": "Assignments\nHand in:\n\nHand in a .zip file with R project and all files (html, qmd, dataset)\nMake sure all code and text are visible in the html files\nOnly content in html files is graded!!!!\nCheck the course website for more information"
-  },
-  {
-    "objectID": "workgroups/WG1.html#this-week",
-    "href": "workgroups/WG1.html#this-week",
-    "title": "Work Group Meeting 1",
-    "section": "This week:",
-    "text": "This week:\n\nMake groups of max. 4 students\nSet up a group contract\nLook for a dataset\nInspect variables\nCome up with research questions for linear and logistic regression\nStart pre-processing the dataset"
-  },
-  {
-    "objectID": "workgroups/WG1.html#dataset-requirements",
-    "href": "workgroups/WG1.html#dataset-requirements",
-    "title": "Work Group Meeting 1",
-    "section": "Dataset requirements",
-    "text": "Dataset requirements\nThe dataset should at least contain:\n\nA continuous outcome variable\nAt least two continuous predictor variables\nA categorical predictor variable\nA dichotomous outcome variable"
-  },
-  {
-    "objectID": "workgroups/WG1.html#where-to-find-your-dataset",
-    "href": "workgroups/WG1.html#where-to-find-your-dataset",
-    "title": "Work Group Meeting 1",
-    "section": "Where to find your dataset",
-    "text": "Where to find your dataset\nWe use real-world data from large scale international surveys for the assignments, such as:\n\nPISA: Program for International Student Assessment\nLISS: Langlopende Internet Studies voor de Sociale wetenschappen\nEVS: European Values Study\nESS: European Social Study\nTIMSS: Trends in International Mathematics and Science Study"
-  },
-  {
-    "objectID": "workgroups/WG1.html#pay-attention",
-    "href": "workgroups/WG1.html#pay-attention",
-    "title": "Work Group Meeting 1",
-    "section": "Pay attention!",
-    "text": "Pay attention!\nMost datasets have rules and requirements about how you can use them. Carefully check this and make sure you meet the requirements.\nFor example: The LISS panel requires you to sign a statement."
-  },
-  {
-    "objectID": "workgroups/WG1.html#example-research-questions",
-    "href": "workgroups/WG1.html#example-research-questions",
-    "title": "Work Group Meeting 1",
-    "section": "Example research questions",
-    "text": "Example research questions\nLinear regression:\n\nCan body weight predict the level of cholesterol in Dutch adults?\nWhat variables are related to income in the Netherlands?\n\nLogistic regression:\n\nDo body weight, calorie intake, fat intake and age have an influence on the occurrence of a heart attack?\nWhat variables can be used to predict whether students pass a driving test?"
-  },
-  {
-    "objectID": "workgroups/WG1.html#data-processing",
-    "href": "workgroups/WG1.html#data-processing",
-    "title": "Work Group Meeting 1",
-    "section": "Data processing",
-    "text": "Data processing\nFound a dataset? Start processing it right away, so it is ready when we start analysing.\n\n  \n    1. Raw data.sav / .csv / .dta\n    →\n    2. Import& inspect\n    →\n    3. Fix classesfactor / numeric\n    →\n    4. Recodemissing values\n  \n  ↓\n  \n    5. Computescale scores\n    ←\n    6. Select & linkdatasets\n    ←\n    7. Ready!for analysis\n  \n\nKeep all processing steps in your .qmd file, so every step is reproducible (and visible in the html!)."
-  },
-  {
-    "objectID": "workgroups/WG1.html#data-processing-what-to-check",
-    "href": "workgroups/WG1.html#data-processing-what-to-check",
-    "title": "Work Group Meeting 1",
-    "section": "Data processing: what to check",
-    "text": "Data processing: what to check\n\n\n\nClasses\n\nAre character classes set correctly?\nSurvey data from SPSS often come as labelled variables\nAdjust with as_factor() or as.numeric()\n\nMissing values\n\nAre missing values recognized as NA?\nSurveys often use codes such as -9, 77, 88, 99 for “don’t know” or “refused”\nCheck the codebook!\n\n\nScale scores\n\nDo you need to calculate sum scores or mean scores of multiple items?\nAre some items reverse coded?\n\nLinking & selecting\n\nDo you need to link multiple separate datasets (e.g. students and schools)?\nSelect only the variables (and cases) you need"
-  },
-  {
-    "objectID": "workgroups/WG1.html#data-processing-examples-in-r",
-    "href": "workgroups/WG1.html#data-processing-examples-in-r",
-    "title": "Work Group Meeting 1",
-    "section": "Data processing: examples in R",
-    "text": "Data processing: examples in R\nlibrary(tidyverse)\nlibrary(haven)\n\n# Import and inspect\ndat &lt;- read_sav(\"data/survey.sav\")\nglimpse(dat)\nsummary(dat)\n\n# Fix classes\ndat &lt;- dat |&gt;\n  mutate(gender = as_factor(gender),\n         age    = as.numeric(age))"
-  },
-  {
-    "objectID": "workgroups/WG1.html#data-processing-examples-in-r-1",
-    "href": "workgroups/WG1.html#data-processing-examples-in-r-1",
-    "title": "Work Group Meeting 1",
-    "section": "Data processing: examples in R",
-    "text": "Data processing: examples in R\n# Recode missing value codes to NA\ndat &lt;- dat |&gt;\n  mutate(across(c(item1, item2, item3), ~ na_if(.x, 99)))\n\n# Reverse code an item (scale 1-5)\ndat &lt;- dat |&gt;\n  mutate(item3_r = 6 - item3)\n\n# Compute a mean score\ndat &lt;- dat |&gt;\n  mutate(wellbeing = rowMeans(pick(item1, item2, item3_r),\n                              na.rm = TRUE))\n\n# Link two datasets on a shared ID\nfull &lt;- left_join(students, schools, by = \"school_id\")"
-  },
-  {
-    "objectID": "workgroups/WG1.html#use-of-generative-ai",
-    "href": "workgroups/WG1.html#use-of-generative-ai",
-    "title": "Work Group Meeting 1",
-    "section": "Use of Generative AI",
-    "text": "Use of Generative AI\nYou are allowed to:\n\nGain inspiration\nAsk for help how to tackle an assignment\n\nYou are not allowed to:\n\nSubmit generated text or code as if it was written by you\nHave text or code revised"
-  },
-  {
-    "objectID": "workgroups/WG1.html#starting-the-group-work",
-    "href": "workgroups/WG1.html#starting-the-group-work",
-    "title": "Work Group Meeting 1",
-    "section": "Starting the group work",
-    "text": "Starting the group work\n\nForm your group (5–10 min)\nIndividual reflection (2 min)\nSet up your group contract (15 min)\nStart searching for a dataset"
-  },
-  {
-    "objectID": "workgroups/WG1.html#part-1-form-your-group",
-    "href": "workgroups/WG1.html#part-1-form-your-group",
-    "title": "Work Group Meeting 1",
-    "section": "Part 1: Form your group",
-    "text": "Part 1: Form your group\n\nForm a group of 3 or 4 students\nOne rule: every group member comes from a different bachelor’s program\nWalk around, introduce yourself, and find your group\n\n\nCheck in after 5 minutes: are all groups formed? Help students who are still looking."
-  },
-  {
-    "objectID": "workgroups/WG1.html#part-2-individual-reflection",
-    "href": "workgroups/WG1.html#part-2-individual-reflection",
-    "title": "Work Group Meeting 1",
-    "section": "Part 2: Individual reflection",
-    "text": "Part 2: Individual reflection\nTake 2 minutes on your own to write down:\n\nFour ground rules that will benefit you and your group (e.g., meeting every week at a fixed time)\n1–4 things you have experienced in past group work that you do not want to happen again, and how you think they can be prevented"
-  },
-  {
-    "objectID": "workgroups/WG1.html#part-3-group-contract",
-    "href": "workgroups/WG1.html#part-3-group-contract",
-    "title": "Work Group Meeting 1",
-    "section": "Part 3: Group contract",
-    "text": "Part 3: Group contract\nTake 15 minutes to agree on how you collaborate during and between workgroup meetings.\n\n\nWorking together\n\nCommunication: where? How fast do you respond?\nMeetings: when? How often?\nDecision making: How is everyone involved?\nSkills and expertise: What does everyone bring?\n\n\nGetting the work done\n\nRoles: who does what?\nInternal deadlines and quality standards\nTime and effort: what can you expect from each other?\nWhat happens if someone breaks the agreements?"
-  },
-  {
-    "objectID": "workgroups/WG1.html#warning",
-    "href": "workgroups/WG1.html#warning",
-    "title": "Work Group Meeting 1",
-    "section": "Warning",
-    "text": "Warning\nSplitting up the work and only combining it right before the deadline does not work!\n\nEach part builds on the previous one\nEveryone needs to understand the full analysis\n\nSend your contract to your workgroup instructor, and check every week whether it still works."
-  },
-  {
-    "objectID": "workgroups/WG1.html#part-4-find-a-dataset",
-    "href": "workgroups/WG1.html#part-4-find-a-dataset",
-    "title": "Work Group Meeting 1",
-    "section": "Part 4: Find a dataset",
-    "text": "Part 4: Find a dataset\nYour group is ready to go: start searching for a dataset!"
-  },
-  {
-    "objectID": "workgroups/WG1.html#before-the-end-of-the-meeting",
-    "href": "workgroups/WG1.html#before-the-end-of-the-meeting",
-    "title": "Work Group Meeting 1",
-    "section": "Before the end of the meeting",
-    "text": "Before the end of the meeting\nAs a group, send an email to your WG instructor with:\n\nNames of group members\nYour group contract\nSelected data set (topic and link)\nResearch questions you want to answer in your assignments\n\nSend this email before the end of the meeting!"
-  },
-  {
-    "objectID": "workgroups/WG2.html#today",
-    "href": "workgroups/WG2.html#today",
-    "title": "Work Group Meeting 2",
-    "section": "Today",
-    "text": "Today\nCheck your status:\n\nIs your data ready for the next steps?\n\nExploratory data analysis\nSimple linear regression\nWriting up these parts for assignment 1\n\nGroup contract check-in"
-  },
-  {
-    "objectID": "workgroups/WG2.html#where-are-we",
-    "href": "workgroups/WG2.html#where-are-we",
-    "title": "Work Group Meeting 2",
+    "objectID": "workgroups/WG6.html#where-are-we",
+    "href": "workgroups/WG6.html#where-are-we",
+    "title": "Work Group Meeting 6",
     "section": "Where are we?",
-    "text": "Where are we?\n\nAll workgroup meetings, we work on the two assignments\nYou formed your group last week\nAssignment 1 is a written report: deadline Friday December 11, 16:00\n\n\n  \n    Data processinglast week\n    →\n    Exploratory analysisthis week\n    →\n    Simple regressionthis week\n    →\n    Multiple regressionnext week"
+    "text": "Where are we?\nThis is our final regular workgroup meeting. Today: the second set of big steps for your logistic regression.\n\n  \n    Data prep✓ done\n    →\n    Logistic model✓ interpreted\n    →\n    Assumptionstoday\n    →\n    Confusion matrixtoday\n    →\n    PresentJanuary 19"
   },
   {
-    "objectID": "workgroups/WG2.html#first-is-your-data-ready",
-    "href": "workgroups/WG2.html#first-is-your-data-ready",
-    "title": "Work Group Meeting 2",
-    "section": "First: is your data ready?",
-    "text": "First: is your data ready?\nDid you finish processing your data, so you have proper measurements of all your variables?\n\nAre the character classes correct?\nAre missing values represented as NA?\nDid you compute sum scores, mean scores or scales where needed?\nDid you link datasets where needed?\n\nYes? Continue with this week’s content. No? Finish this first!"
+    "objectID": "workgroups/WG6.html#assumptions-check-your-final-model",
+    "href": "workgroups/WG6.html#assumptions-check-your-final-model",
+    "title": "Work Group Meeting 6",
+    "section": "Assumptions: check your final model",
+    "text": "Assumptions: check your final model\n\n\n\n\nAssumption\n\n\n\n\n1. Linear in the parameters (logit scale)\n\n\n2. Full rank: no (severe) multicollinearity\n\n\n3. Binary outcome? No omitted variable? No residual clustering?\n\n\n\n\n\nComputational considerations (not needed in linear regression):\n\nSufficient sample size, e.g. at least 10 cases per predictor\nBalanced outcome classes\nNo perfect prediction (separation): watch out for huge, unstable estimates"
   },
   {
-    "objectID": "workgroups/WG2.html#exploratory-data-analysis",
-    "href": "workgroups/WG2.html#exploratory-data-analysis",
-    "title": "Work Group Meeting 2",
-    "section": "Exploratory data analysis",
-    "text": "Exploratory data analysis\n\n\n1. One variable at a time\nLook at distributions and descriptive statistics of the variables you will use:\n\nContinuous: means, standard deviations, histograms\nCategorical: frequency tables, bar charts\n\n\n2. Bivariate relationships\nLook at relations between your variables:\n\nContinuous & continuous: scatterplots, correlations\nContinuous & categorical: boxplots, group means"
+    "objectID": "workgroups/WG6.html#influential-cases",
+    "href": "workgroups/WG6.html#influential-cases",
+    "title": "Work Group Meeting 6",
+    "section": "Influential cases",
+    "text": "Influential cases\n\nCook’s distance\nInfluence on a specific coefficient\n\nExample from the lecture: Titanic passengers who paid very high fares look unusual. But after removing them and refitting, the coefficients barely change. They follow the trend of the other data, so they are not influential.\nUnusual is not the same as influential: always check by refitting!"
   },
   {
-    "objectID": "workgroups/WG2.html#something-weird-or-unexpected",
-    "href": "workgroups/WG2.html#something-weird-or-unexpected",
-    "title": "Work Group Meeting 2",
-    "section": "Something weird or unexpected?",
-    "text": "Something weird or unexpected?\n\nCheck first: did I miss something I should have processed?\nIf not, but still weird: don’t change anything (yet)\n\nReport on it in your assignment\nBe aware of it during your analysis\nHow might it influence your regression results later on?\n\n\n\n\n\n\n\n\n\nWe do not remove extreme values upfront!"
+    "objectID": "workgroups/WG6.html#confusion-matrix",
+    "href": "workgroups/WG6.html#confusion-matrix",
+    "title": "Work Group Meeting 6",
+    "section": "Confusion matrix",
+    "text": "Confusion matrix\nClassify with a threshold (here 0.5) and compare to the true outcome:\npiHat &lt;- predict(fit, type = \"response\")\nyHat  &lt;- factor(ifelse(piHat &lt;= 0.5, \"no\", \"yes\"))\ncaret::confusionMatrix(data = yHat, reference = titanic$survived,\n                       positive = \"yes\")\n\n\n\n\n\nTrue: died (no)\nTrue: survived (yes)\n\n\n\n\nPredicted: no\n458 (TN)\n106 (FN)\n\n\nPredicted: yes\n87 (FP)\n236 (TP)\n\n\n\n\nTitanic example from lecture 6"
   },
   {
-    "objectID": "workgroups/WG2.html#simple-linear-regression",
-    "href": "workgroups/WG2.html#simple-linear-regression",
-    "title": "Work Group Meeting 2",
-    "section": "Simple linear regression",
-    "text": "Simple linear regression\nStart with your analysis strategy:\n\nFor your research question, does it make more sense to focus on prediction or on estimation?\nHow will you build your model? How does this relate to your research question?\nWhich predictor do you start with?\n\nThen: fit your first simple linear regression model.\nNext week we expand to multiple linear regression."
+    "objectID": "workgroups/WG6.html#reading-the-confusion-matrix",
+    "href": "workgroups/WG6.html#reading-the-confusion-matrix",
+    "title": "Work Group Meeting 6",
+    "section": "Reading the confusion matrix",
+    "text": "Reading the confusion matrix\n\n\n\n\n\n\n\n\n\nMeasure\nFormula\nTitanic\n\n\n\n\nAccuracy\n(TP + TN) / N\n0.78\n\n\nSensitivity: survivors correctly predicted\nTP / (TP + FN)\n0.69\n\n\nSpecificity: deaths correctly predicted\nTN / (TN + FP)\n0.84\n\n\n\n\n\n\nCompare accuracy to simply predicting the largest class: 0.61\ncaret uses the first factor level as positive class: set positive = \"yes\"!\nInterpret what the errors mean for your research question"
   },
   {
-    "objectID": "workgroups/WG2.html#writing-the-report",
-    "href": "workgroups/WG2.html#writing-the-report",
-    "title": "Work Group Meeting 2",
+    "objectID": "workgroups/WG6.html#assignment-2-logistic-regression",
+    "href": "workgroups/WG6.html#assignment-2-logistic-regression",
+    "title": "Work Group Meeting 6",
+    "section": "Assignment 2: logistic regression",
+    "text": "Assignment 2: logistic regression\n\n\n\n\n\n\n\n\nType\nPresentation and discussion with slides in Quarto\n\n\nGrading\n25% of your final grade\n\n\nDeadline\nMonday January 18, 15:00\n\n\nWhat to submit\nA ZIP archive with the complete R project (dataset, .qmd, slides)\n\n\nWhere to submit\nBrightspace\n\n\nPresentation\nTuesday January 19, 13:15 to 17:00, at the workgroup meeting"
+  },
+  {
+    "objectID": "workgroups/WG6.html#the-presentation",
+    "href": "workgroups/WG6.html#the-presentation",
+    "title": "Work Group Meeting 6",
+    "section": "The presentation",
+    "text": "The presentation\n\nPrepare a presentation of 15 minutes\nExpect 5 minutes of questions from students and teachers\nHand in your ZIP archive including your slides before the deadline: your WG instructor sets up the slides for the presentations\n\n\n\n\n\n\n\n\nCarefully check that the compiled .html file in your ZIP archive is self-contained, correct and complete before submitting!"
+  },
+  {
+    "objectID": "workgroups/WG6.html#grading-six-dimensions",
+    "href": "workgroups/WG6.html#grading-six-dimensions",
+    "title": "Work Group Meeting 6",
+    "section": "Grading: six dimensions",
+    "text": "Grading: six dimensions\nYou perform and report a multiple logistic regression analysis in a Quarto presentation.\n\n\n\n\n\n\n\n\nDimension\nWhat we look for\n\n\n\n\n1. Preliminaries\nIntroduction of your research questions, description and potential processing of your data\n\n\n2. Model estimation\nDescription of the model estimates, model fit, and model comparison procedure (including moderation)\n\n\n3. Assumptions\nTesting of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed"
+  },
+  {
+    "objectID": "workgroups/WG6.html#grading-six-dimensions-1",
+    "href": "workgroups/WG6.html#grading-six-dimensions-1",
+    "title": "Work Group Meeting 6",
+    "section": "Grading: six dimensions",
+    "text": "Grading: six dimensions\n\n\n\n\n\n\n\n\nDimension\nWhat we look for\n\n\n\n\n4. Interpretation\nSubstantive interpretation of the final model (including the confusion matrix). Answering your research question\n\n\n5. Layout\nStructure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations\n\n\n6. Coding\nUse code from the labs and annotate what each piece of code does"
+  },
+  {
+    "objectID": "workgroups/WG6.html#plan-the-final-steps-as-a-group",
+    "href": "workgroups/WG6.html#plan-the-final-steps-as-a-group",
+    "title": "Work Group Meeting 6",
+    "section": "Plan the final steps as a group",
+    "text": "Plan the final steps as a group\nThis is the last workgroup meeting before the deadline:\n\nLook back at your group contract: is everybody still on track?\nAgree on the final work to finish assignment 2\nRehearse the presentation together: does it fit in 15 minutes?\nMake sure everybody can answer questions about the whole analysis"
+  },
+  {
+    "objectID": "workgroups/WG6.html#continue-working",
+    "href": "workgroups/WG6.html#continue-working",
+    "title": "Work Group Meeting 6",
+    "section": "Continue working",
+    "text": "Continue working\n\n  \n    1. Checkassumptions & influential cases\n    →\n    2. Classifyconfusion matrix\n    →\n    3. Presentbuild your Quarto slides\n  \n\nUse the code from this week’s lab!"
+  },
+  {
+    "objectID": "workgroups/WG6.html#group-contract-check-in",
+    "href": "workgroups/WG6.html#group-contract-check-in",
+    "title": "Work Group Meeting 6",
+    "section": "Group contract check-in",
+    "text": "Group contract check-in\nTake a moment to think back on your group contract:\n\nIs everything still working?\nIs everybody on track?\nDo you need to adjust anything?\nMail your working agreements and changes to the contract to your workgroup instructor"
+  },
+  {
+    "objectID": "workgroups/WG4.html#today",
+    "href": "workgroups/WG4.html#today",
+    "title": "Work Group Meeting 4",
+    "section": "Today",
+    "text": "Today\nWhere are we?\n\nAssumptions and diagnostics\nAct on what you find\nInterpret your final model\n\n\n\nPrepare your assignment to hand in"
+  },
+  {
+    "objectID": "workgroups/WG4.html#where-are-we",
+    "href": "workgroups/WG4.html#where-are-we",
+    "title": "Work Group Meeting 4",
+    "section": "Where are we?",
+    "text": "Where are we?\nAssignment 1 deadline is this Friday, December 11, 16:00!\n\n  \n    Data prep✓ done\n    →\n    Regression✓ final model\n    →\n    Assumptionsthis week\n    →\n    Interpretationthis week\n    →\n    Hand inFriday 16:00\n  \n\nNot there yet? Talk to your instructor today!"
+  },
+  {
+    "objectID": "workgroups/WG4.html#assumptions-and-diagnostics",
+    "href": "workgroups/WG4.html#assumptions-and-diagnostics",
+    "title": "Work Group Meeting 4",
+    "section": "Assumptions and diagnostics",
+    "text": "Assumptions and diagnostics\nCheck these on your final model, using the code and plots from this week’s lab:\n\n\nAssumptions\n\nLinear in the parameters\nFull rank: no predictor is a linear combination of others\nExogenous predictors\nConstant error variance\nUncorrelated errors: serial dependence, clustering\nNormally distributed errors\n\n\nInfluential observations\n\nOutliers\nHigh leverage\nInfluence"
+  },
+  {
+    "objectID": "workgroups/WG4.html#act-on-what-you-find",
+    "href": "workgroups/WG4.html#act-on-what-you-find",
+    "title": "Work Group Meeting 4",
+    "section": "Act on what you find",
+    "text": "Act on what you find\n\n  \n    1. Checkassumptions & diagnostics\n    →\n    2. Changedata or model, if needed\n    →\n    3. Refitand check again\n    →\n    4. Interpretthe final model\n  \n\n\nViolation found? Act upon it and/or reflect on what it means for your results\nReport what you changed and why"
+  },
+  {
+    "objectID": "workgroups/WG4.html#interpret-your-final-model",
+    "href": "workgroups/WG4.html#interpret-your-final-model",
+    "title": "Work Group Meeting 4",
+    "section": "Interpret your final model",
+    "text": "Interpret your final model\n\n\n\n\n\n\n\nInterpret the final model after all changes have been made!\n\n\n\n\n\nGive a substantive interpretation: what do the coefficients mean in the context of your data and variables?\nGo back to your research question(s): what is the answer?"
+  },
+  {
+    "objectID": "workgroups/WG4.html#assignment-1-linear-regression",
+    "href": "workgroups/WG4.html#assignment-1-linear-regression",
+    "title": "Work Group Meeting 4",
+    "section": "Assignment 1: linear regression",
+    "text": "Assignment 1: linear regression\n\n\n\n\n\n\n\n\nType\nWritten report in Quarto\n\n\nGrading\n25% of your final grade\n\n\nDeadline\nFriday December 11, 16:00\n\n\nWhat to submit\nA ZIP archive with the complete R project (dataset, .qmd, HTML)\n\n\nWhere to submit\nBrightspace\n\n\nWhat is graded\nOnly your .html file"
+  },
+  {
+    "objectID": "workgroups/WG4.html#only-the-.html-file-is-graded",
+    "href": "workgroups/WG4.html#only-the-.html-file-is-graded",
+    "title": "Work Group Meeting 4",
+    "section": "Only the .html file is graded!",
+    "text": "Only the .html file is graded!\n\nMake sure all code, comments and output are visible\nCarefully check that the compiled .html file in your ZIP archive is:\n\nself-contained\ncorrect\ncomplete\n\n\nTip: add embed-resources: true to the html format in your YAML header, so figures and styles are stored inside the .html file."
+  },
+  {
+    "objectID": "workgroups/WG4.html#grading-six-dimensions",
+    "href": "workgroups/WG4.html#grading-six-dimensions",
+    "title": "Work Group Meeting 4",
+    "section": "Grading: six dimensions",
+    "text": "Grading: six dimensions\nYou perform and report a multiple linear regression analysis in a Quarto document.\n\n\n\n\n\n\n\n\nDimension\nWhat we look for\n\n\n\n\n1. Preliminaries\nIntroduction of your research questions, description and potential processing of your data\n\n\n2. Model estimation\nDescription of the model estimates, model fit, and model comparison procedure (including moderation)\n\n\n3. Assumptions\nTesting of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed"
+  },
+  {
+    "objectID": "workgroups/WG4.html#grading-six-dimensions-1",
+    "href": "workgroups/WG4.html#grading-six-dimensions-1",
+    "title": "Work Group Meeting 4",
+    "section": "Grading: six dimensions",
+    "text": "Grading: six dimensions\n\n\n\n\n\n\n\n\nDimension\nWhat we look for\n\n\n\n\n4. Interpretation\nSubstantive interpretation of the final model. Answering your research question\n\n\n5. Layout\nStructure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations\n\n\n6. Coding\nUse code from the labs and annotate what each piece of code does"
+  },
+  {
+    "objectID": "workgroups/WG4.html#checklist-before-you-hand-in",
+    "href": "workgroups/WG4.html#checklist-before-you-hand-in",
+    "title": "Work Group Meeting 4",
+    "section": "Checklist before you hand in",
+    "text": "Checklist before you hand in\n\nAre all six dimensions covered?\nIs your research question answered?\nIs every piece of code annotated?\nIs all output you show also interpreted?\nDoes the .html render without errors and show all code and output?\nIs the ZIP complete: dataset, .qmd and .html?\nAre the names of all group members in the report?"
+  },
+  {
+    "objectID": "workgroups/WG4.html#continue-working",
+    "href": "workgroups/WG4.html#continue-working",
+    "title": "Work Group Meeting 4",
+    "section": "Continue working",
+    "text": "Continue working\n\nFinish assumptions, diagnostics and interpretation\nUse the code from this week’s lab\nRead the full report and then hand it in before Friday December 11, 16:00\nMail any final changes to the group contract to your workgroup instructor"
+  },
+  {
+    "objectID": "workgroups/WG3.html#today",
+    "href": "workgroups/WG3.html#today",
+    "title": "Work Group Meeting 3",
+    "section": "Today",
+    "text": "Today\nWhere are we?\n\nMultiple linear regression\n\nGoal for today: your final model\nDocument every step\n\n\n\n\nGroup contract check-in"
+  },
+  {
+    "objectID": "workgroups/WG3.html#where-are-we",
+    "href": "workgroups/WG3.html#where-are-we",
+    "title": "Work Group Meeting 3",
+    "section": "Where are we?",
+    "text": "Where are we?\nAssignment 1 is a written report: deadline Friday December 11, 16:00. The deadline is approaching!\n\n  \n    Data processing✓ done\n    →\n    Exploratory analysis✓ done\n    →\n    Simple regression✓ done\n    →\n    Multiple regressionthis week\n    →\n    Assumptionsnext week\n  \n\nNot there yet? Catch up first, and ask your instructor if you are stuck."
+  },
+  {
+    "objectID": "workgroups/WG3.html#multiple-linear-regression",
+    "href": "workgroups/WG3.html#multiple-linear-regression",
+    "title": "Work Group Meeting 3",
+    "section": "Multiple linear regression",
+    "text": "Multiple linear regression\n\nAdd more predictors to your model\nDon’t forget to also test interaction terms!\nExplain the logic for the order in which you add predictors: is your focus on prediction or on estimation?\nCompare your models and interpret the model fit statistics"
+  },
+  {
+    "objectID": "workgroups/WG3.html#goal-for-today-your-final-model",
+    "href": "workgroups/WG3.html#goal-for-today-your-final-model",
+    "title": "Work Group Meeting 3",
+    "section": "Goal for today: your final model",
+    "text": "Goal for today: your final model\n\n  \n    1. Final modelby the end of today\n    →\n    2. Interpretsubstantively interpret the regression coefficients\n    →\n    3. Assumptionstest them on this model next week"
+  },
+  {
+    "objectID": "workgroups/WG3.html#document-every-step",
+    "href": "workgroups/WG3.html#document-every-step",
+    "title": "Work Group Meeting 3",
+    "section": "Document every step",
+    "text": "Document every step\n\nPresent output efficiently: can you create “custom” tables or figures?\nOnly show what matters: everything you output should be important and needs to be interpreted\nAnnotate your code: can you explain what happens in each line?"
+  },
+  {
+    "objectID": "workgroups/WG3.html#bad-example",
+    "href": "workgroups/WG3.html#bad-example",
+    "title": "Work Group Meeting 3",
+    "section": "Bad example",
+    "text": "Bad example\n\n\n\nfit1 &lt;- lm(wellbeing ~ income,\n           data = dat)\nsummary(fit1)\n\nfit2 &lt;- lm(wellbeing ~ income +\n             age * gender,\n           data = dat)\nsummary(fit2)\n\n\n\nNo comments: why this model?\nFull summary() of every model\nNo formal model comparison\n\n\n\n\nCall:\nlm(formula = wellbeing ~ income + age * gender,\n   data = dat)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.9899 -0.6571 -0.0260  0.5825  3.5480 \n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     4.149593   0.277115  14.974  &lt; 2e-16 ***\nincome          0.398894   0.059574   6.696 1.08e-10 ***\nage             0.016979   0.004467   3.801 0.000175 ***\ngendermale      0.087982   0.329407   0.267 0.789584    \nage:gendermale -0.012401   0.006284  -1.973 0.049376 *  \n---\nSignif. codes:  \n0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9781 on 295 degrees of freedom\nMultiple R-squared:  0.218, Adjusted R-squared:  0.2074 \nF-statistic: 20.56 on 4 and 295 DF,  p-value: 5.871e-15\n\n\n… and the same full output for model 1, model 3, …"
+  },
+  {
+    "objectID": "workgroups/WG3.html#good-example",
+    "href": "workgroups/WG3.html#good-example",
+    "title": "Work Group Meeting 3",
+    "section": "Good example",
+    "text": "Good example\n\n\n\n# Model 2: add age and its\n# interaction with gender\nfit2 &lt;- lm(wellbeing ~ income +\n             age * gender,\n           data = dat)\n\n# Does model 2 fit significantly\n# better than model 1?\nanova(fit1, fit2)\n\n# Coefficients with 95% CIs,\n# rounded, in a clean table\nbroom::tidy(fit2,\n            conf.int = TRUE) |&gt;\n  knitr::kable(digits = 3)\n\n\n\nAnalysis of Variance Table\n\nModel 1: wellbeing ~ income\nModel 2: wellbeing ~ income + age * gender\n  Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    \n1    298 313.33                                  \n2    295 282.21  3    31.124 10.845 8.863e-07 ***\n\n\n\n\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n4.150\n0.277\n0.000\n3.604\n4.695\n\n\nincome\n0.399\n0.060\n0.000\n0.282\n0.516\n\n\nage\n0.017\n0.004\n0.000\n0.008\n0.026\n\n\ngendermale\n0.088\n0.329\n0.790\n-0.560\n0.736\n\n\nage:gendermale\n-0.012\n0.006\n0.049\n-0.025\n0.000\n\n\n\n\n\nOnly the output you will interpret, in a readable format."
+  },
+  {
+    "objectID": "workgroups/WG3.html#what-we-grade-on-relevant-this-week",
+    "href": "workgroups/WG3.html#what-we-grade-on-relevant-this-week",
+    "title": "Work Group Meeting 3",
+    "section": "What we grade on (relevant this week)",
+    "text": "What we grade on (relevant this week)\n\n\n\n\n\n\n\n\nElement\nWhat we look for\n\n\n\n\nLinear regression\nDescription of the building process, the model fit, and the model comparison procedure\n\n\nInterpretation\nSubstantive interpretation of the final model. Answers to your research questions\n\n\nLayout\nStructure of the document, output is efficiently presented, custom functions are developed when needed. Graphs are used where fitting\n\n\n\n\nFind the complete assignment description on the course website."
+  },
+  {
+    "objectID": "workgroups/WG3.html#writing-the-report",
+    "href": "workgroups/WG3.html#writing-the-report",
+    "title": "Work Group Meeting 3",
     "section": "Writing the report",
-    "text": "Writing the report\n\nWe want a concise written report: not long and extensive, but make sure you cover all the steps\nNo extensive introduction with literature\nBut we do need to understand:\n\nthe logic behind your research question\nwhere your data come from\nAnnotated code that shows you understand what happens at each step"
+    "text": "Writing the report\n\nWe want a concise written report: not long and extensive, but make sure you cover all the steps\nNo extensive introduction with literature\nBut we do need to understand:\n\nthe logic behind your research question\nwhere your data come from"
   },
   {
-    "objectID": "workgroups/WG2.html#use-the-code-from-the-lab",
-    "href": "workgroups/WG2.html#use-the-code-from-the-lab",
-    "title": "Work Group Meeting 2",
+    "objectID": "workgroups/WG3.html#use-the-code-from-the-lab",
+    "href": "workgroups/WG3.html#use-the-code-from-the-lab",
+    "title": "Work Group Meeting 3",
     "section": "Use the code from the lab",
     "text": "Use the code from the lab\n\nEach week, the lab contains the code you need for the steps in the assignment\nCode borrowed from other courses or generated by AI (not allowed!) may do something slightly different, and you may end up applying the wrong method"
   },
   {
-    "objectID": "workgroups/WG2.html#group-contract-check-in",
-    "href": "workgroups/WG2.html#group-contract-check-in",
-    "title": "Work Group Meeting 2",
+    "objectID": "workgroups/WG3.html#group-contract-check-in",
+    "href": "workgroups/WG3.html#group-contract-check-in",
+    "title": "Work Group Meeting 3",
     "section": "Group contract check-in",
-    "text": "Group contract check-in\nTake a couple of minutes to reflect on your group contract:\n\nWhat did you agree on?\nIs everything and everybody still on track?\nIs it working? Do you need to adjust anything?\nMail your working agreements and changes to the contract to your workgroup instructor"
+    "text": "Group contract check-in\nTake a moment to think back on your group contract:\n\nIs everything still working?\nIs everybody on track?\nDo you need to adjust anything?\nMail your working agreements and changes to the contract to your workgroup instructor"
   },
   {
-    "objectID": "workgroups/WG2.html#continue-working-on-assignment-1",
-    "href": "workgroups/WG2.html#continue-working-on-assignment-1",
-    "title": "Work Group Meeting 2",
+    "objectID": "workgroups/WG3.html#continue-working-on-assignment-1",
+    "href": "workgroups/WG3.html#continue-working-on-assignment-1",
+    "title": "Work Group Meeting 3",
     "section": "Continue working on assignment 1",
-    "text": "Continue working on assignment 1\n\n  \n    1. Finishdata processing\n    →\n    2. Exploredescriptives & relations\n    →\n    3. Regresssimple linear regression\n  \n\nUse the code from this week’s lab!\nAlso note: it’s useful to work on the lab before the workgroup meeting so that you are prepared to execute these steps."
+    "text": "Continue working on assignment 1\n\n  \n    1. Addpredictors & interactions\n    →\n    2. Comparemodels & model fit\n    →\n    3. Final modelinterpret coefficients\n  \n\nUse the code from this week’s lab, and document every step!"
+  },
+  {
+    "objectID": "email.html",
+    "href": "email.html",
+    "title": "Weekly group update",
+    "section": "",
+    "text": "After each workgroup meeting, your group sends a short update email to your workgroup instructor. Take turns writing it, agree on the content as a group, and always CC every group member."
+  },
+  {
+    "objectID": "email.html#template",
+    "href": "email.html#template",
+    "title": "Weekly group update",
+    "section": "Template",
+    "text": "Template\nCurrent status\n\nDone this week:\nNext steps and who does what:\n\nDecisions and new agreements\n\nProject decisions or changes to how we work / our contract:\n\nGroup contract follow-up\n\nAgreements not met (e.g., absence, not prepared, missed deadline) and what we did about it:\nFollow-up on earlier issues:\n\nQuestions for the instructor (optional)"
   },
   {
     "objectID": "labs/lab3_answers.html",
@@ -606,7 +599,7 @@
     "href": "labs/lab2.html#inspecting-the-relation-between-two-variables",
     "title": "Lab 2",
     "section": "Inspecting the relation between two variables",
-    "text": "Inspecting the relation between two variables\nA good way to eyeball the relation between two continuous variables is a scatterplot. As a reminder, a ggplot() is built up in layers that are added with +:\n\nggplot(data, aes(x = ..., y = ...)) sets the data and maps variables to the axes;\na geom_...() layer chooses how the data are drawn, for example geom_point() for points;\nlabs() adds axis labels and a title;\na theme_...() layer, such as theme_minimal() or theme_bw(), changes the overall look.\n\nExercise 3\nMake a scatterplot with Sepal.Length on the x-axis and Petal.Width on the y-axis. Give both axes an informative label (including the unit), add a title and apply a theme.\nA smooth curve helps to see the general shape of the relation. You can add one with geom_smooth(). With method = \"loess\" you get a flexible curve that follows the data, and se = FALSE leaves out the confidence band.\nExercise 4\nAdd a loess curve to your plot from Exercise 3 with geom_smooth(method = \"loess\", se = FALSE).\nExercise 5\nChange the loess curve into a straight regression line by using method = \"lm\". Describe in one sentence the relation that the line shows."
+    "text": "Inspecting the relation between two variables\nA good way to eyeball the relation between two continuous variables is a scatterplot. As a reminder, a ggplot() is built up in layers that are added with +:\n\nggplot(data, aes(x = ..., y = ...)) sets the data and maps variables to the axes;\na geom_...() layer chooses how the data are drawn, for example geom_point() for points;\nlabs() adds axis labels and a title;\na theme_...() layer, such as theme_minimal() or theme_bw(), changes the overall look.\n\nExercise 3\nMake a scatterplot with Sepal.Length on the x-axis and Petal.Width on the y-axis. Give both axes an informative label (including the unit), add a title and apply a theme.\nExercise 4\nA smooth curve helps to see the general shape of the relation. You can add one with geom_smooth(). With method = \"loess\" you get a flexible curve that follows the data, and se = FALSE leaves out the confidence band.\nAdd a loess curve to your plot from Exercise 3 with geom_smooth(method = \"loess\", se = FALSE).\nExercise 5\nChange the loess curve into a straight regression line by using method = \"lm\". Describe in one sentence the relation that the line shows."
   },
   {
     "objectID": "labs/lab2.html#simple-linear-regression",
@@ -704,7 +697,7 @@
     "href": "labs/lab1_answers.html#set-up-your-project",
     "title": "Lab 1",
     "section": "Set up your project",
-    "text": "Set up your project\nExercise 1\nSet up an R project with the same folder structure as the “good” example from the lecture (see the Project Organization Demo):\n\nIn RStudio, create a new project called lab1 (File &gt; New Project &gt; New Directory &gt; New Project).\nInside the project folder, create the folders code, data, figures and output.\nDownload penguins.csv and save it in the data folder.\nCreate a new Quarto document (File &gt; New File &gt; Quarto Document) and save it in the code folder as lab1_firstname_lastname_studentnumber.qmd.\n\n---\ntitle: \"lab1_firstname_lastname_studentnumber\"\nauthor: \"Firstname Lastname\"\nformat:\n  html:\n    embed-resources: true\n---\nYour project should now look like this:\nlab1/\n├── lab1.Rproj\n├── code/\n│   └── lab1_firstname_lastname_studentnumber.qmd\n├── data/\n│   └── penguins.csv\n├── figures/\n└── output/"
+    "text": "Set up your project\nExercise 1\nSet up an R project with the same folder structure as the “good” example from the lecture (see the Project Organization Demo):\n\nIn RStudio, create a new project called lab1 (File &gt; New Project &gt; New Directory &gt; New Project).\nInside the project folder, create the folders code, data, figures and output.\nDownload penguins.csv and save it in the data folder.\nCreate a new Quarto document (File &gt; New File &gt; Quarto Document) and save it in the code folder as lab1_firstname_lastname_studentnumber.qmd.\nReplace the YAML header with the header below and fill in your own details:\n\n---\ntitle: \"lab1_firstname_lastname_studentnumber\"\nauthor: \"Firstname Lastname\"\nformat:\n  html:\n    embed-resources: true\n---\nYour project should now look like this:\nlab1/\n├── lab1.Rproj\n├── code/\n│   └── lab1_firstname_lastname_studentnumber.qmd\n├── data/\n│   └── penguins.csv\n├── figures/\n└── output/"
   },
   {
     "objectID": "labs/lab1_answers.html#import-the-data",
@@ -725,7 +718,7 @@
     "href": "labs/lab1_answers.html#reproducible-reporting",
     "title": "Lab 1",
     "section": "Reproducible reporting",
-    "text": "Reproducible reporting\nExercise 6\nWrite one sentence in your document (as normal text, not in a code chunk) that reports the mean body mass from Exercise 4. Do not type the number yourself: use inline code so that the number is calculated when you render the document.\nHint: inline code looks like this: `r 1 + 1`\nAnswer: In the text of the document, write:\nThe mean body mass of the penguins is `r round(mean(penguins$body_mass_g, na.rm = TRUE), 1)` grams.\nwhich renders as:\n\nThe mean body mass of the penguins is 4201.8 grams.\n\nExercise 7\nMake a boxplot of body mass per species with base R’s boxplot() function. Add a caption to the figure with the chunk option #| fig-cap:, and give the axes clear labels.\n\nboxplot(body_mass_g ~ species,\n        data = penguins,\n        xlab = \"Species\",\n        ylab = \"Body mass (g)\")\n\n\n\n\nBody mass of penguins per species.\n\n\n\n\nAlso save the boxplot as an image in your figures folder. png() opens an image file, the plot is drawn into that file, and dev.off() closes it:\npng(here::here(figDir, \"boxplot_mass.png\"))\nboxplot(body_mass_g ~ species, data = penguins,\n        xlab = \"Species\", ylab = \"Body mass (g)\")\ndev.off()\n\npng(here::here(figDir, \"boxplot_mass.png\"))\nboxplot(body_mass_g ~ species, data = penguins,\n        xlab = \"Species\", ylab = \"Body mass (g)\")\ndev.off()"
+    "text": "Reproducible reporting\nExercise 6\nWrite one sentence in your document (as normal text, not in a code chunk) that reports the mean body mass from Exercise 4. Do not type the number yourself: use inline code so that the number is calculated when you render the document.\nHint: inline code looks like this: `r 1 + 1`\nAnswer: In the text of the document, write:\nThe mean body mass of the penguins is `r round(mean(penguins$body_mass_g, na.rm = TRUE), 1)` grams.\nwhich renders as:\n\nThe mean body mass of the penguins is 4201.8 grams.\n\nExercise 7\nMake a boxplot of body mass per species with base R’s boxplot() function. Add a caption to the figure with the chunk option #| fig-cap:, and give the axes clear labels.\n\nboxplot(body_mass_g ~ species,\n        data = penguins,\n        xlab = \"Species\",\n        ylab = \"Body mass (g)\")\n\n\n\n\nBody mass of penguins per species.\n\n\n\n\nAlso save the boxplot as an image in your figures folder. png() opens an image file, the plot is drawn into that file, and dev.off() closes it:\n#| fig-cap: \"Body mass of penguins per species.\"\n\npng(here::here(figDir, \"boxplot_mass.png\"))\nboxplot(y ~ x, \n        data = data, \n        xlab = \"x axis label\", \n        ylab = \"y axis label\")\ndev. Off()\n\npng(here::here(figDir, \"boxplot_mass.png\"))\nboxplot(body_mass_g ~ species, data = penguins,\n        xlab = \"Species\", ylab = \"Body mass (g)\")\ndev.off()"
   },
   {
     "objectID": "labs/lab1_answers.html#render-and-hand-in",
@@ -788,7 +781,7 @@
     "href": "labs/lab1.html#set-up-your-project",
     "title": "Lab 1",
     "section": "Set up your project",
-    "text": "Set up your project\nExercise 1\nSet up an R project with the same folder structure as the “good” example from the lecture (see the Project Organization Demo):\n\nIn RStudio, create a new project called lab1 (File &gt; New Project &gt; New Directory &gt; New Project).\nInside the project folder, create the folders code, data, figures and output.\nDownload penguins.csv and save it in the data folder.\nCreate a new Quarto document (File &gt; New File &gt; Quarto Document) and save it in the code folder as lab1_firstname_lastname_studentnumber.qmd.\n\n---\ntitle: \"lab1_firstname_lastname_studentnumber\"\nauthor: \"Firstname Lastname\"\nformat:\n  html:\n    embed-resources: true\n---\nYour project should now look like this:\nlab1/\n├── lab1.Rproj\n├── code/\n│   └── lab1_firstname_lastname_studentnumber.qmd\n├── data/\n│   └── penguins.csv\n├── figures/\n└── output/"
+    "text": "Set up your project\nExercise 1\nSet up an R project with the same folder structure as the “good” example from the lecture (see the Project Organization Demo):\n\nIn RStudio, create a new project called lab1 (File &gt; New Project &gt; New Directory &gt; New Project).\nInside the project folder, create the folders code, data, figures and output.\nDownload penguins.csv and save it in the data folder.\nCreate a new Quarto document (File &gt; New File &gt; Quarto Document) and save it in the code folder as lab1_firstname_lastname_studentnumber.qmd.\nReplace the YAML header with the header below and fill in your own details:\n\n---\ntitle: \"lab1_firstname_lastname_studentnumber\"\nauthor: \"Firstname Lastname\"\nformat:\n  html:\n    embed-resources: true\n---\nYour project should now look like this:\nlab1/\n├── lab1.Rproj\n├── code/\n│   └── lab1_firstname_lastname_studentnumber.qmd\n├── data/\n│   └── penguins.csv\n├── figures/\n└── output/"
   },
   {
     "objectID": "labs/lab1.html#import-the-data",
@@ -809,7 +802,7 @@
     "href": "labs/lab1.html#reproducible-reporting",
     "title": "Lab 1",
     "section": "Reproducible reporting",
-    "text": "Reproducible reporting\nExercise 6\nWrite one sentence in your document (as normal text, not in a code chunk) that reports the mean body mass from Exercise 4. Do not type the number yourself: use inline code so that the number is calculated when you render the document.\nHint: inline code looks like this: `r 1 + 1`\nExercise 7\nMake a boxplot of body mass per species with base R’s boxplot() function. Add a caption to the figure with the chunk option #| fig-cap:, and give the axes clear labels.\nAlso save the boxplot as an image in your figures folder. png() opens an image file, the plot is drawn into that file, and dev.off() closes it:\npng(here::here(figDir, \"boxplot_mass.png\"))\nboxplot(body_mass_g ~ species, data = penguins,\n        xlab = \"Species\", ylab = \"Body mass (g)\")\ndev.off()"
+    "text": "Reproducible reporting\nExercise 6\nWrite one sentence in your document (as normal text, not in a code chunk) that reports the mean body mass from Exercise 4. Do not type the number yourself: use inline code so that the number is calculated when you render the document.\nHint: inline code looks like this: `r 1 + 1`\nExercise 7\nMake a boxplot of body mass per species with base R’s boxplot() function. Add a caption to the figure with the chunk option #| fig-cap:, and give the axes clear labels.\nAlso save the boxplot as an image in your figures folder. png() opens an image file, the plot is drawn into that file, and dev.off() closes it:\n#| fig-cap: \"Body mass of penguins per species.\"\n\npng(here::here(figDir, \"boxplot_mass.png\"))\nboxplot(y ~ x, \n        data = data, \n        xlab = \"x axis label\", \n        ylab = \"y axis label\")\ndev. Off()"
   },
   {
     "objectID": "labs/lab1.html#render-and-hand-in",
@@ -844,7 +837,7 @@
     "href": "labs/lab2_answers.html#inspecting-the-relation-between-two-variables",
     "title": "Lab 2",
     "section": "Inspecting the relation between two variables",
-    "text": "Inspecting the relation between two variables\nA good way to eyeball the relation between two continuous variables is a scatterplot. As a reminder, a ggplot() is built up in layers that are added with +:\n\nggplot(data, aes(x = ..., y = ...)) sets the data and maps variables to the axes;\na geom_...() layer chooses how the data are drawn, for example geom_point() for points;\nlabs() adds axis labels and a title;\na theme_...() layer, such as theme_minimal() or theme_bw(), changes the overall look.\n\nExercise 3\nMake a scatterplot with Sepal.Length on the x-axis and Petal.Width on the y-axis. Give both axes an informative label (including the unit), add a title and apply a theme.\n\nggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +\n  geom_point() +\n  labs(x = \"Sepal length (cm)\",\n       y = \"Petal width (cm)\",\n       title = \"Sepal length and petal width\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nA smooth curve helps to see the general shape of the relation. You can add one with geom_smooth(). With method = \"loess\" you get a flexible curve that follows the data, and se = FALSE leaves out the confidence band.\nExercise 4\nAdd a loess curve to your plot from Exercise 3 with geom_smooth(method = \"loess\", se = FALSE).\n\nggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +\n  geom_point() +\n  geom_smooth(method = \"loess\", se = FALSE) +\n  labs(x = \"Sepal length (cm)\",\n       y = \"Petal width (cm)\",\n       title = \"Sepal length and petal width\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nExercise 5\nChange the loess curve into a straight regression line by using method = \"lm\". Describe in one sentence the relation that the line shows.\n\nggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(x = \"Sepal length (cm)\",\n       y = \"Petal width (cm)\",\n       title = \"Sepal length and petal width\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nAnswer: The line goes up: there is a positive, roughly linear relation. Flowers with longer sepal leaves tend to have wider petal leaves."
+    "text": "Inspecting the relation between two variables\nA good way to eyeball the relation between two continuous variables is a scatterplot. As a reminder, a ggplot() is built up in layers that are added with +:\n\nggplot(data, aes(x = ..., y = ...)) sets the data and maps variables to the axes;\na geom_...() layer chooses how the data are drawn, for example geom_point() for points;\nlabs() adds axis labels and a title;\na theme_...() layer, such as theme_minimal() or theme_bw(), changes the overall look.\n\nExercise 3\nMake a scatterplot with Sepal.Length on the x-axis and Petal.Width on the y-axis. Give both axes an informative label (including the unit), add a title and apply a theme.\n\nggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +\n  geom_point() +\n  labs(x = \"Sepal length (cm)\",\n       y = \"Petal width (cm)\",\n       title = \"Sepal length and petal width\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nExercise 4\nA smooth curve helps to see the general shape of the relation. You can add one with geom_smooth(). With method = \"loess\" you get a flexible curve that follows the data, and se = FALSE leaves out the confidence band.\nAdd a loess curve to your plot from Exercise 3 with geom_smooth(method = \"loess\", se = FALSE).\n\nggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +\n  geom_point() +\n  geom_smooth(method = \"loess\", se = FALSE) +\n  labs(x = \"Sepal length (cm)\",\n       y = \"Petal width (cm)\",\n       title = \"Sepal length and petal width\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nExercise 5\nChange the loess curve into a straight regression line by using method = \"lm\". Describe in one sentence the relation that the line shows.\n\nggplot(iris, aes(x = Sepal.Length, y = Petal.Width)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(x = \"Sepal length (cm)\",\n       y = \"Petal width (cm)\",\n       title = \"Sepal length and petal width\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nAnswer: The line goes up: there is a positive, roughly linear relation. Flowers with longer sepal leaves tend to have wider petal leaves."
   },
   {
     "objectID": "labs/lab2_answers.html#simple-linear-regression",
@@ -991,14 +984,14 @@
     "href": "assignments.html",
     "title": "Assignments",
     "section": "",
-    "text": "Both assignments are group assignments. We will form groups of 3 or 4 students at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.\nIn order to be assigned to a group, presence at the first meeting is crucial!\nTo collaborate effectively on the group assignments, each group draws up a group contract in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Each week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor.\n\n\n\nYou can use the same dataset for both assigments. The minimum requirement for the dataset is that it contains:\n\nOne continuous outcome variable (for linear regression)\nOne binary outcome variable (for logistic regression)\nTwo continuous predictor variables\nOne categorical predictor variable"
+    "text": "Both assignments are group assignments. We will form groups of 3 or 4 students at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.\nIn order to be assigned to a group, presence at the first meeting is crucial!\nTo collaborate effectively on the group assignments, each group draws up a group contract in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Here is a Contract Template you can use.\nEach week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor. Here is a suggested Email Template you can use.\n\n\n\nYou can use the same dataset for both assigments. The minimum requirement for the dataset is that it contains:\n\nOne continuous outcome variable (for linear regression)\nOne binary outcome variable (for logistic regression)\nTwo continuous predictor variables\nOne categorical predictor variable"
   },
   {
     "objectID": "assignments.html#group-participation",
     "href": "assignments.html#group-participation",
     "title": "Assignments",
     "section": "",
-    "text": "Both assignments are group assignments. We will form groups of 3 or 4 students at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.\nIn order to be assigned to a group, presence at the first meeting is crucial!\nTo collaborate effectively on the group assignments, each group draws up a group contract in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Each week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor."
+    "text": "Both assignments are group assignments. We will form groups of 3 or 4 students at the first workgroup meeting, and you work on both assignments with the same group throughout the rest of the course.\nIn order to be assigned to a group, presence at the first meeting is crucial!\nTo collaborate effectively on the group assignments, each group draws up a group contract in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Here is a Contract Template you can use.\nEach week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor. Here is a suggested Email Template you can use."
   },
   {
     "objectID": "assignments.html#dataset",
@@ -1008,353 +1001,430 @@
     "text": "You can use the same dataset for both assigments. The minimum requirement for the dataset is that it contains:\n\nOne continuous outcome variable (for linear regression)\nOne binary outcome variable (for logistic regression)\nTwo continuous predictor variables\nOne categorical predictor variable"
   },
   {
-    "objectID": "workgroups/WG3.html#today",
-    "href": "workgroups/WG3.html#today",
-    "title": "Work Group Meeting 3",
+    "objectID": "workgroups/WG2.html#today",
+    "href": "workgroups/WG2.html#today",
+    "title": "Work Group Meeting 2",
     "section": "Today",
-    "text": "Today\nWhere are we?\n\nMultiple linear regression\n\nGoal for today: your final model\nDocument every step\n\n\n\n\nGroup contract check-in"
+    "text": "Today\nCheck your status:\n\nIs your data ready for the next steps?\n\nExploratory data analysis\nSimple linear regression\nWriting up these parts for assignment 1\n\nGroup contract check-in"
   },
   {
-    "objectID": "workgroups/WG3.html#where-are-we",
-    "href": "workgroups/WG3.html#where-are-we",
-    "title": "Work Group Meeting 3",
+    "objectID": "workgroups/WG2.html#where-are-we",
+    "href": "workgroups/WG2.html#where-are-we",
+    "title": "Work Group Meeting 2",
     "section": "Where are we?",
-    "text": "Where are we?\nAssignment 1 is a written report: deadline Friday December 11, 16:00. The deadline is approaching!\n\n  \n    Data processing✓ done\n    →\n    Exploratory analysis✓ done\n    →\n    Simple regression✓ done\n    →\n    Multiple regressionthis week\n    →\n    Assumptionsnext week\n  \n\nNot there yet? Catch up first, and ask your instructor if you are stuck."
+    "text": "Where are we?\n\nAll workgroup meetings, we work on the two assignments\nYou formed your group last week\nAssignment 1 is a written report: deadline Friday December 11, 16:00\n\n\n  \n    Data processinglast week\n    →\n    Exploratory analysisthis week\n    →\n    Simple regressionthis week\n    →\n    Multiple regressionnext week"
   },
   {
-    "objectID": "workgroups/WG3.html#multiple-linear-regression",
-    "href": "workgroups/WG3.html#multiple-linear-regression",
-    "title": "Work Group Meeting 3",
-    "section": "Multiple linear regression",
-    "text": "Multiple linear regression\n\nAdd more predictors to your model\nDon’t forget to also test interaction terms!\nExplain the logic for the order in which you add predictors: is your focus on prediction or on estimation?\nCompare your models and interpret the model fit statistics"
+    "objectID": "workgroups/WG2.html#first-is-your-data-ready",
+    "href": "workgroups/WG2.html#first-is-your-data-ready",
+    "title": "Work Group Meeting 2",
+    "section": "First: is your data ready?",
+    "text": "First: is your data ready?\nDid you finish processing your data, so you have proper measurements of all your variables?\n\nAre the character classes correct?\nAre missing values represented as NA?\nDid you compute sum scores, mean scores or scales where needed?\nDid you link datasets where needed?\n\nYes? Continue with this week’s content. No? Finish this first!"
   },
   {
-    "objectID": "workgroups/WG3.html#goal-for-today-your-final-model",
-    "href": "workgroups/WG3.html#goal-for-today-your-final-model",
-    "title": "Work Group Meeting 3",
-    "section": "Goal for today: your final model",
-    "text": "Goal for today: your final model\n\n  \n    1. Final modelby the end of today\n    →\n    2. Interpretsubstantively interpret the regression coefficients\n    →\n    3. Assumptionstest them on this model next week"
+    "objectID": "workgroups/WG2.html#exploratory-data-analysis",
+    "href": "workgroups/WG2.html#exploratory-data-analysis",
+    "title": "Work Group Meeting 2",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\n\n\n1. One variable at a time\nLook at distributions and descriptive statistics of the variables you will use:\n\nContinuous: means, standard deviations, histograms\nCategorical: frequency tables, bar charts\n\n\n2. Bivariate relationships\nLook at relations between your variables:\n\nContinuous & continuous: scatterplots, correlations\nContinuous & categorical: boxplots, group means"
   },
   {
-    "objectID": "workgroups/WG3.html#document-every-step",
-    "href": "workgroups/WG3.html#document-every-step",
-    "title": "Work Group Meeting 3",
-    "section": "Document every step",
-    "text": "Document every step\n\nPresent output efficiently: can you create “custom” tables or figures?\nOnly show what matters: everything you output should be important and needs to be interpreted\nAnnotate your code: can you explain what happens in each line?"
+    "objectID": "workgroups/WG2.html#something-weird-or-unexpected",
+    "href": "workgroups/WG2.html#something-weird-or-unexpected",
+    "title": "Work Group Meeting 2",
+    "section": "Something weird or unexpected?",
+    "text": "Something weird or unexpected?\n\nCheck first: did I miss something I should have processed?\nIf not, but still weird: don’t change anything (yet)\n\nReport on it in your assignment\nBe aware of it during your analysis\nHow might it influence your regression results later on?\n\n\n\n\n\n\n\n\n\nWe do not remove extreme values upfront!"
   },
   {
-    "objectID": "workgroups/WG3.html#bad-example",
-    "href": "workgroups/WG3.html#bad-example",
-    "title": "Work Group Meeting 3",
-    "section": "Bad example",
-    "text": "Bad example\n\n\n\nfit1 &lt;- lm(wellbeing ~ income,\n           data = dat)\nsummary(fit1)\n\nfit2 &lt;- lm(wellbeing ~ income +\n             age * gender,\n           data = dat)\nsummary(fit2)\n\n\n\nNo comments: why this model?\nFull summary() of every model\nNo formal model comparison\n\n\n\n\nCall:\nlm(formula = wellbeing ~ income + age * gender,\n   data = dat)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.9899 -0.6571 -0.0260  0.5825  3.5480 \n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     4.149593   0.277115  14.974  &lt; 2e-16 ***\nincome          0.398894   0.059574   6.696 1.08e-10 ***\nage             0.016979   0.004467   3.801 0.000175 ***\ngendermale      0.087982   0.329407   0.267 0.789584    \nage:gendermale -0.012401   0.006284  -1.973 0.049376 *  \n---\nSignif. codes:  \n0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9781 on 295 degrees of freedom\nMultiple R-squared:  0.218, Adjusted R-squared:  0.2074 \nF-statistic: 20.56 on 4 and 295 DF,  p-value: 5.871e-15\n\n\n… and the same full output for model 1, model 3, …"
+    "objectID": "workgroups/WG2.html#simple-linear-regression",
+    "href": "workgroups/WG2.html#simple-linear-regression",
+    "title": "Work Group Meeting 2",
+    "section": "Simple linear regression",
+    "text": "Simple linear regression\nStart with your analysis strategy:\n\nFor your research question, does it make more sense to focus on prediction or on estimation?\nHow will you build your model? How does this relate to your research question?\nWhich predictor do you start with?\n\nThen: fit your first simple linear regression model.\nNext week we expand to multiple linear regression."
   },
   {
-    "objectID": "workgroups/WG3.html#good-example",
-    "href": "workgroups/WG3.html#good-example",
-    "title": "Work Group Meeting 3",
-    "section": "Good example",
-    "text": "Good example\n\n\n\n# Model 2: add age and its\n# interaction with gender\nfit2 &lt;- lm(wellbeing ~ income +\n             age * gender,\n           data = dat)\n\n# Does model 2 fit significantly\n# better than model 1?\nanova(fit1, fit2)\n\n# Coefficients with 95% CIs,\n# rounded, in a clean table\nbroom::tidy(fit2,\n            conf.int = TRUE) |&gt;\n  knitr::kable(digits = 3)\n\n\n\nAnalysis of Variance Table\n\nModel 1: wellbeing ~ income\nModel 2: wellbeing ~ income + age * gender\n  Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    \n1    298 313.33                                  \n2    295 282.21  3    31.124 10.845 8.863e-07 ***\n\n\n\n\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n4.150\n0.277\n0.000\n3.604\n4.695\n\n\nincome\n0.399\n0.060\n0.000\n0.282\n0.516\n\n\nage\n0.017\n0.004\n0.000\n0.008\n0.026\n\n\ngendermale\n0.088\n0.329\n0.790\n-0.560\n0.736\n\n\nage:gendermale\n-0.012\n0.006\n0.049\n-0.025\n0.000\n\n\n\n\n\nOnly the output you will interpret, in a readable format."
-  },
-  {
-    "objectID": "workgroups/WG3.html#what-we-grade-on-relevant-this-week",
-    "href": "workgroups/WG3.html#what-we-grade-on-relevant-this-week",
-    "title": "Work Group Meeting 3",
-    "section": "What we grade on (relevant this week)",
-    "text": "What we grade on (relevant this week)\n\n\n\n\n\n\n\n\nElement\nWhat we look for\n\n\n\n\nLinear regression\nDescription of the building process, the model fit, and the model comparison procedure\n\n\nInterpretation\nSubstantive interpretation of the final model. Answers to your research questions\n\n\nLayout\nStructure of the document, output is efficiently presented, custom functions are developed when needed. Graphs are used where fitting\n\n\n\n\nFind the complete assignment description on the course website."
-  },
-  {
-    "objectID": "workgroups/WG3.html#writing-the-report",
-    "href": "workgroups/WG3.html#writing-the-report",
-    "title": "Work Group Meeting 3",
+    "objectID": "workgroups/WG2.html#writing-the-report",
+    "href": "workgroups/WG2.html#writing-the-report",
+    "title": "Work Group Meeting 2",
     "section": "Writing the report",
-    "text": "Writing the report\n\nWe want a concise written report: not long and extensive, but make sure you cover all the steps\nNo extensive introduction with literature\nBut we do need to understand:\n\nthe logic behind your research question\nwhere your data come from"
+    "text": "Writing the report\n\nWe want a concise written report: not long and extensive, but make sure you cover all the steps\nNo extensive introduction with literature\nBut we do need to understand:\n\nthe logic behind your research question\nwhere your data come from\nAnnotated code that shows you understand what happens at each step"
   },
   {
-    "objectID": "workgroups/WG3.html#use-the-code-from-the-lab",
-    "href": "workgroups/WG3.html#use-the-code-from-the-lab",
-    "title": "Work Group Meeting 3",
+    "objectID": "workgroups/WG2.html#use-the-code-from-the-lab",
+    "href": "workgroups/WG2.html#use-the-code-from-the-lab",
+    "title": "Work Group Meeting 2",
     "section": "Use the code from the lab",
     "text": "Use the code from the lab\n\nEach week, the lab contains the code you need for the steps in the assignment\nCode borrowed from other courses or generated by AI (not allowed!) may do something slightly different, and you may end up applying the wrong method"
   },
   {
-    "objectID": "workgroups/WG3.html#group-contract-check-in",
-    "href": "workgroups/WG3.html#group-contract-check-in",
-    "title": "Work Group Meeting 3",
+    "objectID": "workgroups/WG2.html#group-contract-check-in",
+    "href": "workgroups/WG2.html#group-contract-check-in",
+    "title": "Work Group Meeting 2",
     "section": "Group contract check-in",
-    "text": "Group contract check-in\nTake a moment to think back on your group contract:\n\nIs everything still working?\nIs everybody on track?\nDo you need to adjust anything?\nMail your working agreements and changes to the contract to your workgroup instructor"
+    "text": "Group contract check-in\nTake a couple of minutes to reflect on your group contract:\n\nWhat did you agree on?\nIs everything and everybody still on track?\nIs it working? Do you need to adjust anything?\nMail your working agreements and changes to the contract to your workgroup instructor"
   },
   {
-    "objectID": "workgroups/WG3.html#continue-working-on-assignment-1",
-    "href": "workgroups/WG3.html#continue-working-on-assignment-1",
-    "title": "Work Group Meeting 3",
+    "objectID": "workgroups/WG2.html#continue-working-on-assignment-1",
+    "href": "workgroups/WG2.html#continue-working-on-assignment-1",
+    "title": "Work Group Meeting 2",
     "section": "Continue working on assignment 1",
-    "text": "Continue working on assignment 1\n\n  \n    1. Addpredictors & interactions\n    →\n    2. Comparemodels & model fit\n    →\n    3. Final modelinterpret coefficients\n  \n\nUse the code from this week’s lab, and document every step!"
+    "text": "Continue working on assignment 1\n\n  \n    1. Finishdata processing\n    →\n    2. Exploredescriptives & relations\n    →\n    3. Regresssimple linear regression\n  \n\nUse the code from this week’s lab!\nAlso note: it’s useful to work on the lab before the workgroup meeting so that you are prepared to execute these steps."
   },
   {
-    "objectID": "workgroups/WG4.html#today",
-    "href": "workgroups/WG4.html#today",
-    "title": "Work Group Meeting 4",
+    "objectID": "workgroups/WG1.html#today",
+    "href": "workgroups/WG1.html#today",
+    "title": "Work Group Meeting 1",
     "section": "Today",
-    "text": "Today\nWhere are we?\n\nAssumptions and diagnostics\nAct on what you find\nInterpret your final model\n\n\n\nPrepare your assignment to hand in"
+    "text": "Today\n\nIntroduction\nCourse structure\nWork group structure\nAssignments\n\nbreak\n\nStart first assignment"
   },
   {
-    "objectID": "workgroups/WG4.html#where-are-we",
-    "href": "workgroups/WG4.html#where-are-we",
-    "title": "Work Group Meeting 4",
-    "section": "Where are we?",
-    "text": "Where are we?\nAssignment 1 deadline is this Friday, December 11, 16:00!\n\n  \n    Data prep✓ done\n    →\n    Regression✓ final model\n    →\n    Assumptionsthis week\n    →\n    Interpretationthis week\n    →\n    Hand inFriday 16:00\n  \n\nNot there yet? Talk to your instructor today!"
+    "objectID": "workgroups/WG1.html#introduction",
+    "href": "workgroups/WG1.html#introduction",
+    "title": "Work Group Meeting 1",
+    "section": "Introduction",
+    "text": "Introduction\n\nIntroduce yourself\nWhat is your background (study)?\nWhy did you choose this minor/course?"
   },
   {
-    "objectID": "workgroups/WG4.html#assumptions-and-diagnostics",
-    "href": "workgroups/WG4.html#assumptions-and-diagnostics",
-    "title": "Work Group Meeting 4",
-    "section": "Assumptions and diagnostics",
-    "text": "Assumptions and diagnostics\nCheck these on your final model, using the code and plots from this week’s lab:\n\n\nAssumptions\n\nLinear in the parameters\nFull rank: no predictor is a linear combination of others\nExogenous predictors\nConstant error variance\nUncorrelated errors: serial dependence, clustering\nNormally distributed errors\n\n\nInfluential observations\n\nOutliers\nHigh leverage\nInfluence"
+    "objectID": "workgroups/WG1.html#course-structure",
+    "href": "workgroups/WG1.html#course-structure",
+    "title": "Work Group Meeting 1",
+    "section": "Course structure",
+    "text": "Course structure\n\nTuesday 13:15: Lecture by Dr. K. Lang on location\nTuesday 15:15: Workgroup meetings on location\nThursday 11:00: Q&A by Dr. K. Lang online\n\nBy yourself:\n\nDo the required reading\nWork on practicals (deadline is each Friday 16:00)\nContinue work on group assignment"
   },
   {
-    "objectID": "workgroups/WG4.html#act-on-what-you-find",
-    "href": "workgroups/WG4.html#act-on-what-you-find",
-    "title": "Work Group Meeting 4",
-    "section": "Act on what you find",
-    "text": "Act on what you find\n\n  \n    1. Checkassumptions & diagnostics\n    →\n    2. Changedata or model, if needed\n    →\n    3. Refitand check again\n    →\n    4. Interpretthe final model\n  \n\n\nViolation found? Act upon it and/or reflect on what it means for your results\nReport what you changed and why"
+    "objectID": "workgroups/WG1.html#workgroup-meetings",
+    "href": "workgroups/WG1.html#workgroup-meetings",
+    "title": "Work Group Meeting 1",
+    "section": "Workgroup meetings",
+    "text": "Workgroup meetings\n\nApply the lecture topics to your own (real!) datasets\nMeet your group to work together\nPrepare by starting on the practicals before the meeting (it contains most of the code you need for the assignment)"
   },
   {
-    "objectID": "workgroups/WG4.html#interpret-your-final-model",
-    "href": "workgroups/WG4.html#interpret-your-final-model",
-    "title": "Work Group Meeting 4",
-    "section": "Interpret your final model",
-    "text": "Interpret your final model\n\n\n\n\n\n\n\nInterpret the final model after all changes have been made!\n\n\n\n\n\nGive a substantive interpretation: what do the coefficients mean in the context of your data and variables?\nGo back to your research question(s): what is the answer?"
+    "objectID": "workgroups/WG1.html#assignments",
+    "href": "workgroups/WG1.html#assignments",
+    "title": "Work Group Meeting 1",
+    "section": "Assignments",
+    "text": "Assignments\n\n\nAssignment 1\n\nGroup assignment\nGroups with max. 4 members\nLinear regression\nHand in written report on Friday Dec. 11, 16:00\n\n\nAssignment 2\n\nGroup assignment\nSame group as assignment 1\nLogistic regression\nPresentation on Tuesday Jan. 19 at workgroup meeting"
   },
   {
-    "objectID": "workgroups/WG4.html#assignment-1-linear-regression",
-    "href": "workgroups/WG4.html#assignment-1-linear-regression",
-    "title": "Work Group Meeting 4",
-    "section": "Assignment 1: linear regression",
-    "text": "Assignment 1: linear regression\n\n\n\n\n\n\n\n\nType\nWritten report in Quarto\n\n\nGrading\n25% of your final grade\n\n\nDeadline\nFriday December 11, 16:00\n\n\nWhat to submit\nA ZIP archive with the complete R project (dataset, .qmd, HTML)\n\n\nWhere to submit\nBrightspace\n\n\nWhat is graded\nOnly your .html file"
+    "objectID": "workgroups/WG1.html#assignment-1-linear-regression",
+    "href": "workgroups/WG1.html#assignment-1-linear-regression",
+    "title": "Work Group Meeting 1",
+    "section": "Assignment 1: Linear regression",
+    "text": "Assignment 1: Linear regression\nYou perform a multiple linear regression analysis in R and report this using R markdown. The assignment is graded on the following elements:\n\n\n\n\n\n\n\n\n\nElement\nContent\nWeek\n\n\n\n\nContext\nIntroduction of research questions, data description and processing\n1\n\n\nExploratory data analysis\nInspection of relations in data\n2\n\n\nLinear regression\nDescription of the building process, model fit, and model comparison\n3"
   },
   {
-    "objectID": "workgroups/WG4.html#only-the-.html-file-is-graded",
-    "href": "workgroups/WG4.html#only-the-.html-file-is-graded",
-    "title": "Work Group Meeting 4",
-    "section": "Only the .html file is graded!",
-    "text": "Only the .html file is graded!\n\nMake sure all code, comments and output are visible\nCarefully check that the compiled .html file in your ZIP archive is:\n\nself-contained\ncorrect\ncomplete\n\n\nTip: add embed-resources: true to the html format in your YAML header, so figures and styles are stored inside the .html file."
+    "objectID": "workgroups/WG1.html#assignment-1-linear-regression-1",
+    "href": "workgroups/WG1.html#assignment-1-linear-regression-1",
+    "title": "Work Group Meeting 1",
+    "section": "Assignment 1: Linear regression",
+    "text": "Assignment 1: Linear regression\nThe assignment is graded on the following elements:\n\n\n\n\n\n\n\n\n\nElement\nContent\nWeek\n\n\n\n\nAssumptions\nTesting of model assumptions, outliers and influential cases. Act upon and reflect on violations\n4\n\n\nInterpretation\nSubstantive interpretation of the final model. Answer research questions\n4\n\n\nLayout\nStructure of the document, efficient output, custom functions when needed. Graphs are used where fitting\nall\n\n\n\n\nFind the complete assignment description on the course website."
   },
   {
-    "objectID": "workgroups/WG4.html#grading-six-dimensions",
-    "href": "workgroups/WG4.html#grading-six-dimensions",
-    "title": "Work Group Meeting 4",
-    "section": "Grading: six dimensions",
-    "text": "Grading: six dimensions\nYou perform and report a multiple linear regression analysis in a Quarto document.\n\n\n\n\n\n\n\n\nDimension\nWhat we look for\n\n\n\n\n1. Preliminaries\nIntroduction of your research questions, description and potential processing of your data\n\n\n2. Model estimation\nDescription of the model estimates, model fit, and model comparison procedure (including moderation)\n\n\n3. Assumptions\nTesting of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed"
+    "objectID": "workgroups/WG1.html#assignments-1",
+    "href": "workgroups/WG1.html#assignments-1",
+    "title": "Work Group Meeting 1",
+    "section": "Assignments",
+    "text": "Assignments\nGrading:\n\nBoth group assignments contribute 25% to your final grade\nIf names are omitted from groups/assignments, we assume everyone is aware of this.\nGroup contract"
   },
   {
-    "objectID": "workgroups/WG4.html#grading-six-dimensions-1",
-    "href": "workgroups/WG4.html#grading-six-dimensions-1",
-    "title": "Work Group Meeting 4",
-    "section": "Grading: six dimensions",
-    "text": "Grading: six dimensions\n\n\n\n\n\n\n\n\nDimension\nWhat we look for\n\n\n\n\n4. Interpretation\nSubstantive interpretation of the final model. Answering your research question\n\n\n5. Layout\nStructure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations\n\n\n6. Coding\nUse code from the labs and annotate what each piece of code does"
+    "objectID": "workgroups/WG1.html#assignments-2",
+    "href": "workgroups/WG1.html#assignments-2",
+    "title": "Work Group Meeting 1",
+    "section": "Assignments",
+    "text": "Assignments\nHand in:\n\nHand in a .zip file with R project and all files (html, qmd, dataset)\nMake sure all code and text are visible in the html files\nOnly content in html files is graded!!!!\nCheck the course website for more information"
   },
   {
-    "objectID": "workgroups/WG4.html#checklist-before-you-hand-in",
-    "href": "workgroups/WG4.html#checklist-before-you-hand-in",
-    "title": "Work Group Meeting 4",
-    "section": "Checklist before you hand in",
-    "text": "Checklist before you hand in\n\nAre all six dimensions covered?\nIs your research question answered?\nIs every piece of code annotated?\nIs all output you show also interpreted?\nDoes the .html render without errors and show all code and output?\nIs the ZIP complete: dataset, .qmd and .html?\nAre the names of all group members in the report?"
+    "objectID": "workgroups/WG1.html#this-week",
+    "href": "workgroups/WG1.html#this-week",
+    "title": "Work Group Meeting 1",
+    "section": "This week:",
+    "text": "This week:\n\nMake groups of max. 4 students\nSet up a group contract\nLook for a dataset\nInspect variables\nCome up with research questions for linear and logistic regression\nStart pre-processing the dataset"
   },
   {
-    "objectID": "workgroups/WG4.html#continue-working",
-    "href": "workgroups/WG4.html#continue-working",
-    "title": "Work Group Meeting 4",
-    "section": "Continue working",
-    "text": "Continue working\n\nFinish assumptions, diagnostics and interpretation\nUse the code from this week’s lab\nRead the full report and then hand it in before Friday December 11, 16:00\nMail any final changes to the group contract to your workgroup instructor"
+    "objectID": "workgroups/WG1.html#dataset-requirements",
+    "href": "workgroups/WG1.html#dataset-requirements",
+    "title": "Work Group Meeting 1",
+    "section": "Dataset requirements",
+    "text": "Dataset requirements\nThe dataset should at least contain:\n\nA continuous outcome variable\nAt least two continuous predictor variables\nA categorical predictor variable\nA dichotomous outcome variable"
   },
   {
-    "objectID": "workgroups/WG6.html#today",
-    "href": "workgroups/WG6.html#today",
-    "title": "Work Group Meeting 6",
+    "objectID": "workgroups/WG1.html#where-to-find-your-dataset",
+    "href": "workgroups/WG1.html#where-to-find-your-dataset",
+    "title": "Work Group Meeting 1",
+    "section": "Where to find your dataset",
+    "text": "Where to find your dataset\nWe use real-world data from large scale international surveys for the assignments, such as:\n\nPISA: Program for International Student Assessment\nLISS: Langlopende Internet Studies voor de Sociale wetenschappen\nEVS: European Values Study\nESS: European Social Study\nTIMSS: Trends in International Mathematics and Science Study"
+  },
+  {
+    "objectID": "workgroups/WG1.html#pay-attention",
+    "href": "workgroups/WG1.html#pay-attention",
+    "title": "Work Group Meeting 1",
+    "section": "Pay attention!",
+    "text": "Pay attention!\nMost datasets have rules and requirements about how you can use them. Carefully check this and make sure you meet the requirements.\nFor example: The LISS panel requires you to sign a statement."
+  },
+  {
+    "objectID": "workgroups/WG1.html#example-research-questions",
+    "href": "workgroups/WG1.html#example-research-questions",
+    "title": "Work Group Meeting 1",
+    "section": "Example research questions",
+    "text": "Example research questions\nLinear regression:\n\nCan body weight predict the level of cholesterol in Dutch adults?\nWhat variables are related to income in the Netherlands?\n\nLogistic regression:\n\nDo body weight, calorie intake, fat intake and age have an influence on the occurrence of a heart attack?\nWhat variables can be used to predict whether students pass a driving test?"
+  },
+  {
+    "objectID": "workgroups/WG1.html#data-processing",
+    "href": "workgroups/WG1.html#data-processing",
+    "title": "Work Group Meeting 1",
+    "section": "Data processing",
+    "text": "Data processing\nFound a dataset? Start processing it right away, so it is ready when we start analysing.\n\n  \n    1. Raw data.sav / .csv / .dta\n    →\n    2. Import& inspect\n    →\n    3. Fix classesfactor / numeric\n    →\n    4. Recodemissing values\n  \n  ↓\n  \n    5. Computescale scores\n    ←\n    6. Select & linkdatasets\n    ←\n    7. Ready!for analysis\n  \n\nKeep all processing steps in your .qmd file, so every step is reproducible (and visible in the html!)."
+  },
+  {
+    "objectID": "workgroups/WG1.html#data-processing-what-to-check",
+    "href": "workgroups/WG1.html#data-processing-what-to-check",
+    "title": "Work Group Meeting 1",
+    "section": "Data processing: what to check",
+    "text": "Data processing: what to check\n\n\n\nClasses\n\nAre character classes set correctly?\nSurvey data from SPSS often come as labelled variables\nAdjust with as_factor() or as.numeric()\n\nMissing values\n\nAre missing values recognized as NA?\nSurveys often use codes such as -9, 77, 88, 99 for “don’t know” or “refused”\nCheck the codebook!\n\n\nScale scores\n\nDo you need to calculate sum scores or mean scores of multiple items?\nAre some items reverse coded?\n\nLinking & selecting\n\nDo you need to link multiple separate datasets (e.g. students and schools)?\nSelect only the variables (and cases) you need"
+  },
+  {
+    "objectID": "workgroups/WG1.html#data-processing-examples-in-r",
+    "href": "workgroups/WG1.html#data-processing-examples-in-r",
+    "title": "Work Group Meeting 1",
+    "section": "Data processing: examples in R",
+    "text": "Data processing: examples in R\nlibrary(tidyverse)\nlibrary(haven)\n\n# Import and inspect\ndat &lt;- read_sav(\"data/survey.sav\")\nglimpse(dat)\nsummary(dat)\n\n# Fix classes\ndat &lt;- dat |&gt;\n  mutate(gender = as_factor(gender),\n         age    = as.numeric(age))"
+  },
+  {
+    "objectID": "workgroups/WG1.html#data-processing-examples-in-r-1",
+    "href": "workgroups/WG1.html#data-processing-examples-in-r-1",
+    "title": "Work Group Meeting 1",
+    "section": "Data processing: examples in R",
+    "text": "Data processing: examples in R\n# Recode missing value codes to NA\ndat &lt;- dat |&gt;\n  mutate(across(c(item1, item2, item3), ~ na_if(.x, 99)))\n\n# Reverse code an item (scale 1-5)\ndat &lt;- dat |&gt;\n  mutate(item3_r = 6 - item3)\n\n# Compute a mean score\ndat &lt;- dat |&gt;\n  mutate(wellbeing = rowMeans(pick(item1, item2, item3_r),\n                              na.rm = TRUE))\n\n# Link two datasets on a shared ID\nfull &lt;- left_join(students, schools, by = \"school_id\")"
+  },
+  {
+    "objectID": "workgroups/WG1.html#use-of-generative-ai",
+    "href": "workgroups/WG1.html#use-of-generative-ai",
+    "title": "Work Group Meeting 1",
+    "section": "Use of Generative AI",
+    "text": "Use of Generative AI\nYou are allowed to:\n\nGain inspiration\nAsk for help how to tackle an assignment\n\nYou are not allowed to:\n\nSubmit generated text or code as if it was written by you\nHave text or code revised"
+  },
+  {
+    "objectID": "workgroups/WG1.html#starting-the-group-work",
+    "href": "workgroups/WG1.html#starting-the-group-work",
+    "title": "Work Group Meeting 1",
+    "section": "Starting the group work",
+    "text": "Starting the group work\n\nForm your group (5–10 min)\nIndividual reflection (2 min)\nSet up your group contract (15 min)\nStart searching for a dataset"
+  },
+  {
+    "objectID": "workgroups/WG1.html#part-1-form-your-group",
+    "href": "workgroups/WG1.html#part-1-form-your-group",
+    "title": "Work Group Meeting 1",
+    "section": "Part 1: Form your group",
+    "text": "Part 1: Form your group\n\nForm a group of 3 or 4 students\nOne rule: every group member comes from a different bachelor’s program\nWalk around, introduce yourself, and find your group\n\n\nCheck in after 5 minutes: are all groups formed? Help students who are still looking."
+  },
+  {
+    "objectID": "workgroups/WG1.html#part-2-individual-reflection",
+    "href": "workgroups/WG1.html#part-2-individual-reflection",
+    "title": "Work Group Meeting 1",
+    "section": "Part 2: Individual reflection",
+    "text": "Part 2: Individual reflection\nTake 2 minutes on your own to write down:\n\nFour ground rules that will benefit you and your group (e.g., meeting every week at a fixed time)\n1–4 things you have experienced in past group work that you do not want to happen again, and how you think they can be prevented"
+  },
+  {
+    "objectID": "workgroups/WG1.html#part-3-group-contract",
+    "href": "workgroups/WG1.html#part-3-group-contract",
+    "title": "Work Group Meeting 1",
+    "section": "Part 3: Group contract",
+    "text": "Part 3: Group contract\nTake 15 minutes to agree on how you collaborate during and between workgroup meetings.\n\n\nWorking together\n\nCommunication: where? How fast do you respond?\nMeetings: when? How often?\nDecision making: How is everyone involved?\nSkills and expertise: What does everyone bring?\n\n\nGetting the work done\n\nRoles: who does what?\nInternal deadlines and quality standards\nTime and effort: what can you expect from each other?\nWhat happens if someone breaks the agreements?"
+  },
+  {
+    "objectID": "workgroups/WG1.html#warning",
+    "href": "workgroups/WG1.html#warning",
+    "title": "Work Group Meeting 1",
+    "section": "Warning",
+    "text": "Warning\nSplitting up the work and only combining it right before the deadline does not work!\n\nEach part builds on the previous one\nEveryone needs to understand the full analysis\n\nSend your contract to your workgroup instructor, and check every week whether it still works."
+  },
+  {
+    "objectID": "workgroups/WG1.html#part-4-find-a-dataset",
+    "href": "workgroups/WG1.html#part-4-find-a-dataset",
+    "title": "Work Group Meeting 1",
+    "section": "Part 4: Find a dataset",
+    "text": "Part 4: Find a dataset\nYour group is ready to go: start searching for a dataset!"
+  },
+  {
+    "objectID": "workgroups/WG1.html#before-the-end-of-the-meeting",
+    "href": "workgroups/WG1.html#before-the-end-of-the-meeting",
+    "title": "Work Group Meeting 1",
+    "section": "Before the end of the meeting",
+    "text": "Before the end of the meeting\nAs a group, send an email to your WG instructor with:\n\nNames of group members\nYour group contract\nSelected data set (topic and link)\nResearch questions you want to answer in your assignments\n\nSend this email before the end of the meeting!"
+  },
+  {
+    "objectID": "workgroups/WG5.html#today",
+    "href": "workgroups/WG5.html#today",
+    "title": "Work Group Meeting 5",
     "section": "Today",
-    "text": "Today\n\nAssumptions and diagnostics\nConfusion matrix\nDetails on Assignment 2"
+    "text": "Today\n\nAssignment 2: Quarto presentation\nGroup contract check-in\nProcessing and exploring your (new) data\nMultiple logistic regression\nInterpreting logistic regression coefficients"
   },
   {
-    "objectID": "workgroups/WG6.html#where-are-we",
-    "href": "workgroups/WG6.html#where-are-we",
-    "title": "Work Group Meeting 6",
-    "section": "Where are we?",
-    "text": "Where are we?\nThis is our final regular workgroup meeting. Today: the second set of big steps for your logistic regression.\n\n  \n    Data prep✓ done\n    →\n    Logistic model✓ interpreted\n    →\n    Assumptionstoday\n    →\n    Confusion matrixtoday\n    →\n    PresentJanuary 19"
+    "objectID": "workgroups/WG5.html#assignment-2",
+    "href": "workgroups/WG5.html#assignment-2",
+    "title": "Work Group Meeting 5",
+    "section": "Assignment 2",
+    "text": "Assignment 2\n\n\n\n\nTopic\nLogistic regression\n\n\nType\nPresentation, made in Quarto\n\n\nGroup\nSame group as assignment 1\n\n\nGrading\n25% of your final grade\n\n\nPresentation\nTuesday January 19, at the workgroup meeting"
   },
   {
-    "objectID": "workgroups/WG6.html#assumptions-check-your-final-model",
-    "href": "workgroups/WG6.html#assumptions-check-your-final-model",
-    "title": "Work Group Meeting 6",
-    "section": "Assumptions: check your final model",
-    "text": "Assumptions: check your final model\n\n\n\n\nAssumption\n\n\n\n\n1. Linear in the parameters (logit scale)\n\n\n2. Full rank: no (severe) multicollinearity\n\n\n3. Binary outcome? No omitted variable? No residual clustering?\n\n\n\n\n\nComputational considerations (not needed in linear regression):\n\nSufficient sample size, e.g. at least 10 cases per predictor\nBalanced outcome classes\nNo perfect prediction (separation): watch out for huge, unstable estimates"
-  },
-  {
-    "objectID": "workgroups/WG6.html#influential-cases",
-    "href": "workgroups/WG6.html#influential-cases",
-    "title": "Work Group Meeting 6",
-    "section": "Influential cases",
-    "text": "Influential cases\n\nCook’s distance\nInfluence on a specific coefficient\n\nExample from the lecture: Titanic passengers who paid very high fares look unusual. But after removing them and refitting, the coefficients barely change. They follow the trend of the other data, so they are not influential.\nUnusual is not the same as influential: always check by refitting!"
-  },
-  {
-    "objectID": "workgroups/WG6.html#confusion-matrix",
-    "href": "workgroups/WG6.html#confusion-matrix",
-    "title": "Work Group Meeting 6",
-    "section": "Confusion matrix",
-    "text": "Confusion matrix\nClassify with a threshold (here 0.5) and compare to the true outcome:\npiHat &lt;- predict(fit, type = \"response\")\nyHat  &lt;- factor(ifelse(piHat &lt;= 0.5, \"no\", \"yes\"))\ncaret::confusionMatrix(data = yHat, reference = titanic$survived,\n                       positive = \"yes\")\n\n\n\n\n\nTrue: died (no)\nTrue: survived (yes)\n\n\n\n\nPredicted: no\n458 (TN)\n106 (FN)\n\n\nPredicted: yes\n87 (FP)\n236 (TP)\n\n\n\n\nTitanic example from lecture 6"
-  },
-  {
-    "objectID": "workgroups/WG6.html#reading-the-confusion-matrix",
-    "href": "workgroups/WG6.html#reading-the-confusion-matrix",
-    "title": "Work Group Meeting 6",
-    "section": "Reading the confusion matrix",
-    "text": "Reading the confusion matrix\n\n\n\n\n\n\n\n\n\nMeasure\nFormula\nTitanic\n\n\n\n\nAccuracy\n(TP + TN) / N\n0.78\n\n\nSensitivity: survivors correctly predicted\nTP / (TP + FN)\n0.69\n\n\nSpecificity: deaths correctly predicted\nTN / (TN + FP)\n0.84\n\n\n\n\n\n\nCompare accuracy to simply predicting the largest class: 0.61\ncaret uses the first factor level as positive class: set positive = \"yes\"!\nInterpret what the errors mean for your research question"
-  },
-  {
-    "objectID": "workgroups/WG6.html#assignment-2-logistic-regression",
-    "href": "workgroups/WG6.html#assignment-2-logistic-regression",
-    "title": "Work Group Meeting 6",
-    "section": "Assignment 2: logistic regression",
-    "text": "Assignment 2: logistic regression\n\n\n\n\n\n\n\n\nType\nPresentation and discussion with slides in Quarto\n\n\nGrading\n25% of your final grade\n\n\nDeadline\nMonday January 18, 15:00\n\n\nWhat to submit\nA ZIP archive with the complete R project (dataset, .qmd, slides)\n\n\nWhere to submit\nBrightspace\n\n\nPresentation\nTuesday January 19, 13:15 to 17:00, at the workgroup meeting"
-  },
-  {
-    "objectID": "workgroups/WG6.html#the-presentation",
-    "href": "workgroups/WG6.html#the-presentation",
-    "title": "Work Group Meeting 6",
-    "section": "The presentation",
-    "text": "The presentation\n\nPrepare a presentation of 15 minutes\nExpect 5 minutes of questions from students and teachers\nHand in your ZIP archive including your slides before the deadline: your WG instructor sets up the slides for the presentations\n\n\n\n\n\n\n\n\nCarefully check that the compiled .html file in your ZIP archive is self-contained, correct and complete before submitting!"
-  },
-  {
-    "objectID": "workgroups/WG6.html#grading-six-dimensions",
-    "href": "workgroups/WG6.html#grading-six-dimensions",
-    "title": "Work Group Meeting 6",
-    "section": "Grading: six dimensions",
-    "text": "Grading: six dimensions\nYou perform and report a multiple logistic regression analysis in a Quarto presentation.\n\n\n\n\n\n\n\n\nDimension\nWhat we look for\n\n\n\n\n1. Preliminaries\nIntroduction of your research questions, description and potential processing of your data\n\n\n2. Model estimation\nDescription of the model estimates, model fit, and model comparison procedure (including moderation)\n\n\n3. Assumptions\nTesting of model assumptions, checking for influential cases. Act upon and/or reflect on violations when needed"
-  },
-  {
-    "objectID": "workgroups/WG6.html#grading-six-dimensions-1",
-    "href": "workgroups/WG6.html#grading-six-dimensions-1",
-    "title": "Work Group Meeting 6",
-    "section": "Grading: six dimensions",
-    "text": "Grading: six dimensions\n\n\n\n\n\n\n\n\nDimension\nWhat we look for\n\n\n\n\n4. Interpretation\nSubstantive interpretation of the final model (including the confusion matrix). Answering your research question\n\n\n5. Layout\nStructure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations\n\n\n6. Coding\nUse code from the labs and annotate what each piece of code does"
-  },
-  {
-    "objectID": "workgroups/WG6.html#plan-the-final-steps-as-a-group",
-    "href": "workgroups/WG6.html#plan-the-final-steps-as-a-group",
-    "title": "Work Group Meeting 6",
-    "section": "Plan the final steps as a group",
-    "text": "Plan the final steps as a group\nThis is the last workgroup meeting before the deadline:\n\nLook back at your group contract: is everybody still on track?\nAgree on the final work to finish assignment 2\nRehearse the presentation together: does it fit in 15 minutes?\nMake sure everybody can answer questions about the whole analysis"
-  },
-  {
-    "objectID": "workgroups/WG6.html#continue-working",
-    "href": "workgroups/WG6.html#continue-working",
-    "title": "Work Group Meeting 6",
-    "section": "Continue working",
-    "text": "Continue working\n\n  \n    1. Checkassumptions & influential cases\n    →\n    2. Classifyconfusion matrix\n    →\n    3. Presentbuild your Quarto slides\n  \n\nUse the code from this week’s lab!"
-  },
-  {
-    "objectID": "workgroups/WG6.html#group-contract-check-in",
-    "href": "workgroups/WG6.html#group-contract-check-in",
-    "title": "Work Group Meeting 6",
+    "objectID": "workgroups/WG5.html#group-contract-check-in",
+    "href": "workgroups/WG5.html#group-contract-check-in",
+    "title": "Work Group Meeting 5",
     "section": "Group contract check-in",
-    "text": "Group contract check-in\nTake a moment to think back on your group contract:\n\nIs everything still working?\nIs everybody on track?\nDo you need to adjust anything?\nMail your working agreements and changes to the contract to your workgroup instructor"
+    "text": "Group contract check-in\nYou continue in the same group as for assignment 1. Check in again:\n\nWhat did you agree on in your group contract?\nDid this work well during assignment 1?\nWhat can be improved or changed for assignment 2?\nMail your working agreements and changes to the contract to your workgroup instructor\n\nUpdate your group contract where needed."
   },
   {
-    "objectID": "exam.html",
-    "href": "exam.html",
-    "title": "Exam",
+    "objectID": "workgroups/WG5.html#what-changes-in-assignment-2",
+    "href": "workgroups/WG5.html#what-changes-in-assignment-2",
+    "title": "Work Group Meeting 5",
+    "section": "What changes in assignment 2?",
+    "text": "What changes in assignment 2?\n\n\n\n\n\n\n\n\n\n\nAssignment 1\nAssignment 2\n\n\n\n\nResearch question\nFor linear regression\nA different research question\n\n\nOutcome\nContinuous\nBinary (two categories)\n\n\nPredictors\nYour chosen predictors\nPotentially different predictors\n\n\nDataset\nYour chosen dataset\nPotentially even a different dataset\n\n\nOutput\nWritten report\nPresentation"
+  },
+  {
+    "objectID": "workgroups/WG5.html#new-variables-process-them-again",
+    "href": "workgroups/WG5.html#new-variables-process-them-again",
+    "title": "Work Group Meeting 5",
+    "section": "New variables? Process them again!",
+    "text": "New variables? Process them again!\nDo your new or other variables require processing?\n\nFollow the same steps as in assignment 1:\n\nclasses, missing values, scale scores, linking\n\nBriefly report on these steps in assignment 2\nDo exploratory data analysis again"
+  },
+  {
+    "objectID": "workgroups/WG5.html#multiple-logistic-regression",
+    "href": "workgroups/WG5.html#multiple-logistic-regression",
+    "title": "Work Group Meeting 5",
+    "section": "Multiple logistic regression",
+    "text": "Multiple logistic regression\n\nJustify the logic of your model building\nBuild your models and compare them\n\nLikelihood ratio test: anova(fit0, fit, test = \"LRT\")\nInformation criteria: AIC(), BIC()\n\nInterpret the coefficients\nUse the lab material as an example"
+  },
+  {
+    "objectID": "workgroups/WG5.html#interpreting-coefficients-is-harder",
+    "href": "workgroups/WG5.html#interpreting-coefficients-is-harder",
+    "title": "Work Group Meeting 5",
+    "section": "Interpreting coefficients is harder",
+    "text": "Interpreting coefficients is harder\nA logistic regression coefficient can be expressed on three scales:\n\n  \n    Log-oddsβ: additive changein the logit\n    →\n    Odds ratioeβ: odds aremultiplied by this\n    →\n    Probabilityπ = odds / (1 + odds)not a constant effect\n  \n\n\neβ &gt; 1: higher odds of the outcome; eβ &lt; 1: lower odds\nOdds ratio below 1? Its reciprocal (1 / eβ) is often easier to explain"
+  },
+  {
+    "objectID": "workgroups/WG5.html#example-passing-an-exam",
+    "href": "workgroups/WG5.html#example-passing-an-exam",
+    "title": "Work Group Meeting 5",
+    "section": "Example: passing an exam",
+    "text": "Example: passing an exam\nlogit(passing) = −3.414 + 0.683 × study hours\n\nIntercept: a student who does not study has log-odds of passing of −3.41, so odds of e−3.414 = 0.03\nSlope: each extra hour of study increases the log-odds by 0.683, so the odds of passing are multiplied by e0.683 = 1.98\n\n\n\n\n\n\n\n\nOdds are not probabilities: 1.98 times the odds of passing is not 1.98 times the probability of passing!"
+  },
+  {
+    "objectID": "workgroups/WG5.html#example-surviving-the-titanic",
+    "href": "workgroups/WG5.html#example-surviving-the-titanic",
+    "title": "Work Group Meeting 5",
+    "section": "Example: surviving the Titanic",
+    "text": "Example: surviving the Titanic\nglm(survived ~ age + sex + class, family = \"binomial\")\n\n\n\n\n\n\n\n\n\n\nTerm\nβ\nOdds ratio\nInterpretation (controlling for the other predictors)\n\n\n\n\nage\n−0.034\n0.97\nEach extra year: odds of survival × 0.97\n\n\nsexmale\n−2.589\n0.08\nMen: 0.08 times the odds of survival of women, or 13.3 times the odds of death\n\n\nclass3rd\n−2.455\n0.09\n3rd vs 1st class: 0.09 times the odds of survival, or 11.7 times the odds of death\n\n\n\n\nExamples from lecture 5."
+  },
+  {
+    "objectID": "workgroups/WG5.html#making-a-presentation-in-quarto",
+    "href": "workgroups/WG5.html#making-a-presentation-in-quarto",
+    "title": "Work Group Meeting 5",
+    "section": "Making a presentation in Quarto",
+    "text": "Making a presentation in Quarto\n\nUse format: revealjs in the YAML header\nEach ## heading starts a new slide\nKeep slides concise: little text, meaningful visuals, no long code blocks\nAdd embed-resources: true, so your slides are one self-contained .html file\n\nMore tips: open-stat-prog module Creating presentations with Quarto"
+  },
+  {
+    "objectID": "workgroups/WG5.html#by-the-end-of-this-meeting",
+    "href": "workgroups/WG5.html#by-the-end-of-this-meeting",
+    "title": "Work Group Meeting 5",
+    "section": "By the end of this meeting",
+    "text": "By the end of this meeting\n\n  \n    1. Processyour data where necessary\n    →\n    2. Exploreexploratory data analysis\n    →\n    3. Modelmultiple logistic regression with interpretation\n  \n\nUse the code from this week’s lab!"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ADS fundamentals",
     "section": "",
-    "text": "Anything mentioned in the lectures may appear on the exam.\nThis includes both information printed in the lecture slides and information delivered verbally during a lecture itself.Anything covered in the required readings may appear on the exam.\nObviously, this is a lot of material. To prioritize, keep in mind that topics mentioned in the lectures and topics directly related to ideas covered in the lectures are most likely to appear on the exam.\nThe materials presented on the “preparation” page can also be part of the exam since this is required knowledge.\nSummary of the required readings:\n\nR4DS: Ch. 1, 3, 4, 7, 9, 10, 13, 16.\nSDAM: Ch. 1, 2, 3, 4, 5, 6.1, 12.1-12.5, 12.8.\nBook420: Ch.17.4.\nhttps://stats.oarc.ucla.edu/r/dae/robust-regression/\nhttps://stats.oarc.ucla.edu/r/dae/robust-regression/\nhttps://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/\nhttps://stats.oarc.ucla.edu/r/dae/logit-regression/"
+    "text": "Welcome to the course “Fundamental Techniques in Data Science with R”."
   },
   {
-    "objectID": "exam.html#what-will-be-tested",
-    "href": "exam.html#what-will-be-tested",
-    "title": "Exam",
+    "objectID": "index.html#important-links",
+    "href": "index.html#important-links",
+    "title": "ADS fundamentals",
+    "section": "Important links",
+    "text": "Important links\n\nCoordinator: Dr L. Boeschoten\nLecturer: Dr K.M. Lang\nInstructors: Dr L. Boeschoten and N.E. van Vugt, MSc\nRooms: See MyTimetable\nCourse manual\nInstructions group assignments\nExam information"
+  },
+  {
+    "objectID": "index.html#weekly-schedule",
+    "href": "index.html#weekly-schedule",
+    "title": "ADS fundamentals",
+    "section": "Weekly schedule",
+    "text": "Weekly schedule\n\n\n\nWeek\nDate\nContent\nPrepare\n\n\n0\n\nSelf-study\nBefore you start the course:\n\nRead the course manual\nWork through the preparation material\n\n\n\n1\n17-11 (Tue)\nLecture 1\n\nRead R4DS Ch. 3, 4, 7, 13, 16\n\n\n\n1\n17-11 (Tue)\nWG 1\n\nIf you’re not present, you fail the course!\nStart with Lab 1\n\n\n\n1\n19-11 (Thu)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n1\n20-11 (Fri)\nDeadline Lab 1: 16:00\n\nHand in on Brightspace\nLab 1 (see solutions here)\n\n\n\n2\n24-11 (Tue)\nLecture 2\n\nRead R4DS Ch. 1, 9, 10\nRead SDAM Ch. 4\n\n\n\n2\n24-11 (Tue)\nWG 2\n\nAttendance required\nStart with Lab 2\n\n\n\n2\n26-11 (Tue)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n2\n27-11 (Fri)\nDeadline Lab 2: 16:00\n\nLab 2 (see solutions here)\n\n\n\n3\n1-12 (Tue)\nLecture 3\n\nRead SDAM Ch. 5.1 - 5.6, 6.1\n\n\n\n3\n1-12 (Tue)\nWG 3\n\nAttendance required\nStart withLab 3\nCheck out this demo\n\n\n\n3\n3-12 (Thu)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n3\n4-12 (Fri)\nDeadline Lab 3: 16:00\n\nLab 3 (see solutions here)\n\n\n\n4\n8-12 (Tue)\nLecture 4\n\nRead SDAM Ch. 5.7 - 5.9\nRead this page and this page\n\n\n\n4\n8-12 (Tue)\nWG 4\n\nAttendance required\nStart with Lab 4\n\n\n\n4\n10-12 (Thu)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n4\n11-12 (Fri)\nDeadline Lab 4: 16:00\n\nLab 4 (see solutions here)\n\n\n\n4\n11-12 (Fri)\nDeadline assignment 1: 16:00\n\nHand in on Brightspace\n\n\n\n5\n15-12 (Tue)\nLecture 5\n\nRead SDAM Ch. 12.1 - 12.5, 12.8\nRead this page\n\n\n\n5\n15-12 (Tue)\nWG 5\n\nAttendance required\nStart with Lab 5\n\n\n\n5\n17-12 (Thu)\nQ&A - online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n5\n18-12 (Fri)\nDeadline Lab 5: 16:00\n\nLab 5 (see solutions here)\n\n\n\n6\n5-1 (Tue)\nLecture 6\n\nRead this page\nRead Book420 CH. 17.4\n\n\n\n6\n5-1 (Tue)\nWG 6\n\nAttendance required\nStart with Lab 6\n\n\n\n6\n7-1 (Thu)\nQ&A - Online\n\nAsk questions about the lecture, lab or assignment\n\n\n\n6\n8-1 (Fri)\nDeadline Lab 6:16:00\n\nLab 6 (see solutions here)\n\n\n\n7\n19-1 (Tue)\nWG 7\n\nPresentations assignment 2\nBe present to pass the course\nHand in on Brightspace\n\n\n\n7\n21-1 (Thu)\nLecture 7\n\nRecap lecture\nFinal opportunity to ask questions in preparation for the exam\n\n\n\n8\n28-1 (Thu)\nExam\n\nSee this page on how to prepare for the exam"
+  },
+  {
+    "objectID": "preparation.html",
+    "href": "preparation.html",
+    "title": "Preparation",
     "section": "",
-    "text": "Anything mentioned in the lectures may appear on the exam.\nThis includes both information printed in the lecture slides and information delivered verbally during a lecture itself.Anything covered in the required readings may appear on the exam.\nObviously, this is a lot of material. To prioritize, keep in mind that topics mentioned in the lectures and topics directly related to ideas covered in the lectures are most likely to appear on the exam.\nThe materials presented on the “preparation” page can also be part of the exam since this is required knowledge.\nSummary of the required readings:\n\nR4DS: Ch. 1, 3, 4, 7, 9, 10, 13, 16.\nSDAM: Ch. 1, 2, 3, 4, 5, 6.1, 12.1-12.5, 12.8.\nBook420: Ch.17.4.\nhttps://stats.oarc.ucla.edu/r/dae/robust-regression/\nhttps://stats.oarc.ucla.edu/r/dae/robust-regression/\nhttps://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/\nhttps://stats.oarc.ucla.edu/r/dae/logit-regression/"
+    "text": "In this course, you will use both R and RStudio.\nIf you have never worked with R before, use the tutorials from Open Statistical Programming to be ready and prepared before the course starts. The materials discussed in the tutorials\n\nSoftware setup\nBasics\nFunctions\nPackages and documentation\nVectors and matrices\nLists and dataframes\nFactors\nBasic visualization\n\nare required knowledge before you start the course!"
   },
   {
-    "objectID": "exam.html#what-about-equations",
-    "href": "exam.html#what-about-equations",
-    "title": "Exam",
-    "section": "What about equations?",
-    "text": "What about equations?\nThis is not a math class; we are not trying to test your ability to do calculations or manipulate equations. That being said, a certain degree of mathematical literacy is crucial to statistics and data science, so you will have to do some simple calculations on the exam. For example, you should be comfortable with the following.\n\nWorking with the linear regression equation, \\(Y_i = \\beta_0 + \\beta_1 X_i +\\varepsilon_i\\), to:\n\nCalculate predicted values give certain inputs\nInterpret parameter estimates\nEvaluate hypotheses/research questions\n\nThe differences between:\n\nThe full regression model: \\(Y_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_i +\\hat{\\varepsilon}_i\\)\nThe equation for the best-fit line: \\(\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_i\\)\n\nThe definition of a residual:\n\n\\(\\hat{\\varepsilon}_i = Y_i - \\hat{Y}_i\\)\n\nThe relationship between probabilities (\\(p\\)) and odds (for binary outcomes):\n\n\\(\\text{odds} = \\frac{p}{1-p}\\)\n\nThe definition of the logit function:\n\n\\(\\ln(\\text{odds}) = \\ln\\left(\\frac{p}{1-p}\\right) = \\text{logit}(p)\\)\n\nThe definition of the logistic function, its relation to the logit function, and its role in logistic regression:\n\n\\(\\text{logistic}(\\eta_i) = \\text{logit}^{-1}(p_i) = \\frac{\\exp(\\eta_i)}{1+\\exp(\\eta_i)} = \\frac{\\exp(\\hat{\\beta}_0 + \\hat{\\beta}_1 X_i)}{1 + \\exp(\\hat{\\beta}_0 + \\hat{\\beta}_1 X_i)} = \\hat{p}_i\\)\n\n\nOf course, you should also be able to do basic arithmetic operations that are too trivial to detail here (e.g., calculating the difference between the \\(R^2\\) statistics from two models that you are trying to compare).\nNote: Although all examples above are shown in terms of simple linear regression models, you should also be able to do these calculations/interpretations using multiple linear regression models and models that include dummy codes and interactions."
-  },
-  {
-    "objectID": "exam.html#qa-and-practice-exam",
-    "href": "exam.html#qa-and-practice-exam",
-    "title": "Exam",
-    "section": "Q&A and practice exam",
-    "text": "Q&A and practice exam\n\nThe lecture on Monday January 12 will be completely devoted to a recap of the material and there will be plenty of time to answer all your questions. Send your questions in advance to Dr. Lang if you want to make sure you get an extensive answer!\nYou can find the practice exam here."
-  },
-  {
-    "objectID": "exam.html#what-can-i-expect-regarding-the-exam",
-    "href": "exam.html#what-can-i-expect-regarding-the-exam",
-    "title": "Exam",
-    "section": "What can I expect regarding the exam?",
-    "text": "What can I expect regarding the exam?\nThe exam takes place on January 22. Keep an eye out on MyTimetable for the timing, location. These can change very last-minute!\nThe exam takes place on laptops that are provided in the room, and we use the software program Remindo. Please read the instructions on how to use Remindo carefully. You can also practice making an exam in Remindo. Remindo has a small built-in calculator, so you don’t need to bring one.\nRegulations during the exam:\n\nTurn of your phone and smartwatch and stow them away. You cannot use them in any way during the exam.\nYou are not allowed to use any teaching materials or dictionaries during the exam.\nClose your bag and do not store it in the walkway.\nYou cannot leave in the first 30 minutes.\nYou are not allowed to visit the bathroom during the exam.\nMake sure your ID is visible on your table during the exam.\nIf you are more than 30 minutes late to the exam, you are not allowed to participate.\n\nWhat to bring:\n\nIdentification card.\nSolid ID and password for logging in to Remindo."
-  },
-  {
-    "objectID": "exam.html#testing-procedure",
-    "href": "exam.html#testing-procedure",
-    "title": "Exam",
-    "section": "Testing procedure",
-    "text": "Testing procedure\nThere are two opportunities per year to take a test.\n\nShould circumstances prevent you from taking the first opportunity, you will be invited to the second. It is not necessary to deregister.\nIf you do not obtain a satisfactory final grade on the second opportunity, you will have to retake the course in the 2026-2027 academic year. See detailed information on testing on the student website.\nbut you have obtained a pass for one part (e.g. an assignment or the exam), then you do not have to redo this part next year."
-  },
-  {
-    "objectID": "lectures.html",
-    "href": "lectures.html",
-    "title": "Lectures",
+    "objectID": "preparation.html#required-r-skills",
+    "href": "preparation.html#required-r-skills",
+    "title": "Preparation",
     "section": "",
-    "text": "Below, you can access the lecture slides and associated materials for each week."
+    "text": "In this course, you will use both R and RStudio.\nIf you have never worked with R before, use the tutorials from Open Statistical Programming to be ready and prepared before the course starts. The materials discussed in the tutorials\n\nSoftware setup\nBasics\nFunctions\nPackages and documentation\nVectors and matrices\nLists and dataframes\nFactors\nBasic visualization\n\nare required knowledge before you start the course!"
   },
   {
-    "objectID": "lectures.html#w1",
-    "href": "lectures.html#w1",
-    "title": "Lectures",
-    "section": "Week 1",
-    "text": "Week 1\nR Programming Fundamentals\n\nLecture Slides\nProject Organization Demo\n\nThis link will download a ZIP archive that you must unpack on your computer."
+    "objectID": "preparation.html#required-statistical-knowledge",
+    "href": "preparation.html#required-statistical-knowledge",
+    "title": "Preparation",
+    "section": "Required statistical knowledge",
+    "text": "Required statistical knowledge\nWe expect you to be familiar with some basic statistical concepts such as:\n\nDescriptive statistics\nSampling\nCorrelation\nT-test\nP-values\n\nTo refresh your memory, you can read SDAM Ch. 1, 2 and 3.\nThe course material builds on this knowledge, and it can also be part of the exam.\nNote: if you followed the course ADS-BOS, you have covered these topics and you should be good to go!"
   },
   {
-    "objectID": "lectures.html#w2",
-    "href": "lectures.html#w2",
-    "title": "Lectures",
-    "section": "Week 2",
-    "text": "Week 2\nData Visualization & Simple Linear Regression\n\nVisualization Lecture Slides\nSLR Lecture Slides"
+    "objectID": "contract.html",
+    "href": "contract.html",
+    "title": "Group contract",
+    "section": "",
+    "text": "Below you can find a template of a group contract. This is based on the template shared in the course Digital Trace Data. Use it as inspiration to make your own contract, and sign it to ensure you all commit to it.\n\n\nThis contract represents our collective commitment to the successful completion of our group project. By signing below, each member agrees to the terms outlined.\n\n\n\nName Team Member\nSignature\n\n\n\n\nMember 1 …\n\n\n\nMember 2 …\n\n\n\n…\n\n\n\n\n\n\nWe agree to…\n\nAttend Labs Regularly: All members commit to attending labs. If I am unable to attend a lab session, I will take personal responsibility to acquire all necessary notes and updates from my team members. • Engage Actively: Every member is expected to actively participate in discussions and tasks. No member should consistently take on all the work, nor should any member fail to contribute. Communication: I agree to…\nPrompt Communication: In case of illness or an emergency that prevents me from attending class or meeting a deadline, I will promptly notify my team members. This includes making arrangements to submit my work on time, even if I am unable to attend in person.\nRegular Updates: I will keep the team informed about my progress on assigned tasks, any obstacles encountered, and any changes in my availability.\n\n\n\n\n\nI agree to…\n\nSchedule Regular Meetings: Our team will hold regular meetings to discuss ongoing work. These meetings will take place on [Day, e.g., Wednesdays] at [Time, e.g., 13:00], either online or on campus, depending on the group’s consensus.\nMeeting Attendance: All members commit to attending these scheduled meetings. If a member cannot attend, they will inform the group in advance and catch up on what was missed.\nAttend Workgroup Meetings: I commit to attending the workgroup meetings. I commit to come prepared, including having covered the lecture and lab materials am prepared to discuss any questions related to this material.\n\n\n\n\nI agree to…\n\nShare Work Equitably: All team members will contribute fairly to the workload. No member will be expected to complete tasks alone, nor will any member be allowed to avoid contributing.\nCultural Awareness and Equitable Participation: I commit to respecting each other’s cultural backgrounds, ensuring all voices are heard, and sharing speaking time equitably, so that every member has an equal opportunity to contribute to the project.\nSupport Team Members: I will offer help to my fellow team members when needed and will not hesitate to ask for assistance if I encounter difficulties. Open communication about concerns related to group work is essential.\nReport Issues: Any issues that affect team functioning will be communicated to the group promptly. If the problem persists, the instructor will be informed.\n\n\n\n\nI acknowledge that I will not:\n\nCopy Work: I will not copy from others, including textbooks, other students, or generative AI tools, without proper citation.\nParaphrase Unethically: I will not paraphrase the work of others (including LLMs) merely by changing wording without giving proper credit.\nAllow Plagiarism: I will not allow my work to be used by others in a manner that constitutes academic dishonesty.\n\n\n\n\nI agree to…\n\nAddress Conflicts Early: Any conflicts or disagreements within the team will be addressed as soon as they arise. The group will work together to resolve issues respectfully and constructively.\nEscalate When Necessary: If a conflict cannot be resolved within the group, we will seek the assistance of the instructor to mediate and help find a solution.\n\n\n\n\nI agree to…\n\nRespect Deadlines: All members will adhere to the deadlines agreed upon for the project. This includes submitting individual contributions on time to ensure the group can meet the final project deadline.\nAccountability: If a member is unable to meet a deadline, they must notify the group in advance and work with the team to mitigate any impact on the overall project timeline.\n\n\n\n\nWe agree that if a group member does not fulfill their responsibilities, the following steps will be taken:\n\nInitial Warning: The team member will receive an initial, informal reminder from the group. This reminder will clearly communicate the specific task or responsibility that was not completed and emphasize the importance of meeting future obligations.\nGroup Discussion: If the issue persists after the initial warning, a formal group discussion will be held, either during a scheduled meeting or separately. During this discussion, the team member will be given the opportunity to explain the reasons for not fulfilling their responsibilities. The group will work together to find a solution, such as reassigning tasks or providing additional support.\nDocumentation of Issues: If the problem continues, the group will document the issues in writing, including specific instances of unmet responsibilities and the steps taken to address them. This documentation will be shared with the team member in question to ensure transparency.\nInstructor Involvement: If the team member continues to fail in their responsibilities despite the previous steps, the group will escalate the issue to the instructor. The documented issues will be presented, and the instructor may be asked to intervene. This could involve mediation, reallocation of tasks, or potential academic consequences. If the instructor determines that a team member has not contributed fairly, that member’s grade may be adjusted to reflect their lack of participation. This may include receiving a lower grade or even a zero for the group project.\nReallocation of Work: Should a team member consistently fail to contribute, the remaining members may decide to reallocate the uncompleted work among themselves to ensure the project’s success. The non-contributing member will be informed of this decision.\nFinal Decision: In extreme cases, if the team member’s non-participation significantly jeopardizes the project, the group may collectively decide to exclude the member from the project. This decision will be made in consultation with the instructor and will be based on documented evidence of repeated non-compliance with the group contract."
   },
   {
-    "objectID": "lectures.html#w3",
-    "href": "lectures.html#w3",
-    "title": "Lectures",
-    "section": "Week 3",
-    "text": "Week 3\nMultiple Linear Regression\n\nLecture Slides"
+    "objectID": "contract.html#example-text",
+    "href": "contract.html#example-text",
+    "title": "Group contract",
+    "section": "",
+    "text": "This contract represents our collective commitment to the successful completion of our group project. By signing below, each member agrees to the terms outlined.\n\n\n\nName Team Member\nSignature\n\n\n\n\nMember 1 …\n\n\n\nMember 2 …\n\n\n\n…\n\n\n\n\n\n\nWe agree to…\n\nAttend Labs Regularly: All members commit to attending labs. If I am unable to attend a lab session, I will take personal responsibility to acquire all necessary notes and updates from my team members. • Engage Actively: Every member is expected to actively participate in discussions and tasks. No member should consistently take on all the work, nor should any member fail to contribute. Communication: I agree to…\nPrompt Communication: In case of illness or an emergency that prevents me from attending class or meeting a deadline, I will promptly notify my team members. This includes making arrangements to submit my work on time, even if I am unable to attend in person.\nRegular Updates: I will keep the team informed about my progress on assigned tasks, any obstacles encountered, and any changes in my availability."
   },
   {
-    "objectID": "lectures.html#w4",
-    "href": "lectures.html#w4",
-    "title": "Lectures",
-    "section": "Week 4",
-    "text": "Week 4\nMLR Assumptions & Diagnostics\n\nAssumptions Lecture Slides\nInfluential Observations Lecture Slides"
+    "objectID": "contract.html#meetings",
+    "href": "contract.html#meetings",
+    "title": "Group contract",
+    "section": "",
+    "text": "I agree to…\n\nSchedule Regular Meetings: Our team will hold regular meetings to discuss ongoing work. These meetings will take place on [Day, e.g., Wednesdays] at [Time, e.g., 13:00], either online or on campus, depending on the group’s consensus.\nMeeting Attendance: All members commit to attending these scheduled meetings. If a member cannot attend, they will inform the group in advance and catch up on what was missed.\nAttend Workgroup Meetings: I commit to attending the workgroup meetings. I commit to come prepared, including having covered the lecture and lab materials am prepared to discuss any questions related to this material."
   },
   {
-    "objectID": "lectures.html#w5",
-    "href": "lectures.html#w5",
-    "title": "Lectures",
-    "section": "Week 5",
-    "text": "Week 5\nGeneralized Linear Models & Logistic Regression\n\nGLM & Logistic Regression Lecture Slides\nExtra: Extended Example Slides"
+    "objectID": "contract.html#conduct",
+    "href": "contract.html#conduct",
+    "title": "Group contract",
+    "section": "",
+    "text": "I agree to…\n\nShare Work Equitably: All team members will contribute fairly to the workload. No member will be expected to complete tasks alone, nor will any member be allowed to avoid contributing.\nCultural Awareness and Equitable Participation: I commit to respecting each other’s cultural backgrounds, ensuring all voices are heard, and sharing speaking time equitably, so that every member has an equal opportunity to contribute to the project.\nSupport Team Members: I will offer help to my fellow team members when needed and will not hesitate to ask for assistance if I encounter difficulties. Open communication about concerns related to group work is essential.\nReport Issues: Any issues that affect team functioning will be communicated to the group promptly. If the problem persists, the instructor will be informed."
   },
   {
-    "objectID": "lectures.html#w6",
-    "href": "lectures.html#w6",
-    "title": "Lectures",
-    "section": "Week 6",
-    "text": "Week 6\nLogistic Regression Assumptions & Assessing Classification Performance\n\nAssumption & Diagnostics Slides\nClassification Performance Slides"
+    "objectID": "contract.html#academic-integrity.",
+    "href": "contract.html#academic-integrity.",
+    "title": "Group contract",
+    "section": "",
+    "text": "I acknowledge that I will not:\n\nCopy Work: I will not copy from others, including textbooks, other students, or generative AI tools, without proper citation.\nParaphrase Unethically: I will not paraphrase the work of others (including LLMs) merely by changing wording without giving proper credit.\nAllow Plagiarism: I will not allow my work to be used by others in a manner that constitutes academic dishonesty."
   },
   {
-    "objectID": "lectures.html#w7",
-    "href": "lectures.html#w7",
-    "title": "Lectures",
-    "section": "Week 7",
-    "text": "Week 7\nWrap Up & Review\n\nLecture Slides"
+    "objectID": "contract.html#conflict",
+    "href": "contract.html#conflict",
+    "title": "Group contract",
+    "section": "",
+    "text": "I agree to…\n\nAddress Conflicts Early: Any conflicts or disagreements within the team will be addressed as soon as they arise. The group will work together to resolve issues respectfully and constructively.\nEscalate When Necessary: If a conflict cannot be resolved within the group, we will seek the assistance of the instructor to mediate and help find a solution."
+  },
+  {
+    "objectID": "contract.html#deadlines",
+    "href": "contract.html#deadlines",
+    "title": "Group contract",
+    "section": "",
+    "text": "I agree to…\n\nRespect Deadlines: All members will adhere to the deadlines agreed upon for the project. This includes submitting individual contributions on time to ensure the group can meet the final project deadline.\nAccountability: If a member is unable to meet a deadline, they must notify the group in advance and work with the team to mitigate any impact on the overall project timeline."
+  },
+  {
+    "objectID": "contract.html#consequences-for-unmet-responsibilities",
+    "href": "contract.html#consequences-for-unmet-responsibilities",
+    "title": "Group contract",
+    "section": "",
+    "text": "We agree that if a group member does not fulfill their responsibilities, the following steps will be taken:\n\nInitial Warning: The team member will receive an initial, informal reminder from the group. This reminder will clearly communicate the specific task or responsibility that was not completed and emphasize the importance of meeting future obligations.\nGroup Discussion: If the issue persists after the initial warning, a formal group discussion will be held, either during a scheduled meeting or separately. During this discussion, the team member will be given the opportunity to explain the reasons for not fulfilling their responsibilities. The group will work together to find a solution, such as reassigning tasks or providing additional support.\nDocumentation of Issues: If the problem continues, the group will document the issues in writing, including specific instances of unmet responsibilities and the steps taken to address them. This documentation will be shared with the team member in question to ensure transparency.\nInstructor Involvement: If the team member continues to fail in their responsibilities despite the previous steps, the group will escalate the issue to the instructor. The documented issues will be presented, and the instructor may be asked to intervene. This could involve mediation, reallocation of tasks, or potential academic consequences. If the instructor determines that a team member has not contributed fairly, that member’s grade may be adjusted to reflect their lack of participation. This may include receiving a lower grade or even a zero for the group project.\nReallocation of Work: Should a team member consistently fail to contribute, the remaining members may decide to reallocate the uncompleted work among themselves to ensure the project’s success. The non-contributing member will be informed of this decision.\nFinal Decision: In extreme cases, if the team member’s non-participation significantly jeopardizes the project, the group may collectively decide to exclude the member from the project. This decision will be made in consultation with the instructor and will be based on documented evidence of repeated non-compliance with the group contract."
   }
 ]

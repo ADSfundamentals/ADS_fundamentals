@@ -9,9 +9,13 @@ Below, you can access the lecture slides and associated materials for each week.
 
 R Programming Fundamentals
 
-- [Lecture Slides](lectures/l1/lecture1.pdf)
+- [Lecture Materials](lectures/l1/l1.zip)
+   - This link will download a ZIP archive that you must unpack on your computer.
 - [Project Organization Demo](assets/project_organization.zip)
    - This link will download a ZIP archive that you must unpack on your computer.
+- [Supplementary Lecture Slides](lectures/l1/lecture1.pdf)
+
+<!----------------------------------------------------------------------------------------------------------------------
 
 ## Week 2 {#w2}
 
@@ -52,3 +56,5 @@ Logistic Regression Assumptions & Assessing Classification Performance
 Wrap Up & Review
 
 - [Lecture Slides](lectures/l7/summary.pdf)
+
+----------------------------------------------------------------------------------------------------------------------->

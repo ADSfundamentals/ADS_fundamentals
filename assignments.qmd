@@ -2,7 +2,7 @@
 title: "Assignments"
 ---
 
-# Two group assignments 
+# Two group assignments
 
 ## Group participation
 
@@ -10,10 +10,9 @@ Both assignments are group assignments. We will form groups of 3 or 4 students a
 
 **In order to be assigned to a group, presence at the first meeting is crucial!**
 
-To collaborate effectively on the group assignments, each group draws up a **group contract** in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Here is a [Contract Template](contract.qmd) you can use. 
+To collaborate effectively on the group assignments, each group draws up a **group contract** in the first week. In this contract, you set out agreements on communication, availability, task division and how to handle problems. Here is a [Contract Template](contract.qmd) you can use.
 
 Each week, you review together if the contract is still working, and send your work division and any changes to the contract to your workgroup instructor. Here is a suggested [Email Template](email.qmd) you can use.
-
 
 ## Dataset
 
@@ -26,7 +25,6 @@ You can use the same dataset for both assigments. The minimum requirement for th
 - Two continuous predictor variables
 
 - One categorical predictor variable
-
 
 # Assignment 1: Linear regression
 
@@ -42,7 +40,7 @@ You can use the same dataset for both assigments. The minimum requirement for th
 
 - **What is graded:** Only your .html file is graded, so make sure all code, comments and output are visible! **Carefully check if the compiled .html file in your ZIP archive is self-contained, correct and complete before submitting!**
 
-- **Description:** For this assignment, you perform and report a multiple linear regression analysis in a Quarto text document. The assignment will be graded on the following six dimensions:
+- **Description:** For this assignment, you perform and report a multiple linear regression analysis in a Quarto text document. The assignment will be graded on the following dimensions:
 
 1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
 
@@ -56,7 +54,9 @@ You can use the same dataset for both assigments. The minimum requirement for th
 
 6.  **Coding:** Use code from the labs and annotate what each piece of code does.
 
-7. **Group process:** Set up a group contract, stick with the agreements made, review them regularly and report to your workgroup instructor weekly. 
+7.  **Group process:** Set up a group contract, stick with the agreements made, review them regularly and report to your workgroup instructor weekly.
+
+8.  **AI use:** You use AI only as described in the course manual and add a short reflection on this at the end of your assignment.
 
 # Assignment 2: Logistic regression
 
@@ -74,7 +74,7 @@ Group assignment 2: Logistic regression
 
 - **Where to submit:** Brightspace
 
-- **Description:** For this assignment, you perform and report a multiple logistic regression analysis in a Quarto presentation. The presentation will be graded on the following six dimensions:
+- **Description:** For this assignment, you perform and report a multiple logistic regression analysis in a Quarto presentation. The presentation will be graded on the following dimensions:
 
 1.  **Preliminaries:** Introduction of your research questions, description and potential processing of your data.
 2.  **Model estimation:** Description of the model estimates, model fit, and model comparison procedure (including moderation).
@@ -82,4 +82,5 @@ Group assignment 2: Logistic regression
 4.  **Interpretation:** Substantive interpretation of the final model (including the confusion matrix). Answering your research question.
 5.  **Layout:** Structure of the document, efficiency of output presentation, use of custom functions (when applicable). Presentation of suitable visualizations.
 6.  **Coding:** Use code from the labs and annotate what each piece of code does.
-7. **Group process:** Set up a group contract, stick with the agreements made, review them regularly and report to your workgroup instructor weekly. 
+7.  **Group process:** Set up a group contract, stick with the agreements made, review them regularly and report to your workgroup instructor weekly.
+8.  **AI use:** You use AI only as described in the course manual and add a short reflection on this at the end of your assignment.

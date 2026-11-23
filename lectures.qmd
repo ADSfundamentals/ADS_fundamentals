@@ -15,20 +15,26 @@ R Programming Fundamentals
    - This link will download a ZIP archive that you must unpack on your computer.
 - [Supplementary Lecture Slides](lectures/l1/lecture1.pdf)
 
-<!----------------------------------------------------------------------------------------------------------------------
+<!--------------------------------------------------------------------------------------------------------------------->
 
 ## Week 2 {#w2}
 
-Data Visualization & Simple Linear Regression
+Data Transformation, Data Visualization, & Simple Linear Regression
 
-- [Visualization Lecture Slides](lectures/l2/visualization.pdf)
+- [Lecture Code Package](lectures/l2/l2.zip)
+   - This link will download a ZIP archive that you must unpack on your computer.
 - [SLR Lecture Slides](lectures/l2/slr.pdf)
+- [Supplementary Visualization Slides](lectures/l2/visualization.pdf)
+
+<!----------------------------------------------------------------------------------------------------------------------
 
 ## Week 3 {#w3}
 
 Multiple Linear Regression
 
 - [Lecture Slides](lectures/l3/mlr.pdf)
+
+<!----------------------------------------------------------------------------------------------------------------------
 
 ## Week 4 {#w4}
 
@@ -37,6 +43,8 @@ MLR Assumptions & Diagnostics
 - [Assumptions Lecture Slides](lectures/l4/assumptions.pdf)
 - [Influential Observations Lecture Slides](lectures/l4/influence.pdf)
 
+<!----------------------------------------------------------------------------------------------------------------------
+
 ## Week 5 {#w5}
 
 Generalized Linear Models & Logistic Regression
@@ -44,12 +52,16 @@ Generalized Linear Models & Logistic Regression
 - [GLM & Logistic Regression Lecture Slides](lectures/l5/glm.pdf)
 - [Extra: Extended Example Slides](lectures/l5/extra.pdf)
 
+<!----------------------------------------------------------------------------------------------------------------------
+
 ## Week 6 {#w6}
 
 Logistic Regression Assumptions & Assessing Classification Performance
 
 - [Assumption \& Diagnostics Slides](lectures/l6/log_reg_diagnostics.pdf)
 - [Classification Performance Slides](lectures/l6/log_reg_performance.pdf)
+
+<!----------------------------------------------------------------------------------------------------------------------
 
 ## Week 7 {#w7}
 

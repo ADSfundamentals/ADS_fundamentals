@@ -325,7 +325,7 @@ What to hand in
 <h3 class="anchored" data-anchor-id="predictor-matrix-full-rank">Predictor matrix full rank</h3>
 <p>This assumption states that:</p>
 <ul>
-<li><p>there need to be more observations than predictors (n &gt; P).</p></li>
+<li><p>there needs to be more observations than predictors (n &gt; P).</p></li>
 <li><p>no predictor can be a linear combination of other predictors;</p></li>
 <li><p>predictors cannot have a very high correlation (multicollinearity).</p></li>
 </ul>
@@ -333,7 +333,7 @@ What to hand in
 <p>To examine VIF scores, the function <code>VIF()</code> from the <code>regclass</code> can be used on a prespecified model. If this model includes a categorical variable with multiple categories, such as ‘species’ in the example data, the generalized VIF is used, and we have to look at the third column <code>(GVIF^*(1/(2*Df)))</code>, these values can be compared to normal VIF values.</p>
 <p><strong>Exercise 5</strong></p>
 <ol type="1">
-<li><p><strong>Specify a linear model with <code>weight</code> as outcome variable using all other variables in the dataset as predictors. Save this model as <code>model_fish1</code>. Calculate VIF values for this model.</strong></p></li>
+<li><p>Specify a linear model with&nbsp;<code>weight</code>&nbsp;as the outcome variable and all other variables in the dataset as predictors<strong>. Save this model as <code>model_fish1</code>. Calculate VIF values for this model.</strong></p></li>
 <li><p><strong>Check the VIF scores. If VIF scores exceed a score of 10, give substantial explanation why the VIF scores are this high.</strong></p></li>
 <li><p><strong>What adjustments can be made to the model to account for multicollinearity in this case?</strong></p></li>
 <li><p><strong>Run a new model which only includes one of the three length variables and call it <code>model_fish2</code>. Describe if there is an improvement.</strong></p></li>
@@ -388,10 +388,10 @@ What to hand in
 <p>Outliers are observations that show extreme outcomes compared to the other data, or observations with outcome values that fit the model very badly. Outliers can be detected by inspecting the <em>externally studentized residuals</em>.</p>
 <p><strong>Exercise 10</strong></p>
 <ol type="1">
-<li><p><strong>Make a plot of studentized residuals by using the functions <code>rstudent</code> and <code>plot</code> for `model_fish1. What do you conclude?</strong></p></li>
-<li><p><strong>Make a plot of studentized residuals for <code>model_iris1</code>.</strong></p></li>
+<li><p><strong>Make a plot of studentized residuals by using the functions <code>rstudent</code> and <code>plot</code> for <code>model_fish1</code>. What do you conclude?</strong></p></li>
+<li><p><strong>Make a plot of studentized residuals for <code>model_iris1</code>. What. do you conclude?</strong></p></li>
 <li><p><strong>Store the dataset <code>Animals</code> from the <code>MASS</code> package. Define a regression model where animals’ body weight is predicted by brain weight and store it as <code>model_animals1</code>.</strong></p></li>
-<li><p><strong>Make a plot of the studentized residuals for <code>model_animals1</code>.</strong></p></li>
+<li><p><strong>Make a plot of the studentized residuals for <code>model_animals1</code>. What do you conclude?</strong></p></li>
 </ol>
 </section>
 <section id="high-leverage-observations" class="level3">
@@ -399,7 +399,7 @@ What to hand in
 <p>High-leverage observations are observations with extreme predictor values. To detect these observations, we look at their <em>leverage values</em>. These values can be summarized in a leverage plot.</p>
 <p><strong>Exercise 11</strong></p>
 <ol type="1">
-<li><strong>For the model specified under model_animals1, create a leverage plot by plotting the <code>hatvalues()</code> of the model.</strong></li>
+<li><strong>For the model specified under model_animals1, create a leverage plot by plotting the <code>hatvalues()</code> of the model. Are there any points with high leverage?</strong></li>
 </ol>
 </section>
 <section id="influence-on-the-model" class="level3">
@@ -409,12 +409,12 @@ What to hand in
 <p><strong>Exercise 12</strong></p>
 <ol type="1">
 <li><p><strong>For <code>model_animals1</code>, check Cooks distance by plotting the <code>cooks.distance</code> of the model.</strong></p></li>
-<li><p><strong>For <code>model_animals1</code>, check the DFBETAS by using the function <code>dfbetas</code>.</strong></p></li>
+<li><p><strong>For <code>model_animals1</code>, check the DFBETAS by using the function <code>dfbetas</code>.</strong> Try avoiding a pipe structure and instead using something like&nbsp;<code>plot(dfbetas(…)[ , ], …).</code></p></li>
 <li><p><strong>Describe what you see in the plots for Cook’s distance and DFBETAS. What do you conclude?</strong></p></li>
 <li><p><strong>Delete the problematic observation that you found in the previous exercise and store the dataset under a new name.</strong></p></li>
 <li><p><strong>Fit the regression model where animals’ body weight is predicted by brain weight using the adjusted dataset and store it as <code>model_animals2</code>.</strong></p></li>
 <li><p><strong>Compare the output to <code>model_animals1</code> and describe the changes.</strong></p></li>
-<li><p><strong>Run the plots for influential observations again on this new model and see if anything changes.</strong></p></li>
+<li><p><strong>Run the plots for influential observations again on this new model and write down your findings. Explain what could or should be done to deal with these problems.</strong></p></li>
 </ol>
 </section>
 </section>

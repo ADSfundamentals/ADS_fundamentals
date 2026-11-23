@@ -159,7 +159,7 @@ ggplot(data_fish, aes(x = weigth_trans, y = height)) +
 
 This assumption states that:
 
-- there need to be more observations than predictors (n \> P).
+- there needs to be more observations than predictors (n \> P).
 
 - no predictor can be a linear combination of other predictors;
 
@@ -171,7 +171,7 @@ To examine VIF scores, the function `VIF()` from the `regclass` can be used on a
 
 **Exercise 5**
 
-1.  **Specify a linear model with `weight` as outcome variable using all other variables in the dataset as predictors. Save this model as `model_fish1`. Calculate VIF values for this model.**
+1.  Specify a linear model with `weight` as the outcome variable and all other variables in the dataset as predictors**. Save this model as `model_fish1`. Calculate VIF values for this model.**
 
 ```{r, include = params$answers}
 model_fish1 <- lm(weigth ~., 
@@ -254,7 +254,7 @@ model_iris1 %>%
 4.  **Discuss both plots and indicate whether the assumption is met.**
 
 ```{r, include = params$answers}
-# In the `iris_data` plot, it can be seen that the red line is quite constant. Also, the dots seem to have a rather constant variance. In the `fish_data` plot, however, the variance in error terms seems smaller for the lower values than for the higher values. This second plot indicates heteroscedasticity and indicates that the assumption is violated.
+# In the iris_data plot, it can be seen that the red line is quite constant. Also, the dots seem to have a rather constant variance (evenly scattered above and below the red line). In the fish_data plot, however, the variance in error terms seems smaller for the lower values than for the higher values. This second plot indicates heteroscedasticity and indicates that the assumption is violated.
 ```
 
 5.  **Discuss what the consequence would be if this assumption is violated.**
@@ -288,6 +288,8 @@ This assumption states that errors should be roughly normally distributed. Like 
 ```{r, include = params$answers}
 model_iris1 %>%
   plot(2)
+
+#The points in the Q-Q plot follow the diagonal reference line closely, indicating that the assumption is met.
 ```
 
 2.  **Create a new model using the fish data, where `diagonal_width` is predicted by `cross_length`, and store the model as `model_fish3`.**
@@ -324,7 +326,7 @@ Outliers are observations that show extreme outcomes compared to the other data,
 
 **Exercise 10**
 
-1.  **Make a plot of studentized residuals by using the functions `rstudent` and `plot` for \`model_fish1. What do you conclude?**
+1.  **Make a plot of studentized residuals by using the functions `rstudent` and `plot` for `model_fish1`. What do you conclude?**
 
 ```{r, include = params$answers}
 model_fish1 %>%
@@ -334,12 +336,14 @@ model_fish1 %>%
 # There is at least one clear outlier around observation number 70.
 ```
 
-2.  **Make a plot of studentized residuals for `model_iris1`.**
+2.  **Make a plot of studentized residuals for `model_iris1`. What. do you conclude?**
 
 ```{r, include = params$answers}
 model_iris1 %>%
   rstudent() %>%
   plot()
+
+# There are not really any clear outliers to worry about.
 ```
 
 3.  **Store the dataset `Animals` from the `MASS` package. Define a regression model where animals' body weight is predicted by brain weight and store it as `model_animals1`.**
@@ -348,11 +352,9 @@ model_iris1 %>%
 data_animals   <- Animals
 model_animals1 <- lm(body ~ brain,
                      data = data_animals)
-
-# There are not really any clear outliers to worry about.
 ```
 
-4.  **Make a plot of the studentized residuals for `model_animals1`.**
+4.  **Make a plot of the studentized residuals for `model_animals1`. What do you conclude?**
 
 ```{r, include = params$answers}
 model_animals1 %>%
@@ -368,7 +370,7 @@ High-leverage observations are observations with extreme predictor values. To de
 
 **Exercise 11**
 
-1.  **For the model specified under model_animals1, create a leverage plot by plotting the `hatvalues()` of the model.**
+1.  **For the model specified under model_animals1, create a leverage plot by plotting the `hatvalues()` of the model. Are there any points with high leverage?**
 
 ```{r, include = params$answers}
 model_animals1 %>%
@@ -396,7 +398,7 @@ model_animals1 %>%
   plot()
 ```
 
-2.  **For `model_animals1`, check the DFBETAS by using the function `dfbetas`.**
+2.  **For `model_animals1`, check the DFBETAS by using the function `dfbetas`.** Try avoiding a pipe structure and instead using something like `plot(dfbetas(…)[ , ], …).`
 
 ```{r, include = params$answers}
 plot(dfbetas(model_animals1)[,1],
@@ -436,7 +438,7 @@ summary(model_animals2)
 # We see that the model changes quite a bit: the intercept becomes much lower, and the slope even changes direction (negative to positive).
 ```
 
-7.  **Run the plots for influential observations again on this new model and see if anything changes.**
+7.  **Run the plots for influential observations again on this new model and write down your findings. Explain what could or should be done to deal with these problems.**
 
 ```{r, include = params$answers}
 model_animals2 %>%
@@ -449,7 +451,7 @@ plot(dfbetas(model_animals2)[,1],
 plot(dfbetas(model_animals2)[,2],
      main = "slope")
 
-# We see that new influential observations arise. These were earlier overshadowed by observation 26. If you look at these cases, you see these are the cases with very heavy animals. In this case the solution should be to transform the data and take the log of the weights, instead of these values. This means that the assumption of linearity was probably not met for this data set.*
+# We see that new influential observations arise. These were earlier overshadowed by observation 26. If you look at these cases, you see these are the cases with very heavy animals. In this case the solution should be to transform the data and take the log of the weights, instead of removing these values. This means that the assumption of linearity was probably not met for this data set.*
 ```
 
 ## Render and hand in

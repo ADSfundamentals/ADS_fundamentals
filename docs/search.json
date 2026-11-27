@@ -280,6 +280,20 @@
     "text": "Week 2\nData Transformation, Data Visualization, & Simple Linear Regression\n\nLecture Code Package\n\nThis link will download a ZIP archive that you must unpack on your computer.\n\nSLR Lecture Slides\nSupplementary Visualization Slides"
   },
   {
+    "objectID": "lectures.html#w3",
+    "href": "lectures.html#w3",
+    "title": "Lectures",
+    "section": "Week 3",
+    "text": "Week 3\nMultiple Linear Regression\n\nLecture Slides"
+  },
+  {
+    "objectID": "lectures.html#w4",
+    "href": "lectures.html#w4",
+    "title": "Lectures",
+    "section": "Week 4",
+    "text": "Week 4\nMLR Assumptions & Diagnostics\n\nAssumptions Lecture Slides\nInfluential Observations Lecture Slides"
+  },
+  {
     "objectID": "labs/lab6.html",
     "href": "labs/lab6.html",
     "title": "Lab 6",
@@ -501,7 +515,7 @@
     "href": "labs/lab1_answers.html#import-the-data",
     "title": "Lab 1",
     "section": "Import the data",
-    "text": "Import the data\nExercise 2\nAdd a code chunk that loads the dplyr package. Then, just like in the example from the lecture, define a variable for each folder in your project:\ndataDir &lt;- \"data\"\noutDir  &lt;- \"output\"\nfigDir  &lt;- \"figures\"\nRead penguins.csv into an object called penguins with read.csv2() and here::here(dataDir, \"penguins.csv\").\nHow many rows and columns does penguins have?\n\nlibrary(dplyr)\n\ndataDir &lt;- \"data\"\noutDir  &lt;- \"output\"\nfigDir  &lt;- \"figures\"\n\npenguins &lt;- read.csv2(here::here(dataDir, \"penguins.csv\"))\n\ndim(penguins)  # 344 rows, 8 columns\n\n[1] 344   8\n\n\nAnswer: The data has 344 rows and 8 columns. With read.csv() (instead of read.csv2()) you would get only 1 column, because read.csv() expects commas between columns."
+    "text": "Import the data\nExercise 2\nAdd a code chunk that loads the dplyr package. Then, just like in the example from the lecture, define a variable for each folder in your project:\ndataDir &lt;- \"data\"\noutDir  &lt;- \"output\"\nfigDir  &lt;- \"figures\"\nRead penguins.csv into an object called penguins with read.csv2() and here::here(dataDir, \"penguins.csv\").\nHow many rows and columns does penguins have?\n\nlibrary(dplyr)\n\nWarning: package 'dplyr' was built under R version 4.5.3\n\ndataDir &lt;- \"data\"\noutDir  &lt;- \"output\"\nfigDir  &lt;- \"figures\"\n\npenguins &lt;- read.csv2(here::here(dataDir, \"penguins.csv\"))\n\ndim(penguins)  # 344 rows, 8 columns\n\n[1] 344   8\n\n\nAnswer: The data has 344 rows and 8 columns. With read.csv() (instead of read.csv2()) you would get only 1 column, because read.csv() expects commas between columns."
   },
   {
     "objectID": "labs/lab1_answers.html#descriptive-statistics-with-pipes",
